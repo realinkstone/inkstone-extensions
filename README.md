@@ -1,12 +1,14 @@
-# Inkstone Extensions
+# Inkstone
 
-Reading sources for Boundless and other compatible reader apps. Each source is one small JavaScript file that your app downloads and runs in an on-device sandbox.
+**Extension Registry.** Community-made extensions that add content to Boundless Reader. Free and open source under the MIT license.
 
-The full catalog and docs live at [inkstone.web.app](https://inkstone.web.app). Questions or broken sources? Come say hi on [Discord](https://discord.gg/6pX2XgFYcs).
+Each extension is one small JavaScript file that Boundless downloads and runs in a sandbox on your device.
 
-## Add the repository
+The full catalog and docs live at [inkstone.web.app](https://inkstone.web.app). Questions or a broken extension? Come say hi on [Discord](https://discord.gg/6pX2XgFYcs).
 
-Paste this into your reader app's repository settings:
+## Add it to Boundless
+
+Paste this into Boundless Reader's extension settings:
 
 ```
 https://inkstone.web.app/v3
@@ -14,23 +16,23 @@ https://inkstone.web.app/v3
 
 Step by step guide: [inkstone.web.app/installation](https://inkstone.web.app/installation)
 
-Nothing installs until you pick a source, and removing one takes a tap.
+Nothing installs until you pick an extension, and removing one takes a tap.
 
 ## What's in here
 
 ```
-<id>/index.js        one folder per source
-versioning.json      the listing apps read
-docs/EXTENSIONS.md   how a source works
+<id>/index.js        one folder per extension
+versioning.json      the list Boundless reads
+docs/EXTENSIONS.md   how an extension works
 ```
 
-## Sources
+## Extensions
 
-92 sources right now. Ratings are Safe, Mature or Adult, and some sources also rate each title on its own.
+92 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
 
 ### Comics
 
-| Source | Site | Language | Rating | Version |
+| Extension | Site | Language | Rating | Version |
 | --- | --- | --- | --- | --- |
 | [Anime-Sama](animesama/index.js) | anime-sama.to | French | Mature | 1.0.1 |
 | [AsuraScans](asurascans/index.js) | asurascans.com | English | Safe | 2.3.1 |
@@ -107,7 +109,7 @@ docs/EXTENSIONS.md   how a source works
 
 ### Novels
 
-| Source | Site | Language | Rating | Version |
+| Extension | Site | Language | Rating | Version |
 | --- | --- | --- | --- | --- |
 | [17K Novel Network](17k/index.js) | 17k.com | Chinese | Mature | 1.2.0 |
 | [Chikari](chikari/index.js) | chikari.moe | English | Adult | 4.3.0 |
@@ -133,8 +135,12 @@ docs/EXTENSIONS.md   how a source works
 
 ## Contributing
 
-New sources and fixes are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
+New extensions and fixes are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## License
+
+MIT. See [LICENSE](LICENSE).
 
 ## Disclaimer
 
-Inkstone doesn't host any content. Sources read from third party sites, and everything they show belongs to those sites and their owners.
+Inkstone doesn't host any content. Extensions read from third party sites, and everything they show belongs to those sites and their owners.
