@@ -143,4 +143,6 @@ MIT. See [LICENSE](LICENSE).
 
 ## Disclaimer
 
+Inkstone is an independent project. It isn't part of Boundless Reader and isn't endorsed by it.
+
 Inkstone doesn't host any content. Extensions read from third party sites, and everything they show belongs to those sites and their owners.
