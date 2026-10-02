@@ -169,9 +169,10 @@ A wrong name never throws. The field just shows up blank, which is harder to deb
   mangaId: 'slug',        // required
   title: 'Title',
   image: 'https://...',   // "image", NOT "coverURL". Absolute URL.
+  referer: 'https://site.com/',   // only if covers 403 without it
   author, summary, tags: ['Action'], webURL,
   medium: 'comics' | 'novel',
-  contentRating: 'safe' | 'mature' | 'adult',   // only if the site rates titles
+  ageRating: 0 | 16 | 18,   // minimum age, only if the site rates titles one by one
   rating, views, chapters, completed, releaseDate, publisher,
 }
 
@@ -195,6 +196,8 @@ A wrong name never throws. The field just shows up blank, which is harder to deb
 ```
 
 It's `desc` (or `summary`), not `description`, and `status` must be one of those exact uppercase words.
+
+`ageRating` is a number, the title's own minimum age, and only for sites that rate titles one by one (safe is 0, suggestive 16, erotica and pornographic 18). By default Boundless blurs 16 and up and hides 18 and up, and the reader can change that. A word like `contentRating: 'adult'` on a title is ignored. The `contentRating` in `versioning.json` is a separate thing that rates the whole extension.
 
 ### Settings (only if you need them)
 
@@ -237,6 +240,12 @@ const say = (kind, label, detail = '') => {
   return kind === 'pass';
 };
 const check = (ok, label, detail) => say(ok ? 'pass' : 'fail', label, detail);
+let warnedRating = false;
+const warnIgnoredRating = (what) => {
+  if (warnedRating) return;
+  warnedRating = true;
+  say('warn', `${what} set contentRating, which Boundless ignores`, 'to rate titles one by one, set ageRating to a minimum age such as 0, 16 or 18');
+};
 let skippedInApp = false;
 const finish = () => {
   console.log(`\n${tally.pass} passed, ${tally.fail} failed, ${tally.warn} warnings.`);
@@ -387,6 +396,10 @@ if (browse) {
   else check(list.length > 0, 'browse returns titles', `${list.length} results in ${browse.took}`);
   check(list.every((r) => r.mangaId && r.title), 'every title has a mangaId and a title');
   check(list.every((r) => isUrl(r.image)), 'every cover is an absolute URL in "image"');
+  if (list.some((r) => r.contentRating !== undefined && r.ageRating === undefined)) warnIgnoredRating('titles');
+  if (list.some((r) => r.ageRating !== undefined)) {
+    check(list.every((r) => r.ageRating === undefined || typeof r.ageRating === 'number'), 'ageRating is a number, a minimum age such as 0, 16 or 18');
+  }
   if (browse.value.metadata) {
     const next = await step('browse page 2', () => source.getSearchResults({ title: '', feed: feeds[0]?.id }, browse.value.metadata));
     if (next) check(next.value.results?.[0]?.mangaId !== list[0]?.mangaId, 'page 2 differs from page 1');
@@ -419,6 +432,7 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
     const info = details.value.mangaInfo;
     check(info && (info.desc !== undefined || info.summary !== undefined), 'details have a description (desc or summary)', details.took);
     check(['ONGOING', 'COMPLETED', 'HIATUS', 'CANCELLED', 'UNKNOWN'].includes(info?.status), 'status is an allowed value', info?.status);
+    if (info && info.contentRating !== undefined && info.ageRating === undefined) warnIgnoredRating('details');
   }
   const chapters = await step('chapters', () => source.getChapters(item.mangaId));
   if (!chapters) continue;

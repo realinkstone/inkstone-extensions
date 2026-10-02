@@ -22,7 +22,7 @@ Each extension SHALL live at `<id>/index.js`, where `<id>` is lowercase letters 
 - **THEN** the catalog shows its name, version, medium and language
 
 ### Requirement: Honest content rating
-Each extension SHALL declare `contentRating` as `safe`, `mature` or `adult`, chosen from what the site really serves rather than from its name or genre tags. When unsure, the stricter rating SHALL be used. An extension MAY also set a per-title `contentRating` on titles when the site rates them individually.
+Each extension SHALL declare `contentRating` as `safe`, `mature` or `adult`, chosen from what the site really serves rather than from its name or genre tags. When unsure, the stricter rating SHALL be used. An extension MAY also set a per-title `ageRating` on titles when the site rates them individually, as described in the source-api specification. That is a separate field from the listing's `contentRating`.
 
 #### Scenario: Site serves explicit titles
 - **GIVEN** a site that lists pornographic titles

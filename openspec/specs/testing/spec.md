@@ -36,6 +36,12 @@ The script SHALL make real requests to check that browse and search return title
 - **WHEN** the script runs
 - **THEN** `every host it called is in "hosts"` fails
 
+#### Scenario: Rating field Boundless ignores
+- **GIVEN** an extension whose titles set a string `contentRating` and no `ageRating`
+- **WHEN** the script runs
+- **THEN** it warns that Boundless ignores that field
+- **AND** the run does not fail because of it
+
 #### Scenario: Empty genre list
 - **GIVEN** an extension whose genre list is empty
 - **WHEN** the script runs

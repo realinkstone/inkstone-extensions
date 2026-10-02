@@ -36,6 +36,7 @@ It looks for `versioning.json` one folder above your extension, the same layout 
 **Live results (real requests)**
 
 - Browse returns titles with a `mangaId`, a `title` and an absolute `image` URL.
+- If titles carry their own rating, it is an `ageRating` number. A `contentRating` word on a title is ignored by Boundless, so the script warns about it.
 - Page 2 really differs from page 1.
 - Genre list (if you have one) has ids and labels. An empty list is a warning, because some sites have no working genre filter. In that case don't declare `genres` in `versioning.json`, and the script checks the two agree.
 - Search returns titles.

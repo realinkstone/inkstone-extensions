@@ -76,12 +76,18 @@ The `Source` class SHALL provide the asynchronous methods `getSearchResults(requ
 - **AND** the listing does not declare `genres`
 
 ### Requirement: Title fields
-Each result SHALL have `mangaId` and `title`, and a cover in `image` as an absolute URL. It MAY have `author`, `summary`, `tags`, `webURL`, `medium` (`comics` or `novel`) and a per-title `contentRating` of `safe`, `mature` or `adult`. The cover field is `image`, not `coverURL`.
+Each result SHALL have `mangaId` and `title`, and a cover in `image` as an absolute URL. It MAY have `author`, `summary`, `tags`, `webURL`, `medium` (`comics` or `novel`), `referer` (when covers answer 403 without one) and, when the site rates titles one by one, a per-title `ageRating`: a number, the title's minimum age, such as 0, 16 or 18. Boundless reads 16 and up as mature and 18 and up as restricted. The cover field is `image`, not `coverURL`.
 
 #### Scenario: Wrong cover field
 - **GIVEN** a result that uses `coverURL`
 - **WHEN** it is shown in Browse
 - **THEN** the cover is blank and no error is raised
+
+#### Scenario: Per-title rating
+- **GIVEN** a site that rates a title pornographic
+- **WHEN** the result sets `ageRating` to 18
+- **THEN** Boundless treats the title as restricted
+- **AND** a string such as `contentRating: 'adult'` on the same title is ignored
 
 #### Scenario: Relative cover URL
 - **GIVEN** a cover such as `/c.jpg`

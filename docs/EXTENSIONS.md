@@ -161,12 +161,22 @@ just blank in the UI, which is much harder to debug than a crash.
   mangaId: 'slug',      // REQUIRED (`id` also accepted)
   title: 'Title',
   image: 'https://…',   // ← `image`, NOT `coverURL`. Must be absolute.
+  referer: 'https://example.com/',   // only if covers 403 without it
   author, summary, tags: ['Action'], webURL,
   medium: 'comics' | 'novel',
-  contentRating: 'safe' | 'mature' | 'adult',   // only if the site rates titles
+  ageRating: 0 | 16 | 18,   // minimum age, only if the site rates titles one by one
   rating, views, chapters, completed, releaseDate, publisher,
 }
 ```
+
+`ageRating` is a number: the title's own minimum age. Set it only when the site
+rates titles one by one (MangaDex's safe, suggestive, erotica and pornographic
+become 0, 16, 18 and 18). Boundless reads 16 and up as mature and 18 and up as
+restricted, and the reader's content settings decide whether those are shown,
+blurred or hidden (by default mature is blurred and restricted is hidden). A
+word such as `contentRating: 'adult'` on a title is ignored. It is also a
+different thing from the `contentRating` in `versioning.json`, which rates the
+whole extension.
 
 **Manga details**: same fields, nested under `mangaInfo`, with:
 
@@ -204,7 +214,9 @@ because covers and the manga-detail HTML fetch usually still work fine and
 only the actual page images fail. If chapters load but every page in the reader shows
 "failed to load", check this before assuming your selectors are wrong: fetch
 one page URL with and without a `Referer` header matching your site and
-compare the status codes.
+compare the status codes. If covers are blocked the same way, put `referer` on
+the title as well, on Browse results and in `mangaInfo` (a `headers` object
+works too).
 
 ## 5. Publishing to a repo
 

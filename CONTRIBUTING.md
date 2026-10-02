@@ -12,7 +12,7 @@ Want an AI assistant to do the building? Give it [docs/BUILD_WITH_AI.md](docs/BU
 
 1. Make a folder named after the extension id (lowercase) with an `index.js` inside.
 2. Add an entry for it to `versioning.json`. Copying a similar extension's entry is the easy way.
-3. Set `contentRating` honestly: `safe`, `mature` or `adult`. If the site rates titles one by one, rate them per title too.
+3. Set `contentRating` honestly: `safe`, `mature` or `adult`. If the site rates titles one by one, also return each title's own minimum age as `ageRating` (0, 16 or 18).
 4. Test it against the live site with `npm install` then `node docs/test-extension.mjs <id>/index.js "search term"`. It checks compatibility and that browse, search, details, chapters and reading all return real results. Fix every `FAIL`.
 5. Hash your file and put the result in `sha256`:
    ```bash
