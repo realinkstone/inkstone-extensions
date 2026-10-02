@@ -1,0 +1,10 @@
+{
+  "name": "inkstone-extensions",
+  "private": true,
+  "type": "module",
+  "description": "Community-made extensions that add content to Boundless Reader",
+  "license": "MIT",
+  "devDependencies": {
+    "cheerio": "^1.0.0"
+  }
+}

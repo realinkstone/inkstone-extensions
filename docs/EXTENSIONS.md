@@ -7,6 +7,9 @@ and calls its methods to fill the Browse, Search, Detail and Reader screens.
 The format keeps the surface area small: implement a handful of methods on
 that class and the app can browse, search and read through your source.
 
+Building with an AI assistant? Give it [BUILD_WITH_AI.md](BUILD_WITH_AI.md).
+To check an extension works, see [TESTING.md](TESTING.md).
+
 ---
 
 ## 1. The runtime is JavaScriptCore, not a browser
@@ -23,12 +26,23 @@ in the app as an empty screen:
 | `URL`, `URLSearchParams` | build strings with `encodeURIComponent` |
 | `setTimeout`, `setInterval` | (no timers; use `Promise` directly) |
 | `btoa`, `atob`, `TextDecoder` | None |
-| `document`, `DOM`, `DOMParser` | regex over the HTML string |
+| `document`, `DOM`, `DOMParser` | `cheerio.load(html)`, provided as a global |
 | `structuredClone` | `JSON.parse(JSON.stringify(x))` |
 
 **Available:** `Promise`, `async`/`await`, `JSON`, `Math`, `Date`, `RegExp`,
 `Intl`, `String.prototype.replaceAll`, `Object.fromEntries`,
-`encodeURIComponent`, and the rest of modern ECMAScript.
+`encodeURIComponent`, and the rest of modern ECMAScript. Boundless also
+provides two globals: `App` (below) and `cheerio`.
+
+`cheerio` is the real cheerio library with its usual jQuery-style API. Parse
+HTML with it instead of regex:
+
+```js
+const $ = cheerio.load(html);
+const title = $('h1.title').text().trim();
+const cover = $('img.cover').attr('src');
+$('.chapter-list a').each((_, el) => { /* $(el).attr('href') */ });
+```
 
 Every extension in this repo carries a small `qs()` helper for query strings.
 Copy it:
@@ -63,7 +77,24 @@ async requestJSON(url) {
 }
 ```
 
-`response.data` is always a **string**. There is no automatic JSON parsing.
+`response.data` is always a **string**. There is no automatic JSON parsing. A
+404 or 500 still resolves, so check `response.status`; only network failures
+reject.
+
+`App.createRequest` takes `{ url, method, headers, body }`. `method` defaults to
+`GET`; for a `POST`, pass `body` as a string and a `Content-Type` header. To
+pace requests to a site that answers 429, pass a limit when creating the
+manager: `App.createRequestManager({ rateLimit: { requestsPerSecond: 2 } })`
+(`requestsPerMinute` works too, and the stricter of the two wins).
+
+### The rest of `App`
+
+| Call | What it does |
+| --- | --- |
+| `App.getSourceSetting(key)` | Reads a value the user set in your settings (see `settingsSchema` below). Always a string, or `undefined`. |
+| `App.createSourceStateManager()` | Returns `{ store(key, value), retrieve(key) }`, both async, for remembering things between calls. |
+| `App.base64Encode(text)`, `App.base64Decode(text)` | Base64 in and out. |
+| `App.executeInWebView({ url \| html + baseUrl, script, timeoutMs })` | Last resort for sites that only hand out a token through their own page scripts. Runs `script` in a real browser view and resolves to `{ value }` or `{ error }`. See `mangafire` and `kagane` for working examples. |
 
 ## 3. The `Source` class
 
@@ -129,6 +160,7 @@ just blank in the UI, which is much harder to debug than a crash.
   image: 'https://…',   // ← `image`, NOT `coverURL`. Must be absolute.
   author, summary, tags: ['Action'], webURL,
   medium: 'comics' | 'novel',
+  contentRating: 'safe' | 'mature' | 'adult',   // only if the site rates titles
   rating, views, chapters, completed, releaseDate, publisher,
 }
 ```
@@ -196,6 +228,16 @@ onto the installed record at install/update time. They drive real
 in-app behavior (category filtering, the source icon, content-rating gating,
 per-source settings screens), not just this repo's own listing pages.
 
+### Settings: the optional `settingsSchema` field
+
+If your extension has options (a language, a quality setting, a server URL),
+declare them as a `settingsSchema` array on its `versioning.json` entry. Each
+field has a `type` (`text`, `toggle`, `select`, `multiSelect` or `section`), a
+`key`, a `label`, and optionally `default`, `placeholder`, `secure` (hides
+passwords) and `options: [{ value, label }]`. Read the value back with
+`App.getSourceSetting('key')`, which returns a string, so a toggle is `'true'`
+or `'false'`.
+
 ### Bundle integrity: the optional `sha256` field
 
 A `versioning.json` entry may also declare `sha256`: the lowercase-hex
@@ -244,7 +286,20 @@ nothing about where those may point. That's a real, currently open gap in every
 app that implements this field today, not something publishing `hosts`
 closes on its own.
 
-## 6. Debugging
+## 6. Testing
+
+`test-extension.mjs` checks that your extension is compatible with Boundless
+(loads in a bare sandbox, exports the right methods, has a valid listing entry
+and a matching `sha256`) and that it can fetch real results from the live site
+(browse, search, details, chapters and actually opening them). See
+[TESTING.md](TESTING.md) for how to run it and read the output.
+
+```bash
+npm install cheerio
+node test-extension.mjs ./mysite/index.js "naruto"
+```
+
+## 7. Debugging
 
 `console.log/warn/error` inside an extension goes to the device log tagged
 `[ext:<source-id>]`. Runtime exceptions appear as `[JSRuntime:<id>] uncaught`.
@@ -261,8 +316,9 @@ reinstalling the app is the reliable way to pick up local changes:
 xcrun simctl uninstall booted com.ahmed.boundless
 ```
 
-## 7. Checklist before you publish
+## 8. Checklist before you publish
 
+- [ ] `node test-extension.mjs` reports no `FAIL` lines.
 - [ ] No `fetch` / `URL` / `URLSearchParams` / `setTimeout` anywhere in the file.
 - [ ] Covers use `image`, and every URL is absolute.
 - [ ] Chapter dates use numeric `time` in **milliseconds**.

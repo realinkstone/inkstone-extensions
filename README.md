@@ -21,10 +21,18 @@ Nothing installs until you pick an extension, and removing one takes a tap.
 ## What's in here
 
 ```
-<id>/index.js        one folder per extension
-versioning.json      the list Boundless reads
-docs/EXTENSIONS.md   how an extension works
+<id>/index.js              one folder per extension
+versioning.json            the list Boundless reads
+docs/BUILD_WITH_AI.md      have an AI assistant build one for you
+docs/EXTENSIONS.md         how an extension works
+docs/TESTING.md            check an extension works
+docs/test-extension.mjs    the test script
+AGENTS.md                  instructions for AI coding assistants
 ```
+
+## Build one with AI
+
+Open this repo in Claude Code, Cursor, Codex or any coding assistant and tell it which site you want. It picks up [AGENTS.md](AGENTS.md) and follows [docs/BUILD_WITH_AI.md](docs/BUILD_WITH_AI.md). Or paste that guide into a chat.
 
 ## Extensions
 
