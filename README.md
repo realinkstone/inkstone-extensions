@@ -40,7 +40,7 @@ Prefer to review a written plan before any code is written? This repo works with
 
 ## Extensions
 
-92 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
+93 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
 
 ### Comics
 
@@ -56,6 +56,7 @@ Prefer to review a written plan before any code is written? This repo works with
 | [Flame Scans](flamescans/index.js) | flamecomics.xyz | English | Safe | 1.0.0 |
 | [GD Scans](gdscans/index.js) | gdscans.com | English | Adult | 1.0.0 |
 | [GlobalComix](globalcomix/index.js) | globalcomix.com | English | Adult | 1.1.0 |
+| [HiperDEX](hiperdex/index.js) | hiperdex.tv | English | Adult | 1.0.0 |
 | [HiveToons](hivetoon/index.js) | hivetoons.org | English | Adult | 1.1.0 |
 | [Indomanhwa](indomanhwa/index.js) | indomanhwa.com | Indonesian | Mature | 1.0.0 |
 | [InkStory](inkstory/index.js) | inkstory.net | Russian | Mature | 1.1.0 |
@@ -151,6 +152,12 @@ These extensions are known to be broken right now:
 
 - **Flame Scans** (`flamescans`): The site's domain now redirects to a Discord invite, and its image host is offline.
 - **Komikindo** (`komikindo`): The site is down for maintenance.
+
+## Credits
+
+Thanks to the people who built extensions for Inkstone.
+
+- [omfgitsjesus](https://discord.com/users/177424485526274048): HiperDEX
 
 ## Contributing
 

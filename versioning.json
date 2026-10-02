@@ -1831,6 +1831,31 @@
       "language": "en",
       "contentRating": "safe",
       "sha256": "e9f1d8d8ba4197c70cde2aab22f33cde58071f12f0b98126922fcf4d1ae5daa3"
+    },
+    {
+      "id": "hiperdex",
+      "name": "HiperDEX",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://hiperdex.tv",
+      "iconUrl": "https://hiperdex.tv/apple-touch-icon.png",
+      "hosts": [
+        "hiperdex.tv"
+      ],
+      "author": "omfgitsjesus",
+      "authorUrl": "https://discord.com/users/177424485526274048",
+      "description": "Manhwa, manga and manhua platform with a large adult catalog. Five browse feeds, a live genre filter, search, and chapter reading. Every title carries the site's own content rating. Chapter pages load through Boundless's built-in web view, since the site only serves them to its own pages.",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "adult",
+      "sha256": "36d73fe03e3a8c607186c6ddb4fdbc52e8012362486b012f8e35463b6ac53737"
     }
   ]
 }

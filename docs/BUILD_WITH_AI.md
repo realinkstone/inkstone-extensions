@@ -436,7 +436,9 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
       const took = `${((Date.now() - started) / 1000).toFixed(1)}s`;
       return { ok: Boolean(isText || isImages), label, detail: isText ? 'text' : `${read.pages?.length ?? 0} pages in ${took}` };
     } catch (error) {
-      return { ok: false, label, detail: String(error.message ?? error).slice(0, 200) };
+      const message = String(error.message ?? error);
+      if (message.includes('only works inside Boundless')) return { skipped: true, label, detail: message };
+      return { ok: false, label, detail: message.slice(0, 200) };
     }
   };
   const readable = list.filter((c) => !gated(c));
@@ -445,10 +447,15 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
   const attempts = [];
   for (const chapter of pool.slice(0, 4)) {
     attempts.push(await tryOpen(chapter));
-    if (attempts.at(-1).ok) break;
+    if (attempts.at(-1).ok || attempts.at(-1).skipped) break;
   }
   const [first] = attempts;
   const opened = attempts.at(-1);
+  if (first.skipped) {
+    skippedInApp = true;
+    say('warn', 'opening a chapter needs Boundless, so it was skipped');
+    continue;
+  }
   if (first.ok) {
     say('pass', `${first.label} opens`, first.detail);
   } else if (opened.ok) {
@@ -527,7 +534,7 @@ Add an entry to `versioning.json`, and make the folder name equal the `id`:
 - `contentRating` is `safe`, `mature` or `adult`, based on what you saw in Step 1. When in doubt, go one step stricter.
 - `hosts` lists every host the extension talks to. Boundless refuses requests to anything else. Image hosts aren't covered by it, but list them anyway.
 - `description` should say what's missing. A description that overclaims costs the next person a debugging session.
-- `author` is optional. Add your name or handle to get credit on the catalog.
+- `author` is optional. Add your name or handle to get credit on the catalog. `authorUrl` can link it to your profile.
 - Get the hash with `shasum -a 256 mysite/index.js`. **Redo it every time the file changes.** A stale hash makes Boundless refuse the install.
 - Bump `version` whenever the file changes.
 

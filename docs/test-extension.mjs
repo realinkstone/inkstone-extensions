@@ -216,7 +216,9 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
       const took = `${((Date.now() - started) / 1000).toFixed(1)}s`;
       return { ok: Boolean(isText || isImages), label, detail: isText ? 'text' : `${read.pages?.length ?? 0} pages in ${took}` };
     } catch (error) {
-      return { ok: false, label, detail: String(error.message ?? error).slice(0, 200) };
+      const message = String(error.message ?? error);
+      if (message.includes('only works inside Boundless')) return { skipped: true, label, detail: message };
+      return { ok: false, label, detail: message.slice(0, 200) };
     }
   };
   const readable = list.filter((c) => !gated(c));
@@ -225,10 +227,15 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
   const attempts = [];
   for (const chapter of pool.slice(0, 4)) {
     attempts.push(await tryOpen(chapter));
-    if (attempts.at(-1).ok) break;
+    if (attempts.at(-1).ok || attempts.at(-1).skipped) break;
   }
   const [first] = attempts;
   const opened = attempts.at(-1);
+  if (first.skipped) {
+    skippedInApp = true;
+    say('warn', 'opening a chapter needs Boundless, so it was skipped');
+    continue;
+  }
   if (first.ok) {
     say('pass', `${first.label} opens`, first.detail);
   } else if (opened.ok) {
