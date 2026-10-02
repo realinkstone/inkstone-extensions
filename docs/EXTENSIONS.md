@@ -121,7 +121,7 @@ source id, then a global `Source`.
 | Method | Async | Returns |
 | --- | --- | --- |
 | `getSourceFeeds()` | **no** (plain/synchronous) | `[{ id, name }]` (the Browse feed tabs) |
-| `getSearchTags()` | yes | `[{ id, label }]` (the genre picker) |
+| `getSearchTags()` | yes | `[{ id, label }]`, the site's genres |
 
 `getSourceFeeds()` is called at load time on the JS queue, so it must return
 immediately: no `await`, no network. Omitting it gives you one "Popular" feed.

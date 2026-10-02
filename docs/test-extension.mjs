@@ -27,9 +27,11 @@ const finish = () => {
 };
 const isUrl = (u) => typeof u === 'string' && /^https?:\/\//.test(u);
 const pickQuery = (title) => {
-  const words = String(title ?? '').split(/\s+/).map((w) => w.replace(/[^\p{L}\p{N}]/gu, '')).filter((w) => [...w].length >= 3);
-  return words[0] ?? String(title ?? '').trim() ?? 'a';
+  const parts = String(title ?? '').split(/[^\p{L}\p{N}]+/u).filter((w) => [...w].length >= 3);
+  const first = parts[0] ?? String(title ?? '').trim();
+  return /[\u3040-\u30ff\u3400-\u9fff\uac00-\ud7af]/u.test(first) ? [...first].slice(0, 4).join('') : first;
 };
+const gated = (chapter) => /\b(locked|paid|premium|join to read|early access|coins?)\b/i.test(chapter.name ?? '');
 
 const requests = [];
 const App = {
@@ -79,7 +81,8 @@ if (hits.length) {
 } else {
   say('pass', 'no fetch, URL, setTimeout, document or require in the code');
 }
-if (code.includes('executeInWebView')) {
+const usesWebView = code.includes('executeInWebView');
+if (usesWebView) {
   say('warn', 'uses App.executeInWebView, which only runs inside Boundless. Test that part in the app');
 }
 
@@ -105,7 +108,8 @@ if (typeof source.getSourceFeeds === 'function') {
   const returned = source.getSourceFeeds();
   check(!(returned && typeof returned.then === 'function'), 'getSourceFeeds() is synchronous, not async');
   feeds = Array.isArray(returned) ? returned : [];
-  check(feeds.every((f) => f.id && f.name), 'every feed has an id and a name', `${feeds.length} feeds`);
+  check(feeds.every((f) => f.name && f.id !== undefined && f.id !== null), 'every feed has an id and a name', `${feeds.length} feeds`);
+  if (feeds.some((f) => f.id === '')) say('warn', 'a feed has an empty id', 'it can work as the default feed, but a named id is safer');
 }
 
 const folder = path.resolve(path.dirname(file));
@@ -153,7 +157,8 @@ async function step(label, run) {
 const browse = await step('browse', () => source.getSearchResults({ title: '', feed: feeds[0]?.id }, null));
 if (browse) {
   const list = browse.value.results ?? [];
-  check(list.length > 0, 'browse returns titles', `${list.length} results in ${browse.took}`);
+  if (usesWebView && list.length === 0) say('warn', 'browse returned nothing, expected if it needs Boundless (WebView)');
+  else check(list.length > 0, 'browse returns titles', `${list.length} results in ${browse.took}`);
   check(list.every((r) => r.mangaId && r.title), 'every title has a mangaId and a title');
   check(list.every((r) => isUrl(r.image)), 'every cover is an absolute URL in "image"');
   if (browse.value.metadata) {
@@ -168,20 +173,25 @@ if (typeof source.getSearchTags === 'function') {
   if (tags) {
     genreCount = tags.value.length;
     if (genreCount === 0) say('warn', 'genre list is empty', 'fine if the site has no working genre filter, but then do not declare "genres"');
+    else if (tags.value.some((t) => Array.isArray(t.tags))) say('warn', 'genre list is grouped into sections', 'Boundless reads flat { id, label } entries, so return a flat list');
     else check(tags.value.every((t) => t.id && t.label), 'genre list has ids and labels', `${genreCount} genres`);
   }
 }
 
 const query = searchTerm || pickQuery(browse?.value.results?.[0]?.title) || 'a';
 const found = await step(`search "${query}"`, () => source.getSearchResults({ title: query }, null));
-if (found) check(found.value.results?.length > 0, `search "${query}" returns titles`, `${found.value.results?.length} results in ${found.took}`);
+if (found) {
+  const count = found.value.results?.length ?? 0;
+  if (usesWebView && count === 0) say('warn', `search "${query}" returned nothing, expected if it needs Boundless (WebView)`);
+  else check(count > 0, `search "${query}" returns titles`, `${count} results in ${found.took}`);
+}
 
 for (const item of (found?.value.results ?? []).slice(0, 2)) {
   console.log(`\n${item.title}`);
   const details = await step('details', () => source.getMangaDetails(item.mangaId));
   if (details) {
     const info = details.value.mangaInfo;
-    check(info && info.desc !== undefined, 'details have desc', details.took);
+    check(info && (info.desc !== undefined || info.summary !== undefined), 'details have a description (desc or summary)', details.took);
     check(['ONGOING', 'COMPLETED', 'HIATUS', 'CANCELLED', 'UNKNOWN'].includes(info?.status), 'status is an allowed value', info?.status);
   }
   const chapters = await step('chapters', () => source.getChapters(item.mangaId));
@@ -203,8 +213,11 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
       return { ok: false, label, detail: String(error.message ?? error).slice(0, 200) };
     }
   };
+  const readable = list.filter((c) => !gated(c));
+  if (readable.length && readable.length < list.length) say('warn', `${list.length - readable.length} locked or paid chapters were skipped`);
+  const pool = readable.length ? readable : list;
   const attempts = [];
-  for (const chapter of list.slice(0, 4)) {
+  for (const chapter of pool.slice(0, 4)) {
     attempts.push(await tryOpen(chapter));
     if (attempts.at(-1).ok) break;
   }
@@ -218,13 +231,13 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
   } else {
     say('fail', `none of the ${attempts.length} newest chapters opened`, `${first.label}: ${first.detail}`);
   }
-  if (list.length > 1) {
-    const oldest = await tryOpen(list.at(-1));
+  if (pool.length > 1) {
+    const oldest = await tryOpen(pool.at(-1));
     check(oldest.ok, `${oldest.label} opens`, oldest.detail);
   }
 }
 
-if (entry && genreCount !== null && browse) {
+if (entry && genreCount !== null && browse && !usesWebView) {
   const declares = entry.capabilities?.includes('genres');
   if (declares && genreCount === 0) say('fail', 'declares "genres" in versioning.json but the genre list is empty');
   if (!declares && genreCount > 0) say('warn', 'has a working genre list but versioning.json does not declare "genres"');

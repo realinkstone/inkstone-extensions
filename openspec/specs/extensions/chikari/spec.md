@@ -29,11 +29,12 @@ The extension SHALL support text search.
 - **THEN** matching titles are listed
 
 ### Requirement: Genres
-The extension SHALL provide a genre list that can narrow Browse and Search.
+The extension SHALL provide the site's genres as a flat list, and SHALL support narrowing results by a genre.
 
-#### Scenario: Pick a genre
-- **WHEN** the user opens the genre picker
-- **THEN** the site's genres are listed
+#### Scenario: Related titles
+- **GIVEN** a title tagged with a genre the site offers
+- **WHEN** Boundless looks for related titles
+- **THEN** it searches the site by that genre's id
 
 ### Requirement: Details, chapters and reading
 The extension SHALL show a title's description and status, return its whole chapter list, and open a chapter as a list of absolute image URLs for comics, or as text for novels.

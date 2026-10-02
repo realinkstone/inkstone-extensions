@@ -57,12 +57,17 @@ The `Source` class SHALL provide the asynchronous methods `getSearchResults(requ
 - **THEN** no feeds appear
 
 ### Requirement: Genre list
-`getSearchTags()` MAY be provided. When it is, it SHALL be asynchronous and return `[{ id, label }]`.
+`getSearchTags()` MAY be provided. When it is, it SHALL be asynchronous and return a flat array of `{ id, label }`, where each `label` matches the genre names used in the `tags` of titles, because Boundless matches them to find related titles. Grouped sections are not read.
 
-#### Scenario: Genre picker
-- **GIVEN** an extension with `getSearchTags`
-- **WHEN** the user opens the genre picker
-- **THEN** each tag is listed by its `label`
+#### Scenario: Related titles
+- **GIVEN** a title whose `tags` include "Action" and a genre list with the label "Action"
+- **WHEN** Boundless looks for related titles
+- **THEN** it searches the site using that genre's id
+
+#### Scenario: Grouped sections
+- **GIVEN** a genre list grouped into sections
+- **WHEN** Boundless reads it
+- **THEN** no genres are matched
 
 #### Scenario: Site with no working genre filter
 - **GIVEN** a site whose genre filter does nothing
