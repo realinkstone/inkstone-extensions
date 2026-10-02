@@ -1793,7 +1793,7 @@
     {
       "id": "kagane",
       "name": "Kagane",
-      "version": "1.0.6",
+      "version": "1.0.7",
       "medium": "comics",
       "website": "https://kagane.to",
       "iconUrl": "https://kagane.to/favicons/apple-icon-180x180.png",
@@ -1808,12 +1808,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "cafedc8e424c77b17f7b859228e1bd3465301d7bc3ffeb1158cd944923859328"
+      "sha256": "541512eb98a09fb5d8c4306a386ea720ca585ef37bd79f9ffaaaac551ce2d422"
     },
     {
       "id": "mangafire",
       "name": "MangaFire",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://mangafire.to",
       "iconUrl": "https://mangafire.to/assets/mangafire/favicon.png",
@@ -1830,7 +1830,7 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "e9f1d8d8ba4197c70cde2aab22f33cde58071f12f0b98126922fcf4d1ae5daa3"
+      "sha256": "332cfceb14d11c339f8971cd34f9d38eecdba907d75c13020ec94140ac261bc2"
     },
     {
       "id": "hiperdex",

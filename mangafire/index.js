@@ -2,13 +2,13 @@ const SITE_BASE = 'https://mangafire.to';
 const ALL_CONTENT_RATINGS = 'safe,suggestive,erotica,pornographic';
 const ORACLE_TIMEOUT_MS = 170000;
 
-function mapContentRating(rating) {
+function ageRatingFor(rating) {
   if (!rating) return undefined;
   const r = rating.toLowerCase();
-  if (r === 'safe') return 'safe';
-  if (r === 'suggestive' || r === 'erotica') return 'mature';
-  if (r === 'pornographic') return 'adult';
-  return 'mature';
+  if (r === 'safe') return 0;
+  if (r === 'suggestive') return 16;
+  if (r === 'erotica' || r === 'pornographic') return 18;
+  return 16;
 }
 
 function mapStatus(status) {
@@ -40,7 +40,7 @@ function toPartialManga(item) {
     title: item.title,
     image: item.poster && (item.poster.large || item.poster.medium),
     status: mapStatus(item.status),
-    contentRating: mapContentRating(item.contentRating),
+    ageRating: ageRatingFor(item.contentRating),
     tags: [item.type].filter(Boolean),
     chapters: item.latestChapter,
     webURL: `${SITE_BASE}${item.url || '/title/' + item.hid + '-' + item.slug}`,
@@ -125,7 +125,7 @@ class Source {
         image: series.poster && (series.poster.large || series.poster.medium),
         desc: stripHtml(series.synopsisHtml),
         status: mapStatus(series.status),
-        contentRating: mapContentRating(series.contentRating),
+        ageRating: ageRatingFor(series.contentRating),
         tags: [
           ...(series.genres || []).map((g) => g.title),
           ...(series.themes || []).map((t) => t.title),

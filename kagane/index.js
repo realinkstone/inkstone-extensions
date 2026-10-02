@@ -1,11 +1,11 @@
 const SITE_BASE = 'https://kagane.to';
 
-function mapContentRating(rating) {
+function ageRatingFor(rating) {
   const r = (rating || '').toLowerCase();
-  if (r === 'safe') return 'safe';
-  if (r === 'suggestive' || r === 'erotica') return 'mature';
-  if (r === 'pornographic') return 'adult';
-  return 'mature';
+  if (r === 'safe') return 0;
+  if (r === 'suggestive') return 16;
+  if (r === 'erotica' || r === 'pornographic') return 18;
+  return 16;
 }
 
 function mapStatus(status) {
@@ -36,7 +36,7 @@ function toPartialManga(series) {
     title: series.title,
     image: coverUrl(series),
     status: mapStatus(series.publication_status),
-    contentRating: mapContentRating(series.content_rating),
+    ageRating: ageRatingFor(series.content_rating),
     tags: tagList(series),
     chapters: Array.isArray(series.series_books) ? series.series_books.length : undefined,
     webURL: `${SITE_BASE}/series/${series.series_id}`,
@@ -52,7 +52,7 @@ function searchResultToPartialManga(item) {
       ? `${SITE_BASE}/api/v2/image/${item.cover_image_id}/compressed`
       : undefined,
     status: mapStatus(item.publication_status),
-    contentRating: mapContentRating(item.content_rating),
+    ageRating: ageRatingFor(item.content_rating),
     tags: [],
     chapters: item.current_books,
     webURL: `${SITE_BASE}/series/${item.series_id}`,
@@ -117,7 +117,7 @@ class Source {
         image: coverUrl(series),
         desc: series.description,
         status: mapStatus(series.publication_status),
-        contentRating: mapContentRating(series.content_rating),
+        ageRating: ageRatingFor(series.content_rating),
         tags: tagList(series),
         webURL: `${SITE_BASE}/series/${mangaId}`,
         medium: 'comics',

@@ -61,7 +61,7 @@ Prefer to review a written plan before any code is written? This repo works with
 | [Indomanhwa](indomanhwa/index.js) | indomanhwa.com | Indonesian | Mature | 1.0.0 |
 | [InkStory](inkstory/index.js) | inkstory.net | Russian | Mature | 1.1.0 |
 | [InManga](inmanga/index.js) | inmanga.com | Spanish | Safe | 1.1.0 |
-| [Kagane](kagane/index.js) | kagane.to | English | Safe | 1.0.6 |
+| [Kagane](kagane/index.js) | kagane.to | English | Safe | 1.0.7 |
 | [Keikomik](keikomik/index.js) | keikomik.net | Indonesian | Adult | 1.0.0 |
 | [Kingofshojo](kingofshojo/index.js) | kingofshojo.com | English | Adult | 1.0.0 |
 | [Komikindo](komikindo/index.js) | komikindo.ch | Indonesian | Adult | 1.0.0 |
@@ -74,7 +74,7 @@ Prefer to review a written plan before any code is written? This repo works with
 | [Manga-Scantrad](mangascantrad/index.js) | manga-scantrad.io | French | Adult | 1.0.0 |
 | [MangaBuddy](mangabuddy/index.js) | mangabuddy1.co.uk | English | Adult | 1.3.0 |
 | [MangaDex](mangadex/index.js) | mangadex.org | English | Safe | 1.0.0 |
-| [MangaFire](mangafire/index.js) | mangafire.to | English | Safe | 1.0.0 |
+| [MangaFire](mangafire/index.js) | mangafire.to | English | Safe | 1.0.1 |
 | [MangaFreak](mangafreak/index.js) | mangafreak.me | English | Adult | 1.0.0 |
 | [MangaGo](mangago/index.js) | mangago.me | English | Adult | 1.1.0 |
 | [MangaHere](mangahere/index.js) | mangahere.cc | English | Adult | 1.0.1 |
