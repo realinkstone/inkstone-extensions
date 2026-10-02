@@ -6,6 +6,14 @@ This repository holds Boundless Reader extensions: one folder per site, each wit
 
 Read `docs/BUILD_WITH_AI.md` and follow it. It covers looking at the site, writing the code, testing and packaging. The full reference is `docs/EXTENSIONS.md`.
 
+## Spec-driven workflow with OpenSpec
+
+This repo uses [OpenSpec](https://github.com/Fission-AI/OpenSpec). `openspec/specs/` describes how extensions work (runtime, source-api, listing, testing) and `openspec/config.yaml` says what a proposal for a new extension must contain.
+
+If the user wants OpenSpec, follow `docs/OPENSPEC.md`: propose a change named `add-<id>-extension` (for example `/opsx:propose`), stop for review, then apply and archive. Plan first and write no extension code until asked. Run `openspec validate --all --strict` before finishing.
+
+If they don't, follow `docs/BUILD_WITH_AI.md` directly.
+
 ## Rules
 
 - One folder per extension, named after its `id` (lowercase), containing `index.js`.

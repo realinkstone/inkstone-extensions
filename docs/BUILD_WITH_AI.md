@@ -13,6 +13,8 @@ If your AI can't open links, paste this whole file into the chat first, then add
 
 Works with Claude, ChatGPT, Cursor, Codex, Gemini and anything else that can write code. It works best when the AI can run commands (curl, node), so it can check the real site instead of guessing.
 
+**Prefer to approve a plan before any code is written?** Use OpenSpec instead: [OPENSPEC.md](https://inkstone.web.app/docs/OPENSPEC.md).
+
 Inkstone is an independent project. It isn't part of Boundless Reader and isn't endorsed by it.
 
 ---
@@ -20,6 +22,8 @@ Inkstone is an independent project. It isn't part of Boundless Reader and isn't 
 # Instructions for the AI
 
 You're building one extension for Boundless Reader: a single JavaScript file that lets the app browse, search and read one site. Work through the steps in order. Ask the user a question only when you're truly blocked.
+
+If the user asked for OpenSpec, or this repository has an `openspec/` folder and they want a plan first, follow [OPENSPEC.md](https://inkstone.web.app/docs/OPENSPEC.md) instead: propose a change named `add-<id>-extension`, stop for review, then apply. The steps below still apply. Step 1 becomes the findings in the proposal and design, Step 2 becomes the spec and tasks, and Steps 3 to 5 become the tasks you check off.
 
 ## What you're delivering
 

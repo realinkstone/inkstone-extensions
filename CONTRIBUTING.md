@@ -6,7 +6,7 @@ Thanks for helping out. New extensions and fixes are both welcome.
 
 Read [docs/EXTENSIONS.md](docs/EXTENSIONS.md). Extensions run in a plain JavaScript sandbox with no `fetch`, no DOM and no timers, so it's worth a read before you write any code.
 
-Want an AI assistant to do the building? Give it [docs/BUILD_WITH_AI.md](docs/BUILD_WITH_AI.md).
+Want an AI assistant to do the building? Give it [docs/BUILD_WITH_AI.md](docs/BUILD_WITH_AI.md). If you like to agree a written plan first, this repo works with OpenSpec: see [docs/OPENSPEC.md](docs/OPENSPEC.md).
 
 ## Add an extension
 

@@ -1,0 +1,44 @@
+schema: spec-driven
+
+context: |
+  This repository holds extensions for Boundless Reader. Each extension is one JavaScript
+  file at <id>/index.js, listed in versioning.json. Extensions run in a JavaScriptCore
+  sandbox inside the app. They only have App and cheerio. There is no fetch, URL,
+  setTimeout, document or require.
+  The specs in openspec/specs describe the runtime, the Source class, the listing format
+  and testing. Read them before proposing anything. docs/BUILD_WITH_AI.md is the
+  step by step guide, and docs/EXTENSIONS.md is the reference.
+  Every claim about how a site behaves must come from a request actually made against
+  the live site. Never invent titles, covers, chapters or endpoints.
+  Published code has no comments. Notes belong in the proposal and design.
+  Do not work around logins, paywalls or DRM, and do not try to solve CAPTCHAs.
+
+rules:
+  proposal:
+    - Use the sections Why, What Changes, Capabilities and Impact. List the new extension as a new capability named extensions/<id>.
+    - Name the site and its real domain after following redirects.
+    - Say what data source was found (JSON API, HTML, or data embedded in the page) and how it was confirmed.
+    - State a clear go or no-go. If it is a no-go (TLS block, login-only catalog), say why and stop.
+    - State the content rating (safe, mature or adult) and what was seen on the site to justify it.
+    - List what is out of scope or cannot work, such as scrambled images or login-only content.
+  specs:
+    - Add each new extension as a new capability at specs/extensions/<id>/spec.md using ADDED Requirements.
+    - Cover browse feeds, search, details, chapters and reading, each with a scenario using a real title that was checked.
+    - Use SHALL or MUST in requirement text, and put every limitation in its own requirement.
+  design:
+    - Explain the data source decision, bot protection and rate limit findings, id stability, and how pagination really works.
+    - Say whether the site hotlink protects images and whether chapters need a referer.
+    - List every host the extension will call, for the hosts allowlist.
+  tasks:
+    - Include writing <id>/index.js, running the test script until there are no FAIL lines, adding the versioning.json entry, refreshing sha256, and removing comments from the final file.
+    - Say how each task is verified, for example the test script output.
+
+operations:
+  apply:
+    guidance:
+      - Run node docs/test-extension.mjs <id>/index.js "search term" after every meaningful change and fix every FAIL.
+      - Try a few different search terms, including one that should return nothing.
+      - Anything using App.executeInWebView only runs inside Boundless, so say what could not be tested.
+  archive:
+    guidance:
+      - Summarize what works, what does not, and the test output.

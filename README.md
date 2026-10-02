@@ -27,12 +27,16 @@ docs/BUILD_WITH_AI.md      have an AI assistant build one for you
 docs/EXTENSIONS.md         how an extension works
 docs/TESTING.md            check an extension works
 docs/test-extension.mjs    the test script
+docs/OPENSPEC.md           the spec-driven way, with OpenSpec
+openspec/                  specs describing how extensions work
 AGENTS.md                  instructions for AI coding assistants
 ```
 
 ## Build one with AI
 
 Open this repo in Claude Code, Cursor, Codex or any coding assistant and tell it which site you want. It picks up [AGENTS.md](AGENTS.md) and follows [docs/BUILD_WITH_AI.md](docs/BUILD_WITH_AI.md). Or paste that guide into a chat.
+
+Prefer to review a written plan before any code is written? This repo works with [OpenSpec](https://github.com/Fission-AI/OpenSpec). Run `openspec init`, then propose a change for your site. See [docs/OPENSPEC.md](docs/OPENSPEC.md).
 
 ## Extensions
 
