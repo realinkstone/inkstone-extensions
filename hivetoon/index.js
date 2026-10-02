@@ -1,12 +1,41 @@
 const REQUESTED_SITE = 'https://hivetoon.com';
 const SITE_BASE = 'https://hivetoons.org';
-const API_QUERY_URL = `${SITE_BASE}/api/query`;
+const API_BASE = 'https://api.hivetoons.org/api';
+const API_QUERY_URL = `${API_BASE}/query`;
 const UA =
   'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1';
 
 const PER_PAGE = 50;
 
 const COMIC_SERIES_TYPES = 'MANHWA,MANHUA,MANGA';
+
+const BLOCKED_GENRES = new Set(['shotacon', 'shota', 'lolicon', 'loli']);
+const BLOCKED_IDS_TTL_MS = 10 * 60 * 1000;
+
+function blockedKey(value) {
+  return String(value === undefined || value === null ? '' : value)
+    .toLowerCase()
+    .replace(/[\s-]+/g, '');
+}
+
+function isBlockedGenre(genre) {
+  if (typeof genre === 'string') return BLOCKED_GENRES.has(blockedKey(genre));
+  return !!genre && (BLOCKED_GENRES.has(blockedKey(genre.name)) || BLOCKED_GENRES.has(blockedKey(genre.slug)));
+}
+
+function hasBlockedGenre(list) {
+  return Array.isArray(list) && list.some(isBlockedGenre);
+}
+
+function isBlockedTag(tag, blockedIds) {
+  if (!tag) return false;
+  return (
+    blockedIds.has(String(tag.id)) ||
+    isBlockedGenre(String(tag.id)) ||
+    isBlockedGenre(tag.label) ||
+    isBlockedGenre(tag.name)
+  );
+}
 
 const FEED_SORTS = {
   latest_chapters: { orderBy: 'lastChapterAddedAt', orderDirection: 'desc' },
@@ -20,6 +49,11 @@ const DEFAULT_FEED = 'latest_chapters';
 
 function cleanText(text) {
   return (text || '').replace(/\s+/g, ' ').trim();
+}
+
+function creditName(value) {
+  const text = cleanText(value);
+  return /^-+$/.test(text) ? '' : text;
 }
 
 function descriptionText(raw) {
@@ -49,58 +83,6 @@ function mapStatus(seriesStatus) {
   if (s === 'HIATUS') return 'HIATUS';
   if (s === 'DROPPED' || s === 'CANCELLED') return 'CANCELLED';
   return 'UNKNOWN';
-}
-
-function decodeIslandValue(node) {
-  if (Array.isArray(node)) {
-    if (node.length === 2 && typeof node[0] === 'number') {
-      const tag = node[0];
-      const payload = node[1];
-      if (tag === 1 && Array.isArray(payload)) {
-        return payload.map(decodeIslandValue);
-      }
-      return decodeIslandValue(payload);
-    }
-    return node.map(decodeIslandValue);
-  }
-  if (node && typeof node === 'object') {
-    const out = {};
-    for (const key in node) {
-      if (Object.prototype.hasOwnProperty.call(node, key)) {
-        out[key] = decodeIslandValue(node[key]);
-      }
-    }
-    return out;
-  }
-  return node;
-}
-
-function findIslandData($, mustContain, accept) {
-  let found = null;
-  $('astro-island[props]').each((_, el) => {
-    if (found) return false;
-    const raw = $(el).attr('props');
-    if (!raw || raw.indexOf(mustContain) === -1) return;
-    try {
-      const decoded = decodeIslandValue(JSON.parse(raw));
-      if (accept(decoded)) found = decoded;
-    } catch (e) {
-    }
-  });
-  return found;
-}
-
-function findSeriesData($) {
-  return findIslandData(
-    $,
-    'initialChap',
-    (decoded) => decoded && decoded.post && Array.isArray(decoded.initialChap)
-  );
-}
-
-function findGenresList($) {
-  const decoded = findIslandData($, '"genres"', (d) => d && Array.isArray(d.genres));
-  return decoded ? decoded.genres : [];
 }
 
 function parsePost(p) {
@@ -138,13 +120,12 @@ class Source {
 
   async getSearchTags() {
     try {
-      const html = await this.requestHTML(`${SITE_BASE}/series/`);
-      const $ = cheerio.load(html);
-      const genres = findGenresList($);
+      const genres = await this.requestJSON(`${API_BASE}/genres`);
       const seen = new Set();
       const tags = [];
-      genres.forEach((g) => {
+      (Array.isArray(genres) ? genres : []).forEach((g) => {
         if (!g || g.id === undefined || g.id === null) return;
+        if (isBlockedGenre(g)) return;
         const id = String(g.id);
         if (seen.has(id)) return;
         const label = cleanText(g.name);
@@ -164,6 +145,8 @@ class Source {
       return { results: [] };
     }
 
+    const blockedIds = await this.blockedGenreIds();
+
     const page = (metadata && metadata.page) || 1;
     const params = [`page=${page}`, `perPage=${PER_PAGE}`, 'view=archive', `seriesType=${COMIC_SERIES_TYPES}`];
 
@@ -171,11 +154,17 @@ class Source {
     if (query) params.push(`searchTerm=${encodeURIComponent(query)}`);
 
     const includedTags = (request && request.includedTags) || [];
+    if (includedTags.some((t) => isBlockedTag(t, blockedIds))) {
+      return { results: [], metadata: undefined };
+    }
     const genreIds = includedTags.map((t) => t && t.id).filter(Boolean);
     if (genreIds.length > 0) params.push(`genreIds=${encodeURIComponent(genreIds.join(','))}`);
 
     const excludedTags = (request && request.excludedTags) || [];
-    const excludedGenreIds = excludedTags.map((t) => t && t.id).filter(Boolean);
+    const excludedGenreIds = excludedTags.map((t) => t && t.id).filter(Boolean).map(String);
+    blockedIds.forEach((id) => {
+      if (excludedGenreIds.indexOf(id) === -1) excludedGenreIds.push(id);
+    });
     if (excludedGenreIds.length > 0) {
       params.push(`excludedGenreIds=${encodeURIComponent(excludedGenreIds.join(','))}`);
     }
@@ -189,24 +178,22 @@ class Source {
     const posts = (json && json.posts) || [];
     const totalCount = (json && json.totalCount) || 0;
 
-    const results = posts.map(parsePost);
+    const results = posts.filter((p) => p && !hasBlockedGenre(p.genres)).map(parsePost);
     const hasNext = page * PER_PAGE < totalCount;
 
     return { results, metadata: hasNext ? { page: page + 1 } : undefined };
   }
 
   async getMangaDetails(mangaId) {
-    const url = `${SITE_BASE}/series/${encodeURIComponent(mangaId)}`;
-    const html = await this.requestHTML(url);
-    const $ = cheerio.load(html);
-    const data = findSeriesData($);
-    if (!data || !data.post) {
-      throw new Error(`Could not find series data for ${mangaId}`);
-    }
-    const post = data.post;
+    const post = await this.requestPost(mangaId);
 
     const tags = (post.genres || []).map((g) => cleanText(g && g.name)).filter(Boolean);
-    const author = cleanText(post.artist);
+    const credits = [];
+    [post.author, post.artist].forEach((value) => {
+      const name = creditName(value);
+      if (name && credits.indexOf(name) === -1) credits.push(name);
+    });
+    const author = credits.join(' / ');
     const status = mapStatus(post.seriesStatus);
 
     const mangaInfo = {
@@ -215,7 +202,7 @@ class Source {
       desc: descriptionText(post.postContent),
       status,
       tags,
-      webURL: url,
+      webURL: `${SITE_BASE}/series/${encodeURIComponent(mangaId)}`,
       medium: 'comics',
     };
     if (author) mangaInfo.author = author;
@@ -225,13 +212,13 @@ class Source {
   }
 
   async getChapters(mangaId) {
-    const url = `${SITE_BASE}/series/${encodeURIComponent(mangaId)}`;
-    const html = await this.requestHTML(url);
-    const $ = cheerio.load(html);
-    const data = findSeriesData($);
-    if (!data) return [];
+    const post = await this.requestPost(mangaId);
+    const data = await this.requestJSON(`${API_BASE}/chapters?postId=${encodeURIComponent(post.id)}&take=all`);
+    const raw = data && data.post && data.post.chapters;
+    if (!Array.isArray(raw)) {
+      throw new Error(`No chapter list in the response for ${mangaId}`);
+    }
 
-    const raw = data.initialChap || [];
     const chapters = raw
       .filter((ch) => ch && ch.slug)
       .map((ch) => {
@@ -251,6 +238,8 @@ class Source {
   }
 
   async getChapterDetails(mangaId, chapterId) {
+    await this.requestPost(mangaId);
+
     const url = `${SITE_BASE}/series/${encodeURIComponent(mangaId)}/${encodeURIComponent(chapterId)}`;
     const html = await this.requestHTML(url);
     const $ = cheerio.load(html);
@@ -270,6 +259,32 @@ class Source {
     return { id: chapterId, mangaId, pages };
   }
 
+  async requestPost(mangaId) {
+    const data = await this.requestJSON(`${API_BASE}/post?postSlug=${encodeURIComponent(mangaId)}`);
+    const post = data && data.post;
+    if (!post || post.id === undefined || post.id === null) {
+      throw new Error(`Could not find series data for ${mangaId}`);
+    }
+    if (hasBlockedGenre(post.genres) || hasBlockedGenre(post.tags)) {
+      throw new Error('title not available');
+    }
+    return post;
+  }
+
+  async blockedGenreIds() {
+    const now = Date.now();
+    if (this.blockedIds && now - this.blockedIdsAt < BLOCKED_IDS_TTL_MS) return this.blockedIds;
+    const genres = await this.requestJSON(`${API_BASE}/genres`);
+    if (!Array.isArray(genres)) throw new Error('Could not load the genre list');
+    const ids = new Set();
+    genres.forEach((g) => {
+      if (g && g.id !== undefined && g.id !== null && isBlockedGenre(g)) ids.add(String(g.id));
+    });
+    this.blockedIds = ids;
+    this.blockedIdsAt = now;
+    return ids;
+  }
+
   async requestHTML(url) {
     const manager = App.createRequestManager({});
     const request = App.createRequest({
@@ -279,7 +294,7 @@ class Source {
     });
     const response = await manager.schedule(request);
     if (response.status < 200 || response.status >= 300) {
-      throw new Error(`HTTP ${response.status}`);
+      throw new Error(`HTTP ${response.status} for ${url}`);
     }
     return response.data;
   }

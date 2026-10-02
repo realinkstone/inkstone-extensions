@@ -56,7 +56,7 @@ Prefer to review a written plan before any code is written? This repo works with
 | [Flame Scans](flamescans/index.js) | flamecomics.xyz | English | Safe | 1.0.0 |
 | [GD Scans](gdscans/index.js) | gdscans.com | English | Adult | 1.0.0 |
 | [GlobalComix](globalcomix/index.js) | globalcomix.com | English | Adult | 1.1.0 |
-| [HiveToons](hivetoon/index.js) | hivetoon.com | English | Adult | 1.0.0 |
+| [HiveToons](hivetoon/index.js) | hivetoons.org | English | Adult | 1.1.0 |
 | [Indomanhwa](indomanhwa/index.js) | indomanhwa.com | Indonesian | Mature | 1.0.0 |
 | [InkStory](inkstory/index.js) | inkstory.net | Russian | Mature | 1.1.0 |
 | [InManga](inmanga/index.js) | inmanga.com | Spanish | Safe | 1.1.0 |
@@ -76,7 +76,7 @@ Prefer to review a written plan before any code is written? This repo works with
 | [MangaFire](mangafire/index.js) | mangafire.to | English | Safe | 1.0.0 |
 | [MangaFreak](mangafreak/index.js) | mangafreak.me | English | Adult | 1.0.0 |
 | [MangaGo](mangago/index.js) | mangago.me | English | Adult | 1.1.0 |
-| [MangaHere](mangahere/index.js) | mangahere.cc | English | Adult | 1.0.0 |
+| [MangaHere](mangahere/index.js) | mangahere.cc | English | Adult | 1.0.1 |
 | [MangaHub](mangahub/index.js) | mangahub.io | English | Adult | 1.0.0 |
 | [Mangakakalot](mangakakalot/index.js) | mangakakalot.gg | English | Adult | 1.2.0 |
 | [MangaKatana](mangakatana/index.js) | mangakatana.com | English | Adult | 1.1.2 |
@@ -91,7 +91,7 @@ Prefer to review a written plan before any code is written? This repo works with
 | [ManhuaHot](manhuahot/index.js) | manhuahot.com | English | Mature | 1.0.0 |
 | [Manhuaplus](manhuaplus/index.js) | manhuaplus.org | English | Safe | 1.0.0 |
 | [Manhuaus](manhuaus/index.js) | manhuaus.club | English | Mature | 1.0.0 |
-| [ManhuaVN](manhuavn/index.js) | manhuavn.top | Vietnamese | Adult | 1.1.0 |
+| [ManhuaVN](manhuavn/index.js) | manhuavn.top | Vietnamese | Adult | 1.2.0 |
 | [Manhwa18](manhwa18/index.js) | manhwa18.cc | English | Adult | 1.0.0 |
 | [ManhwaClan](manhwaclan/index.js) | manhwaclan.com | English | Adult | 1.0.0 |
 | [ManhwaHQ](manhwahq/index.js) | manhwahq.com | English | Adult | 1.0.1 |
@@ -102,7 +102,7 @@ Prefer to review a written plan before any code is written? This repo works with
 | [NetTruyen](nettruyen/index.js) | nettruyenvia.com | Vietnamese | Adult | 1.0.0 |
 | [NirvanaManga](nirvanamanga/index.js) | nirvanamanga.com | Turkish | Adult | 1.0.0 |
 | [Olympus Scanlation](olympusscans/index.js) | olympusbiblioteca.com | Spanish | Adult | 1.0.2 |
-| [Rawkuma](rawkuma/index.js) | rawkuma.net | Japanese | Adult | 1.0.0 |
+| [Rawkuma](rawkuma/index.js) | rawkuma.net | Japanese | Adult | 1.0.1 |
 | [ReManga](remanga/index.js) | remanga.org | Russian | Adult | 1.2.1 |
 | [Scan-VF](scanvf/index.js) | scan-vf.net | French | Safe | 1.0.0 |
 | [Serein Scan](sereinscan/index.js) | sereinscan.net | Turkish | Safe | 1.0.0 |
@@ -123,7 +123,7 @@ Prefer to review a written plan before any code is written? This repo works with
 
 | Extension | Site | Language | Rating | Version |
 | --- | --- | --- | --- | --- |
-| [17K Novel Network](17k/index.js) | 17k.com | Chinese | Mature | 1.2.0 |
+| [17K Novel Network](17k/index.js) | 17k.com | Chinese | Mature | 1.3.0 |
 | [Chikari](chikari/index.js) | chikari.moe | English | Adult | 4.3.0 |
 | [Dreame](dreame/index.js) | dreame.com | English | Adult | 1.2.0 |
 | [FreeWebNovel](freewebnovel/index.js) | freewebnovel.com | English | Adult | 1.2.0 |
@@ -149,13 +149,8 @@ Prefer to review a written plan before any code is written? This repo works with
 
 These extensions are known to be broken right now:
 
-- **17K Novel Network** (`17k`): Browse and search are returning no titles right now.
-- **Flame Scans** (`flamescans`): The site changed, so browse and search stopped working.
-- **HiveToons** (`hivetoon`): Title details fail to load and chapter lists come back empty.
-- **Komikindo** (`komikindo`): The site has moved, so browse and search return an error.
-- **MangaHere** (`mangahere`): Chapter lists come back empty.
-- **ManhuaVN** (`manhuavn`): Chapters open with no pages.
-- **Rawkuma** (`rawkuma`): Browse and search are returning no titles right now.
+- **Flame Scans** (`flamescans`): The site's domain now redirects to a Discord invite, and its image host is offline.
+- **Komikindo** (`komikindo`): The site is down for maintenance.
 
 ## Contributing
 

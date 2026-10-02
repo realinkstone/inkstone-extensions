@@ -3,6 +3,8 @@ const SEARCH_BASE = 'https://search.17k.com';
 const UA =
   'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1';
 
+const BROWSER_TIMEOUT_MS = 60000;
+
 const LOCKED_CHAPTER_TEXT =
   '本章为17K付费（VIP）章节，暂无法在此阅读完整内容，请前往17K小说网或官方App订阅解锁。\n\nThis chapter is a 17K members-only (VIP) chapter and cannot be unlocked here. Read it on 17k.com or in the official 17K app.';
 
@@ -47,6 +49,42 @@ function isAcwChallenge(html) {
     /var arg1\s*=/.test(html)
   );
 }
+
+function isWafWall(html) {
+  return (
+    typeof html === 'string' &&
+    html.indexOf('name="aliyun_waf_aa"') !== -1 &&
+    html.indexOf('id="renderData"') !== -1
+  );
+}
+
+const BROWSER_SCRIPT = `
+(function () {
+  if (window.top !== window) return;
+  var started = Date.now();
+  function walled() {
+    return !!document.getElementById('renderData') || !!document.querySelector('meta[name^="aliyun_waf"]');
+  }
+  function tick() {
+    try {
+      if (location.pathname === '/error.html') {
+        __reportError('17K error page: the book or chapter is not available');
+        return;
+      }
+      if (document.readyState !== 'loading' && document.body && document.title && !walled()) {
+        __reportResult(document.documentElement.outerHTML);
+        return;
+      }
+    } catch (e) {}
+    if (Date.now() - started > ${BROWSER_TIMEOUT_MS - 5000}) {
+      __reportError('17K page did not clear the check in time');
+      return;
+    }
+    setTimeout(tick, 250);
+  }
+  tick();
+})();
+`;
 
 function qs(params) {
   return Object.keys(params)
@@ -99,7 +137,7 @@ class Source {
 
   async getSearchTags() {
     try {
-      const html = await this.requestBypassed(`${SITE_BASE}/all/book/2_0_0_0_0_0_0_0_1.html`);
+      const html = await this.requestBypassed(`${SITE_BASE}/all`);
       const $ = cheerio.load(html);
       const tags = [];
       const seen = {};
@@ -289,6 +327,11 @@ class Source {
   parseListing(html) {
     const $ = cheerio.load(html);
     const items = [];
+    const popupCovers = {};
+    $('[id^="mydiv"]').each((_, el) => {
+      const src = $(el).find('img').first().attr('src');
+      if (src) popupCovers[$(el).attr('id')] = src;
+    });
     $('table tbody tr').each((_, tr) => {
       const $tr = $(tr);
       const $link = $tr.find('td.td3 a.jt').first();
@@ -297,7 +340,7 @@ class Source {
       if (!idMatch) return;
       const mangaId = idMatch[1];
       const title = cleanText($link.text()) || mangaId;
-      const cover = $tr.find('img').first().attr('src');
+      const cover = $tr.find('img').first().attr('src') || popupCovers[($link.attr('rel') || '').replace(/^#/, '')];
       const author = cleanText($tr.find('td.td6 a').first().text());
       const statusText = cleanText($tr.find('td.td8').first().text());
 
@@ -374,6 +417,7 @@ class Source {
 
   async requestBypassed(url) {
     const first = await this.requestText(url);
+    if (isWafWall(first)) return this.requestInBrowser(url);
     if (!isAcwChallenge(first)) return first;
     const m = first.match(/var arg1\s*=\s*['"]([0-9A-Fa-f]+)['"]/);
     if (!m) {
@@ -387,10 +431,34 @@ class Source {
       console.error('17K WAF-challenge solve failed:', e);
       throw e;
     }
+    if (isWafWall(solved)) return this.requestInBrowser(url);
     if (isAcwChallenge(solved)) {
       throw new Error(`17K WAF challenge for ${url} still gated after solving acw_sc__v2`);
     }
     return solved;
+  }
+
+  async requestInBrowser(url) {
+    const startedAt = Date.now();
+    const result = await App.executeInWebView({
+      url,
+      baseUrl: `${SITE_BASE}/`,
+      script: BROWSER_SCRIPT,
+      timeoutMs: BROWSER_TIMEOUT_MS,
+      runBeforePageScripts: true,
+    });
+    if (result && result.error) {
+      throw new Error(`17K browser view failed for ${url}: ${result.error}`);
+    }
+    const html = result && result.value;
+    if (typeof html !== 'string' || !html) {
+      throw new Error(`17K browser view returned no page for ${url}`);
+    }
+    if (isWafWall(html)) {
+      throw new Error(`17K wall still showing for ${url} after the browser view`);
+    }
+    console.warn(`[17k] browser view for ${url} took ${Date.now() - startedAt}ms`);
+    return html;
   }
 }
 

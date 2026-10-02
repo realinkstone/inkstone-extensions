@@ -4,12 +4,16 @@ const UA =
 
 const EMBEDDED_CHAPTER_CAP = 20;
 
+const APP_ONLY_ICON = 'i.fa-mobile';
+const APP_ONLY_SUFFIX = ' (Locked, App Only)';
+
 const FEEDS = {
-  '': { status: 0, sort: 2 },
+  latest: { status: 0, sort: 2 },
   hot: { status: 0, sort: 1 },
   new: { status: 0, sort: 0 },
   completed: { status: 2, sort: 1 },
 };
+const DEFAULT_FEED = 'latest';
 
 function cleanText(text) {
   return (text || '').replace(/\s+/g, ' ').trim();
@@ -77,7 +81,7 @@ function chapterNumberFromName(name) {
 }
 
 function feedParams(feedId) {
-  return FEEDS[feedId] || FEEDS[''];
+  return FEEDS[feedId] || FEEDS[DEFAULT_FEED];
 }
 
 function pageSegment(page) {
@@ -133,7 +137,7 @@ function extractStoryId($) {
 class Source {
   getSourceFeeds() {
     return [
-      { id: '', name: 'Latest Updated' },
+      { id: DEFAULT_FEED, name: 'Latest Updated' },
       { id: 'hot', name: 'Most Popular' },
       { id: 'new', name: 'New Manga' },
       { id: 'completed', name: 'Completed' },
@@ -171,7 +175,7 @@ class Source {
 
     const page = (metadata && metadata.page) || 1;
     const query = ((request && request.title) || '').trim();
-    const feedId = (request && request.feed) || '';
+    const feedId = (request && request.feed) || DEFAULT_FEED;
     const includedTags = (request && request.includedTags) || [];
     const genreId = includedTags.length > 0 && includedTags[0] ? includedTags[0].id : '';
 
@@ -257,8 +261,13 @@ class Source {
       const href = link.attr('href') || '';
       const chapterId = extractChapterId(href);
       if (!chapterId) return;
-      const name = cleanText(link.text());
-      raw.push({ chapterId, name, number: chapterNumberFromName(name) });
+      const baseName = cleanText(link.text());
+      const appOnly = $list(el).find(APP_ONLY_ICON).length > 0;
+      raw.push({
+        chapterId,
+        name: appOnly ? `${baseName}${APP_ONLY_SUFFIX}` : baseName,
+        number: chapterNumberFromName(baseName),
+      });
     });
 
     if (fullListError && raw.length >= EMBEDDED_CHAPTER_CAP) {
@@ -284,6 +293,13 @@ class Source {
       const src = ($(el).attr('data-original') || '').trim();
       if (src) pages.push(src);
     });
+
+    if (pages.length === 0 && $('.wrap_taiapp').length === 0) {
+      throw new Error(
+        `ManhuaVN: chapter ${chapterId} has no page images and no app-only notice, ` +
+          'so the reader markup may have changed'
+      );
+    }
 
     return { id: chapterId, mangaId, pages, referer: SITE_BASE };
   }

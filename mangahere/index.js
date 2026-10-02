@@ -3,6 +3,10 @@ const IMAGE_REFERER = SITE_BASE;
 const UA =
   'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1';
 
+const AGE_HEADERS = { Cookie: 'isAdult=1' };
+
+const ASHX_TRIES = 3;
+
 const MONTHS = {
   Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,
   Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11,
@@ -297,7 +301,7 @@ class Source {
 
   async getMangaDetails(mangaId) {
     const url = `${SITE_BASE}/manga/${encodeURIComponent(mangaId)}/`;
-    const html = await this.requestHTML(url);
+    const html = await this.requestHTML(url, AGE_HEADERS);
     const $ = cheerio.load(html);
 
     const title = cleanText($('.detail-info-right-title-font').first().text()) || mangaId;
@@ -351,8 +355,12 @@ class Source {
 
   async getChapters(mangaId) {
     const url = `${SITE_BASE}/manga/${encodeURIComponent(mangaId)}/`;
-    const html = await this.requestHTML(url);
+    const html = await this.requestHTML(url, AGE_HEADERS);
     const $ = cheerio.load(html);
+
+    if ($('#checkAdult').length > 0) {
+      throw new Error('MangaHere getChapters: the 18+ warning is blocking ' + url);
+    }
 
     const raw = [];
     $('.detail-main-list > li').each((_, li) => {
@@ -416,9 +424,7 @@ class Source {
       pages = [];
       for (let page = 1; page <= imageCount; page++) {
         const ashxUrl = `${SITE_BASE}/manga/${encodeURIComponent(mangaId)}/${chapterId}/chapterfun.ashx?cid=${cid}&page=${page}&key=${encodeURIComponent(key)}`;
-        const ashxBody = await this.requestHTML(ashxUrl);
-        const ashxUnpacked = unpackPacked(ashxBody);
-        const pageImage = ashxUnpacked ? extractAshxPageImage(ashxUnpacked) : null;
+        const pageImage = await this.fetchPageImage(ashxUrl, readerUrl);
         if (!pageImage) {
           throw new Error(`MangaHere getChapterDetails: failed to parse page ${page} of ${readerUrl}`);
         }
@@ -429,12 +435,22 @@ class Source {
     return { id: chapterId, mangaId, pages, referer: IMAGE_REFERER };
   }
 
-  async requestHTML(url) {
+  async fetchPageImage(ashxUrl, readerUrl) {
+    let body = '';
+    for (let attempt = 1; attempt <= ASHX_TRIES; attempt++) {
+      body = await this.requestHTML(ashxUrl, { Referer: readerUrl });
+      if (body.trim() !== '') break;
+    }
+    const unpacked = unpackPacked(body);
+    return unpacked ? extractAshxPageImage(unpacked) : null;
+  }
+
+  async requestHTML(url, extraHeaders) {
     const manager = App.createRequestManager({});
     const request = App.createRequest({
       url,
       method: 'GET',
-      headers: { 'User-Agent': UA },
+      headers: Object.assign({ 'User-Agent': UA }, extraHeaders),
     });
     const response = await manager.schedule(request);
     if (response.status < 200 || response.status >= 300) {

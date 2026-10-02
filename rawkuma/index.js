@@ -58,6 +58,10 @@ function extractDescription($) {
   return cleanText(clone.text()).replace(/\s*\[…\]\s*$/, '').trim();
 }
 
+function loadFragment(html) {
+  return cheerio.load(html, null, false);
+}
+
 function parseSearchCards($) {
   const results = [];
   $.root().children('div').each((_, el) => {
@@ -169,7 +173,7 @@ class Source {
     if (excludedSlugs.length > 0) fields.genre_exclude = JSON.stringify(excludedSlugs);
 
     const html = await this.requestSearchCards(fields);
-    const $ = cheerio.load(html);
+    const $ = loadFragment(html);
     const results = parseSearchCards($);
     const hasNext = results.length > 0 && hasNextPage($, page);
 
