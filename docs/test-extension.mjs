@@ -153,9 +153,14 @@ if (browse) {
   }
 }
 
+let genreCount = null;
 if (typeof source.getSearchTags === 'function') {
   const tags = await step('genre list', () => source.getSearchTags());
-  if (tags) check(tags.value.length > 0 && tags.value.every((t) => t.id && t.label), 'genre list has ids and labels', `${tags.value.length} genres`);
+  if (tags) {
+    genreCount = tags.value.length;
+    if (genreCount === 0) say('warn', 'genre list is empty', 'fine if the site has no working genre filter, but then do not declare "genres"');
+    else check(tags.value.every((t) => t.id && t.label), 'genre list has ids and labels', `${genreCount} genres`);
+  }
 }
 
 const found = await step(`search "${query}"`, () => source.getSearchResults({ title: query }, null));
@@ -183,6 +188,12 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
     const isImages = read.value.pages?.length > 0 && read.value.pages.every(isUrl);
     check(isText || isImages, `${label} opens`, isText ? 'text' : `${read.value.pages?.length} pages in ${read.took}`);
   }
+}
+
+if (entry && genreCount !== null) {
+  const declares = entry.capabilities?.includes('genres');
+  if (declares && genreCount === 0) say('fail', 'declares "genres" in versioning.json but the genre list is empty');
+  if (!declares && genreCount > 0) say('warn', 'has a working genre list but versioning.json does not declare "genres"');
 }
 
 const hostsUsed = [...new Set(requests)];

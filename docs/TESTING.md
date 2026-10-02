@@ -35,7 +35,7 @@ It looks for `versioning.json` one folder above your extension, the same layout 
 
 - Browse returns titles with a `mangaId`, a `title` and an absolute `image` URL.
 - Page 2 really differs from page 1.
-- Genre list (if you have one) has ids and labels.
+- Genre list (if you have one) has ids and labels. An empty list is a warning, because some sites have no working genre filter. In that case don't declare `genres` in `versioning.json`, and the script checks the two agree.
 - Search returns titles.
 - For two titles: details have a `desc` and an allowed `status`, the chapter list isn't empty, chapter times are in milliseconds, and the first and last chapters open with real image URLs (or text, for novels).
 - Every host your extension called is listed in `hosts`.

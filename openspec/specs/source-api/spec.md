@@ -64,6 +64,12 @@ The `Source` class SHALL provide the asynchronous methods `getSearchResults(requ
 - **WHEN** the user opens the genre picker
 - **THEN** each tag is listed by its `label`
 
+#### Scenario: Site with no working genre filter
+- **GIVEN** a site whose genre filter does nothing
+- **WHEN** `getSearchTags` runs
+- **THEN** it returns an empty array
+- **AND** the listing does not declare `genres`
+
 ### Requirement: Title fields
 Each result SHALL have `mangaId` and `title`, and a cover in `image` as an absolute URL. It MAY have `author`, `summary`, `tags`, `webURL`, `medium` (`comics` or `novel`) and a per-title `contentRating` of `safe`, `mature` or `adult`. The cover field is `image`, not `coverURL`.
 

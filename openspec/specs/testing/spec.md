@@ -36,6 +36,12 @@ The script SHALL make real requests to check that browse and search return title
 - **WHEN** the script runs
 - **THEN** `every host it called is in "hosts"` fails
 
+#### Scenario: Empty genre list
+- **GIVEN** an extension whose genre list is empty
+- **WHEN** the script runs
+- **THEN** it reports a warning rather than a failure
+- **AND** it fails only if the listing declares `genres`
+
 ### Requirement: Parts that need Boundless
 Anything that relies on `App.executeInWebView` SHALL be reported as skipped with a warning rather than a failure, and SHALL be tried inside Boundless Reader instead.
 
