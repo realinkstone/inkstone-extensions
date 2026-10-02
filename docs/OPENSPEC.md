@@ -62,55 +62,59 @@ openspec/changes/add-mysite-extension/
 | `source-api` | The `Source` class, the data shapes the app reads, and pagination |
 | `listing` | The folder layout, `versioning.json`, content rating, `sha256` and `hosts` |
 | `testing` | What `test-extension.mjs` checks and when an extension is ready |
+| `extensions/asurascans`, `extensions/chikari` | Finished specs for the two reference extensions |
 
-Every new extension adds one more spec of its own, at `specs/extensions/<id>/spec.md`.
+Every new extension adds a spec of its own, at `specs/extensions/<id>/spec.md`, when you archive its change.
 
 ## An example
 
-Here's what a finished plan looks like, for MangaKatana.
+Here's what a finished plan looks like, for an imaginary site called MySite.
 
 **proposal.md**
 
 ```markdown
-# Proposal: Add the MangaKatana extension
+# Proposal: Add the MySite extension
 
 ## Why
-Boundless readers can't read MangaKatana (mangakatana.com) yet. It's a large manga and manhwa catalog, and its pages are plain HTML that answers ordinary requests.
+Boundless readers can't read MySite (mysite.example) yet. It's a comics site with a public JSON API, which makes it reliable to read.
 
 ## What Changes
-- Add a MangaKatana extension with three browse feeds, search, a genre filter, details, chapter lists and reading.
+- Add a MySite extension with a Latest feed, search, details, chapter lists and reading.
 - Go decision: browse, search, details, chapters and reading all worked against the live site for several titles.
-- Content rating `adult`, because the site serves explicit titles.
+- Content rating `safe`, because every title seen was all-ages.
 - Out of scope: anything that needs a login.
 
 ## Capabilities
 
 ### New Capabilities
-- `extensions/mangakatana`: read manga and manhwa from mangakatana.com
+- `extensions/mysite`: read comics from mysite.example
 
 ### Modified Capabilities
 
 ## Impact
-- New `mangakatana/index.js` and a `versioning.json` entry.
+- New `mysite/index.js` and a `versioning.json` entry.
 - No change to any existing extension.
 ```
 
 **design.md**
 
 ```markdown
-# Design: MangaKatana extension
+# Design: MySite extension
 
 ## Data source
-Server-rendered HTML, parsed with cheerio. No login or token is needed.
+A public JSON API at `api.mysite.example`. No login or token is needed.
 
 ## Identifiers
-A title's id is the id segment of its `/manga/<id>` URL. A genre's id is the segment after `/genre/`.
+A title's id is its slug. Chapter ids come from the chapter list.
 
-## Feeds and genres
-Three feeds: `latest`, `new` and `az`. The genre list is read live from the site (52 genres when checked) rather than hardcoded.
+## Feeds
+One feed, `latest`. Page 2 is requested with `?page=2` and really differs from page 1.
+
+## Images
+Page images load without a Referer, so chapters don't set one.
 
 ## Hosts
-`mangakatana.com`
+`api.mysite.example`
 ```
 
 **tasks.md**
@@ -119,44 +123,40 @@ Three feeds: `latest`, `new` and `az`. The genre list is read live from the site
 # Tasks
 
 ## 1. Extension
-- [ ] 1.1 Write `mangakatana/index.js` using only `App` and `cheerio`
-- [ ] 1.2 Verify: `node docs/test-extension.mjs mangakatana/index.js "one"` shows no FAIL lines
+- [ ] 1.1 Write `mysite/index.js` using only `App` and `cheerio`
+- [ ] 1.2 Verify: `node docs/test-extension.mjs mysite/index.js "naruto"` shows no FAIL lines
 
 ## 2. Listing
-- [ ] 2.1 Add the `versioning.json` entry with `contentRating: adult` and `hosts`
-- [ ] 2.2 Refresh `sha256` with `shasum -a 256 mangakatana/index.js`
+- [ ] 2.1 Add the `versioning.json` entry with `contentRating: safe` and `hosts`
+- [ ] 2.2 Refresh `sha256` with `shasum -a 256 mysite/index.js`
 - [ ] 2.3 Confirm the published file has no comments
 
 ## 3. Submit
 - [ ] 3.1 Open a pull request with the test output in the description
 ```
 
-**specs/extensions/mangakatana/spec.md**
+**specs/extensions/mysite/spec.md**
 
 ```markdown
 ## Purpose
-Read manga and manhwa from mangakatana.com in Boundless Reader.
+Read comics from mysite.example in Boundless Reader.
 
 ## ADDED Requirements
 
-### Requirement: Browse feeds
-The extension SHALL provide the feeds Latest Updates, New Manga and All Manga.
+### Requirement: Latest feed
+The extension SHALL provide a Latest feed.
 
-#### Scenario: Open the Latest Updates feed
+#### Scenario: Open the Latest feed
 - **WHEN** the user opens the `latest` feed
 - **THEN** titles with covers are listed
 - **AND** scrolling loads the next page, which differs from the first
 
-### Requirement: Search and genres
-The extension SHALL support text search and a genre filter read from the site.
+### Requirement: Search
+The extension SHALL support text search.
 
 #### Scenario: Search for a title
-- **WHEN** the user searches for "one"
+- **WHEN** the user searches for "naruto"
 - **THEN** matching titles are listed
-
-#### Scenario: Pick a genre
-- **WHEN** the user opens the genre picker
-- **THEN** the site's genres are listed
 
 ### Requirement: Details, chapters and reading
 The extension SHALL show a title's description and status, return its whole chapter list, and open a chapter as a list of absolute image URLs.
@@ -167,12 +167,25 @@ The extension SHALL show a title's description and status, return its whole chap
 - **THEN** the chapter's page images load in order
 
 ### Requirement: Content rating
-The extension SHALL be listed with the content rating `adult`.
+The extension SHALL be listed with the content rating `safe`.
 
 #### Scenario: Catalog listing
 - **WHEN** the extension appears in the catalog
-- **THEN** it is marked adult
+- **THEN** it is marked Safe
 ```
+
+## Real examples
+
+Two extensions are the reference for how a finished one looks. Both work well and are the best tested:
+
+- `asurascans`: a comics site on a JSON API. Its spec is [`openspec/specs/extensions/asurascans/spec.md`](https://github.com/realinkstone/inkstone-extensions/blob/main/openspec/specs/extensions/asurascans/spec.md).
+- `chikari`: one site serving both comics and novels from a JSON API. Its spec is [`openspec/specs/extensions/chikari/spec.md`](https://github.com/realinkstone/inkstone-extensions/blob/main/openspec/specs/extensions/chikari/spec.md).
+
+Read their code and their specs side by side. Other extensions in the repo can give you ideas, but some have rough edges, so don't copy them blindly.
+
+## Changing an existing extension
+
+To fix or improve an extension that already has a spec, propose a change that uses `## MODIFIED Requirements` for the behavior that changes, and bump its `version` and `sha256` in the tasks. The rest of the flow is the same.
 
 ## Checking your work
 

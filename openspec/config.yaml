@@ -8,6 +8,9 @@ context: |
   The specs in openspec/specs describe the runtime, the Source class, the listing format
   and testing. Read them before proposing anything. docs/BUILD_WITH_AI.md is the
   step by step guide, and docs/EXTENSIONS.md is the reference.
+  The reference extensions are asurascans (comics, JSON API) and chikari (comics and
+  novels, JSON API). Their code and their specs under openspec/specs/extensions show a
+  finished extension. Other extensions may have rough edges, so do not copy them blindly.
   Every claim about how a site behaves must come from a request actually made against
   the live site. Never invent titles, covers, chapters or endpoints.
   Published code has no comments. Notes belong in the proposal and design.

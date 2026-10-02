@@ -14,6 +14,10 @@ If the user wants OpenSpec, follow `docs/OPENSPEC.md`: propose a change named `a
 
 If they don't, follow `docs/BUILD_WITH_AI.md` directly.
 
+## Reference extensions
+
+`asurascans` (comics, JSON API) and `chikari` (comics and novels, JSON API) are the most complete and best tested. Copy their structure. Their specs are in `openspec/specs/extensions/`. Other extensions may have rough edges, so don't copy them blindly.
+
 ## Rules
 
 - One folder per extension, named after its `id` (lowercase), containing `index.js`.

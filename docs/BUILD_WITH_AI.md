@@ -27,7 +27,7 @@ If the user asked for OpenSpec, or this repository has an `openspec/` folder and
 
 ## What you're delivering
 
-1. `<id>/index.js`, the extension. `<id>` is lowercase letters and numbers, like `mangakatana`.
+1. `<id>/index.js`, the extension. `<id>` is lowercase letters and numbers, like `asurascans`.
 2. A `versioning.json` entry for it.
 3. Test results from the live site, and a short report (the format is at the end).
 
@@ -58,15 +58,14 @@ Do these checks in one batch (one script, or a few curl calls sent together), th
 7. **Check the images.** Fetch a page image with no `Referer`, then again with `Referer` set to the site. If the results differ, the site has hotlink protection and your chapters need to return `referer`. Then actually look at a downloaded image. If it's a jumble of tiles, that's image scrambling the extension can't undo, so list it as a limitation.
 8. **Check the encoding.** For Chinese, Japanese and Korean sites, make sure the response is UTF-8. If not, look for a mobile or app API that serves clean JSON.
 9. **Check the edges of pagination.** What does an empty search do? What does one page past the end do: an error, an empty list, or page 1 again?
-10. **Find the closest existing extension** in [github.com/realinkstone/inkstone-extensions](https://github.com/realinkstone/inkstone-extensions) and borrow from it:
+10. **Start from the reference extensions** in [github.com/realinkstone/inkstone-extensions](https://github.com/realinkstone/inkstone-extensions). These two are the most complete and the best tested, so copy their structure:
 
-| If the site is... | Look at |
+| Reference | What it shows |
 | --- | --- |
-| A JSON API | `asurascans`, `mangadex` |
-| Plain HTML | `mangakatana`, `toonily` |
-| Novels (text chapters) | `novelfire`, `royalroad` |
-| Data embedded in the page (`__NEXT_DATA__`) | `webfic`, `tapas` |
-| Needs a token from the site's own scripts | `mangafire`, `kagane`, `comix` |
+| `asurascans` | A comics site on a JSON API: feeds, genre filter, search, details, chapters and reading |
+| `chikari` | One site serving both comics and novels from a JSON API: it honors the `medium` toggle and returns text chapters for novels |
+
+Both read from a JSON API. For a site that only serves HTML, follow the `cheerio` guidance in Step 2. Other extensions in the repo are fine for ideas, but some have rough edges, so don't copy them blindly.
 
 **Decide go or no-go.** A TLS-level block, or a catalog behind a login, is a real "no". Say so plainly and stop.
 
@@ -100,7 +99,7 @@ function qs(params) {
 | `App.getSourceSetting(key)` | Reads a value the user set in your extension's settings. Always a string, or `undefined`. |
 | `App.createSourceStateManager()` | Returns `{ store(key, value), retrieve(key) }`, both async, for remembering things between calls. |
 | `App.base64Encode(text)` / `App.base64Decode(text)` | Base64 in and out. |
-| `App.executeInWebView({ url \| html + baseUrl, script, timeoutMs })` | Last resort. Runs your `script` inside a real browser view, for sites that only hand out a token through their own page scripts. See `mangafire` and `kagane` before reaching for it. It resolves to `{ value }` or `{ error }`. |
+| `App.executeInWebView({ url \| html + baseUrl, script, timeoutMs })` | Last resort. Runs your `script` inside a real browser view, for sites that only hand out a token through their own page scripts. A few newer extensions (`mangafire`, `kagane`, `comix`) use it, but treat them as examples of the call rather than models. It resolves to `{ value }` or `{ error }`. |
 
 A request helper to start from:
 
@@ -196,7 +195,7 @@ It's `desc`, not `description`, and `status` must be one of those exact uppercas
 
 ### Settings (only if you need them)
 
-If your extension has options (a language, a quality setting, a server URL), declare them as `settingsSchema` in its `versioning.json` entry. Each field has a `type` (`text`, `toggle`, `select`, `multiSelect` or `section`), a `key`, a `label`, and optionally `default`, `placeholder`, `secure` (hides passwords) and `options: [{ value, label }]`. Read the value back with `App.getSourceSetting('key')`, which gives you a string (so a toggle is `'true'` or `'false'`). No published extension declares a schema yet, so test yours in the app. `mangadex` reads two settings, if you want to see the reading side.
+If your extension has options (a language, a quality setting, a server URL), declare them as `settingsSchema` in its `versioning.json` entry. Each field has a `type` (`text`, `toggle`, `select`, `multiSelect` or `section`), a `key`, a `label`, and optionally `default`, `placeholder`, `secure` (hides passwords) and `options: [{ value, label }]`. Read the value back with `App.getSourceSetting('key')`, which gives you a string (so a toggle is `'true'` or `'false'`). No published extension declares a schema yet, so test yours in the app.
 
 ### Handy rules of thumb
 

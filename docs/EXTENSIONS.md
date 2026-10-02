@@ -94,7 +94,7 @@ manager: `App.createRequestManager({ rateLimit: { requestsPerSecond: 2 } })`
 | `App.getSourceSetting(key)` | Reads a value the user set in your settings (see `settingsSchema` below). Always a string, or `undefined`. |
 | `App.createSourceStateManager()` | Returns `{ store(key, value), retrieve(key) }`, both async, for remembering things between calls. |
 | `App.base64Encode(text)`, `App.base64Decode(text)` | Base64 in and out. |
-| `App.executeInWebView({ url \| html + baseUrl, script, timeoutMs })` | Last resort for sites that only hand out a token through their own page scripts. Runs `script` in a real browser view and resolves to `{ value }` or `{ error }`. See `mangafire` and `kagane` for working examples. |
+| `App.executeInWebView({ url \| html + baseUrl, script, timeoutMs })` | Last resort for sites that only hand out a token through their own page scripts. Runs `script` in a real browser view and resolves to `{ value }` or `{ error }`. A few newer extensions (`mangafire`, `kagane`, `comix`) use it, but treat them as examples of the call rather than models. |
 
 ## 3. The `Source` class
 
@@ -191,9 +191,8 @@ The Reader decodes them as images via ImageIO. For a prose source (novels:
 `medium: 'novel'`, or the novel side of a `'both'` source), return `pages: []`
 and put the chapter body in `text` instead, as either one string or an array
 of paragraph strings: `{ id, mangaId, pages: [], text: 'Chapter text…' }`.
-The app has a real prose reader for this today. Roughly 20 of this repo's
-own bundled sources (novelfire, royalroad, wuxiaworld, webnovel, and others)
-already ship this way; it is not a theoretical capability.
+The app has a real prose reader for this today. `chikari` is a good example:
+one site serving both comics and novels.
 
 Optionally, also return `referer: 'https://example.com'` (your site's own
 origin) alongside `pages` if your page-image CDN checks the `Referer` header
