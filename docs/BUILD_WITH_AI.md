@@ -1,4 +1,6 @@
-# Build an Inkstone extension with AI
+# Build an Inkstone extension with AI (beta)
+
+**This is in beta.** It's new, and extensions built by an AI can have bugs. Always run the test script and try the result in Boundless before you share it.
 
 You can have an AI assistant build a Boundless Reader extension for you. Point it at this page, tell it which site you want, and it can look the site over, write the code, test it against the real thing and package it for Inkstone. Everything it needs is below.
 
@@ -221,7 +223,7 @@ import path from 'node:path';
 import vm from 'node:vm';
 import * as cheerio from 'cheerio';
 
-const [file, query = 'a'] = process.argv.slice(2);
+const [file, searchTerm] = process.argv.slice(2);
 if (!file) {
   console.log('Usage: node test-extension.mjs <path/to/index.js> [search term]');
   process.exit(1);
@@ -243,17 +245,26 @@ const finish = () => {
   process.exit(tally.fail ? 1 : 0);
 };
 const isUrl = (u) => typeof u === 'string' && /^https?:\/\//.test(u);
+const pickQuery = (title) => {
+  const words = String(title ?? '').split(/\s+/).map((w) => w.replace(/[^\p{L}\p{N}]/gu, '')).filter((w) => [...w].length >= 3);
+  return words[0] ?? String(title ?? '').trim() ?? 'a';
+};
 
 const requests = [];
 const App = {
   createRequestManager: () => ({
     async schedule(request) {
       requests.push(new URL(request.url).hostname);
-      const res = await fetch(request.url, {
-        method: request.method || 'GET',
-        headers: request.headers,
-        body: request.body,
-      });
+      let res;
+      try {
+        res = await fetch(request.url, {
+          method: request.method || 'GET',
+          headers: request.headers,
+          body: request.body,
+        });
+      } catch (error) {
+        throw new Error(`network error: ${error.cause?.code ?? error.cause?.message ?? error.message}`);
+      }
       return { status: res.status, headers: Object.fromEntries(res.headers), data: await res.text() };
     },
   }),
@@ -380,6 +391,7 @@ if (typeof source.getSearchTags === 'function') {
   }
 }
 
+const query = searchTerm || pickQuery(browse?.value.results?.[0]?.title) || 'a';
 const found = await step(`search "${query}"`, () => source.getSearchResults({ title: query }, null));
 if (found) check(found.value.results?.length > 0, `search "${query}" returns titles`, `${found.value.results?.length} results in ${found.took}`);
 
@@ -397,17 +409,41 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
   check(list.length > 0, 'chapter list is not empty', `${list.length} chapters in ${chapters.took}`);
   check(list.every((c) => c.id), 'every chapter has an id');
   check(list.every((c) => c.time === undefined || c.time > 1e11), 'chapter times are in milliseconds');
-  for (const chapter of [list[0], list.at(-1)].filter(Boolean)) {
+  const tryOpen = async (chapter) => {
     const label = `chapter "${chapter.name ?? chapter.id}"`;
-    const read = await step(label, () => source.getChapterDetails(item.mangaId, chapter.id));
-    if (!read) continue;
-    const isText = Array.isArray(read.value.pages) && read.value.pages.length === 0 && read.value.text;
-    const isImages = read.value.pages?.length > 0 && read.value.pages.every(isUrl);
-    check(isText || isImages, `${label} opens`, isText ? 'text' : `${read.value.pages?.length} pages in ${read.took}`);
+    const started = Date.now();
+    try {
+      const read = await withTimeout(source.getChapterDetails(item.mangaId, chapter.id));
+      const isText = Array.isArray(read.pages) && read.pages.length === 0 && read.text;
+      const isImages = read.pages?.length > 0 && read.pages.every(isUrl);
+      const took = `${((Date.now() - started) / 1000).toFixed(1)}s`;
+      return { ok: Boolean(isText || isImages), label, detail: isText ? 'text' : `${read.pages?.length ?? 0} pages in ${took}` };
+    } catch (error) {
+      return { ok: false, label, detail: String(error.message ?? error).slice(0, 200) };
+    }
+  };
+  const attempts = [];
+  for (const chapter of list.slice(0, 4)) {
+    attempts.push(await tryOpen(chapter));
+    if (attempts.at(-1).ok) break;
+  }
+  const [first] = attempts;
+  const opened = attempts.at(-1);
+  if (first.ok) {
+    say('pass', `${first.label} opens`, first.detail);
+  } else if (opened.ok) {
+    say('warn', `${first.label} did not open (${first.detail}), maybe locked or not published yet`);
+    say('pass', `${opened.label} opens`, opened.detail);
+  } else {
+    say('fail', `none of the ${attempts.length} newest chapters opened`, `${first.label}: ${first.detail}`);
+  }
+  if (list.length > 1) {
+    const oldest = await tryOpen(list.at(-1));
+    check(oldest.ok, `${oldest.label} opens`, oldest.detail);
   }
 }
 
-if (entry && genreCount !== null) {
+if (entry && genreCount !== null && browse) {
   const declares = entry.capabilities?.includes('genres');
   if (declares && genreCount === 0) say('fail', 'declares "genres" in versioning.json but the genre list is empty');
   if (!declares && genreCount > 0) say('warn', 'has a working genre list but versioning.json does not declare "genres"');
@@ -437,7 +473,7 @@ node test-extension.mjs ./mysite/index.js "naruto"
 
 What to do with the results:
 
-- Keep going until there are no `FAIL` lines. Try a few different search words, including one that should return nothing.
+- Keep going until there are no `FAIL` lines. Try a few different search words (the script picks one itself if you don't give it one), including one that should return nothing.
 - A `fetch is not defined` (or `URL`, `setTimeout`, `document`) means the code used something the app doesn't have.
 - `WARN` lines are worth reading but aren't failures. A missing `hosts` list is the usual one.
 - The script checks data, not looks. Read the output yourself: do titles, covers and chapter names look like the real site? Are chapters in a sensible order?

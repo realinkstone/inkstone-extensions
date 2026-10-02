@@ -1,4 +1,6 @@
-# Build an extension with OpenSpec
+# Build an extension with OpenSpec (beta)
+
+**This is in beta.** It's new, and extensions built by an AI can have bugs. Always run the test script and try the result in Boundless before you share it.
 
 [OpenSpec](https://github.com/Fission-AI/OpenSpec) is a spec-driven workflow for AI coding assistants. You and the AI agree on a written plan first, then it writes the code. This repository is set up for it:
 

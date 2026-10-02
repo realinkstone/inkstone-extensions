@@ -13,7 +13,7 @@ You need Node 18 or newer. It works offline for the first half and needs the int
 npm install cheerio
 ```
 
-3. Point it at your extension, with an optional search word:
+3. Point it at your extension, with an optional search word. If you leave it out, the script picks one from the first title that Browse returns, so it works for any language:
 
 ```bash
 node test-extension.mjs ./mysite/index.js "naruto"
