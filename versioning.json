@@ -219,7 +219,9 @@
       "language": "en",
       "contentRating": "safe",
       "iconUrl": "https://flamecomics.xyz/favicon.ico",
-      "sha256": "37f02b5ea55dee9a0ed2817b9fbe75de9bcaabc307af45f3e6208fb71027def4"
+      "sha256": "37f02b5ea55dee9a0ed2817b9fbe75de9bcaabc307af45f3e6208fb71027def4",
+      "status": "broken",
+      "statusNote": "The site changed, so browse and search stopped working."
     },
     {
       "id": "mangapill",
@@ -359,7 +361,9 @@
       "language": "en",
       "contentRating": "adult",
       "iconUrl": "https://hivetoons.org/apple-touch-icon.png",
-      "sha256": "6b9dd891c4be5a4b8b9645160fe61304bbfccc7a482d5f3b489d1efb1ba54219"
+      "sha256": "6b9dd891c4be5a4b8b9645160fe61304bbfccc7a482d5f3b489d1efb1ba54219",
+      "status": "broken",
+      "statusNote": "Title details fail to load and chapter lists come back empty."
     },
     {
       "id": "mangahere",
@@ -379,7 +383,9 @@
       "language": "en",
       "contentRating": "adult",
       "iconUrl": "https://www.mangahere.cc/favicon.ico",
-      "sha256": "87271e20b736fa18191de9e995e8f97af070edcf82d84fd2c9b8263e0bdd3381"
+      "sha256": "87271e20b736fa18191de9e995e8f97af070edcf82d84fd2c9b8263e0bdd3381",
+      "status": "broken",
+      "statusNote": "Chapter lists come back empty."
     },
     {
       "id": "rawkuma",
@@ -398,7 +404,9 @@
       ],
       "language": "ja",
       "contentRating": "adult",
-      "sha256": "58e57a288334dbb5da3b8528fe0f13fdad762aeb79e00b8beca4b7144902d6d7"
+      "sha256": "58e57a288334dbb5da3b8528fe0f13fdad762aeb79e00b8beca4b7144902d6d7",
+      "status": "broken",
+      "statusNote": "Browse and search are returning no titles right now."
     },
     {
       "id": "tritinia",
@@ -1144,7 +1152,9 @@
       "language": "id",
       "contentRating": "adult",
       "iconUrl": "https://komikindo.ch/wp-content/uploads/2020/12/fav.png",
-      "sha256": "4f8a31a49b8385e8c10c040811a125d4395a38a61fc3d6ca157f889a3bb5ae1d"
+      "sha256": "4f8a31a49b8385e8c10c040811a125d4395a38a61fc3d6ca157f889a3bb5ae1d",
+      "status": "broken",
+      "statusNote": "The site has moved, so browse and search return an error."
     },
     {
       "id": "indomanhwa",
@@ -1182,7 +1192,9 @@
       "language": "vi",
       "contentRating": "adult",
       "iconUrl": "https://manhuavn.top/images/favicon.png",
-      "sha256": "645dcd78830dfd95241f586ab7c4335b51771bec64836b6d028f9ff6ac0a1170"
+      "sha256": "645dcd78830dfd95241f586ab7c4335b51771bec64836b6d028f9ff6ac0a1170",
+      "status": "broken",
+      "statusNote": "Chapters open with no pages."
     },
     {
       "id": "sereinscan",
@@ -1600,7 +1612,9 @@
       ],
       "language": "zh",
       "contentRating": "mature",
-      "sha256": "f9b0d4acf9fa0ca37f62450cc8c2d5b73fe5da5ae64e98f9c7fa3b2bf16cf619"
+      "sha256": "f9b0d4acf9fa0ca37f62450cc8c2d5b73fe5da5ae64e98f9c7fa3b2bf16cf619",
+      "status": "broken",
+      "statusNote": "Browse and search are returning no titles right now."
     },
     {
       "id": "mangaowl",

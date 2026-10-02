@@ -145,6 +145,18 @@ Prefer to review a written plan before any code is written? This repo works with
 | [Webnovel](webnovel/index.js) | webnovel.com | English | Adult | 1.2.0 |
 | [Wuxiaworld](wuxiaworld/index.js) | wuxiaworld.com | English | Mature | 1.1.0 |
 
+## Known issues
+
+These extensions are known to be broken right now:
+
+- **17K Novel Network** (`17k`): Browse and search are returning no titles right now.
+- **Flame Scans** (`flamescans`): The site changed, so browse and search stopped working.
+- **HiveToons** (`hivetoon`): Title details fail to load and chapter lists come back empty.
+- **Komikindo** (`komikindo`): The site has moved, so browse and search return an error.
+- **MangaHere** (`mangahere`): Chapter lists come back empty.
+- **ManhuaVN** (`manhuavn`): Chapters open with no pages.
+- **Rawkuma** (`rawkuma`): Browse and search are returning no titles right now.
+
 ## Contributing
 
 New extensions and fixes are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).

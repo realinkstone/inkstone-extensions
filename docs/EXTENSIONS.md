@@ -237,6 +237,13 @@ passwords) and `options: [{ value, label }]`. Read the value back with
 `App.getSourceSetting('key')`, which returns a string, so a toggle is `'true'`
 or `'false'`.
 
+### Known issues: the optional `status` and `statusNote` fields
+
+An extension that is known to be broken is marked with `"status": "broken"` and
+a short `statusNote` saying what fails, for example `"Chapters open with no
+pages."`. Websites and apps may show it. The entry stays listed until it is
+fixed or removed.
+
 ### Bundle integrity: the optional `sha256` field
 
 A `versioning.json` entry may also declare `sha256`: the lowercase-hex

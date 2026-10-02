@@ -61,6 +61,15 @@ An entry MAY declare `settingsSchema`. When it does, each field SHALL have a `ty
 - **WHEN** the user picks a language
 - **THEN** `App.getSourceSetting('language')` returns that value
 
+### Requirement: Known issues are marked
+An entry that is known to be broken SHALL declare `status` as `broken` and a short `statusNote` saying what fails. Websites and apps MAY show it. The entry stays listed until it is fixed or removed.
+
+#### Scenario: Site changed
+- **GIVEN** an extension whose site changed and no longer returns titles
+- **WHEN** it is listed
+- **THEN** its entry has `status` set to `broken` and a `statusNote`
+- **AND** the catalog shows it as Broken
+
 ### Requirement: Honest description
 An entry's `description` SHALL state what the extension covers and any limitation it has, such as scrambled images, a missing feed or login-only content.
 
