@@ -6,7 +6,7 @@ The environment an extension runs in inside Boundless Reader, and what it can an
 ## Requirements
 
 ### Requirement: Sandboxed JavaScript environment
-An extension SHALL run in a JavaScriptCore context provided by Boundless Reader, with the modern ECMAScript standard library plus the globals `App` and `cheerio`. An extension MUST NOT use `fetch`, `XMLHttpRequest`, `URL`, `URLSearchParams`, `setTimeout`, `setInterval`, `btoa`, `atob`, `TextDecoder`, `document`, `DOMParser`, `structuredClone` or `require`.
+An extension SHALL run in a JavaScriptCore context provided by Boundless Reader, with the modern ECMAScript standard library plus the globals `App`, `cheerio` and `CryptoJS`. An extension MUST NOT use `fetch`, `XMLHttpRequest`, `URL`, `URLSearchParams`, `setTimeout`, `setInterval`, `btoa`, `atob`, `TextDecoder`, `document`, `DOMParser`, `structuredClone` or `require`.
 
 #### Scenario: Extension uses a missing global
 - **GIVEN** an extension that calls `fetch`
@@ -21,6 +21,12 @@ An extension SHALL run in a JavaScriptCore context provided by Boundless Reader,
 
 ### Requirement: HTML parsing with cheerio
 An extension that parses HTML SHALL do so with the provided `cheerio` global (`cheerio.load(html)`), which offers the usual jQuery-style API, rather than regular expressions that stop at the first nested tag.
+
+#### Scenario: Fragment without a document
+- **GIVEN** an HTML fragment such as a list of `<div>` cards
+- **WHEN** the extension calls `cheerio.load(fragment)`
+- **THEN** the fragment is not wrapped in `<html>` and `<body>`
+- **AND** tests use `cheerio/slim` so they behave the same way
 
 #### Scenario: Field wrapped in a link
 - **GIVEN** an author name wrapped in a nested `<a>` element

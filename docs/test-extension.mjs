@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
-import * as cheerio from 'cheerio';
+import * as cheerio from 'cheerio/slim';
 
 const [file, searchTerm] = process.argv.slice(2);
 if (!file) {
@@ -86,7 +86,13 @@ if (usesWebView) {
   say('warn', 'uses App.executeInWebView, which only runs inside Boundless. Test that part in the app');
 }
 
-const sandbox = { module: { exports: {} }, App, cheerio, console };
+let CryptoJS;
+try {
+  CryptoJS = (await import('crypto-js')).default;
+} catch {
+  CryptoJS = undefined;
+}
+const sandbox = { module: { exports: {} }, App, cheerio, ...(CryptoJS ? { CryptoJS } : {}), console };
 sandbox.exports = sandbox.module.exports;
 try {
   vm.runInNewContext(code, sandbox, { filename: file });

@@ -32,10 +32,13 @@ in the app as an empty screen:
 **Available:** `Promise`, `async`/`await`, `JSON`, `Math`, `Date`, `RegExp`,
 `Intl`, `String.prototype.replaceAll`, `Object.fromEntries`,
 `encodeURIComponent`, and the rest of modern ECMAScript. Boundless also
-provides two globals: `App` (below) and `cheerio`.
+provides three globals: `App` (below), `cheerio` and `CryptoJS`.
 
-`cheerio` is the real cheerio library with its usual jQuery-style API. Parse
-HTML with it instead of regex:
+`cheerio` is cheerio's slim build with its usual jQuery-style API. Parse HTML
+with it instead of regex. Because it is the slim build, `cheerio.load(fragment)`
+does not wrap a fragment in `<html><body>` the way the full build does, so test
+with `cheerio/slim`, not the full package. `CryptoJS` is the crypto-js library,
+for sites that encrypt or hash values in their pages.
 
 ```js
 const $ = cheerio.load(html);

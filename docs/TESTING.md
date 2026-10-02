@@ -7,11 +7,13 @@ You need Node 18 or newer. It works offline for the first half and needs the int
 ## Run it
 
 1. Get the script: [inkstone.web.app/docs/test-extension.mjs](https://inkstone.web.app/docs/test-extension.mjs) (save it as `test-extension.mjs`).
-2. Install the one dependency, the same HTML library Boundless gives your extension:
+2. Install the dependency. The script uses `cheerio/slim`, the same build Boundless gives your extension. It parses HTML fragments differently from the full cheerio build, so test with this one:
 
 ```bash
 npm install cheerio
 ```
+
+If your extension uses `CryptoJS`, install that too (`npm install crypto-js`). Boundless provides it as a global.
 
 3. Point it at your extension, with an optional search word. If you leave it out, the script picks one from the first title that Browse returns, so it works for any language:
 

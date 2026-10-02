@@ -161,6 +161,10 @@ These extensions are known to be broken right now:
 
 New extensions and fixes are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## Copyright and takedowns
+
+Inkstone doesn't host any content. The extensions are code that runs on your device and reads from other sites. If you think something in this repository infringes your rights, open an issue with the "Copyright or takedown request" template, or message us on [Discord](https://discord.gg/6pX2XgFYcs). More at [inkstone.web.app/copyright](https://inkstone.web.app/copyright).
+
 ## License
 
 MIT. See [LICENSE](LICENSE).

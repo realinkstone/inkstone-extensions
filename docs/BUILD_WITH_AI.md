@@ -75,11 +75,12 @@ Both read from a JSON API. For a site that only serves HTML, follow the `cheerio
 
 ### The environment
 
-The code runs in JavaScriptCore inside the app, not a browser. You get modern JavaScript (`Promise`, `async/await`, `JSON`, `Math`, `Date`, `RegExp`, `Intl`, `encodeURIComponent`) plus two things Boundless provides: the `App` object and a `cheerio` global.
+The code runs in JavaScriptCore inside the app, not a browser. You get modern JavaScript (`Promise`, `async/await`, `JSON`, `Math`, `Date`, `RegExp`, `Intl`, `encodeURIComponent`) plus three things Boundless provides: the `App` object, a `cheerio` global and a `CryptoJS` global.
 
 There is **no** `fetch`, `XMLHttpRequest`, `URL`, `URLSearchParams`, `setTimeout`, `setInterval`, `btoa`, `atob`, `TextDecoder`, `document` or `DOMParser`. Using one throws a `ReferenceError`, and in the app that just looks like an empty screen. Don't `require` anything either.
 
-- Parse HTML with `cheerio.load(html)`. It's the real cheerio library with the usual jQuery-style API (`$('.title').text()`, `.attr('href')`, `.each()`). Prefer it to regex.
+- Parse HTML with `cheerio.load(html)`. It's cheerio's slim build with the usual jQuery-style API (`$('.title').text()`, `.attr('href')`, `.each()`). Prefer it to regex. Being the slim build, `cheerio.load(fragment)` does not wrap a fragment in `<html><body>` like the full build does, so the test script uses `cheerio/slim` to match.
+- `CryptoJS` is the crypto-js library, for sites that encrypt or hash values in their pages.
 - Build query strings with this helper (copy it):
 
 ```js
@@ -221,7 +222,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
-import * as cheerio from 'cheerio';
+import * as cheerio from 'cheerio/slim';
 
 const [file, searchTerm] = process.argv.slice(2);
 if (!file) {
@@ -305,7 +306,13 @@ if (usesWebView) {
   say('warn', 'uses App.executeInWebView, which only runs inside Boundless. Test that part in the app');
 }
 
-const sandbox = { module: { exports: {} }, App, cheerio, console };
+let CryptoJS;
+try {
+  CryptoJS = (await import('crypto-js')).default;
+} catch {
+  CryptoJS = undefined;
+}
+const sandbox = { module: { exports: {} }, App, cheerio, ...(CryptoJS ? { CryptoJS } : {}), console };
 sandbox.exports = sandbox.module.exports;
 try {
   vm.runInNewContext(code, sandbox, { filename: file });
