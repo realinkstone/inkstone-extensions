@@ -5437,6 +5437,46 @@
       "language": "tr",
       "contentRating": "safe",
       "sha256": "f0fd7c1e644677fb601e5e4275028c0c7d02692572efb2e43233f2f15e6cff2d"
+    },
+    {
+      "id": "monoschinos",
+      "name": "MonosChinos",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://monoschinos.st",
+      "iconUrl": "https://inkstone.web.app/monoschinos/icon.png",
+      "hosts": [
+        "monoschinos.st",
+        "*.monoschinos.st",
+        "luluvdo.com",
+        "*.luluvdo.com",
+        "mixdrop.top",
+        "*.mixdrop.top",
+        "mxdrop.top",
+        "mxdrop.click",
+        "*.mxdrop.click",
+        "voe.sx",
+        "*.voe.sx",
+        "shannoncoldalready.com",
+        "shanelocaldog.com",
+        "ashleyhardat.com",
+        "ok.ru",
+        "*.ok.ru",
+        "yourupload.com",
+        "www.yourupload.com"
+      ],
+      "description": "Anime\n\nCatalog・4,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "sha256": "57b13b64983654cee18ea0300fd3673bc3067c418fe7c2d7a629ca4abc0ddf32"
     }
   ]
 }
