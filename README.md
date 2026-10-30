@@ -228,6 +228,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [Yuri-Online](comics/yurionline/index.js) | yuri-online.com | Spanish | Safe | 1.0.0 |
 | [Yurimanga](comics/yurimanga/index.js) | yurimanga.net | English | Adult | 1.1.0 |
 | [Zinmanga](comics/zinmanga/index.js) | zinmanga.net | English | Safe | 1.0.0 |
+| [ZonaTMO.org](comics/zonatmoorg/index.js) | zonatmo.org | Spanish | Adult | 1.0.0 |
 | [مانجا ليك](comics/mangalik/index.js) | mangalik.net | Arabic | Safe | 1.0.0 |
 
 ### Novels

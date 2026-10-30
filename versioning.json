@@ -603,6 +603,29 @@
       "sha256": "399394802f72826761fc4515351528e2d200fc0416bf0ea38dbe3b329db53f75"
     },
     {
+      "id": "zonatmoorg",
+      "name": "ZonaTMO.org",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://zonatmo.org",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・30,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "adult",
+      "iconUrl": "https://zonatmo.org/favicon.ico",
+      "sha256": "72ee1dca7f86bfee63d41e343840aa33bd29f787ff7e3241d3d8d61ff47c00cc",
+      "hosts": [
+        "zonatmo.org"
+      ]
+    },
+    {
       "id": "kunmanga",
       "name": "KunManga",
       "version": "1.1.0",
