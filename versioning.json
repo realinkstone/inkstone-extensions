@@ -950,7 +950,7 @@
     {
       "id": "readwn",
       "name": "ReadWN",
-      "version": "1.2.1",
+      "version": "1.2.2",
       "medium": "novel",
       "website": "https://www.wuxiabox.com",
       "iconUrl": "https://inkstone.web.app/readwn/icon.png",
@@ -964,7 +964,7 @@
         "reader"
       ],
       "language": "en",
-      "contentRating": "safe",
+      "contentRating": "adult",
       "sha256": "6580c20e5a79e0b062d18251c57b3de7dab5523d36619f76d7a5b7e631fbca44"
     },
     {
@@ -2453,7 +2453,7 @@
     {
       "id": "cocomic",
       "name": "Cocomic",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://cocomic.co",
       "iconUrl": "https://inkstone.web.app/cocomic/icon.png",
@@ -2471,13 +2471,13 @@
         "reader"
       ],
       "language": "en",
-      "contentRating": "safe",
+      "contentRating": "adult",
       "sha256": "075e8a10d3779666bca6d7133461e797e2cbb99a2d40bb993c47d5f2d2dab4a8"
     },
     {
       "id": "evascans",
       "name": "Eva Scans",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://evascans.net",
       "iconUrl": "https://inkstone.web.app/evascans/icon.png",
@@ -2495,7 +2495,7 @@
         "reader"
       ],
       "language": "en",
-      "contentRating": "safe",
+      "contentRating": "adult",
       "sha256": "35f441a08adb48a28bde4b9b3ae8219c74834bd1d3ad00c6b99b3ad2db036c3c"
     },
     {
@@ -2667,7 +2667,7 @@
     {
       "id": "mangasushi",
       "name": "Mangasushi",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://mangasushi.org",
       "iconUrl": "https://inkstone.web.app/mangasushi/icon.png",
@@ -2685,7 +2685,7 @@
         "reader"
       ],
       "language": "en",
-      "contentRating": "safe",
+      "contentRating": "adult",
       "sha256": "14f54271e6d0243055f3add5f949b112de6f1f6e66bb1a0a94c639717cdb2635"
     },
     {
@@ -2858,7 +2858,7 @@
     {
       "id": "s2manga",
       "name": "S2Manga",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://s2read.com",
       "iconUrl": "https://inkstone.web.app/s2manga/icon.png",
@@ -2876,7 +2876,7 @@
         "reader"
       ],
       "language": "en",
-      "contentRating": "safe",
+      "contentRating": "adult",
       "sha256": "b28385a37bbc3aae8fcf82b4bb74a1b790e756d632a72ce9e9db8418ac9bb2ef"
     },
     {
@@ -3579,7 +3579,7 @@
     {
       "id": "decadencescans",
       "name": "Decadence Scans",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://reader.decadencescans.com",
       "iconUrl": "https://inkstone.web.app/decadencescans/icon.png",
@@ -3597,7 +3597,7 @@
         "reader"
       ],
       "language": "en",
-      "contentRating": "safe",
+      "contentRating": "adult",
       "sha256": "8eb26168e6ade9dba2b364d15ecc194e0e8c2f8550bfecbd734b574e03f8724b"
     },
     {
@@ -3675,7 +3675,7 @@
     {
       "id": "rokaricomics",
       "name": "RokariComics",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://rokaricomics.com",
       "iconUrl": "https://inkstone.web.app/rokaricomics/icon.png",
@@ -3693,7 +3693,7 @@
         "reader"
       ],
       "language": "en",
-      "contentRating": "safe",
+      "contentRating": "adult",
       "sha256": "a408b93696acab3523d0e7c17df6b0a5f23f3c4f0784eed14e3503320de7fd42"
     },
     {
@@ -3956,7 +3956,7 @@
     {
       "id": "hadesnofansub",
       "name": "Hades no Fansub",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://lectorhades.latamtoon.com",
       "iconUrl": "https://inkstone.web.app/hadesnofansub/icon.png",
@@ -3964,7 +3964,7 @@
         "lectorhades.latamtoon.com",
         "*.lectorhades.latamtoon.com"
       ],
-      "description": "Hades no Fansub read from its own Madara pages, with no browser step and no sign-in: Latest, New, A-Z, Rating, Most Views, Trending feeds, search, genre filtering, full details, chapter lists with dates and the reader. No adult genres turned up on the titles sampled.",
+      "description": "Manhua\n\nCatalog・100+",
       "capabilities": [
         "browse",
         "search",
@@ -3974,13 +3974,13 @@
         "reader"
       ],
       "language": "es",
-      "contentRating": "safe",
+      "contentRating": "adult",
       "sha256": "619e8531422d7b1ba38b4fa078c0d3ecf27bd2d0cdd0f95c1b870c3b96ab8d79"
     },
     {
       "id": "inventariooculto",
       "name": "Inventario Oculto",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://inventariooculto.com",
       "iconUrl": "https://inkstone.web.app/inventariooculto/icon.png",
@@ -3988,7 +3988,7 @@
         "inventariooculto.com",
         "*.inventariooculto.com"
       ],
-      "description": "Inventario Oculto read from its own Madara pages, with no browser step and no sign-in: Latest, New, A-Z, Rating, Most Views, Trending feeds, search, genre filtering, full details, chapter lists with dates and the reader. No adult genres turned up on the titles sampled.",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・30+",
       "capabilities": [
         "browse",
         "search",
@@ -3998,7 +3998,7 @@
         "reader"
       ],
       "language": "es",
-      "contentRating": "safe",
+      "contentRating": "adult",
       "sha256": "6393f930fc717c4445ca7fe6c5eb000163a2de9bd53cd952a6d772acb211c203"
     },
     {
@@ -4315,7 +4315,7 @@
     {
       "id": "tsundokutradues",
       "name": "Tsundoku Traduções",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://tsundoku.com.br",
       "iconUrl": "https://inkstone.web.app/tsundokutradues/icon.png",
@@ -4323,7 +4323,7 @@
         "tsundoku.com.br",
         "*.tsundoku.com.br"
       ],
-      "description": "Tsundoku Traduções read from its own MangaThemesia pages, with no browser step and no sign-in: Latest Updates, Popular, Newly Added, A-Z feeds, search, genre filtering, full details, chapter lists with dates and the reader. No adult genres turned up on the titles sampled.",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・70+",
       "capabilities": [
         "browse",
         "search",
@@ -4333,7 +4333,7 @@
         "reader"
       ],
       "language": "pt-BR",
-      "contentRating": "safe",
+      "contentRating": "adult",
       "sha256": "aa7df778e141a09e3da0f156814da5b74de7088cd156efdc11b99b38465da5c4"
     },
     {
@@ -4363,7 +4363,7 @@
     {
       "id": "ghostoon",
       "name": "GhosToon",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://ghostoon.com",
       "iconUrl": "https://inkstone.web.app/ghostoon/icon.png",
@@ -4371,7 +4371,7 @@
         "ghostoon.com",
         "*.ghostoon.com"
       ],
-      "description": "GhosToon read from its own Madara pages, with no browser step and no sign-in: Latest, New, A-Z, Rating, Most Views, Trending feeds, search, genre filtering, full details, chapter lists with dates and the reader. No adult genres turned up on the titles sampled.",
+      "description": "Manhwa\n\nCatalog・200+",
       "capabilities": [
         "browse",
         "search",
@@ -4381,7 +4381,7 @@
         "reader"
       ],
       "language": "tr",
-      "contentRating": "safe",
+      "contentRating": "adult",
       "sha256": "add9727edc8a141931f952567fdb70be2d7746ba96d0df806c1c4af0c7b9d22a"
     },
     {
@@ -4459,7 +4459,7 @@
     {
       "id": "tarotscans",
       "name": "Tarot Scans",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://www.tarotscans.com",
       "iconUrl": "https://inkstone.web.app/tarotscans/icon.png",
@@ -4467,7 +4467,7 @@
         "tarotscans.com",
         "*.tarotscans.com"
       ],
-      "description": "Tarot Scans read from its own Madara pages, with no browser step and no sign-in: Latest, A-Z, Rating, Most Views feeds, search, genre filtering, full details, chapter lists with dates and the reader. No adult genres turned up on the titles sampled.",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・1,000+",
       "capabilities": [
         "browse",
         "search",
@@ -4477,7 +4477,7 @@
         "reader"
       ],
       "language": "tr",
-      "contentRating": "safe",
+      "contentRating": "adult",
       "sha256": "2c594d5c272c588d8cb11820e2e486e6594b915376f959b621a43356896717b0"
     },
     {
@@ -4577,7 +4577,7 @@
     {
       "id": "truyentini",
       "name": "TruyenTini",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://truyentini.net",
       "iconUrl": "https://inkstone.web.app/truyentini/icon.png",
@@ -4585,7 +4585,7 @@
         "truyentini.net",
         "*.truyentini.net"
       ],
-      "description": "TruyenTini read from its own Madara pages, with no browser step and no sign-in: Latest, New, A-Z, Rating, Most Views, Trending feeds, search, genre filtering, full details, chapter lists with dates and the reader. No adult genres turned up on the titles sampled.",
+      "description": "Manhwa\n\nCatalog・200+",
       "capabilities": [
         "browse",
         "search",
@@ -4595,7 +4595,7 @@
         "reader"
       ],
       "language": "vi",
-      "contentRating": "safe",
+      "contentRating": "adult",
       "sha256": "15a32a64630534b08bca0f4ffbf40f113379b1427c3ca028852e8c943e73b539"
     },
     {
@@ -4864,7 +4864,7 @@
     {
       "id": "sleepytranslations",
       "name": "Sleepy Translations",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "novel",
       "website": "https://sleepytranslations.com",
       "iconUrl": "https://inkstone.web.app/sleepytranslations/icon.png",
@@ -4882,13 +4882,13 @@
         "reader"
       ],
       "language": "en",
-      "contentRating": "safe",
+      "contentRating": "adult",
       "sha256": "587767997d363840877e5bc4e9e442453de276e82685619355656b8e2fec7845"
     },
     {
       "id": "wuxiaworldsite",
       "name": "WuxiaWorld.site",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "novel",
       "website": "https://wuxiaworld.site",
       "iconUrl": "https://inkstone.web.app/wuxiaworldsite/icon.png",
@@ -4906,7 +4906,7 @@
         "reader"
       ],
       "language": "en",
-      "contentRating": "safe",
+      "contentRating": "adult",
       "sha256": "29898ea62af1b248b2724eaa88ea8137fdaa33b50ca1460426413bd3419d09f0"
     },
     {
