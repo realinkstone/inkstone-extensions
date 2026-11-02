@@ -87,9 +87,10 @@ Do these checks in one batch (one script, or a few curl calls sent together), th
 | `mangatoon` | HTML and embedded JSON, paid episodes marked locked, an optional email sign-in |
 | `navercomic` | Server-rendered pages, an age wall, and an optional login with session cookies |
 | `mangafire` | A site that needs the web view: one page visit per title, shared by details and chapters (not yet timed inside the app) |
-| `anizone` | Anime, for Sumizuri only: HTML pages with the player's data embedded, an HLS master playlist, ASS subtitles, and intro and outro times read from a chapters track |
-| `uniquestream` | Anime, for Sumizuri only: a JSON API, titles with several seasons (the season fields), the audio language in the quality label |
-| `kickassanime` | Anime, for Sumizuri only: a JSON API with several servers per episode, each behind a player page that needs a Referer |
+| `anikoto` | Anime, for Sumizuri only: HTML pages, an embed player page whose source data is AES encrypted (read with the bundled CryptoJS), and subtitle tracks |
+| `aniworld` | Anime in German, for Sumizuri only: HTML pages and an embedded payload that is reversed base64 JSON (`App.base64Decode`) |
+| `serienstream` | Series in German, for Sumizuri only: HTML pages and the same kind of reversed base64 JSON payload |
+| `miruro` | Anime, for Sumizuri only: HLS playlists behind the site's own obfuscated proxy addresses, subtitles, and intro and outro skip ranges |
 
 `asurascans`, `chikari` and `mangadex` read from a JSON API. For a site that only serves HTML, follow the `cheerio` guidance in Step 2 and look at `mangatoon`. Other extensions in the repo are fine for ideas, but some have rough edges, so don't copy them blindly.
 
@@ -360,7 +361,7 @@ Some sites open more chapters to a signed-in or paying reader. An extension can 
 
 ### Anime (video) extensions (Sumizuri only)
 
-**These extensions are for Sumizuri compatibility.** Boundless Reader is not compatible with anime extensions: it has no video player and does not call `getVideos`. Use [Sumizuri](https://sumizuri.notakari.com/) to install, play and test them. The rules below are from Sumizuri's own extension documentation and engine source (version 0.2.0), checked against the three anime extensions in this catalog (`anizone`, `uniquestream`, `kickassanime`). Everything else in this guide (feeds, search, details, episode lists, rate limits, the `App` object, the test script) applies to them unchanged. This section is only what is different.
+**These extensions are for Sumizuri compatibility.** Boundless Reader is not compatible with anime extensions: it has no video player and does not call `getVideos`. Use [Sumizuri](https://sumizuri.notakari.com/) to install, play and test them. The rules below are from Sumizuri's own extension documentation and engine source (version 0.2.0), first checked against three anime extensions that the catalog has since replaced with `anikoto`, `aniworld`, `serienstream` and `miruro` (not rechecked against those four). Everything else in this guide (feeds, search, details, episode lists, rate limits, the `App` object, the test script) applies to them unchanged. This section is only what is different.
 
 - **Manifest.** `medium` is `anime` and `capabilities` is `["browse", "search", "details", "chapters", "videos"]` (there is no `reader`). In the public repository the file lives in `anime/<id>/index.js`.
 - **Episodes are chapters.** `getChapters(mangaId)` returns the usual shape, newest first: `id` (or `chapterId`), `name` such as `Episode 12: Title`, `number`, `time` in milliseconds. `language`, `group`, `isLocked` and `unlockAt` work as for chapters. Nothing is read from `getChapterDetails` to play an episode; the catalog extensions return `{ id, mangaId, pages: [] }` from it. Titles may carry `medium: 'anime'`.
@@ -398,7 +399,7 @@ async getVideos(mangaId, chapterId) {
 - **Several servers.** Return one entry per working server, each labeled (KickAssAnime returns `VidStreaming` and `BirdStream`). Skip a server that fails and keep the others.
 - **An episode with no stream yet** is an `Error` with a message that says so, not an empty list (which shows "no videos" with no reason). Check the newest episodes of a new show and a few old ones: KickAssAnime lists some episodes with an empty server list (19 of 76 episodes sampled on 2026-10-23, new shows and old ones alike), and there the site has no stream to read. Say which case it is in the message (no server listed, or servers that gave no video).
 - **Skip times.** Use the site's own intro and outro times when it has them. AniZone reads them from a WebVTT chapters track whose cues are named Intro or Opening, and Credits, Outro or Ending.
-- **Seasons.** When a title has more than one season, give each episode `season` (an id as text), `seasonName` and optionally `seasonCover`; the title page groups by season (`uniquestream` does this). Leave them out for a single season.
+- **Seasons.** When a title has more than one season, give each episode `season` (an id as text), `seasonName` and optionally `seasonCover`; the title page groups by season. Leave them out for a single season.
 - **Banner.** `mangaInfo` can carry a `banner`, a wide picture shown behind the title page.
 - **Content rating.** Sumizuri treats only `contentRating: "adult"` as adult; `safe` and `mature` show without the gate. The Inkstone website hides `adult` sources.
 - **How Sumizuri differs as a runtime.** It runs sources in QuickJS (Boundless uses JavaScriptCore on iPhone, iPad and Mac and QuickJS on Android), can reach only public `http` and `https` addresses and never the local network, keeps cookies between a source's requests, and accepts a number written as text where Boundless would throw. Keep real numbers anyway. If the site needs a `Cookie`, send it yourself as AniZone does, so it works everywhere. `hosts` limits what your extension requests; keep listing the site, its API and the stream hosts.

@@ -50,7 +50,7 @@ Prefer to review a written plan before any code is written? This repo works with
 
 ## Extensions
 
-198 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
+200 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
 
 Each extension lives in the folder for what it offers: `comics`, `novels`, `mixed` for those that do both, or `anime`. The site still serves every one at `inkstone.web.app/<id>/index.js`, so the folders change nothing in the apps.
 
@@ -228,6 +228,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [Yuri-Online](comics/yurionline/index.js) | yuri-online.com | Spanish | Safe | 1.0.0 |
 | [Yurimanga](comics/yurimanga/index.js) | yurimanga.net | English | Adult | 1.1.0 |
 | [Zinmanga](comics/zinmanga/index.js) | zinmanga.net | English | Safe | 1.0.0 |
+| [ZonaTMO.org](comics/zonatmoorg/index.js) | zonatmo.org | Spanish | Adult | 1.0.0 |
 | [مانجا ليك](comics/mangalik/index.js) | mangalik.net | Arabic | Safe | 1.0.0 |
 
 ### Novels
@@ -270,9 +271,10 @@ Anime extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 
 | Extension | Site | Language | Rating | Version |
 | --- | --- | --- | --- | --- |
-| [AniZone](anime/anizone/index.js) | anizone.to | English | Mature | 1.0.0 |
-| [KickAssAnime](anime/kickassanime/index.js) | kaa.lt | English | Mature | 1.0.1 |
-| [UniqueStream](anime/uniquestream/index.js) | anime.uniquestream.net | English | Mature | 1.0.1 |
+| [Anikoto](anime/anikoto/index.js) | anikototv.to | English | Mature | 1.0.0 |
+| [AniWorld](anime/aniworld/index.js) | aniworld.to | German | Mature | 1.0.0 |
+| [Miruro](anime/miruro/index.js) | miruro.cx | English | Mature | 1.0.0 |
+| [SerienStream](anime/serienstream/index.js) | serienstream.to | German | Mature | 1.0.0 |
 
 ## Known issues
 
@@ -286,7 +288,7 @@ These extensions are known to be broken right now:
 Thanks to the people who built extensions for Inkstone.
 
 - [omfgitsjesus](https://discord.com/users/177424485526274048): HiperDEX
-- [matsukiender-star](https://github.com/matsukiender-star): KuManga
+- [matsukiender-star](https://github.com/matsukiender-star): KuManga, ZonaTMO.org
 
 ## Contributing
 

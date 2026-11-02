@@ -3393,6 +3393,131 @@
       "sha256": "1684fdbbd9a0d3279ae47e19956471d7158a45678e397a6435c39a760fddf33f"
     },
     {
+      "id": "anikoto",
+      "name": "Anikoto",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://anikototv.to",
+      "iconUrl": "https://anikototv.to/AnikotoTheme/assets/images/favicon.png",
+      "hosts": [
+        "anikototv.to",
+        "*.anikototv.to",
+        "megaplay.buzz",
+        "*.megaplay.buzz",
+        "*.qeltrix.top",
+        "*.nexabloom.top",
+        "*.imgnex.top",
+        "*.shiora.top",
+        "*.shiora.site",
+        "*.akirax.buzz",
+        "*.zhaevor.top",
+        "*.embermeadow.world",
+        "*.midnightvoyage.site",
+        "cdn.anipixcdn.co"
+      ],
+      "description": "Anime\n\nCatalog・10,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "49553ae8ad4d9ca9895b652af9f77a5e55c5d5876e82e1a8d428748cefc3d0a3"
+    },
+    {
+      "id": "aniworld",
+      "name": "AniWorld",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://aniworld.to",
+      "iconUrl": "https://aniworld.to/public/img/apple-icon-180x180.png",
+      "hosts": [
+        "aniworld.to",
+        "*.aniworld.to",
+        "voe.sx",
+        "*.voe.sx",
+        "jamespatterncamera.com",
+        "*.jamespatterncamera.com",
+        "*.cloudwindow-route.com"
+      ],
+      "description": "Anime\n\nCatalog・2,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "de",
+      "contentRating": "mature",
+      "sha256": "b7d2ee6dfc007d6c89a51b6a8ac400a3d705cd3da85249a50cd0729eb15742ab"
+    },
+    {
+      "id": "serienstream",
+      "name": "SerienStream",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://serienstream.to",
+      "iconUrl": "https://serienstream.to/apple-touch-icon.png",
+      "hosts": [
+        "serienstream.to",
+        "*.serienstream.to",
+        "voe.sx",
+        "*.voe.sx",
+        "jamespatterncamera.com",
+        "*.jamespatterncamera.com",
+        "*.cloudwindow-route.com"
+      ],
+      "description": "Anime\n\nCatalog・10,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "de",
+      "contentRating": "mature",
+      "sha256": "39dd6ef0662ce1e59f0d7f222b9d563f622f6ab3052525207a6fd4df1d3d1cb3"
+    },
+    {
+      "id": "miruro",
+      "name": "Miruro",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://miruro.cx",
+      "iconUrl": "https://miruro.cx/icon-dark-1024x1024.png",
+      "hosts": [
+        "miruro.cx",
+        "*.miruro.cx",
+        "s4.anilist.co",
+        "image.tmdb.org",
+        "artworks.thetvdb.com",
+        "s1.keeply.top",
+        "s2.keeply.top",
+        "*.krussdomi.com",
+        "krussdomi.com"
+      ],
+      "description": "Anime\n\nCatalog・10,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "520b4a2969e6825a4a7d500ed7e7ba775d5a89dd18f289bd0b8e1675ae87aee8"
+    },
+    {
       "id": "akazascans",
       "name": "Akaza Scans",
       "version": "1.0.0",
@@ -4786,129 +4911,30 @@
       "sha256": "77594342b36c22316c9e8cc81e8d0d6f30be21f26b00aff26d1ad47392b1b067"
     },
     {
-      "id": "anikoto",
-      "name": "Anikoto",
+      "id": "zonatmoorg",
+      "name": "ZonaTMO.org",
       "version": "1.0.0",
-      "medium": "anime",
-      "website": "https://anikototv.to",
-      "iconUrl": "https://anikototv.to/AnikotoTheme/assets/images/favicon.png",
+      "medium": "comics",
+      "website": "https://zonatmo.org",
+      "iconUrl": "https://inkstone.web.app/zonatmoorg/icon.png",
       "hosts": [
-        "anikototv.to",
-        "*.anikototv.to",
-        "megaplay.buzz",
-        "*.megaplay.buzz",
-        "*.qeltrix.top",
-        "*.nexabloom.top",
-        "*.imgnex.top",
-        "*.shiora.top",
-        "*.shiora.site",
-        "*.akirax.buzz",
-        "*.zhaevor.top",
-        "*.embermeadow.world",
-        "*.midnightvoyage.site",
-        "cdn.anipixcdn.co"
+        "zonatmo.org",
+        "*.zonatmo.org"
       ],
-      "description": "Anime\n\nCatalog・10,000+",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・30,000+",
       "capabilities": [
         "browse",
         "search",
         "genres",
         "details",
         "chapters",
-        "videos"
+        "reader"
       ],
-      "language": "en",
-      "contentRating": "mature",
-      "sha256": "49553ae8ad4d9ca9895b652af9f77a5e55c5d5876e82e1a8d428748cefc3d0a3"
-    },
-    {
-      "id": "aniworld",
-      "name": "AniWorld",
-      "version": "1.0.0",
-      "medium": "anime",
-      "website": "https://aniworld.to",
-      "iconUrl": "https://aniworld.to/public/img/apple-icon-180x180.png",
-      "hosts": [
-        "aniworld.to",
-        "*.aniworld.to",
-        "voe.sx",
-        "*.voe.sx",
-        "jamespatterncamera.com",
-        "*.jamespatterncamera.com",
-        "*.cloudwindow-route.com"
-      ],
-      "description": "Anime\n\nCatalog・2,000+",
-      "capabilities": [
-        "browse",
-        "search",
-        "genres",
-        "details",
-        "chapters",
-        "videos"
-      ],
-      "language": "de",
-      "contentRating": "mature",
-      "sha256": "b7d2ee6dfc007d6c89a51b6a8ac400a3d705cd3da85249a50cd0729eb15742ab"
-    },
-    {
-      "id": "serienstream",
-      "name": "SerienStream",
-      "version": "1.0.0",
-      "medium": "anime",
-      "website": "https://serienstream.to",
-      "iconUrl": "https://serienstream.to/apple-touch-icon.png",
-      "hosts": [
-        "serienstream.to",
-        "*.serienstream.to",
-        "voe.sx",
-        "*.voe.sx",
-        "jamespatterncamera.com",
-        "*.jamespatterncamera.com",
-        "*.cloudwindow-route.com"
-      ],
-      "description": "Anime\n\nCatalog・10,000+",
-      "capabilities": [
-        "browse",
-        "search",
-        "genres",
-        "details",
-        "chapters",
-        "videos"
-      ],
-      "language": "de",
-      "contentRating": "mature",
-      "sha256": "39dd6ef0662ce1e59f0d7f222b9d563f622f6ab3052525207a6fd4df1d3d1cb3"
-    },
-    {
-      "id": "miruro",
-      "name": "Miruro",
-      "version": "1.0.0",
-      "medium": "anime",
-      "website": "https://miruro.cx",
-      "iconUrl": "https://miruro.cx/icon-dark-1024x1024.png",
-      "hosts": [
-        "miruro.cx",
-        "*.miruro.cx",
-        "s4.anilist.co",
-        "image.tmdb.org",
-        "artworks.thetvdb.com",
-        "s1.keeply.top",
-        "s2.keeply.top",
-        "*.krussdomi.com",
-        "krussdomi.com"
-      ],
-      "description": "Anime\n\nCatalog・10,000+",
-      "capabilities": [
-        "browse",
-        "search",
-        "genres",
-        "details",
-        "chapters",
-        "videos"
-      ],
-      "language": "en",
-      "contentRating": "mature",
-      "sha256": "520b4a2969e6825a4a7d500ed7e7ba775d5a89dd18f289bd0b8e1675ae87aee8"
+      "language": "es",
+      "contentRating": "adult",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "03c525683b6cf8db344e12a6a1025776ad5820dba0e45c8141f2ac14e08ff999"
     }
   ]
 }
