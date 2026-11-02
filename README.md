@@ -131,7 +131,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [Manga-Scantrad](comics/mangascantrad/index.js) | manga-scantrad.io | French | Adult | 1.0.0 |
 | [Mangabat](comics/mangabats/index.js) | mangabats.com | English | Adult | 1.0.0 |
 | [MangaBuddy](comics/mangabuddy/index.js) | mangabuddy1.co.uk | English | Adult | 1.3.0 |
-| [MangaDex](comics/mangadex/index.js) | mangadex.org | English | Safe | 1.2.0 |
+| [MangaDex](comics/mangadex/index.js) | mangadex.org | English | Safe | 1.2.1 |
 | [MangaFire](comics/mangafire/index.js) | mangafire.to | English | Safe | 1.4.1 |
 | [MangaFox](comics/mangafox/index.js) | fanfox.net | English | Adult | 1.0.0 |
 | [MangaFreak](comics/mangafreak/index.js) | mangafreak.me | English | Adult | 1.0.1 |

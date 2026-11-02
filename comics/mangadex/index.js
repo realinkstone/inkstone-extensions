@@ -3,7 +3,14 @@ const UPLOADS_BASE = 'https://uploads.mangadex.org';
 const PAGE_SIZE = 24;
 const MAX_OFFSET_PLUS_LIMIT = 10000;
 
-const UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15';
+const PLAIN_UA = 'Boundless/1.0 (+https://boundless.moe)';
+
+function isBotCheck(response, error) {
+  if (error) return !!(error.kind === 'challenge' || /challenge|bot check/i.test(String(error.message || '')));
+  const body = String(response.data || '').slice(0, 600);
+  if (response.status === 403 && /bot challenge/i.test(body)) return true;
+  return /^\s*</.test(body) && /browser verification|challenge-assets|powblock/i.test(body);
+}
 
 const FEEDS = [
   { id: 'latest', name: 'Latest Updates' },
@@ -274,13 +281,33 @@ class Source {
   }
 
   async requestJSON(url) {
+    if (this.agent !== 'plain') {
+      try {
+        return await this.fetchJSON(url, false);
+      } catch (e) {
+        if (!(e && e.botCheck)) throw e;
+        this.agent = 'plain';
+        console.error(`MangaDex: the browser identity met its bot check (${e.message}), using the plain agent from now on`);
+      }
+    }
+    return this.fetchJSON(url, true);
+  }
+
+  async fetchJSON(url, plain) {
     const manager = App.createRequestManager({});
-    const request = App.createRequest({
-      url,
-      method: 'GET',
-      headers: { 'User-Agent': UA, Accept: 'application/json' },
-    });
-    const response = await manager.schedule(request);
+    const headers = { Accept: 'application/json' };
+    if (plain) headers['User-Agent'] = PLAIN_UA;
+    const request = App.createRequest({ url, method: 'GET', headers });
+    let response;
+    try {
+      response = await manager.schedule(request);
+    } catch (e) {
+      if (!plain && isBotCheck(null, e)) throw Object.assign(new Error((e && e.message) || 'check not cleared'), { botCheck: true });
+      throw e;
+    }
+    if (!plain && isBotCheck(response)) {
+      throw Object.assign(new Error(`HTTP ${response.status} check page`), { botCheck: true });
+    }
     if (response.status < 200 || response.status >= 300) {
       throw new Error(`MangaDex API HTTP ${response.status} for ${url}`);
     }
@@ -307,6 +334,7 @@ class Source {
       mangaId: manga.id,
       title: bestTitle(a, 'en'),
       image: this.coverUrl(manga, true),
+      headers: { 'User-Agent': PLAIN_UA },
       author: this.authorNames(manga),
       summary: cleanDescription(pickLang(a.description, 'en')),
       tags: (a.tags || []).map((t) => pickLang(t.attributes && t.attributes.name, 'en')).filter(Boolean),
