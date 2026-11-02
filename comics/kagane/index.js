@@ -1,4 +1,4 @@
-const MIRRORS = ['kagane.si', 'kagane.cx', 'kagane.moe', 'kagane.net'];
+const MIRRORS = ['kagane.moe', 'kagane.cx', 'kagane.net'];
 let mirrorIx = 0;
 
 function siteBase() {
@@ -17,7 +17,7 @@ function mirrorFailed(error) {
   const status = /HTTP (\d{3})/.exec(String((error && error.message) || error));
   if (!status) return true;
   const code = Number(status[1]);
-  return code >= 500 || code === 403;
+  return code >= 500 || code === 403 || (code >= 300 && code < 400);
 }
 
 const SERIES_TTL_MS = 5 * 60 * 1000;
@@ -124,7 +124,7 @@ function readerScript(bookId) {
           if (!res.ok) return null;
           return res.clone().json().then(function (json) {
             var pages = pagesFrom(json);
-            if (pages) finish(function () { __reportResult(pages); });
+            if (pages) finish(function () { __reportResult({ pages: pages, origin: location.origin }); });
           });
         }).catch(function () {});
       }
@@ -286,9 +286,11 @@ class Source {
       if ('error' in answer) throw new Error('Kagane chapter fetch failed: ' + answer.error);
       return answer;
     }, 2);
-    const pages = Array.isArray(result.value) ? result.value : [];
+    const value = result.value;
+    const pages = Array.isArray(value) ? value : (value && Array.isArray(value.pages) ? value.pages : []);
     if (pages.length === 0) throw new Error('Kagane returned no pages for this chapter');
-    return { id: chapterId, mangaId, pages };
+    const origin = (value && !Array.isArray(value) && value.origin) || siteBase();
+    return { id: chapterId, mangaId, pages, headers: { Origin: origin, Referer: `${origin}/` } };
   }
 
   async _seriesData(mangaId) {

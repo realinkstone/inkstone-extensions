@@ -101,7 +101,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [InManga](comics/inmanga/index.js) | inmanga.com | Spanish | Safe | 1.1.0 |
 | [Inu Manga](comics/inumanga/index.js) | inu-manga.net | Thai | Mature | 1.0.0 |
 | [Inventario Oculto](comics/inventariooculto/index.js) | inventariooculto.com | Spanish | Safe | 1.0.0 |
-| [Kagane](comics/kagane/index.js) | kagane.org | English | Safe | 1.3.2 |
+| [Kagane](comics/kagane/index.js) | kagane.org | English | Safe | 1.3.3 |
 | [Kami Sama Explorer](comics/kamisamaexplorer/index.js) | leitor.kamisama.com.br | Brazilian Portuguese | Safe | 1.0.0 |
 | [Kazoku Den](comics/kazokuden/index.js) | kazokuden.com | Spanish | Mature | 1.0.0 |
 | [Keikomik](comics/keikomik/index.js) | keikomik.net | Indonesian | Adult | 1.0.0 |

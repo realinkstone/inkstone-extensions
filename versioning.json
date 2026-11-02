@@ -9,6 +9,7 @@
       "version": "2.4.0",
       "medium": "both",
       "website": "https://asurascans.com",
+      "iconUrl": "https://inkstone.web.app/asurascans/icon.png",
       "description": "Manhwa・Manhua・Novels\n\nCatalog・300+\n\nRestrictions:\n・Locked Chapters",
       "capabilities": [
         "browse",
@@ -41,7 +42,6 @@
           "placeholder": "Not for Google-only accounts"
         }
       ],
-      "iconUrl": "https://asurascans.com/icons/apple-touch-icon.png",
       "sha256": "b9c2d51d5133baad1a3d4eeb6b3181dfc96e35903cad9e1e584c98cf221d473e"
     },
     {
@@ -50,6 +50,7 @@
       "version": "4.4.0",
       "medium": "both",
       "website": "https://chikari.moe",
+      "iconUrl": "https://inkstone.web.app/chikari/icon.png",
       "description": "Manga・Manhwa・Manhua・Light Novels\n\nCatalog・3,000+",
       "capabilities": [
         "browse",
@@ -61,7 +62,6 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "iconUrl": "https://chikari.moe/apple-touch-icon.png",
       "sha256": "067f2c9365c98fe888b74061a92a9afd8a2608f88a5c39609952ed7cc9b89f33"
     },
     {
@@ -70,6 +70,7 @@
       "version": "2.6.0",
       "medium": "novel",
       "website": "https://novelfire.net",
+      "iconUrl": "https://inkstone.web.app/novelfire/icon.png",
       "description": "Web Novels・Light Novels\n\nCatalog・10,000+\n\nRestrictions:\n・Rate Limit",
       "capabilities": [
         "browse",
@@ -81,7 +82,6 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "iconUrl": "https://novelfire.net/apple-touch-icon.png?v=11.2.1",
       "sha256": "7dbc0de7ba8c4c5a321a00e1c2236f89114052336593f88d2a7f1f2a1b0dd6cd"
     },
     {
@@ -90,6 +90,7 @@
       "version": "1.2.1",
       "medium": "comics",
       "website": "https://toonily.com",
+      "iconUrl": "https://inkstone.web.app/toonily/icon.png",
       "description": "Manhwa・Webtoons\n\nRestrictions:\n・Cloudflare Checks",
       "capabilities": [
         "browse",
@@ -101,7 +102,6 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "iconUrl": "https://static.tnlycdn.com/2017/10/toonily_favicon2-300x300.png",
       "sha256": "d0b0103fbbae868a7992d2badb2c5d91904dcdff80ad06106f014441de3a1882"
     },
     {
@@ -110,6 +110,7 @@
       "version": "1.1.3",
       "medium": "comics",
       "website": "https://mangakatana.com",
+      "iconUrl": "https://inkstone.web.app/mangakatana/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nCatalog・10,000+",
       "capabilities": [
         "browse",
@@ -121,7 +122,6 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "iconUrl": "https://mangakatana.com/static/img/fav.png",
       "sha256": "a8e7d3a4d93ba4d1926a93ab834462090cdb87ff8a4d6a3589268b9875448061"
     },
     {
@@ -130,6 +130,7 @@
       "version": "1.3.0",
       "medium": "comics",
       "website": "https://mangabuddy1.co.uk",
+      "iconUrl": "https://inkstone.web.app/mangabuddy/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nCatalog・60,000+",
       "capabilities": [
         "browse",
@@ -140,7 +141,6 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "iconUrl": "https://mangabuddy1.co.uk/assets/mangabuddy1couk/images/logo/mangabuddy.png",
       "sha256": "66690e1c259edbb713f16d1d0d5ad0eb0098e9259e1ddb752fb98ecebcaa1f6e"
     },
     {
@@ -169,6 +169,7 @@
       "version": "1.2.0",
       "medium": "comics",
       "website": "https://natomanga.com",
+      "iconUrl": "https://inkstone.web.app/natomanga/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nCatalog・90,000+\n\nRestrictions:\n・Cloudflare Checks",
       "capabilities": [
         "browse",
@@ -180,7 +181,6 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "iconUrl": "https://natomanga.com/images/favicon-manganato.webp",
       "sha256": "99eb7e0b37ca854eac73e487b4d0c18b54565ae65d95d27c5be4ca06d6ccf581"
     },
     {
@@ -189,6 +189,7 @@
       "version": "1.0.0",
       "medium": "novel",
       "website": "https://www.royalroad.com",
+      "iconUrl": "https://inkstone.web.app/royalroad/icon.png",
       "description": "Web Novels\n\nRestrictions:\n・Cloudflare Checks",
       "capabilities": [
         "browse",
@@ -200,7 +201,6 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "iconUrl": "https://www.royalroad.com/icons/apple-icon-180x180.png?v=20200125",
       "sha256": "b0484ff366c0da8df3f19d29b7704376a50080a08a95a8e2092cc2e38e96404f"
     },
     {
@@ -209,6 +209,7 @@
       "version": "1.0.1",
       "medium": "comics",
       "website": "https://mangafreak.me",
+      "iconUrl": "https://inkstone.web.app/mangafreak/icon.png",
       "description": "Manga・Manhwa\n\nCatalog・9,000+",
       "capabilities": [
         "browse",
@@ -220,7 +221,6 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "iconUrl": "https://mangafreak.me/misc/MF.ico?1",
       "sha256": "7ecaa7205940866211e55a17bc81928c32ae332da53c4b94aa7e7c8da872db7a"
     },
     {
@@ -229,6 +229,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://flamecomics.xyz",
+      "iconUrl": "https://inkstone.web.app/flamescans/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nCatalog・100+",
       "capabilities": [
         "browse",
@@ -240,7 +241,6 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "iconUrl": "https://flamecomics.xyz/favicon.ico",
       "sha256": "37f02b5ea55dee9a0ed2817b9fbe75de9bcaabc307af45f3e6208fb71027def4"
     },
     {
@@ -249,6 +249,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://mangapill.com",
+      "iconUrl": "https://inkstone.web.app/mangapill/icon.png",
       "description": "Manga",
       "capabilities": [
         "browse",
@@ -260,7 +261,6 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "iconUrl": "https://mangapill.com/static/favicon/apple-touch-icon.png",
       "sha256": "c4741421d8e9017a227aa9e99179b5b6ea65575fa61ca9c87fa8c66e1e9fdd78"
     },
     {
@@ -269,6 +269,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://www.mgeko.cc",
+      "iconUrl": "https://inkstone.web.app/mgeko/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nCatalog・8,000+",
       "capabilities": [
         "browse",
@@ -280,7 +281,6 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "iconUrl": "https://www.mgeko.cc/static/img/logo_200x200.png",
       "sha256": "fb68a0be4ce60f159ec5102405fd4eaf4296b6e9475c48c348fdbec9f5808cc9"
     },
     {
@@ -289,6 +289,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://manhuaplus.org",
+      "iconUrl": "https://inkstone.web.app/manhuaplus/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nCatalog・700+",
       "capabilities": [
         "browse",
@@ -300,7 +301,6 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "iconUrl": "https://manhuaplus.org/uploads/images/favicon.png",
       "sha256": "2944b7b6b263ca36713de18fff237f878f71ac95d1244b6045722aeaf7e60c5a"
     },
     {
@@ -309,6 +309,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://kingofshojo.com",
+      "iconUrl": "https://inkstone.web.app/kingofshojo/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nCatalog・4,000+",
       "capabilities": [
         "browse",
@@ -320,7 +321,6 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "iconUrl": "https://i1.wp.com/kingofshojo.com/wp-content/uploads/2024/03/cropped-adawewtyy-180x180.png",
       "sha256": "5be989223727d01724e0d31c3571ed056a5384fef872bafc16cb49ab9e405ee9"
     },
     {
@@ -329,6 +329,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://weebcentral.com",
+      "iconUrl": "https://inkstone.web.app/weebcentral/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nCatalog・10,000+",
       "capabilities": [
         "browse",
@@ -340,7 +341,6 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "iconUrl": "https://weebcentral.com/static/images/apple-touch-icon.png",
       "sha256": "cc2c0fe66350c0125b109b123ed921327ce194cc083b152ffeaa6c292979bc1a"
     },
     {
@@ -349,6 +349,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://komiku.org",
+      "iconUrl": "https://inkstone.web.app/komiku/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nCatalog・7,000+",
       "capabilities": [
         "browse",
@@ -360,7 +361,6 @@
       ],
       "language": "id",
       "contentRating": "adult",
-      "iconUrl": "https://komiku.org/asset/img/ico.ico",
       "sha256": "ec3bcf5590ff502275babd83bd93f12beaad58710e3f8d7a18cf3f73b59541e0"
     },
     {
@@ -369,6 +369,7 @@
       "version": "1.1.0",
       "medium": "comics",
       "website": "https://hivetoons.org",
+      "iconUrl": "https://inkstone.web.app/hivetoon/icon.png",
       "description": "Manhwa・Manhua\n\nCatalog・300+\n\nRestrictions:\n・Locked Chapters",
       "capabilities": [
         "browse",
@@ -380,7 +381,6 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "iconUrl": "https://hivetoons.org/apple-touch-icon.png",
       "sha256": "01036fe80773c2abc5fd342c103feda55d7e297691cb64f9cb6c021589725433"
     },
     {
@@ -389,6 +389,7 @@
       "version": "1.1.1",
       "medium": "comics",
       "website": "https://www.mangahere.cc",
+      "iconUrl": "https://inkstone.web.app/mangahere/icon.png",
       "description": "Manga\n\nCatalog・30,000+",
       "capabilities": [
         "browse",
@@ -400,7 +401,6 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "iconUrl": "https://www.mangahere.cc/favicon.ico",
       "sha256": "715ea34fbe98be0750650f12f58ac14e2ed19339aabdfb5e3e3118c9c055898a"
     },
     {
@@ -409,6 +409,7 @@
       "version": "1.0.1",
       "medium": "comics",
       "website": "https://rawkuma.net",
+      "iconUrl": "https://inkstone.web.app/rawkuma/icon.png",
       "description": "Manga\n\nCatalog・9,000+",
       "capabilities": [
         "browse",
@@ -428,6 +429,7 @@
       "version": "1.0.1",
       "medium": "comics",
       "website": "https://tritinia.org",
+      "iconUrl": "https://inkstone.web.app/tritinia/icon.png",
       "description": "Manga\n\nCatalog・50+",
       "capabilities": [
         "browse",
@@ -439,7 +441,6 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "iconUrl": "https://tritinia.org/wp-content/uploads/2021/01/unknown.png",
       "sha256": "ca23e38387eef5934ea2ab8f4d6a0fc0401b83650710a623eb5afe2890ab6504"
     },
     {
@@ -448,6 +449,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://mangadistrict.com",
+      "iconUrl": "https://inkstone.web.app/mangadistrict/icon.png",
       "description": "Manga・Manhwa\n\nCatalog・5,000+",
       "capabilities": [
         "browse",
@@ -459,7 +461,6 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "iconUrl": "https://mangadistrict.com/wp-content/uploads/2021/02/cropped-Copie-de-Copie-de-MANGADISTRICT_5-180x180.png",
       "sha256": "cd673c122ded443ed1ac519aadd57b75ffa8065ede9383a37e97d17244ec1189"
     },
     {
@@ -468,6 +469,7 @@
       "version": "1.0.1",
       "medium": "comics",
       "website": "https://m.manhuagui.com",
+      "iconUrl": "https://inkstone.web.app/manhuagui/icon.png",
       "description": "Manga・Manhua\n\nRestrictions:\n・Rate Limit",
       "capabilities": [
         "browse",
@@ -479,7 +481,6 @@
       ],
       "language": "zh",
       "contentRating": "adult",
-      "iconUrl": "https://www.manhuagui.com/favicon.ico",
       "sha256": "ff7ff6c19b099366870531fedaa710f67329d6252050fd90e6492864b815a1a5"
     },
     {
@@ -488,6 +489,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://www.scan-vf.net",
+      "iconUrl": "https://inkstone.web.app/scanvf/icon.png",
       "description": "Manga\n\nCatalog・20+",
       "capabilities": [
         "browse",
@@ -499,7 +501,6 @@
       ],
       "language": "fr",
       "contentRating": "safe",
-      "iconUrl": "https://www.scan-vf.net/uploads/favicon.png",
       "sha256": "05ee0395addaf125413c42a20e58691f76817fdab7eade6115f3d73eae773d9f"
     },
     {
@@ -508,6 +509,7 @@
       "version": "1.1.0",
       "medium": "comics",
       "website": "https://inmanga.com",
+      "iconUrl": "https://inkstone.web.app/inmanga/icon.png",
       "description": "Manga\n\nCatalog・5,000+",
       "capabilities": [
         "browse",
@@ -518,7 +520,6 @@
       ],
       "language": "es",
       "contentRating": "safe",
-      "iconUrl": "https://assets.intomanga.com/inmangafavicon.png",
       "sha256": "d06c10056980ec2b01fcfbaaf628f42841b73cf13446b4af2043b155b6a75879"
     },
     {
@@ -527,6 +528,7 @@
       "version": "1.0.3",
       "medium": "comics",
       "website": "https://olympusbiblioteca.com",
+      "iconUrl": "https://inkstone.web.app/olympusscans/icon.png",
       "description": "Manhwa・Manhua\n\nCatalog・800+",
       "capabilities": [
         "browse",
@@ -538,7 +540,6 @@
       ],
       "language": "es",
       "contentRating": "adult",
-      "iconUrl": "https://olympusbiblioteca.com/olympus-logo-180.webp",
       "sha256": "519fa9afc0ff0e7e80023e43dcbd582357b16c020d3a87f45ad403c746b514b0",
       "hosts": [
         "olympusxyz.com"
@@ -550,6 +551,7 @@
       "version": "1.2.0",
       "medium": "novel",
       "website": "https://novelbuddy.me",
+      "iconUrl": "https://inkstone.web.app/novelbuddy/icon.png",
       "description": "Web Novels・Light Novels\n\nCatalog・10,000+",
       "capabilities": [
         "browse",
@@ -561,7 +563,6 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "iconUrl": "https://novelbuddy.me/apple-touch-icon.png",
       "sha256": "bb307e04923ce3e4e055551a7abae1b08e9f908c77b5cf8a1da8498e6bc48b96"
     },
     {
@@ -570,6 +571,7 @@
       "version": "1.2.0",
       "medium": "comics",
       "website": "https://www.mangatown.com",
+      "iconUrl": "https://inkstone.web.app/mangatown/icon.png",
       "description": "Manga\n\nCatalog・20,000+",
       "capabilities": [
         "browse",
@@ -581,7 +583,6 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "iconUrl": "https://static.mangatown.com/v20251117/mangatown/images/favicon.ico",
       "sha256": "b42ac88b4d8d155eaf2f8673f56095a25e3d1346e1fa835be7ba64eff1a9598d"
     },
     {
@@ -590,6 +591,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://manhwatop.com",
+      "iconUrl": "https://inkstone.web.app/manhwatop/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nRestrictions:\n・Cloudflare Checks",
       "capabilities": [
         "browse",
@@ -609,6 +611,7 @@
       "version": "1.1.0",
       "medium": "comics",
       "website": "https://kunmanga.com",
+      "iconUrl": "https://inkstone.web.app/kunmanga/icon.png",
       "description": "Manhwa\n\nRestrictions:\n・Cloudflare Checks",
       "capabilities": [
         "browse",
@@ -628,6 +631,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://manhwaclan.com",
+      "iconUrl": "https://inkstone.web.app/manhwaclan/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nRestrictions:\n・Cloudflare Checks",
       "capabilities": [
         "browse",
@@ -647,6 +651,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://www.webtoons.com",
+      "iconUrl": "https://inkstone.web.app/webtoons/icon.png",
       "description": "Webtoons",
       "capabilities": [
         "browse",
@@ -658,7 +663,6 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "iconUrl": "https://webtoons-static.pstatic.net/image/favicon/iPhone_57X57_2.png?dt=2017082401",
       "sha256": "7cb34b3904b24538eb84c70219710fc905ac9984894afb3ac275d34c622e6222"
     },
     {
@@ -667,6 +671,7 @@
       "version": "1.1.0",
       "medium": "novel",
       "website": "https://novelfull.net",
+      "iconUrl": "https://inkstone.web.app/novelfull/icon.png",
       "description": "Web Novels・Light Novels\n\nRestrictions:\n・Cloudflare Checks",
       "capabilities": [
         "browse",
@@ -686,7 +691,7 @@
       "version": "1.1.1",
       "medium": "novel",
       "website": "https://readnovelfull.com",
-      "iconUrl": "https://readnovelfull.com/img/favicon.ico",
+      "iconUrl": "https://inkstone.web.app/readnovelfull/icon.png",
       "description": "Web Novels・Light Novels\n\nCatalog・2,000+",
       "capabilities": [
         "browse",
@@ -706,7 +711,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://truyenqqgo.com",
-      "iconUrl": "https://st.truyenqqko.com/template/frontend/images/icon/apple-touch-icon-144x144.png",
+      "iconUrl": "https://inkstone.web.app/truyenqq/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nRestrictions:\n・Cloudflare Checks",
       "capabilities": [
         "browse",
@@ -750,6 +755,7 @@
       "version": "1.0.0",
       "medium": "novel",
       "website": "https://www.scribblehub.com",
+      "iconUrl": "https://inkstone.web.app/scribblehub/icon.png",
       "description": "Web Novels\n\nRestrictions:\n・Cloudflare Checks",
       "capabilities": [
         "browse",
@@ -769,6 +775,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://toongod.org",
+      "iconUrl": "https://inkstone.web.app/toongod/icon.png",
       "description": "Manhwa\n\nRestrictions:\n・Cloudflare Checks",
       "capabilities": [
         "browse",
@@ -788,6 +795,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://nettruyenvia.com",
+      "iconUrl": "https://inkstone.web.app/nettruyen/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nRestrictions:\n・Cloudflare Checks",
       "capabilities": [
         "browse",
@@ -807,6 +815,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://www.viz.com",
+      "iconUrl": "https://inkstone.web.app/viz/icon.png",
       "description": "Manga\n\nCatalog・200+",
       "capabilities": [
         "browse",
@@ -817,7 +826,6 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "iconUrl": "https://www.viz.com/favicon/apple-touch-icon.png?v=47MPqANpyj",
       "sha256": "03f216b057b8abe86e22f108344add5bf7479bd849e8e406782003c8c204e764"
     },
     {
@@ -826,6 +834,7 @@
       "version": "1.1.0",
       "medium": "comics",
       "website": "https://www.mangago.me",
+      "iconUrl": "https://inkstone.web.app/mangago/icon.png",
       "description": "Manga・Manhwa\n\nRestrictions:\n・Cloudflare Checks",
       "capabilities": [
         "browse",
@@ -837,7 +846,6 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "iconUrl": "https://www.mangago.me/favicon.ico",
       "sha256": "ea488a3f499af166e96fd0c05cd449dc1465a3acc12aec80619abee0b032633a"
     },
     {
@@ -846,6 +854,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://manhuafast.net",
+      "iconUrl": "https://inkstone.web.app/manhuafast/icon.png",
       "description": "Manhwa・Manhua\n\nRestrictions:\n・Cloudflare Checks",
       "capabilities": [
         "browse",
@@ -865,6 +874,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://manhwa18.cc",
+      "iconUrl": "https://inkstone.web.app/manhwa18/icon.png",
       "description": "Manhwa・Webtoons\n\nCatalog・6,000+",
       "capabilities": [
         "browse",
@@ -884,6 +894,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://mangahub.io",
+      "iconUrl": "https://inkstone.web.app/mangahub/icon.png",
       "description": "Manga\n\nRestrictions:\n・Cloudflare Checks",
       "capabilities": [
         "browse",
@@ -903,6 +914,7 @@
       "version": "1.2.0",
       "medium": "comics",
       "website": "https://tapas.io",
+      "iconUrl": "https://inkstone.web.app/tapas/icon.png",
       "description": "Comics・Webtoons\n\nCatalog・40,000+\n\nRestrictions:\n・Locked Chapters",
       "capabilities": [
         "browse",
@@ -914,7 +926,6 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "iconUrl": "https://tapas.io/apple-touch-icon.png",
       "sha256": "51a36c338f5f78c9ba92ffe49321ca25f2f9e3adf40784ef4d4e3ae7d3bc207d"
     },
     {
@@ -923,6 +934,7 @@
       "version": "1.1.0",
       "medium": "novel",
       "website": "https://www.wuxiaworld.com",
+      "iconUrl": "https://inkstone.web.app/wuxiaworld/icon.png",
       "description": "Web Novels・Light Novels\n\nCatalog・200+",
       "capabilities": [
         "browse",
@@ -933,7 +945,6 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "iconUrl": "https://www.wuxiaworld.com/apple-touch-icon.png",
       "sha256": "95b6dc74d3de5d534ba88cab220b8b238a457f494412c5ee9fd4c90f083d7944"
     },
     {
@@ -942,6 +953,7 @@
       "version": "1.2.1",
       "medium": "novel",
       "website": "https://www.wuxiabox.com",
+      "iconUrl": "https://inkstone.web.app/readwn/icon.png",
       "description": "Web Novels・Light Novels\n\nCatalog・100,000+",
       "capabilities": [
         "browse",
@@ -953,7 +965,6 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "iconUrl": "https://www.wuxiabox.com/favicon.ico",
       "sha256": "6580c20e5a79e0b062d18251c57b3de7dab5523d36619f76d7a5b7e631fbca44"
     },
     {
@@ -962,7 +973,7 @@
       "version": "1.4.4",
       "medium": "novel",
       "website": "https://www.webnovel.com",
-      "iconUrl": "https://www.yueimg.com/en/favicon/favicon.d3f6a.ico",
+      "iconUrl": "https://inkstone.web.app/webnovel/icon.png",
       "description": "Web Novels\n\nRestrictions:\n・Cloudflare Checks\n・Locked Chapters",
       "capabilities": [
         "browse",
@@ -982,6 +993,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://manhuahot.com",
+      "iconUrl": "https://inkstone.web.app/manhuahot/icon.png",
       "description": "Manhua\n\nCatalog・300+\n\nRestrictions:\n・Cloudflare Checks",
       "capabilities": [
         "browse",
@@ -993,7 +1005,6 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "iconUrl": "https://manhuahot.com/wp-content/uploads/2024/04/cropped-favicon-mmh-180x180.png",
       "sha256": "a4c580def4a4b64f34e2f7a1a11993395583701bea318fc6c7b3119f2f010ff6"
     },
     {
@@ -1002,6 +1013,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://manhuaus.club",
+      "iconUrl": "https://inkstone.web.app/manhuaus/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nRestrictions:\n・Cloudflare Checks",
       "capabilities": [
         "browse",
@@ -1013,7 +1025,6 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "iconUrl": "https://manhuaus.club/wp-content/uploads/2026/02/cropped-tgiouho-removebg-preview-180x180.png",
       "sha256": "aeb82ed17afbe85f55581fce892a055d17b987049822a2985a889b0d38511b5e"
     },
     {
@@ -1022,6 +1033,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://gdscans.com",
+      "iconUrl": "https://inkstone.web.app/gdscans/icon.png",
       "description": "Manga",
       "capabilities": [
         "browse",
@@ -1033,7 +1045,6 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "iconUrl": "https://gdscans.com/wp-content/uploads/2023/03/cropped-favicon-180x180.png",
       "sha256": "0027509b53a12c67bca17a66973f970347510b75b6838d3b1a92a459358548f5"
     },
     {
@@ -1042,6 +1053,7 @@
       "version": "1.1.0",
       "medium": "comics",
       "website": "https://lelscans.net",
+      "iconUrl": "https://inkstone.web.app/lelscans/icon.png",
       "description": "Manga\n\nCatalog・30+",
       "capabilities": [
         "browse",
@@ -1052,7 +1064,6 @@
       ],
       "language": "fr",
       "contentRating": "safe",
-      "iconUrl": "https://lelscans.net/images/icones/favicon.ico",
       "sha256": "1cd8d66457d100e39ee4c0d0b0d0cf7fc98348b34d462c768e22b877bc06fbac"
     },
     {
@@ -1061,6 +1072,7 @@
       "version": "1.1.1",
       "medium": "comics",
       "website": "https://globalcomix.com",
+      "iconUrl": "https://inkstone.web.app/globalcomix/icon.png",
       "description": "Manga・Comics",
       "capabilities": [
         "browse",
@@ -1072,7 +1084,6 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "iconUrl": "https://assets.globalcomix.com/static/images/header/homescreen.png",
       "sha256": "097c3f3f3763abe0e01bc082258bfe6009e83e6b95b80cdea0d36a0d380384d1"
     },
     {
@@ -1081,6 +1092,7 @@
       "version": "1.0.1",
       "medium": "comics",
       "website": "https://anime-sama.to",
+      "iconUrl": "https://inkstone.web.app/animesama/icon.png",
       "description": "Manga・Manhwa・Manhua",
       "capabilities": [
         "browse",
@@ -1092,7 +1104,6 @@
       ],
       "language": "fr",
       "contentRating": "mature",
-      "iconUrl": "https://anime-sama.to/img/icone_AS.png?v=4",
       "sha256": "ee866ad55997d4ac854f6b1554514687780c131dfd94abdd8dc855d714faa0a3"
     },
     {
@@ -1101,6 +1112,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://cmangavn.com",
+      "iconUrl": "https://inkstone.web.app/cmanga/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nCatalog・2,000+",
       "capabilities": [
         "browse",
@@ -1112,7 +1124,6 @@
       ],
       "language": "vi",
       "contentRating": "adult",
-      "iconUrl": "https://cmangavn.com/apple-touch-icon.png",
       "sha256": "0431be0d237422df28811cdb5a49d67ac26c0065c48d19dbefe8bdf52e238422"
     },
     {
@@ -1121,6 +1132,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://comicfury.com",
+      "iconUrl": "https://inkstone.web.app/comicfury/icon.png",
       "description": "Comics\n\nCatalog・900+",
       "capabilities": [
         "browse",
@@ -1132,7 +1144,6 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "iconUrl": "https://comicfury.com/apple-touch-icon.png",
       "sha256": "d0413343e060afdfa794b02da8544ebed36b87780a5791aee7c0768dfe0bb452"
     },
     {
@@ -1141,6 +1152,7 @@
       "version": "1.2.1",
       "medium": "comics",
       "website": "https://lectormangass.net",
+      "iconUrl": "https://inkstone.web.app/lectormanga/icon.png",
       "description": "Manhwa・Manhua・Comics\n\nCatalog・10,000+",
       "capabilities": [
         "browse",
@@ -1152,7 +1164,6 @@
       ],
       "language": "es",
       "contentRating": "adult",
-      "iconUrl": "https://lectormangass.net/apple-touch-icon.png?v=3",
       "sha256": "e7797f92491443db0b16b00b6e46189795dd5d17d8643636bd639a052d6f68ad"
     },
     {
@@ -1161,6 +1172,7 @@
       "version": "1.0.1",
       "medium": "comics",
       "website": "https://komikindo.ch",
+      "iconUrl": "https://inkstone.web.app/komikindo/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nCatalog・7,000+",
       "capabilities": [
         "browse",
@@ -1172,7 +1184,6 @@
       ],
       "language": "id",
       "contentRating": "adult",
-      "iconUrl": "https://komikindo.ch/wp-content/uploads/2020/12/fav.png",
       "sha256": "e1930e5f652858239b82b69edf08bb9b4cab5967815934cbc72db20b240a22b4"
     },
     {
@@ -1181,6 +1192,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://indomanhwa.com",
+      "iconUrl": "https://inkstone.web.app/indomanhwa/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nRestrictions:\n・Cloudflare Checks",
       "capabilities": [
         "browse",
@@ -1199,6 +1211,7 @@
       "version": "1.2.0",
       "medium": "comics",
       "website": "https://manhuavn.top",
+      "iconUrl": "https://inkstone.web.app/manhuavn/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nCatalog・1,000+\n\nRestrictions:\n・Locked Chapters",
       "capabilities": [
         "browse",
@@ -1210,7 +1223,6 @@
       ],
       "language": "vi",
       "contentRating": "adult",
-      "iconUrl": "https://manhuavn.top/images/favicon.png",
       "sha256": "9abf0af080028c1ae03cd5fa7c2594b87779470fd5ade1c93b5808263673ab94"
     },
     {
@@ -1239,6 +1251,7 @@
       "version": "1.2.0",
       "medium": "comics",
       "website": "https://wamanga.ru",
+      "iconUrl": "https://inkstone.web.app/wamanga/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nCatalog・2,000+",
       "capabilities": [
         "browse",
@@ -1249,7 +1262,6 @@
       ],
       "language": "ru",
       "contentRating": "adult",
-      "iconUrl": "https://wamanga.ru/apple-touch-icon.png",
       "sha256": "1d962987ae686ec487776de8c4bc5dd6f6a3327516c1ff15583f10c93f039ed1"
     },
     {
@@ -1258,7 +1270,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://nirvanamanga.com",
-      "iconUrl": "https://nirvanamanga.com/wp-content/uploads/2024/03/cropped-NirvanaManga-Logo-192x192.png",
+      "iconUrl": "https://inkstone.web.app/nirvanamanga/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nCatalog・20+",
       "capabilities": [
         "browse",
@@ -1278,7 +1290,7 @@
       "version": "1.2.1",
       "medium": "comics",
       "website": "https://remanga.org",
-      "iconUrl": "https://api.remanga.org/media/favicon.ico",
+      "iconUrl": "https://inkstone.web.app/remanga/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nCatalog・50,000+",
       "capabilities": [
         "browse",
@@ -1298,7 +1310,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://turkmanga.org",
-      "iconUrl": "https://turkmanga.org/logo.ico",
+      "iconUrl": "https://inkstone.web.app/turkmanga/icon.png",
       "description": "Manga・Manhwa・Manhua・Webtoons\n\nRestrictions:\n・Cloudflare Checks",
       "capabilities": [
         "browse",
@@ -1318,7 +1330,7 @@
       "version": "1.1.0",
       "medium": "comics",
       "website": "https://www.tilkiscans.com",
-      "iconUrl": "https://www.tilkiscans.com/wp-content/uploads/2025/03/cropped-TILKISCANS-192x192.webp",
+      "iconUrl": "https://inkstone.web.app/tilkiscans/icon.png",
       "description": "Manga・Manhwa\n\nCatalog・70+",
       "capabilities": [
         "browse",
@@ -1338,7 +1350,7 @@
       "version": "1.1.0",
       "medium": "comics",
       "website": "https://inkstory.net",
-      "iconUrl": "https://inkstory.net/inkstory/apple-touch-icon.png",
+      "iconUrl": "https://inkstone.web.app/inkstory/icon.png",
       "description": "Manga・Manhwa・Manhua",
       "capabilities": [
         "browse",
@@ -1378,7 +1390,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://keikomik.net",
-      "iconUrl": "https://keikomik.net/favicon.ico",
+      "iconUrl": "https://inkstone.web.app/keikomik/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nCatalog・200+",
       "capabilities": [
         "browse",
@@ -1398,7 +1410,7 @@
       "version": "1.1.1",
       "medium": "comics",
       "website": "https://blvillage.com",
-      "iconUrl": "https://blvillage.com/favicon.ico",
+      "iconUrl": "https://inkstone.web.app/blvillage/icon.png",
       "description": "Manga\n\nCatalog・20,000+",
       "capabilities": [
         "browse",
@@ -1417,7 +1429,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://lelmanga.com",
-      "iconUrl": "https://i0.wp.com/www.lelmanga.com/wp-content/uploads/2026/06/cropped-cropped-lelmanga-favicon-192x192-1-192x192.webp",
+      "iconUrl": "https://inkstone.web.app/lelmanga/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nCatalog・300+",
       "capabilities": [
         "browse",
@@ -1437,7 +1449,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://manga-scantrad.io",
-      "iconUrl": "https://manga-scantrad.io/wp-content/uploads/2020/03/manga-scantrad-logo-2-e1584734306602.png",
+      "iconUrl": "https://inkstone.web.app/mangascantrad/icon.png",
       "description": "Manga\n\nRestrictions:\n・Cloudflare Checks",
       "capabilities": [
         "browse",
@@ -1457,7 +1469,7 @@
       "version": "1.0.1",
       "medium": "comics",
       "website": "https://mangaread.org",
-      "iconUrl": "https://www.mangaread.org/wp-content/uploads/2017/10/cropped-unnamed-32x32.png",
+      "iconUrl": "https://inkstone.web.app/mangaread/icon.png",
       "description": "Manga・Manhwa\n\nCatalog・3,000+",
       "capabilities": [
         "browse",
@@ -1477,6 +1489,7 @@
       "version": "1.1.1",
       "medium": "novel",
       "website": "https://ranobes.top",
+      "iconUrl": "https://inkstone.web.app/ranobes/icon.png",
       "description": "Web Novels・Light Novels\n\nRestrictions:\n・Cloudflare Checks\n・Rate Limit",
       "capabilities": [
         "browse",
@@ -1488,7 +1501,6 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "iconUrl": "https://ranobes.top/templates/Dark/images/favicon.ico",
       "sha256": "535f81a8ce0b871721fe1805d44588f5b1f522812df7ea2e9f6f72ea56d24b1a"
     },
     {
@@ -1497,7 +1509,7 @@
       "version": "1.0.1",
       "medium": "comics",
       "website": "https://manhwahq.com",
-      "iconUrl": "https://manhwahq.com/Logo/favicon.png",
+      "iconUrl": "https://inkstone.web.app/manhwahq/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nCatalog・9,000+",
       "capabilities": [
         "browse",
@@ -1517,6 +1529,7 @@
       "version": "1.2.0",
       "medium": "novel",
       "website": "https://libread.com",
+      "iconUrl": "https://inkstone.web.app/libread/icon.png",
       "description": "Web Novels\n\nCatalog・1,000+\n\nRestrictions:\n・Cloudflare Checks",
       "capabilities": [
         "browse",
@@ -1528,7 +1541,6 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "iconUrl": "https://libread.com/static/libread/favicon.ico",
       "sha256": "8fe609c454c3f671c9c1ec22f865124288fad5d78360d7c5f75f67c8c7eedc3a"
     },
     {
@@ -1537,8 +1549,8 @@
       "version": "1.1.1",
       "medium": "novel",
       "website": "https://www.wattpad.com",
+      "iconUrl": "https://inkstone.web.app/wattpad/icon.png",
       "description": "Web Novels\n\nCatalog・1,000+",
-      "iconUrl": "https://www.wattpad.com/favicon.ico",
       "capabilities": [
         "browse",
         "search",
@@ -1557,8 +1569,8 @@
       "version": "1.3.0",
       "medium": "novel",
       "website": "https://www.webfic.com",
+      "iconUrl": "https://inkstone.web.app/webfic/icon.png",
       "description": "Web Novels\n\nCatalog・2,000+",
-      "iconUrl": "https://www.webfic.com/images/logo.png",
       "capabilities": [
         "browse",
         "search",
@@ -1577,8 +1589,8 @@
       "version": "1.2.0",
       "medium": "novel",
       "website": "https://www.qidian.com",
+      "iconUrl": "https://inkstone.web.app/qidian/icon.png",
       "description": "Web Novels",
-      "iconUrl": "https://imgservices-1252317822.image.myqcloud.com/coco/s03102023/b7b10602.w663ve.ico",
       "capabilities": [
         "browse",
         "search",
@@ -1597,8 +1609,8 @@
       "version": "1.2.1",
       "medium": "novel",
       "website": "https://www.goodnovel.com",
+      "iconUrl": "https://inkstone.web.app/goodnovel/icon.png",
       "description": "Web Novels\n\nCatalog・2,000+",
-      "iconUrl": "https://www.goodnovel.com/public/favicon.ico",
       "capabilities": [
         "browse",
         "search",
@@ -1617,8 +1629,8 @@
       "version": "1.3.0",
       "medium": "novel",
       "website": "https://www.17k.com",
+      "iconUrl": "https://inkstone.web.app/17k/icon.png",
       "description": "Web Novels\n\nCatalog・10,000+\n\nRestrictions:\n・Web View",
-      "iconUrl": "https://www.17k.com/favicon.ico",
       "capabilities": [
         "browse",
         "search",
@@ -1637,8 +1649,8 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://mangaowl.io",
+      "iconUrl": "https://inkstone.web.app/mangaowl/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nCatalog・2,000+",
-      "iconUrl": "https://mangaowl.io/wp-content/uploads/2017/10/logo.png",
       "capabilities": [
         "browse",
         "search",
@@ -1657,8 +1669,8 @@
       "version": "1.2.0",
       "medium": "novel",
       "website": "https://www.moboreader.com",
+      "iconUrl": "https://inkstone.web.app/moboreader/icon.png",
       "description": "Web Novels\n\nCatalog・8,000+",
-      "iconUrl": "https://www.moboreader.com/favicon.ico",
       "capabilities": [
         "browse",
         "search",
@@ -1677,8 +1689,8 @@
       "version": "1.2.0",
       "medium": "novel",
       "website": "https://www.dreame.com",
+      "iconUrl": "https://inkstone.web.app/dreame/icon.png",
       "description": "Web Novels\n\nCatalog・10,000+",
-      "iconUrl": "https://file.dreame.com/group1/M00/00/DF/rB84XVxrwj-AM46tAAAEfjCRxvU122.ico",
       "capabilities": [
         "browse",
         "search",
@@ -1697,8 +1709,8 @@
       "version": "1.3.0",
       "medium": "novel",
       "website": "https://www.jjwxc.net",
+      "iconUrl": "https://inkstone.web.app/jjwxc/icon.png",
       "description": "Web Novels",
-      "iconUrl": "https://www.jjwxc.net/favicon.ico",
       "capabilities": [
         "browse",
         "search",
@@ -1717,8 +1729,8 @@
       "version": "1.1.1",
       "medium": "comics",
       "website": "https://mangaplaza.com",
+      "iconUrl": "https://inkstone.web.app/mangaplaza/icon.png",
       "description": "Manga\n\nCatalog・10,000+\n\nRestrictions:\n・Locked Chapters",
-      "iconUrl": "https://c.mangaplaza.com/s/images/common/favicon.png",
       "capabilities": [
         "browse",
         "search",
@@ -1737,8 +1749,8 @@
       "version": "1.2.0",
       "medium": "comics",
       "website": "https://comic.naver.com",
+      "iconUrl": "https://inkstone.web.app/navercomic/icon.png",
       "description": "Manhwa・Webtoons\n\nRestrictions:\n・Locked Chapters",
-      "iconUrl": "https://shared-comic.pstatic.net/favicon/favicon_152x152.ico",
       "capabilities": [
         "browse",
         "search",
@@ -1779,7 +1791,7 @@
       "version": "1.2.0",
       "medium": "comics",
       "website": "https://mangatoon.mobi",
-      "iconUrl": "https://mangatoon.mobi/images/icon-128.png",
+      "iconUrl": "https://inkstone.web.app/mangatoon/icon.png",
       "description": "Webtoons\n\nCatalog・2,000+\n\nRestrictions:\n・Locked Chapters",
       "capabilities": [
         "browse",
@@ -1820,7 +1832,7 @@
       "version": "1.2.1",
       "medium": "comics",
       "website": "https://mangadex.org",
-      "iconUrl": "https://mangadex.org/pwa/icons/icon-180.png",
+      "iconUrl": "https://inkstone.web.app/mangadex/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nCatalog・90,000+",
       "capabilities": [
         "browse",
@@ -1933,15 +1945,13 @@
     {
       "id": "kagane",
       "name": "Kagane",
-      "version": "1.3.2",
+      "version": "1.3.3",
       "medium": "comics",
       "website": "https://kagane.org",
       "iconUrl": "https://inkstone.web.app/kagane/icon.png",
       "hosts": [
         "kagane.org",
         "*.kagane.org",
-        "kagane.si",
-        "*.kagane.si",
         "kagane.cx",
         "*.kagane.cx",
         "kagane.moe",
@@ -2243,7 +2253,7 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "262b895bd8412aa8f16bd66a2d3d644f17b84a08eea3ef9a84efaa46989d3078"
+      "sha256": "a1125ccee0c317ff6e73f6b9e4e8de5e7886b3abefaf5a064be954d26da35dd8"
     },
     {
       "id": "mangafire",
@@ -2251,7 +2261,7 @@
       "version": "1.4.1",
       "medium": "comics",
       "website": "https://mangafire.to",
-      "iconUrl": "https://mangafire.to/assets/mangafire/favicon.png",
+      "iconUrl": "https://inkstone.web.app/mangafire/icon.png",
       "hosts": [
         "mangafire.to"
       ],
@@ -2274,7 +2284,7 @@
       "version": "1.0.1",
       "medium": "comics",
       "website": "https://hiperdex.tv",
-      "iconUrl": "https://hiperdex.tv/apple-touch-icon.png",
+      "iconUrl": "https://inkstone.web.app/hiperdex/icon.png",
       "hosts": [
         "hiperdex.tv"
       ],
@@ -2348,7 +2358,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://comicland.org",
-      "iconUrl": "https://comicland.org/apple-touch-icon.png",
+      "iconUrl": "https://inkstone.web.app/comicland/icon.png",
       "hosts": [
         "comicland.org",
         "*.comicland.org"
@@ -2372,7 +2382,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://arenascan.com",
-      "iconUrl": "https://arenascan.com/wp-content/uploads/2024/05/37353d5b-214e-4d1d-acef-265067ef0c8e_c03f4d14-ddbc-48ff-b7cb-b19366af81b4.png",
+      "iconUrl": "https://inkstone.web.app/arenascans/icon.png",
       "hosts": [
         "arenascan.com",
         "*.arenascan.com"
@@ -2422,7 +2432,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://athreascans.com",
-      "iconUrl": "https://athreascans.com/wp-content/uploads/ath-pwa/athreascans-192.png",
+      "iconUrl": "https://inkstone.web.app/athreascans/icon.png",
       "hosts": [
         "athreascans.com",
         "*.athreascans.com"
@@ -2446,7 +2456,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://cocomic.co",
-      "iconUrl": "https://cocomic.co/wp-content/uploads/2017/10/cropped-unnamed-180x180.png",
+      "iconUrl": "https://inkstone.web.app/cocomic/icon.png",
       "hosts": [
         "cocomic.co",
         "*.cocomic.co"
@@ -2470,7 +2480,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://evascans.net",
-      "iconUrl": "https://evascans.net/wp-content/uploads/2026/09/2026-09-14-11-20-35-1789428035312-180x180.png",
+      "iconUrl": "https://inkstone.web.app/evascans/icon.png",
       "hosts": [
         "evascans.net",
         "*.evascans.net"
@@ -2494,7 +2504,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://gakamangas.com",
-      "iconUrl": "https://gakamangas.com/wp-content/uploads/2024/05/IMG_1710.png",
+      "iconUrl": "https://inkstone.web.app/gakamangas/icon.png",
       "hosts": [
         "gakamangas.com",
         "*.gakamangas.com"
@@ -2518,7 +2528,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://hunlightcomics.com",
-      "iconUrl": "https://hunlightcomics.com/wp-content/uploads/2026/06/cropped-Hunlight-180x180.png",
+      "iconUrl": "https://inkstone.web.app/hunlightcomics/icon.png",
       "hosts": [
         "hunlightcomics.com",
         "*.hunlightcomics.com"
@@ -2541,7 +2551,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://kokomangas.com",
-      "iconUrl": "https://kokomangas.com/apple-touch-icon.png",
+      "iconUrl": "https://inkstone.web.app/kokomangas/icon.png",
       "hosts": [
         "kokomangas.com",
         "*.kokomangas.com"
@@ -2564,7 +2574,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://ksgroupscans.com",
-      "iconUrl": "https://ksgroupscans.com/wp-content/uploads/2023/02/cropped-logoks-180x180.png",
+      "iconUrl": "https://inkstone.web.app/ksgroupscans/icon.png",
       "hosts": [
         "ksgroupscans.com",
         "*.ksgroupscans.com"
@@ -2588,7 +2598,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://lagoonscans.com",
-      "iconUrl": "https://lagoonscans.com/wp-content/uploads/2025/10/cropped-3423423434-180x180.webp",
+      "iconUrl": "https://inkstone.web.app/lagoonscans/icon.png",
       "hosts": [
         "lagoonscans.com",
         "*.lagoonscans.com"
@@ -2636,7 +2646,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://mangaeclipse.com",
-      "iconUrl": "https://mangaeclipse.com/wp-content/uploads/2022/02/MANGA-Eclipse-500-%C3%97-180-px-500-%C3%97-500-px-1-300x300.png",
+      "iconUrl": "https://inkstone.web.app/mangaeclipse/icon.png",
       "hosts": [
         "mangaeclipse.com",
         "*.mangaeclipse.com"
@@ -2660,7 +2670,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://mangasushi.org",
-      "iconUrl": "https://mangasushi.org/wp-content/uploads/2022/01/cropped-MS_LOGO-180x180.png",
+      "iconUrl": "https://inkstone.web.app/mangasushi/icon.png",
       "hosts": [
         "mangasushi.org",
         "*.mangasushi.org"
@@ -2684,7 +2694,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://mangatrend.org",
-      "iconUrl": "https://mangatrend.org/wp-content/uploads/2026/09/cropped-file_00000000e06c81f4841ce4fc647bae9e-180x180.png",
+      "iconUrl": "https://inkstone.web.app/mangatrend/icon.png",
       "hosts": [
         "mangatrend.org",
         "*.mangatrend.org"
@@ -2731,7 +2741,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://manhuanext.com",
-      "iconUrl": "https://manhuanext.com/wp-content/uploads/2025/04/cropped-manhua_next-removebg-preview-180x180.png",
+      "iconUrl": "https://inkstone.web.app/manhuanext/icon.png",
       "hosts": [
         "manhuanext.com",
         "*.manhuanext.com"
@@ -2755,7 +2765,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://manhwanex.com",
-      "iconUrl": "https://manhwanex.com/wp-content/uploads/2026/02/cropped-ChatGPT-Image-Feb-13-2026-08_18_51-PM-180x180.png",
+      "iconUrl": "https://inkstone.web.app/manhwanex/icon.png",
       "hosts": [
         "manhwanex.com",
         "*.manhwanex.com"
@@ -2779,7 +2789,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://manhwareads.com",
-      "iconUrl": "https://manhwareads.com/wp-content/uploads/2026/02/512.png",
+      "iconUrl": "https://inkstone.web.app/manhwareads/icon.png",
       "hosts": [
         "manhwareads.com",
         "*.manhwareads.com"
@@ -2803,7 +2813,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://rackusreads.com",
-      "iconUrl": "https://rackusreads.com/wp-content/uploads/2024/09/cropped-RACKLOGO2-180x180.png",
+      "iconUrl": "https://inkstone.web.app/rackus/icon.png",
       "hosts": [
         "rackusreads.com",
         "*.rackusreads.com"
@@ -2827,7 +2837,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://ravenscans.org",
-      "iconUrl": "https://ravenscans.org/wp-content/uploads/2025/05/cropped-favicon-180x180.png",
+      "iconUrl": "https://inkstone.web.app/ravenscans/icon.png",
       "hosts": [
         "ravenscans.org",
         "*.ravenscans.org"
@@ -2851,7 +2861,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://s2read.com",
-      "iconUrl": "https://s2read.com/wp-content/uploads/2026/08/cropped-Thiet-ke-chua-co-ten-5-180x180.png",
+      "iconUrl": "https://inkstone.web.app/s2manga/icon.png",
       "hosts": [
         "s2read.com",
         "*.s2read.com"
@@ -2923,7 +2933,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://yakshacomics.com",
-      "iconUrl": "https://yakshacomics.com/wp-content/uploads/2025/05/cropped-file_00000000810061f687588747abd1dd5e-1-180x180.png",
+      "iconUrl": "https://inkstone.web.app/yakshacomics/icon.png",
       "hosts": [
         "yakshacomics.com",
         "*.yakshacomics.com"
@@ -2970,7 +2980,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://www.zinmanga.net",
-      "iconUrl": "https://www.zinmanga.net/image/icon/cropped-IMG_20200222_225535-180x180.jpg",
+      "iconUrl": "https://inkstone.web.app/zinmanga/icon.png",
       "hosts": [
         "zinmanga.net",
         "*.zinmanga.net"
@@ -3018,7 +3028,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://nyxscans.com",
-      "iconUrl": "https://nyxscans.com/apple-touch-icon.png",
+      "iconUrl": "https://inkstone.web.app/nyxscans/icon.png",
       "hosts": [
         "nyxscans.com",
         "*.nyxscans.com"
@@ -3066,7 +3076,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://en-hijala.com",
-      "iconUrl": "https://en-hijala.com/apple-touch-icon.png",
+      "iconUrl": "https://inkstone.web.app/hijala/icon.png",
       "hosts": [
         "en-hijala.com",
         "*.en-hijala.com"
@@ -3090,7 +3100,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://orion-scans.com",
-      "iconUrl": "https://orion-scans.com/apple-touch-icon.png",
+      "iconUrl": "https://inkstone.web.app/orionscans/icon.png",
       "hosts": [
         "orion-scans.com",
         "*.orion-scans.com"
@@ -3524,7 +3534,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://akazascans.org",
-      "iconUrl": "https://akazascans.org/wp-content/uploads/2026/07/cropped-12d4c82893dd91e6c9f2855f101fdf84-180x180.webp",
+      "iconUrl": "https://inkstone.web.app/akazascans/icon.png",
       "hosts": [
         "akazascans.org",
         "*.akazascans.org"
@@ -3548,7 +3558,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://asterscans.com",
-      "iconUrl": "https://asterscans.com/wp-content/uploads/2026/08/cropped-astro-icon-180x180.png",
+      "iconUrl": "https://inkstone.web.app/asterscans/icon.png",
       "hosts": [
         "asterscans.com",
         "*.asterscans.com"
@@ -3596,7 +3606,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://grabber.zone",
-      "iconUrl": "https://grabber.zone/wp-content/uploads/2022/12/cropped-grabba-180x180.png",
+      "iconUrl": "https://inkstone.web.app/grabberzone/icon.png",
       "hosts": [
         "grabber.zone",
         "*.grabber.zone"
@@ -3620,7 +3630,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://madarascans.net",
-      "iconUrl": "https://madarascans.net/wp-content/uploads/2026/09/2026-09-14-11-21-31-1789428091254-180x180.webp",
+      "iconUrl": "https://inkstone.web.app/madarascans/icon.png",
       "hosts": [
         "madarascans.net",
         "*.madarascans.net"
@@ -3644,7 +3654,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://manhuaplus.com",
-      "iconUrl": "https://manhuaplus.com/wp-content/uploads/2020/07/cropped-manhua-vuong-den-1-180x180.jpg",
+      "iconUrl": "https://inkstone.web.app/manhuapluscom/icon.png",
       "hosts": [
         "manhuaplus.com",
         "*.manhuaplus.com"
@@ -3668,7 +3678,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://rokaricomics.com",
-      "iconUrl": "https://rokaricomics.com/wp-content/uploads/2025/06/cropped-Untitled_Artwork-2-180x180.png",
+      "iconUrl": "https://inkstone.web.app/rokaricomics/icon.png",
       "hosts": [
         "rokaricomics.com",
         "*.rokaricomics.com"
@@ -3760,6 +3770,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://mangak.io",
+      "iconUrl": "https://inkstone.web.app/mangak/icon.png",
       "hosts": [
         "mangak.io",
         "*.mangak.io"
@@ -3775,7 +3786,6 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "iconUrl": "https://mangak.io/static/sites/mangak/icons/apple-touch-icon.png",
       "sha256": "963be57d40c0de1ed518580e7ec36d0b8acb7856595b12de7f2e6a48b0766828"
     },
     {
@@ -3808,6 +3818,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://roliascan.com",
+      "iconUrl": "https://inkstone.web.app/roliascan/icon.png",
       "hosts": [
         "roliascan.com",
         "*.roliascan.com"
@@ -3823,7 +3834,6 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "iconUrl": "https://roliascan.com/content/media/cropped-favicon-192x192.png",
       "sha256": "c5f9e0eff3d1855fd647ce77a4fbe27ebc055b3be630f93b09723d7e47ea0704"
     },
     {
@@ -3832,7 +3842,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://manhwabuddy.com",
-      "iconUrl": "https://manhwabuddy.com/images/180x180.jpg",
+      "iconUrl": "https://inkstone.web.app/manhwabuddy/icon.png",
       "hosts": [
         "manhwabuddy.com",
         "*.manhwabuddy.com"
@@ -3856,7 +3866,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://manhwagalaxy.com",
-      "iconUrl": "https://manhwagalaxy.com/images/180x180.jpg",
+      "iconUrl": "https://inkstone.web.app/manhwagalaxy/icon.png",
       "hosts": [
         "manhwagalaxy.com",
         "*.manhwagalaxy.com"
@@ -3879,7 +3889,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://manhwaonline.org",
-      "iconUrl": "https://manhwaonline.org/images/180x180.jpg",
+      "iconUrl": "https://inkstone.web.app/manhwaonline/icon.png",
       "hosts": [
         "manhwaonline.org",
         "*.manhwaonline.org"
@@ -3903,7 +3913,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://manhwaddict.com",
-      "iconUrl": "https://manhwaddict.com/images/180x180.png",
+      "iconUrl": "https://inkstone.web.app/manhwaddict/icon.png",
       "hosts": [
         "manhwaddict.com",
         "*.manhwaddict.com"
@@ -3926,6 +3936,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://tcbonepiecechapters.com",
+      "iconUrl": "https://inkstone.web.app/tcbscans/icon.png",
       "hosts": [
         "tcbonepiecechapters.com",
         "*.tcbonepiecechapters.com"
@@ -3940,7 +3951,6 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "iconUrl": "https://tcbonepiecechapters.com/files/apple-touch-icon.png",
       "sha256": "dd5b62d9e3d7a961f82529c4edab098b64c81dfbd9cac1a61d0064efdeef327a"
     },
     {
@@ -3949,6 +3959,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://lectorhades.latamtoon.com",
+      "iconUrl": "https://inkstone.web.app/hadesnofansub/icon.png",
       "hosts": [
         "lectorhades.latamtoon.com",
         "*.lectorhades.latamtoon.com"
@@ -3972,6 +3983,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://inventariooculto.com",
+      "iconUrl": "https://inkstone.web.app/inventariooculto/icon.png",
       "hosts": [
         "inventariooculto.com",
         "*.inventariooculto.com"
@@ -3995,6 +4007,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://www.kazokuden.com",
+      "iconUrl": "https://inkstone.web.app/kazokuden/icon.png",
       "hosts": [
         "kazokuden.com",
         "*.kazokuden.com"
@@ -4018,6 +4031,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://mhscans.com",
+      "iconUrl": "https://inkstone.web.app/mhscans/icon.png",
       "hosts": [
         "mhscans.com",
         "*.mhscans.com"
@@ -4041,6 +4055,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://monopolymanhua.com",
+      "iconUrl": "https://inkstone.web.app/monopolyscan/icon.png",
       "hosts": [
         "monopolymanhua.com",
         "*.monopolymanhua.com"
@@ -4064,6 +4079,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://ragnarokscanlation.org",
+      "iconUrl": "https://inkstone.web.app/ragnarokscanlation/icon.png",
       "hosts": [
         "ragnarokscanlation.org",
         "*.ragnarokscanlation.org"
@@ -4087,6 +4103,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://rakuentranslations.com",
+      "iconUrl": "https://inkstone.web.app/rakuentranslations/icon.png",
       "hosts": [
         "rakuentranslations.com",
         "*.rakuentranslations.com"
@@ -4110,6 +4127,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://samurai.j5z.xyz",
+      "iconUrl": "https://inkstone.web.app/samuraiscan/icon.png",
       "hosts": [
         "samurai.j5z.xyz",
         "*.samurai.j5z.xyz"
@@ -4133,6 +4151,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://uchuujinmangas.com",
+      "iconUrl": "https://inkstone.web.app/uchuujinprojects/icon.png",
       "hosts": [
         "uchuujinmangas.com",
         "*.uchuujinmangas.com"
@@ -4156,6 +4175,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://undertranslations.com",
+      "iconUrl": "https://inkstone.web.app/undertranslations/icon.png",
       "hosts": [
         "undertranslations.com",
         "*.undertranslations.com"
@@ -4179,6 +4199,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://yuri-online.com",
+      "iconUrl": "https://inkstone.web.app/yurionline/icon.png",
       "hosts": [
         "yuri-online.com",
         "*.yuri-online.com"
@@ -4202,6 +4223,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://cafecomyaoi.com.br",
+      "iconUrl": "https://inkstone.web.app/cafcomyaoi/icon.png",
       "hosts": [
         "cafecomyaoi.com.br",
         "*.cafecomyaoi.com.br"
@@ -4225,6 +4247,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://hotcabaretscan.com",
+      "iconUrl": "https://inkstone.web.app/hotcabaretscan/icon.png",
       "hosts": [
         "hotcabaretscan.com",
         "*.hotcabaretscan.com"
@@ -4248,6 +4271,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://leitor.kamisama.com.br",
+      "iconUrl": "https://inkstone.web.app/kamisamaexplorer/icon.png",
       "hosts": [
         "leitor.kamisama.com.br",
         "*.leitor.kamisama.com.br"
@@ -4270,6 +4294,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://nebulosascan.com",
+      "iconUrl": "https://inkstone.web.app/nebulosascan/icon.png",
       "hosts": [
         "nebulosascan.com",
         "*.nebulosascan.com"
@@ -4293,6 +4318,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://tsundoku.com.br",
+      "iconUrl": "https://inkstone.web.app/tsundokutradues/icon.png",
       "hosts": [
         "tsundoku.com.br",
         "*.tsundoku.com.br"
@@ -4316,6 +4342,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://anikiga.com",
+      "iconUrl": "https://inkstone.web.app/anikiga/icon.png",
       "hosts": [
         "anikiga.com",
         "*.anikiga.com"
@@ -4339,6 +4366,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://ghostoon.com",
+      "iconUrl": "https://inkstone.web.app/ghostoon/icon.png",
       "hosts": [
         "ghostoon.com",
         "*.ghostoon.com"
@@ -4362,6 +4390,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://www.nabicix.com",
+      "iconUrl": "https://inkstone.web.app/koreliscans/icon.png",
       "hosts": [
         "nabicix.com",
         "*.nabicix.com"
@@ -4385,6 +4414,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://mangawow.org",
+      "iconUrl": "https://inkstone.web.app/mangawow/icon.png",
       "hosts": [
         "mangawow.org",
         "*.mangawow.org"
@@ -4408,6 +4438,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://www.ruyamanga2.com",
+      "iconUrl": "https://inkstone.web.app/ryamanga/icon.png",
       "hosts": [
         "ruyamanga2.com",
         "*.ruyamanga2.com"
@@ -4431,6 +4462,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://www.tarotscans.com",
+      "iconUrl": "https://inkstone.web.app/tarotscans/icon.png",
       "hosts": [
         "tarotscans.com",
         "*.tarotscans.com"
@@ -4454,6 +4486,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://tortugaceviri.com",
+      "iconUrl": "https://inkstone.web.app/tortugaceviri/icon.png",
       "hosts": [
         "tortugaceviri.com",
         "*.tortugaceviri.com"
@@ -4476,6 +4509,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://trmangaoku.com",
+      "iconUrl": "https://inkstone.web.app/trkemangaoku/icon.png",
       "hosts": [
         "trmangaoku.com",
         "*.trmangaoku.com"
@@ -4522,6 +4556,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://www.inu-manga.net",
+      "iconUrl": "https://inkstone.web.app/inumanga/icon.png",
       "hosts": [
         "inu-manga.net",
         "*.inu-manga.net"
@@ -4545,6 +4580,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://truyentini.net",
+      "iconUrl": "https://inkstone.web.app/truyentini/icon.png",
       "hosts": [
         "truyentini.net",
         "*.truyentini.net"
@@ -4568,6 +4604,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://truyentuoitho.com",
+      "iconUrl": "https://inkstone.web.app/truyentuoitho/icon.png",
       "hosts": [
         "truyentuoitho.com",
         "*.truyentuoitho.com"
@@ -4591,6 +4628,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://www.animeshinigami.com",
+      "iconUrl": "https://inkstone.web.app/animeshinigami/icon.png",
       "hosts": [
         "animeshinigami.com",
         "*.animeshinigami.com"
@@ -4614,6 +4652,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://klikmanga.org",
+      "iconUrl": "https://inkstone.web.app/klikmanga/icon.png",
       "hosts": [
         "klikmanga.org",
         "*.klikmanga.org"
@@ -4636,6 +4675,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://mangalik.net",
+      "iconUrl": "https://inkstone.web.app/mangalik/icon.png",
       "hosts": [
         "mangalik.net",
         "*.mangalik.net"
@@ -4659,6 +4699,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://www.phoenixscans.com",
+      "iconUrl": "https://inkstone.web.app/phoenixscans/icon.png",
       "hosts": [
         "phoenixscans.com",
         "*.phoenixscans.com"
@@ -4682,6 +4723,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://lupiteam.net",
+      "iconUrl": "https://inkstone.web.app/lupiteam/icon.png",
       "hosts": [
         "lupiteam.net",
         "*.lupiteam.net"
@@ -4705,6 +4747,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://bluesolo.org",
+      "iconUrl": "https://inkstone.web.app/bluesolo/icon.png",
       "hosts": [
         "bluesolo.org",
         "*.bluesolo.org"
@@ -4728,6 +4771,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://fmteam.fr",
+      "iconUrl": "https://inkstone.web.app/fmteam/icon.png",
       "hosts": [
         "fmteam.fr",
         "*.fmteam.fr"
@@ -4751,6 +4795,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://manga-corporation.com",
+      "iconUrl": "https://inkstone.web.app/mangacorporation/icon.png",
       "hosts": [
         "manga-corporation.com",
         "*.manga-corporation.com"
@@ -4774,6 +4819,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://reader.gtothegreatsite.net",
+      "iconUrl": "https://inkstone.web.app/gtothegreatsite/icon.png",
       "hosts": [
         "reader.gtothegreatsite.net",
         "*.reader.gtothegreatsite.net"
@@ -4797,6 +4843,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://tuttoanimemanga.net",
+      "iconUrl": "https://inkstone.web.app/tuttoanimemanga/icon.png",
       "hosts": [
         "tuttoanimemanga.net",
         "*.tuttoanimemanga.net"
@@ -4820,7 +4867,7 @@
       "version": "1.0.0",
       "medium": "novel",
       "website": "https://sleepytranslations.com",
-      "iconUrl": "https://sleepytranslations.com/wp-content/uploads/2020/10/cropped-bestlogo-180x180.png",
+      "iconUrl": "https://inkstone.web.app/sleepytranslations/icon.png",
       "hosts": [
         "sleepytranslations.com",
         "*.sleepytranslations.com"
@@ -4868,7 +4915,7 @@
       "version": "1.0.0",
       "medium": "comics",
       "website": "https://02.ngomik.cc",
-      "iconUrl": "https://cover.bid-cdn.cloud/2025/06/cropped-icon-180x180.png",
+      "iconUrl": "https://inkstone.web.app/ngomik/icon.png",
       "hosts": [
         "02.ngomik.cc",
         "*.02.ngomik.cc"
