@@ -40,10 +40,33 @@ const pickQuery = (title) => {
 };
 const gated = (chapter) => /\b(locked|paid|premium|join to read|early access|coins?)\b/i.test(chapter.name ?? '');
 
+const APP_UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148';
+const withAppAgent = (headers) => {
+  const given = headers && typeof headers === 'object' ? headers : {};
+  return Object.keys(given).some((k) => k.toLowerCase() === 'user-agent') ? given : { 'User-Agent': APP_UA, ...given };
+};
+const botCheckKind = (status, headers, text) => {
+  const head = String(text).slice(0, 4096).toLowerCase();
+  if (headers.get('cf-mitigated') === 'challenge' || ((status === 403 || status === 503) && /just a moment|cf-turnstile|challenges\.cloudflare\.com/.test(head))) return 'Cloudflare';
+  if (/browser verification/.test(head) && /challenge-assets|powblock/.test(head)) return 'browser verification page';
+  if (status === 403 && /bot challenge not passed/.test(head)) return 'bot check refusal';
+  return null;
+};
+const botCheckHint = (c) =>
+  c.kind === 'Cloudflare'
+    ? `${c.host} answered a Cloudflare check (HTTP ${c.status}). Boundless clears those in its web view, so try this part in the app`
+    : `${c.host} answered a bot check (${c.kind}, HTTP ${c.status}). With no User-Agent set Boundless sends its web view's browser agent, and this site sends that to its check. Try a plain User-Agent such as "Boundless/1.0 (+https://boundless.moe)", or fall back to one when this page comes back`;
+const statuses = {};
+const botChecks = [];
+const reportedChecks = new Set();
+let lastCheck = null;
+let declaredLimit = false;
+
 const requests = [];
 const App = {
   createRequestManager: (options = {}) => {
     const limit = options.rateLimit ?? {};
+    if (limit.requestsPerSecond > 0 || limit.requestsPerMinute > 0) declaredLimit = true;
     const gaps = [limit.requestsPerSecond > 0 ? 1000 / limit.requestsPerSecond : 0, limit.requestsPerMinute > 0 ? 60000 / limit.requestsPerMinute : 0];
     const gap = Math.max(...gaps);
     let nextSlot = 0;
@@ -54,18 +77,26 @@ const App = {
         nextSlot = Math.max(nextSlot, Date.now()) + gap;
         if (wait > 0) await new Promise((resolve) => setTimeout(resolve, wait));
       }
-      requests.push(new URL(request.url).hostname);
+      const host = new URL(request.url).hostname;
+      requests.push(host);
       let res;
       try {
         res = await fetch(request.url, {
           method: request.method || 'GET',
-          headers: request.headers,
+          headers: withAppAgent(request.headers),
           body: request.body,
         });
       } catch (error) {
         throw new Error(`network error: ${error.cause?.code ?? error.cause?.message ?? error.message}`);
       }
-      return { status: res.status, headers: Object.fromEntries(res.headers), data: await res.text() };
+      const data = await res.text();
+      statuses[res.status] = (statuses[res.status] ?? 0) + 1;
+      const kind = botCheckKind(res.status, res.headers, data);
+      if (kind) {
+        lastCheck = { host, kind, status: res.status };
+        if (!botChecks.some((c) => c.host === host && c.kind === kind)) botChecks.push(lastCheck);
+      }
+      return { status: res.status, headers: Object.fromEntries(res.headers), data };
     },
     };
   },
@@ -167,7 +198,11 @@ if (existsSync(listPath)) {
     check((entry.medium === 'anime') === anime, 'an anime source has getVideos, and only an anime source', entry.medium);
     const typeFolder = path.basename(path.dirname(folder));
     const wantedFolder = { comics: 'comics', novel: 'novels', both: 'mixed', anime: 'anime' }[entry.medium];
-    if (['comics', 'novels', 'mixed', 'anime'].includes(typeFolder)) check(typeFolder === wantedFolder, 'sits in the folder for its medium', `${typeFolder}/ holds it, ${wantedFolder}/ fits "${entry.medium}"`);
+    if (['comics', 'novels', 'mixed', 'anime'].includes(typeFolder)) {
+      check(typeFolder === wantedFolder, 'sits in the folder for its medium', `${typeFolder}/ holds it, ${wantedFolder}/ fits "${entry.medium}"`);
+      const commentLines = code.split('\n').filter((line) => /^\s*(\/\/|\/\*|\*\/|\*\s)/.test(line)).length;
+      if (commentLines) say('warn', `${commentLines} comment lines in a file that sits in the repository layout`, 'the repository holds extensions without comments (keep your commented copy elsewhere)');
+    }
     check(['safe', 'mature', 'adult'].includes(entry.contentRating), 'contentRating is safe, mature or adult', entry.contentRating);
     check(isUrl(entry.website), 'website is a full URL');
     check(/^[a-z]{2,3}$/.test(entry.language ?? ''), 'language is a short code like en', entry.language);
@@ -181,12 +216,14 @@ if (existsSync(listPath)) {
   say('warn', 'no versioning.json one or two folders up, so the listing checks were skipped');
 }
 
-console.log('\nLive results (real requests to the site)\n');
+console.log('\nLive results (real requests to the site)');
+console.log('Requests that set no User-Agent are sent with an iPhone web view agent, as Boundless sends them.\n');
 
 const withTimeout = (promise, ms = 60000) =>
   Promise.race([promise, new Promise((_, reject) => setTimeout(() => reject(new Error(`timed out after ${ms / 1000}s`)), ms))]);
 async function step(label, run) {
   const started = Date.now();
+  lastCheck = null;
   try {
     const value = await withTimeout(run());
     return { value, took: `${((Date.now() - started) / 1000).toFixed(1)}s` };
@@ -195,6 +232,13 @@ async function step(label, run) {
     if (message.includes('only works inside Boundless')) {
       skippedInApp = true;
       say('warn', `${label} needs Boundless, so it was skipped`);
+    } else if (lastCheck?.kind === 'Cloudflare') {
+      skippedInApp = true;
+      reportedChecks.add(`${lastCheck.host}|${lastCheck.kind}`);
+      say('warn', `${label} hit a Cloudflare check, so it was skipped`, botCheckHint(lastCheck));
+    } else if (lastCheck) {
+      reportedChecks.add(`${lastCheck.host}|${lastCheck.kind}`);
+      say('fail', label, `${message.slice(0, 120)} | ${botCheckHint(lastCheck)}`);
     } else {
       say('fail', label, message.slice(0, 200));
     }
@@ -214,6 +258,61 @@ const typeProblem = (m) => {
   if (m.tags !== undefined && m.tags !== null && !Array.isArray(m.tags)) return 'tags is not a list';
   return null;
 };
+const imageHeaders = (item) => {
+  const given = { ...(item && item.headers && typeof item.headers === 'object' ? item.headers : {}) };
+  if (item && typeof item.referer === 'string' && item.referer && !Object.keys(given).some((k) => k.toLowerCase() === 'referer')) given.Referer = item.referer;
+  return withAppAgent(given);
+};
+async function loadImage(url, headers) {
+  const control = new AbortController();
+  const timer = setTimeout(() => control.abort(), 30000);
+  try {
+    const res = await fetch(url, { headers, signal: control.signal });
+    const type = res.headers.get('content-type') ?? '';
+    let bytes = Number(res.headers.get('content-length')) || 0;
+    let text = '';
+    if (!res.ok) {
+      text = (await res.text()).slice(0, 4096);
+    } else if (!bytes) {
+      const reader = res.body.getReader();
+      for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        bytes += value.length;
+        if (bytes > 2e6) {
+          await reader.cancel();
+          break;
+        }
+      }
+    } else {
+      await res.body?.cancel();
+    }
+    return { status: res.status, type, bytes, text, kind: botCheckKind(res.status, res.headers, text) };
+  } catch (error) {
+    return { error: error.name === 'AbortError' ? 'timed out after 30s' : (error.cause?.code ?? error.message) };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+async function checkImage(what, url, headers, { cover = false } = {}) {
+  const shot = await loadImage(url, headers);
+  const host = new URL(url).hostname;
+  if (shot.error) return check(false, `${what} loads`, `${host}: ${shot.error}`);
+  if (shot.kind === 'Cloudflare') {
+    skippedInApp = true;
+    return say('warn', `${what} hit a Cloudflare check, so it was skipped`, botCheckHint({ host, kind: shot.kind, status: shot.status }));
+  }
+  const isImage = /^image\//i.test(shot.type) || /^application\/octet-stream/i.test(shot.type);
+  if (shot.status < 200 || shot.status >= 300 || !isImage) {
+    const said = shot.text ? ` "${shot.text.replace(/\s+/g, ' ').slice(0, 60)}"` : '';
+    return check(false, `${what} loads`, `${host} answered HTTP ${shot.status} ${shot.type || 'with no type'}${said}. Boundless sends only the headers you return, plus a browser User-Agent when you set none, so return a referer or headers that work, or a plain User-Agent`);
+  }
+  const kb = Math.round(shot.bytes / 1024);
+  check(true, `${what} loads`, `${kb}${shot.bytes > 2e6 ? '+' : ''} KB ${shot.type.split(';')[0] || 'image'}`);
+  if (cover && shot.bytes > 300000) say('warn', `${what} is ${kb} KB`, 'a browse grid shows dozens of covers at once, so use a thumbnail size if the site has one');
+  return true;
+}
+
 const browse = await step('browse', () => source.getSearchResults(browseRequest, undefined));
 if (browse) {
   const list = browse.value.results ?? [];
@@ -225,6 +324,8 @@ if (browse) {
   const metadata = browse.value.metadata;
   check(metadata === undefined || metadata === null || (typeof metadata === 'object' && !Array.isArray(metadata)), 'metadata is an object, or nothing', 'the app rejects the whole page for any other value');
   check(list.every((r) => isUrl(r.image)), 'every cover is an absolute URL in "image"');
+  const withCover = list.find((r) => isUrl(r.image));
+  if (withCover) await checkImage('first cover', withCover.image, imageHeaders(withCover), { cover: true });
   if (list.some((r) => r.contentRating !== undefined && r.ageRating === undefined)) warnIgnoredRating('titles');
   if (list.some((r) => r.ageRating !== undefined)) {
     check(list.every((r) => r.ageRating === undefined || typeof r.ageRating === 'number'), 'ageRating is a number, a minimum age such as 0, 16 or 18');
@@ -232,6 +333,24 @@ if (browse) {
   if (browse.value.metadata) {
     const next = await step('browse page 2', () => source.getSearchResults(browseRequest, browse.value.metadata));
     if (next) check(next.value.results?.[0]?.mangaId !== list[0]?.mangaId, 'page 2 differs from page 1');
+    if (next?.value.metadata && next.value.results?.length) {
+      const third = await step('browse page 3', () => source.getSearchResults(browseRequest, next.value.metadata));
+      if (third && third.value.results?.length) check(third.value.results[0].mangaId !== next.value.results[0].mangaId, 'page 3 differs from page 2', 'a pager that sends the same page again never ends');
+    }
+  }
+  if (!declaredLimit && !usesWebView) {
+    const before = statuses[429] ?? 0;
+    await Promise.allSettled(Array.from({ length: 5 }, () => withTimeout(source.getSearchResults(browseRequest, undefined))));
+    const throttled = (statuses[429] ?? 0) - before;
+    if (throttled) say('warn', `the site answered 429 to ${throttled} of 5 requests sent at once`, 'declare a rateLimit in App.createRequestManager (see the guide)');
+    else say('pass', 'five requests at once were not throttled', 'so no rateLimit is needed');
+  }
+  for (const feed of feeds.slice(1, 6)) {
+    const other = await step(`feed "${feed.name}"`, () => source.getSearchResults({ feed: feed.id }, undefined));
+    if (!other) continue;
+    const count = other.value.results?.length ?? 0;
+    if (usesWebView && count === 0) say('warn', `feed "${feed.name}" returned nothing, expected if it needs Boundless (WebView)`);
+    else check(count > 0, `feed "${feed.name}" returns titles`, `${count} results in ${other.took}`);
   }
 }
 
@@ -266,6 +385,8 @@ if (nothing) {
   if (Array.isArray(empty) && empty.length > 0) say('warn', `a nonsense search still returned ${empty.length} titles`, 'fine if the site does fuzzy matching, a bug if the query is being ignored (check the parameter name)');
 }
 
+const seenStatuses = [];
+let pageChecked = false;
 for (const item of (found?.value.results ?? []).slice(0, 2)) {
   console.log(`\n${item.title}`);
   const details = await step('details', () => source.getMangaDetails(item.mangaId));
@@ -273,6 +394,8 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
     const info = details.value.mangaInfo;
     check(info && (info.desc !== undefined || info.summary !== undefined), 'details have a description (desc or summary)', details.took);
     check(['ONGOING', 'COMPLETED', 'HIATUS', 'CANCELLED', 'UNKNOWN'].includes(info?.status), 'status is an allowed value', info?.status);
+    seenStatuses.push(info?.status);
+    if (info && info.image !== undefined && info.image !== null) check(isUrl(info.image), 'the cover in details is an absolute URL');
     check([info?.title, info?.author, info?.desc, info?.summary].every((v) => v === undefined || v === null || typeof v === 'string'), 'title, author and description are plain strings', 'join several author names into one string, the app throws on a list');
     if (info && info.contentRating !== undefined && info.ageRating === undefined) warnIgnoredRating('details');
   }
@@ -328,7 +451,7 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
       }
       const isImages = read.pages?.length > 0 && read.pages.every(isUrl);
       const took = `${((Date.now() - started) / 1000).toFixed(1)}s`;
-      return { ok: Boolean(isText || isImages), label, detail: isText ? 'text' : `${read.pages?.length ?? 0} pages in ${took}` };
+      return { ok: Boolean(isText || isImages), label, detail: isText ? 'text' : `${read.pages?.length ?? 0} pages in ${took}`, images: isImages ? read.pages : undefined, headers: read.headers, referer: read.referer };
     } catch (error) {
       const message = String(error.message ?? error);
       if (message.includes('only works inside Boundless')) return { skipped: true, label, detail: message };
@@ -364,10 +487,19 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
   } else {
     say('fail', `none of the ${attempts.length} newest chapters opened`, `${first.label}: ${first.detail}`);
   }
+  const readable1 = first.ok ? first : opened.ok ? opened : null;
+  if (readable1?.images && !pageChecked) {
+    pageChecked = true;
+    await checkImage('first page image', readable1.images[0], imageHeaders({ headers: readable1.headers, referer: readable1.referer }));
+  }
   if (pool.length > 1) {
     const oldest = await tryOpen(pool.at(-1));
     check(oldest.ok, `${oldest.label} opens`, oldest.detail);
   }
+}
+
+if (seenStatuses.length >= 2 && seenStatuses.every((v) => v === 'UNKNOWN')) {
+  say('warn', `status is UNKNOWN on all ${seenStatuses.length} titles checked`, 'fine if the site shows no status, otherwise check the wording and accents the mapping matches (a site can say "Publicándose", "En cours" or "連載中")');
 }
 
 if (entry && genreCount !== null && browse && !usesWebView) {
@@ -384,6 +516,10 @@ if (entry?.hosts?.length) {
   check(blocked.length === 0, 'every host it called is in "hosts"', blocked.join(', '));
 } else if (entry) {
   say('warn', 'no "hosts" list declared, so nothing limits where it can connect (recommended)');
+}
+
+for (const c of botChecks) {
+  if (!reportedChecks.has(`${c.host}|${c.kind}`)) say('warn', `${c.host} answered a bot check during the run`, botCheckHint(c));
 }
 
 finish();

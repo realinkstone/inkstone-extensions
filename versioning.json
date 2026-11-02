@@ -149,6 +149,7 @@
       "version": "1.2.0",
       "medium": "comics",
       "website": "https://www.mangakakalot.gg",
+      "iconUrl": "https://inkstone.web.app/mangakakalot/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nCatalog・90,000+\n\nRestrictions:\n・Cloudflare Checks",
       "capabilities": [
         "browse",

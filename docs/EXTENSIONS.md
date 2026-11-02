@@ -445,7 +445,8 @@ closes on its own.
 `test-extension.mjs` checks that your extension is compatible with Boundless
 (loads in a bare sandbox, exports the right methods, has a valid listing entry
 and a matching `sha256`) and that it can fetch real results from the live site
-(browse, search, details, chapters and actually opening them). See
+(browse, search, every feed, details, chapters and actually opening them, plus
+loading the first cover and page image the way the app would). See
 [TESTING.md](TESTING.md) for how to run it and read the output.
 
 ```bash
