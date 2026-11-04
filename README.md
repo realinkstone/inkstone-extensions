@@ -50,7 +50,7 @@ Prefer to review a written plan before any code is written? This repo works with
 
 ## Extensions
 
-201 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
+221 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
 
 Each extension lives in the folder for what it offers: `comics`, `novels`, `mixed` for those that do both, or `anime`. The site still serves every one at `inkstone.web.app/<id>/index.js`, so the folders change nothing in the apps.
 
@@ -59,6 +59,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | Extension | Site | Language | Rating | Version |
 | --- | --- | --- | --- | --- |
 | [Akaza Scans](comics/akazascans/index.js) | akazascans.org | English | Safe | 1.0.0 |
+| [Amanga Planet](comics/amangaplanet/index.js) | amangaplanet.com.tr | Turkish | Safe | 1.0.0 |
 | [Anikiga](comics/anikiga/index.js) | anikiga.com | Turkish | Safe | 1.0.1 |
 | [Anime-Sama](comics/animesama/index.js) | anime-sama.to | French | Mature | 1.0.1 |
 | [AnimeShinigami](comics/animeshinigami/index.js) | animeshinigami.com | Italian | Safe | 1.0.1 |
@@ -70,6 +71,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [Atsumaru](mixed/atsu/index.js) | atsu.moe | English | Mature | 1.0.1 |
 | [BL village](comics/blvillage/index.js) | blvillage.com | Japanese | Adult | 1.1.1 |
 | [Blue Solo](comics/bluesolo/index.js) | bluesolo.org | French | Safe | 1.0.1 |
+| [Boruto Explorer](comics/borutoexplorer/index.js) | leitor.borutoexplorer.com.br | Brazilian Portuguese | Safe | 1.0.0 |
 | [Bun Manga](comics/bunmanga/index.js) | bunmanga.com | English | Safe | 1.0.0 |
 | [Café com Yaoi](comics/cafcomyaoi/index.js) | cafecomyaoi.com.br | Brazilian Portuguese | Mature | 1.0.1 |
 | [Chikari](mixed/chikari/index.js) | chikari.moe | English | Adult | 4.4.0 |
@@ -95,13 +97,16 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [HiperDEX](comics/hiperdex/index.js) | hiperdex.tv | English | Adult | 1.0.1 |
 | [HiveToons](comics/hivetoon/index.js) | hivetoons.org | English | Adult | 1.1.0 |
 | [Hot Cabaret Scan](comics/hotcabaretscan/index.js) | hotcabaretscan.com | Brazilian Portuguese | Mature | 1.0.1 |
+| [House Of Otakus](comics/houseofotakus/index.js) | houseofotakusv2.xyz | Spanish | Safe | 1.0.0 |
 | [Hunlight Comics](comics/hunlightcomics/index.js) | hunlightcomics.com | English | Safe | 1.0.0 |
 | [Indomanhwa](comics/indomanhwa/index.js) | indomanhwa.com | Indonesian | Mature | 1.0.1 |
 | [InkStory](comics/inkstory/index.js) | inkstory.net | Russian | Mature | 1.1.0 |
 | [InManga](comics/inmanga/index.js) | inmanga.com | Spanish | Safe | 1.1.0 |
 | [Inu Manga](comics/inumanga/index.js) | inu-manga.net | Thai | Mature | 1.0.1 |
 | [Inventario Oculto](comics/inventariooculto/index.js) | inventariooculto.com | Spanish | Adult | 1.0.1 |
+| [Jinmangas](comics/jinmangas/index.js) | mangafree.info | English | Adult | 1.0.0 |
 | [Kagane](comics/kagane/index.js) | kagane.org | English | Safe | 1.3.3 |
+| [KaliScan.org](comics/kaliscanorg/index.js) | kaliscan.org | English | Adult | 1.0.0 |
 | [Kami Sama Explorer](comics/kamisamaexplorer/index.js) | leitor.kamisama.com.br | Brazilian Portuguese | Safe | 1.0.1 |
 | [Kazoku Den](comics/kazokuden/index.js) | kazokuden.com | Spanish | Mature | 1.0.1 |
 | [Keikomik](comics/keikomik/index.js) | keikomik.net | Indonesian | Adult | 1.0.0 |
@@ -115,6 +120,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [KSGroupScans](comics/ksgroupscans/index.js) | ksgroupscans.com | English | Mature | 1.0.0 |
 | [KuManga](comics/kumanga/index.js) | kumanga.com | Spanish | Adult | 1.0.0 |
 | [KunManga](comics/kunmanga/index.js) | kunmanga.com | English | Adult | 1.1.1 |
+| [Kuro Manga](comics/kuromanga/index.js) | kuromanga.id | Indonesian | Mature | 1.0.0 |
 | [Lagoon Scans](comics/lagoonscans/index.js) | lagoonscans.com | English | Safe | 1.0.0 |
 | [Lectormanga](comics/lectormanga/index.js) | lectormangass.net | Spanish | Adult | 1.2.2 |
 | [LelManga](comics/lelmanga/index.js) | lelmanga.com | French | Adult | 1.0.0 |
@@ -126,6 +132,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [Manga Demon](comics/mangademon/index.js) | demonicscans.org | English | Mature | 1.0.0 |
 | [Manga District](comics/mangadistrict/index.js) | mangadistrict.com | English | Adult | 1.0.0 |
 | [Manga Eclipse](comics/mangaeclipse/index.js) | mangaeclipse.com | English | Mature | 1.0.0 |
+| [Manga Livre.to](comics/mangalivreto/index.js) | mangalivre.to | Brazilian Portuguese | Mature | 1.0.0 |
 | [Manga Trend](comics/mangatrend/index.js) | mangatrend.org | English | Safe | 1.0.0 |
 | [Manga-Corporation](comics/mangacorporation/index.js) | manga-corporation.com | French | Safe | 1.0.1 |
 | [Manga-Scantrad](comics/mangascantrad/index.js) | manga-scantrad.io | French | Adult | 1.0.1 |
@@ -138,6 +145,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [MangaGo](comics/mangago/index.js) | mangago.me | English | Adult | 1.1.0 |
 | [MangaHere](comics/mangahere/index.js) | mangahere.cc | English | Adult | 1.1.1 |
 | [MangaHub](comics/mangahub/index.js) | mangahub.io | English | Adult | 1.0.1 |
+| [MangaIsekaiThai](comics/mangaisekaithai/index.js) | mangaisekaithai.net | Thai | Safe | 1.0.0 |
 | [MangaK](comics/mangak/index.js) | mangak.io | English | Mature | 1.0.0 |
 | [Mangakakalot](comics/mangakakalot/index.js) | mangakakalot.gg | English | Adult | 1.2.1 |
 | [MangaKatana](comics/mangakatana/index.js) | mangakatana.com | English | Adult | 1.1.3 |
@@ -174,9 +182,12 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [Natomanga](comics/natomanga/index.js) | natomanga.com | English | Adult | 1.2.0 |
 | [Naver Webtoon](comics/navercomic/index.js) | comic.naver.com | Korean | Mature | 1.2.0 |
 | [Nebulosa Scan](comics/nebulosascan/index.js) | nebulosascan.com | Brazilian Portuguese | Mature | 1.0.1 |
+| [NekoScans](comics/nekoscans/index.js) | nekoproject.org | Spanish | Safe | 1.0.0 |
 | [NetTruyen](comics/nettruyen/index.js) | nettruyenvia.com | Vietnamese | Adult | 1.0.1 |
 | [Ngomik](comics/ngomik/index.js) | 02.ngomik.cc | Indonesian | Safe | 1.0.0 |
+| [Ninja Scan](comics/ninjascan/index.js) | ninjacomics.xyz | Brazilian Portuguese | Safe | 1.0.0 |
 | [NirvanaManga](comics/nirvanamanga/index.js) | nirvanamanga.com | Turkish | Adult | 1.0.1 |
+| [Nocturne Summer](comics/nocturnesummer/index.js) | nocfsb.com | Brazilian Portuguese | Mature | 1.0.0 |
 | [Nyx Scans](comics/nyxscans/index.js) | nyxscans.com | English | Safe | 1.0.0 |
 | [Olympus Scanlation](comics/olympusscans/index.js) | olympusbiblioteca.com | Spanish | Adult | 1.0.3 |
 | [Orion Scans](comics/orionscans/index.js) | orion-scans.com | English | Safe | 1.0.0 |
@@ -189,8 +200,10 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [Rawkuma](comics/rawkuma/index.js) | rawkuma.net | Japanese | Adult | 1.0.2 |
 | [ReManga](comics/remanga/index.js) | remanga.org | Russian | Adult | 1.2.1 |
 | [Renascans](comics/renascans/index.js) | renascans.net | English | Safe | 1.0.0 |
+| [RichtoScan](comics/richtoscan/index.js) | r1.richtoon.top | Spanish | Safe | 1.0.0 |
 | [RokariComics](comics/rokaricomics/index.js) | rokaricomics.com | English | Adult | 1.0.1 |
 | [Rolia Scan](comics/roliascan/index.js) | roliascan.com | English | Mature | 1.0.0 |
+| [Rùa Hấp Chanh Dây](comics/rahpchanhdy/index.js) | ruahapchanhday2.com | Vietnamese | Adult | 1.0.0 |
 | [Rüya Manga](comics/ryamanga/index.js) | ruyamanga2.com | Turkish | Safe | 1.0.1 |
 | [S2Manga](comics/s2manga/index.js) | s2read.com | English | Adult | 1.0.1 |
 | [SamuraiScan](comics/samuraiscan/index.js) | samurai.j5z.xyz | Spanish | Safe | 1.0.1 |
@@ -198,11 +211,15 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [Scan-VF](comics/scanvf/index.js) | scan-vf.net | French | Safe | 1.0.0 |
 | [Scythe Scans](comics/scythescans/index.js) | scythescans.com | English | Safe | 1.0.0 |
 | [Serein Scan](comics/sereinscan/index.js) | sereinscan.net | Turkish | Safe | 1.0.0 |
+| [Slow Manga](comics/slowmanga/index.js) | slow-manga.net | Thai | Mature | 1.0.0 |
+| [Speed Manga](comics/speedmanga/index.js) | speed-manga.com | Thai | Mature | 1.0.0 |
+| [Tanuki-Manga](comics/tanukimanga/index.js) | tanuki-manga.net | Thai | Mature | 1.0.0 |
 | [Tapas](comics/tapas/index.js) | tapas.io | English | Mature | 1.2.0 |
 | [Tarot Scans](comics/tarotscans/index.js) | tarotscans.com | Turkish | Adult | 1.0.1 |
 | [TCB Scans](comics/tcbscans/index.js) | tcbonepiecechapters.com | English | Safe | 1.0.0 |
 | [Thunder Scans](comics/thunderscans/index.js) | en-thunderscans.com | English | Mature | 1.0.0 |
 | [Tilki Scans](comics/tilkiscans/index.js) | tilkiscans.com | Turkish | Mature | 1.1.0 |
+| [TonizuToon](comics/tonizutoon/index.js) | tonizu.top | Turkish | Safe | 1.0.0 |
 | [ToonGod](comics/toongod/index.js) | toongod.org | English | Adult | 1.0.1 |
 | [ToonGrab](comics/toongrab/index.js) | toongrab.com | English | Safe | 1.0.0 |
 | [Toonily](comics/toonily/index.js) | toonily.com | English | Adult | 1.2.1 |
@@ -225,10 +242,13 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [WEBTOON](comics/webtoons/index.js) | webtoons.com | English | Safe | 1.0.0 |
 | [Weeb Central](comics/weebcentral/index.js) | weebcentral.com | English | Adult | 1.0.0 |
 | [YakshaComics](comics/yakshacomics/index.js) | yakshacomics.com | English | Safe | 1.0.0 |
+| [Yuri on Air](comics/yurionair/index.js) | yurionair.top | Brazilian Portuguese | Safe | 1.0.0 |
 | [Yuri-Online](comics/yurionline/index.js) | yuri-online.com | Spanish | Safe | 1.0.1 |
 | [Yurimanga](comics/yurimanga/index.js) | yurimanga.net | English | Adult | 1.1.0 |
+| [Zenith Scans](comics/zenithscans/index.js) | zenithscans.com | Turkish | Safe | 1.0.0 |
 | [Zinmanga](comics/zinmanga/index.js) | zinmanga.net | English | Safe | 1.0.0 |
 | [ZonaTMO.org](comics/zonatmoorg/index.js) | zonatmo.org | Spanish | Adult | 1.0.0 |
+| [مانجا العاشق](comics/3asq/index.js) | 3asq.online | Arabic | Mature | 1.0.0 |
 | [مانجا ليك](comics/mangalik/index.js) | mangalik.net | Arabic | Safe | 1.0.1 |
 
 ### Novels

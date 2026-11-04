@@ -5007,6 +5007,481 @@
       "language": "en",
       "contentRating": "safe",
       "sha256": "73aece4d6e34161ba2ce4f5a8724b1c300db279e2d8da1a514cc63a5454dd8f4"
+    },
+    {
+      "id": "3asq",
+      "name": "مانجا العاشق",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://3asq.online",
+      "iconUrl": "https://inkstone.web.app/3asq/icon.png",
+      "hosts": [
+        "3asq.online",
+        "*.3asq.online"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・300+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "ar",
+      "contentRating": "mature",
+      "sha256": "6289f34839cf82c5ce8d23cf9337580b8c672392a09ba1fbb7eda79c13cc33b6"
+    },
+    {
+      "id": "amangaplanet",
+      "name": "Amanga Planet",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://www.amangaplanet.com.tr",
+      "iconUrl": "https://inkstone.web.app/amangaplanet/icon.png",
+      "hosts": [
+        "amangaplanet.com.tr",
+        "*.amangaplanet.com.tr"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・10+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "tr",
+      "contentRating": "safe",
+      "sha256": "f67b2dc0128a817f92ea0c9ffd98910d152bd8e1c0c1e5ab757c73a47ca9fcc0"
+    },
+    {
+      "id": "borutoexplorer",
+      "name": "Boruto Explorer",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://leitor.borutoexplorer.com.br",
+      "iconUrl": "https://inkstone.web.app/borutoexplorer/icon.png",
+      "hosts": [
+        "leitor.borutoexplorer.com.br",
+        "*.leitor.borutoexplorer.com.br"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・10+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "pt-BR",
+      "contentRating": "safe",
+      "sha256": "a1737cff7b8beb9b8e0dbd774e20622f1018ad55a107deedb35729cabebdf343"
+    },
+    {
+      "id": "houseofotakus",
+      "name": "House Of Otakus",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://houseofotakusv2.xyz",
+      "iconUrl": "https://inkstone.web.app/houseofotakus/icon.png",
+      "hosts": [
+        "houseofotakusv2.xyz",
+        "*.houseofotakusv2.xyz"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・40+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "safe",
+      "sha256": "f917d2243d20b39e0ba55e760eef25388875e0005b2604ee0bd1ff63d8b6ce15"
+    },
+    {
+      "id": "jinmangas",
+      "name": "Jinmangas",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://mangafree.info",
+      "iconUrl": "https://inkstone.web.app/jinmangas/icon.png",
+      "hosts": [
+        "mangafree.info",
+        "*.mangafree.info"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・800+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "adult",
+      "sha256": "6f93e2606bd603edb9d892d3a87788900c20875af8bde4c7830cc0ed532a93af"
+    },
+    {
+      "id": "kaliscanorg",
+      "name": "KaliScan.org",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://kaliscan.org",
+      "iconUrl": "https://inkstone.web.app/kaliscanorg/icon.png",
+      "hosts": [
+        "kaliscan.org",
+        "*.kaliscan.org"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・2,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "adult",
+      "sha256": "882629c880c76abd81d69be064820a0edf870ff76aca46c24dc63b5e9f0dbd52"
+    },
+    {
+      "id": "kuromanga",
+      "name": "Kuro Manga",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://kuromanga.id",
+      "iconUrl": "https://inkstone.web.app/kuromanga/icon.png",
+      "hosts": [
+        "kuromanga.id",
+        "*.kuromanga.id"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・5,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "id",
+      "contentRating": "mature",
+      "sha256": "22a04b0d8d5dfe40eea993ecda1e6fc8160acd49b24e12df809fc3a53eec0aa0"
+    },
+    {
+      "id": "mangaisekaithai",
+      "name": "MangaIsekaiThai",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://www.mangaisekaithai.net",
+      "hosts": [
+        "mangaisekaithai.net",
+        "*.mangaisekaithai.net"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・80+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "th",
+      "contentRating": "safe",
+      "sha256": "56761223adfe151827779045cbc1159354eb20001c900bd4eb08e05d396d87bd"
+    },
+    {
+      "id": "mangalivreto",
+      "name": "Manga Livre.to",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://mangalivre.to",
+      "iconUrl": "https://inkstone.web.app/mangalivreto/icon.png",
+      "hosts": [
+        "mangalivre.to",
+        "*.mangalivre.to"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・100+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "pt-BR",
+      "contentRating": "mature",
+      "sha256": "b3c242b380160f430d0367174e7729e85f0653277fa523ccfe8f2f8c62b57854"
+    },
+    {
+      "id": "nekoscans",
+      "name": "NekoScans",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://nekoproject.org",
+      "iconUrl": "https://inkstone.web.app/nekoscans/icon.png",
+      "hosts": [
+        "nekoproject.org",
+        "*.nekoproject.org"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・50+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "safe",
+      "sha256": "22f7fbf9fcfac6e0c091166dbcd2f23c4af2222805397b88b3ca2e0c5fbc4881"
+    },
+    {
+      "id": "ninjascan",
+      "name": "Ninja Scan",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://ninjacomics.xyz",
+      "iconUrl": "https://inkstone.web.app/ninjascan/icon.png",
+      "hosts": [
+        "ninjacomics.xyz",
+        "*.ninjacomics.xyz"
+      ],
+      "description": "Manga・Manhwa・Manhua",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "pt-BR",
+      "contentRating": "safe",
+      "sha256": "c6f707eeb2f30eab3de5f37ff8db2ccb385290e6cc7a390cb32d17b3f1904d37"
+    },
+    {
+      "id": "nocturnesummer",
+      "name": "Nocturne Summer",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://nocfsb.com",
+      "iconUrl": "https://inkstone.web.app/nocturnesummer/icon.png",
+      "hosts": [
+        "nocfsb.com",
+        "*.nocfsb.com"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・700+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "pt-BR",
+      "contentRating": "mature",
+      "sha256": "4cb52323c252543321e90a8c3902cc859c2869f05cecc1cac168f7f787be7462"
+    },
+    {
+      "id": "rahpchanhdy",
+      "name": "Rùa Hấp Chanh Dây",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://ruahapchanhday2.com",
+      "hosts": [
+        "ruahapchanhday2.com",
+        "*.ruahapchanhday2.com"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・100+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "vi",
+      "contentRating": "adult",
+      "sha256": "139388e3f782f7142c79d0f2a6e9e1d68bb07ec5505852d63641dc6bd04e02fe"
+    },
+    {
+      "id": "richtoscan",
+      "name": "RichtoScan",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://r1.richtoon.top",
+      "hosts": [
+        "r1.richtoon.top",
+        "*.r1.richtoon.top"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・400+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "safe",
+      "sha256": "4e4b9c4a7330968ed7018d6583a26b36968363a0c61682d888716e919671e6e8"
+    },
+    {
+      "id": "slowmanga",
+      "name": "Slow Manga",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://www.slow-manga.net",
+      "hosts": [
+        "slow-manga.net",
+        "*.slow-manga.net"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・1,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "th",
+      "contentRating": "mature",
+      "sha256": "3227298b7630c12f269c2527b796464453080b9db976e1900d0fd93fc3f54c6a"
+    },
+    {
+      "id": "speedmanga",
+      "name": "Speed Manga",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://speed-manga.com",
+      "iconUrl": "https://inkstone.web.app/speedmanga/icon.png",
+      "hosts": [
+        "speed-manga.com",
+        "*.speed-manga.com"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・2,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "th",
+      "contentRating": "mature",
+      "sha256": "567cc68a0a88f05e3172ed4dd0abd1a795d381ef49c065063ace2803dc29347c"
+    },
+    {
+      "id": "tanukimanga",
+      "name": "Tanuki-Manga",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://www.tanuki-manga.net",
+      "hosts": [
+        "tanuki-manga.net",
+        "*.tanuki-manga.net"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・10,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "th",
+      "contentRating": "mature",
+      "sha256": "a6660b1291a5736b5e469a4750b96c31a1e5c0386e6e393840e4942fc0032e8d"
+    },
+    {
+      "id": "tonizutoon",
+      "name": "TonizuToon",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://tonizu.top",
+      "iconUrl": "https://inkstone.web.app/tonizutoon/icon.png",
+      "hosts": [
+        "tonizu.top",
+        "*.tonizu.top"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・10+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "tr",
+      "contentRating": "safe",
+      "sha256": "8336563b00edbac802d85126f856ae1a8c0c4b9fe92ff56318d99d750760a825"
+    },
+    {
+      "id": "yurionair",
+      "name": "Yuri on Air",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://yurionair.top",
+      "iconUrl": "https://inkstone.web.app/yurionair/icon.png",
+      "hosts": [
+        "yurionair.top",
+        "*.yurionair.top"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・400+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "pt-BR",
+      "contentRating": "safe",
+      "sha256": "26547de5ce96c8753e6357604eccbcf241751907e91029e5b603e0493ae26396"
+    },
+    {
+      "id": "zenithscans",
+      "name": "Zenith Scans",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://zenithscans.com",
+      "iconUrl": "https://inkstone.web.app/zenithscans/icon.png",
+      "hosts": [
+        "zenithscans.com",
+        "*.zenithscans.com"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・40+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "tr",
+      "contentRating": "safe",
+      "sha256": "f0fd7c1e644677fb601e5e4275028c0c7d02692572efb2e43233f2f15e6cff2d"
     }
   ]
 }
