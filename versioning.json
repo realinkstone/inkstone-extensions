@@ -3978,7 +3978,7 @@
     {
       "id": "kazokuden",
       "name": "Kazoku Den",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://www.kazokuden.com",
       "iconUrl": "https://inkstone.web.app/kazokuden/icon.png",
@@ -3986,7 +3986,7 @@
         "kazokuden.com",
         "*.kazokuden.com"
       ],
-      "description": "Kazoku Den read from its own Madara pages, with no browser step and no sign-in: Latest, New, A-Z, Most Views, Trending feeds, search, genre filtering, full details, chapter lists with dates and the reader. Titles tagged Mature or Ecchi are marked 16 and Adult or Smut 18 on their details page (the grids carry no genres).",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・100+",
       "capabilities": [
         "browse",
         "search",
@@ -4002,7 +4002,7 @@
     {
       "id": "mhscans",
       "name": "MHScans",
-      "version": "1.0.1",
+      "version": "1.1.0",
       "medium": "comics",
       "website": "https://mhscans.com",
       "iconUrl": "https://inkstone.web.app/mhscans/icon.png",
@@ -4010,7 +4010,7 @@
         "mhscans.com",
         "*.mhscans.com"
       ],
-      "description": "MHScans read from its own Madara pages, with no browser step and no sign-in: Latest, New, A-Z, Rating, Most Views, Trending feeds, search, genre filtering, full details, chapter lists with dates and the reader. No adult genres turned up on the titles sampled.",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・600+\n\nRestrictions:\n・Rate Limit\n・Locked Chapters",
       "capabilities": [
         "browse",
         "search",
@@ -4021,12 +4021,12 @@
       ],
       "language": "es",
       "contentRating": "safe",
-      "sha256": "ae3d1c893da157712d4fe82bf05099e1e364aeb28964d4f872e009ca395001f3"
+      "sha256": "ea58cece0722ad3d132cbf87e2cb44ab097752a6c9726a76883bcfe89cbe5676"
     },
     {
       "id": "monopolyscan",
       "name": "Monopoly Scan",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://monopolymanhua.com",
       "iconUrl": "https://inkstone.web.app/monopolyscan/icon.png",
@@ -4034,7 +4034,7 @@
         "monopolymanhua.com",
         "*.monopolymanhua.com"
       ],
-      "description": "Monopoly Scan read from its own Madara pages, with no browser step and no sign-in: Latest, A-Z, Rating, Most Views, Trending feeds, search, genre filtering, full details, chapter lists with dates and the reader. No adult genres turned up on the titles sampled.",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・50+",
       "capabilities": [
         "browse",
         "search",
@@ -4050,7 +4050,7 @@
     {
       "id": "ragnarokscanlation",
       "name": "Ragnarok Scanlation",
-      "version": "1.0.1",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://ragnarokscanlation.org",
       "iconUrl": "https://inkstone.web.app/ragnarokscanlation/icon.png",
@@ -4058,7 +4058,7 @@
         "ragnarokscanlation.org",
         "*.ragnarokscanlation.org"
       ],
-      "description": "Ragnarok Scanlation read from its own Madara pages, with no browser step and no sign-in: Latest, New, A-Z, Rating, Most Views, Trending feeds, search, genre filtering, full details, chapter lists with dates and the reader. No adult genres turned up on the titles sampled.",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・40+\n\nRestrictions:\n・Locked Chapters",
       "capabilities": [
         "browse",
         "search",
@@ -4069,12 +4069,12 @@
       ],
       "language": "es",
       "contentRating": "safe",
-      "sha256": "ac1d1a31a14886b0d69c8f3911ed3f1fbb4a7de2adf930f279fd8622d0e69937"
+      "sha256": "d33c8b88181df39914e4c2133f2ed6218774de654c56855d19b281213df415fd"
     },
     {
       "id": "rakuentranslations",
       "name": "Rakuen Translations",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://rakuentranslations.com",
       "iconUrl": "https://inkstone.web.app/rakuentranslations/icon.png",
@@ -4082,7 +4082,7 @@
         "rakuentranslations.com",
         "*.rakuentranslations.com"
       ],
-      "description": "Rakuen Translations read from its own MangaThemesia pages, with no browser step and no sign-in: Latest Updates, Popular, Newly Added, A-Z feeds, search, genre filtering, full details, chapter lists with dates and the reader. Titles tagged Mature or Ecchi are marked 16 and Adult or Smut 18 on their details page (the grids carry no genres).",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・30+",
       "capabilities": [
         "browse",
         "search",
@@ -4096,33 +4096,9 @@
       "sha256": "252a6d1dcb4adde8a76d5c56ee084f3ee073ab2056f76a6b60b5570502a23f93"
     },
     {
-      "id": "samuraiscan",
-      "name": "SamuraiScan",
-      "version": "1.0.1",
-      "medium": "comics",
-      "website": "https://samurai.j5z.xyz",
-      "iconUrl": "https://inkstone.web.app/samuraiscan/icon.png",
-      "hosts": [
-        "samurai.j5z.xyz",
-        "*.samurai.j5z.xyz"
-      ],
-      "description": "SamuraiScan read from its own Madara pages, with no browser step and no sign-in: Latest, New, A-Z, Rating, Most Views, Trending feeds, search, genre filtering, full details, chapter lists with dates and the reader. No adult genres turned up on the titles sampled.",
-      "capabilities": [
-        "browse",
-        "search",
-        "genres",
-        "details",
-        "chapters",
-        "reader"
-      ],
-      "language": "es",
-      "contentRating": "safe",
-      "sha256": "53e257b1b2b48943420d4d86ab57f5ee2387d26d5e59ae195662aecba28660f7"
-    },
-    {
       "id": "uchuujinprojects",
       "name": "Uchuujin Projects",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://uchuujinmangas.com",
       "iconUrl": "https://inkstone.web.app/uchuujinprojects/icon.png",
@@ -4130,7 +4106,7 @@
         "uchuujinmangas.com",
         "*.uchuujinmangas.com"
       ],
-      "description": "Uchuujin Projects read from its own MangaThemesia pages, with no browser step and no sign-in: Latest Updates, Popular, Newly Added, A-Z feeds, search, genre filtering, full details, chapter lists with dates and the reader. Titles tagged Mature or Ecchi are marked 16 and Adult or Smut 18 on their details page (the grids carry no genres).",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・100+",
       "capabilities": [
         "browse",
         "search",
@@ -4146,7 +4122,7 @@
     {
       "id": "undertranslations",
       "name": "UnderTranslations",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://undertranslations.com",
       "iconUrl": "https://inkstone.web.app/undertranslations/icon.png",
@@ -4154,7 +4130,7 @@
         "undertranslations.com",
         "*.undertranslations.com"
       ],
-      "description": "UnderTranslations read from its own MangaThemesia pages, with no browser step and no sign-in: Latest Updates, Popular, Newly Added, A-Z feeds, search, genre filtering, full details, chapter lists with dates and the reader. Titles tagged Mature or Ecchi are marked 16 and Adult or Smut 18 on their details page (the grids carry no genres).",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・40+",
       "capabilities": [
         "browse",
         "search",
@@ -4170,7 +4146,7 @@
     {
       "id": "yurionline",
       "name": "Yuri-Online",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://yuri-online.com",
       "iconUrl": "https://inkstone.web.app/yurionline/icon.png",
@@ -4178,7 +4154,7 @@
         "yuri-online.com",
         "*.yuri-online.com"
       ],
-      "description": "Yuri-Online read from its own Madara pages, with no browser step and no sign-in: Latest, New, A-Z, Rating, Most Views, Trending feeds, search, genre filtering, full details, chapter lists with dates and the reader. No adult genres turned up on the titles sampled.",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・400+",
       "capabilities": [
         "browse",
         "search",
@@ -4194,7 +4170,7 @@
     {
       "id": "cafcomyaoi",
       "name": "Café com Yaoi",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://cafecomyaoi.com.br",
       "iconUrl": "https://inkstone.web.app/cafcomyaoi/icon.png",
@@ -4202,7 +4178,7 @@
         "cafecomyaoi.com.br",
         "*.cafecomyaoi.com.br"
       ],
-      "description": "Café com Yaoi read from its own Madara pages, with no browser step and no sign-in: Latest, New, A-Z, Rating, Most Views feeds, search, genre filtering, full details, chapter lists with dates and the reader. Titles tagged Mature or Ecchi are marked 16 and Adult or Smut 18 on their details page (the grids carry no genres).",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・100+",
       "capabilities": [
         "browse",
         "search",
@@ -4218,7 +4194,7 @@
     {
       "id": "hotcabaretscan",
       "name": "Hot Cabaret Scan",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://hotcabaretscan.com",
       "iconUrl": "https://inkstone.web.app/hotcabaretscan/icon.png",
@@ -4226,7 +4202,7 @@
         "hotcabaretscan.com",
         "*.hotcabaretscan.com"
       ],
-      "description": "Hot Cabaret Scan read from its own Madara pages, with no browser step and no sign-in: Latest, New, A-Z, Rating, Most Views feeds, search, genre filtering, full details, chapter lists with dates and the reader. Titles tagged Mature or Ecchi are marked 16 and Adult or Smut 18 on their details page (the grids carry no genres).",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・80+",
       "capabilities": [
         "browse",
         "search",
@@ -4242,7 +4218,7 @@
     {
       "id": "kamisamaexplorer",
       "name": "Kami Sama Explorer",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://leitor.kamisama.com.br",
       "iconUrl": "https://inkstone.web.app/kamisamaexplorer/icon.png",
@@ -4250,7 +4226,7 @@
         "leitor.kamisama.com.br",
         "*.leitor.kamisama.com.br"
       ],
-      "description": "Kami Sama Explorer read from its own Madara pages, with no browser step and no sign-in: Latest, New, A-Z, Rating, Most Views, Trending feeds, search, genre filtering, full details, chapter lists with dates and the reader. No adult genres turned up on the titles sampled.",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・30+",
       "capabilities": [
         "browse",
         "search",
@@ -4265,7 +4241,7 @@
     {
       "id": "nebulosascan",
       "name": "Nebulosa Scan",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://nebulosascan.com",
       "iconUrl": "https://inkstone.web.app/nebulosascan/icon.png",
@@ -4273,7 +4249,7 @@
         "nebulosascan.com",
         "*.nebulosascan.com"
       ],
-      "description": "Nebulosa Scan read from its own Madara pages, with no browser step and no sign-in: Latest, New, A-Z, Most Views, Trending feeds, search, genre filtering, full details, chapter lists with dates and the reader. Titles tagged Mature or Ecchi are marked 16 and Adult or Smut 18 on their details page (the grids carry no genres).",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・40+",
       "capabilities": [
         "browse",
         "search",
@@ -4313,7 +4289,7 @@
     {
       "id": "anikiga",
       "name": "Anikiga",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://anikiga.com",
       "iconUrl": "https://inkstone.web.app/anikiga/icon.png",
@@ -4321,7 +4297,7 @@
         "anikiga.com",
         "*.anikiga.com"
       ],
-      "description": "Anikiga read from its own Madara pages, with no browser step and no sign-in: Latest, New, A-Z, Rating, Most Views feeds, search, genre filtering, full details, chapter lists with dates and the reader. No adult genres turned up on the titles sampled.",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・10+",
       "capabilities": [
         "browse",
         "search",
@@ -4361,7 +4337,7 @@
     {
       "id": "koreliscans",
       "name": "Koreli Scans",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://www.nabicix.com",
       "iconUrl": "https://inkstone.web.app/koreliscans/icon.png",
@@ -4369,7 +4345,7 @@
         "nabicix.com",
         "*.nabicix.com"
       ],
-      "description": "Koreli Scans read from its own MangaThemesia pages, with no browser step and no sign-in: Latest Updates, Popular, Newly Added, A-Z feeds, search, genre filtering, full details, chapter lists with dates and the reader. No adult genres turned up on the titles sampled.",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・50+",
       "capabilities": [
         "browse",
         "search",
@@ -4385,7 +4361,7 @@
     {
       "id": "mangawow",
       "name": "MangaWOW",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://mangawow.org",
       "iconUrl": "https://inkstone.web.app/mangawow/icon.png",
@@ -4393,7 +4369,7 @@
         "mangawow.org",
         "*.mangawow.org"
       ],
-      "description": "MangaWOW read from its own Madara pages, with no browser step and no sign-in: Latest, New, A-Z, Rating, Most Views, Trending feeds, search, genre filtering, full details, chapter lists with dates and the reader. Titles tagged Mature or Ecchi are marked 16 and Adult or Smut 18 on their details page (the grids carry no genres).",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・500+",
       "capabilities": [
         "browse",
         "search",
@@ -4409,7 +4385,7 @@
     {
       "id": "ryamanga",
       "name": "Rüya Manga",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://www.ruyamanga2.com",
       "iconUrl": "https://inkstone.web.app/ryamanga/icon.png",
@@ -4417,7 +4393,7 @@
         "ruyamanga2.com",
         "*.ruyamanga2.com"
       ],
-      "description": "Rüya Manga read from its own Madara pages, with no browser step and no sign-in: Latest, A-Z, Rating, Most Views feeds, search, genre filtering, full details, chapter lists with dates and the reader. No adult genres turned up on the titles sampled.",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・1,000+",
       "capabilities": [
         "browse",
         "search",
@@ -4457,7 +4433,7 @@
     {
       "id": "tortugaceviri",
       "name": "Tortuga Ceviri",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://tortugaceviri.com",
       "iconUrl": "https://inkstone.web.app/tortugaceviri/icon.png",
@@ -4465,7 +4441,7 @@
         "tortugaceviri.com",
         "*.tortugaceviri.com"
       ],
-      "description": "Tortuga Ceviri read from its own Madara pages, with no browser step and no sign-in: Latest, New, A-Z, Rating, Most Views, Trending feeds, search, genre filtering, full details, chapter lists with dates and the reader. No adult genres turned up on the titles sampled.",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・100+",
       "capabilities": [
         "browse",
         "search",
@@ -4480,7 +4456,7 @@
     {
       "id": "trkemangaoku",
       "name": "Türkçe Manga Oku",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://trmangaoku.com",
       "iconUrl": "https://inkstone.web.app/trkemangaoku/icon.png",
@@ -4488,7 +4464,7 @@
         "trmangaoku.com",
         "*.trmangaoku.com"
       ],
-      "description": "Türkçe Manga Oku read from its own Madara pages, with no browser step and no sign-in: Latest, New, A-Z, Rating, Most Views, Trending feeds, search, genre filtering, full details, chapter lists with dates and the reader. No adult genres turned up on the titles sampled.",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・100+",
       "capabilities": [
         "browse",
         "search",
@@ -4504,14 +4480,14 @@
     {
       "id": "flashmanga",
       "name": "Flash-Manga",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://www.flash-manga.net",
       "hosts": [
         "flash-manga.net",
         "*.flash-manga.net"
       ],
-      "description": "Flash-Manga read from its own MangaThemesia pages, with no browser step and no sign-in: Latest Updates, Popular, Newly Added, A-Z feeds, search, genre filtering, full details, chapter lists with dates and the reader. No adult genres turned up on the titles sampled.",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・900+",
       "capabilities": [
         "browse",
         "search",
@@ -4527,7 +4503,7 @@
     {
       "id": "inumanga",
       "name": "Inu Manga",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://www.inu-manga.net",
       "iconUrl": "https://inkstone.web.app/inumanga/icon.png",
@@ -4535,7 +4511,7 @@
         "inu-manga.net",
         "*.inu-manga.net"
       ],
-      "description": "Inu Manga read from its own MangaThemesia pages, with no browser step and no sign-in: Latest Updates, Popular, Newly Added, A-Z feeds, search, genre filtering, full details, chapter lists with dates and the reader. Titles tagged Mature or Ecchi are marked 16 and Adult or Smut 18 on their details page (the grids carry no genres).",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・10,000+",
       "capabilities": [
         "browse",
         "search",
@@ -4575,7 +4551,7 @@
     {
       "id": "truyentuoitho",
       "name": "TruyenTuoiTho",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://truyentuoitho.com",
       "iconUrl": "https://inkstone.web.app/truyentuoitho/icon.png",
@@ -4583,7 +4559,7 @@
         "truyentuoitho.com",
         "*.truyentuoitho.com"
       ],
-      "description": "TruyenTuoiTho read from its own Madara pages, with no browser step and no sign-in: Latest, New, A-Z, Rating, Most Views feeds, search, genre filtering, full details, chapter lists with dates and the reader. No adult genres turned up on the titles sampled.",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・200+",
       "capabilities": [
         "browse",
         "search",
@@ -4599,7 +4575,7 @@
     {
       "id": "animeshinigami",
       "name": "AnimeShinigami",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://www.animeshinigami.com",
       "iconUrl": "https://inkstone.web.app/animeshinigami/icon.png",
@@ -4607,7 +4583,7 @@
         "animeshinigami.com",
         "*.animeshinigami.com"
       ],
-      "description": "AnimeShinigami read from its own Madara pages, with no browser step and no sign-in: Latest, New, A-Z, Rating, Most Views, Trending feeds, search, genre filtering, full details, chapter lists with dates and the reader. No adult genres turned up on the titles sampled.",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・10+",
       "capabilities": [
         "browse",
         "search",
@@ -4623,7 +4599,7 @@
     {
       "id": "klikmanga",
       "name": "KlikManga",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://klikmanga.org",
       "iconUrl": "https://inkstone.web.app/klikmanga/icon.png",
@@ -4631,7 +4607,7 @@
         "klikmanga.org",
         "*.klikmanga.org"
       ],
-      "description": "KlikManga read from its own Madara pages, with no browser step and no sign-in: Latest, New, A-Z, Rating, Most Views, Trending feeds, search, genre filtering, full details, chapter lists with dates and the reader. No adult genres turned up on the titles sampled.",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・10,000+",
       "capabilities": [
         "browse",
         "search",
@@ -4646,7 +4622,7 @@
     {
       "id": "mangalik",
       "name": "مانجا ليك",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://mangalik.net",
       "iconUrl": "https://inkstone.web.app/mangalik/icon.png",
@@ -4654,7 +4630,7 @@
         "mangalik.net",
         "*.mangalik.net"
       ],
-      "description": "مانجا ليك read from its own Madara pages, with no browser step and no sign-in: Latest, New, A-Z, Rating, Most Views feeds, search, genre filtering, full details, chapter lists with dates and the reader. No adult genres turned up on the titles sampled.",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・20,000+",
       "capabilities": [
         "browse",
         "search",
@@ -5321,7 +5297,7 @@
     {
       "id": "slowmanga",
       "name": "Slow Manga",
-      "version": "1.0.0",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://www.slow-manga.net",
       "hosts": [
@@ -5339,7 +5315,8 @@
       ],
       "language": "th",
       "contentRating": "mature",
-      "sha256": "3227298b7630c12f269c2527b796464453080b9db976e1900d0fd93fc3f54c6a"
+      "sha256": "3227298b7630c12f269c2527b796464453080b9db976e1900d0fd93fc3f54c6a",
+      "iconUrl": "https://inkstone.web.app/slowmanga/icon.png"
     },
     {
       "id": "speedmanga",

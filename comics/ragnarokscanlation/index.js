@@ -35,6 +35,7 @@ const CONFIG = {
   ]
 };
 const SITE_BASE = CONFIG.origin;
+const MEDIUM = CONFIG.medium || 'comics';
 const UA =
   'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1';
 
@@ -175,11 +176,20 @@ function idFromHref(href) {
   return prefix === CONFIG.detailPrefix ? slug : `${prefix}~${slug}`;
 }
 
+function seg(piece) {
+  let text = String(piece);
+  try {
+    text = decodeURIComponent(text);
+  } catch (e) {
+  }
+  return encodeURIComponent(text);
+}
+
 function detailUrlOf(mangaId) {
   const at = String(mangaId).indexOf('~');
   const prefix = at < 0 ? CONFIG.detailPrefix : mangaId.slice(0, at);
   const slug = at < 0 ? mangaId : mangaId.slice(at + 1);
-  return `${SITE_BASE}/${encodeURIComponent(prefix)}/${encodeURIComponent(slug)}/`;
+  return `${SITE_BASE}/${seg(prefix)}/${seg(slug)}/`;
 }
 
 function absolute(url) {
@@ -244,7 +254,7 @@ function parseGrid($) {
     const title = cleanText(card.find('.post-title a').first().text()) || cleanText(link.attr('title'));
     if (!title) return;
     seen.add(mangaId);
-    const manga = { mangaId, title, image: coverFrom(link.find('img').first()), medium: 'comics' };
+    const manga = { mangaId, title, image: coverFrom(link.find('img').first()), medium: MEDIUM === 'both' ? 'comics' : MEDIUM };
     withImageAuth(manga);
     manga.webURL = detailUrlOf(mangaId);
     if (cleanText(card.find('.manga-title-badges').first().text()).toLowerCase() === 'completed') manga.completed = true;
@@ -264,7 +274,7 @@ function parseSearch($) {
     const title = cleanText(card.find('.post-title a').first().text()) || cleanText(link.attr('title'));
     if (!title) return;
     seen.add(mangaId);
-    const manga = { mangaId, title, image: coverFrom(link.find('img').first()), medium: 'comics' };
+    const manga = { mangaId, title, image: coverFrom(link.find('img').first()), medium: MEDIUM === 'both' ? 'comics' : MEDIUM };
     withImageAuth(manga);
     manga.webURL = detailUrlOf(mangaId);
     const author = cleanText(card.find('.mg_author .summary-content').first().text());
@@ -321,7 +331,7 @@ class Source {
   }
 
   async getSearchResults(request, metadata) {
-    if (request && request.medium && request.medium !== 'comics') return { results: [] };
+    if (request && request.medium && MEDIUM !== 'both' && request.medium !== MEDIUM) return { results: [] };
     const query = ((request && request.title) || '').trim();
     const tags = ((request && request.includedTags) || []).filter((t) => t && t.id);
     const feed = (request && request.feed) || CONFIG.feeds[0].id;
@@ -350,8 +360,10 @@ class Source {
       throw e;
     }
     const $ = cheerio.load(html);
-    const results = parse($);
-    const more = results.length > 0 && (hasNextLink($) || results.length >= CONFIG.pageSize);
+    const all = parse($);
+    const skip = CONFIG.skipTitle ? new RegExp(CONFIG.skipTitle, 'i') : null;
+    const results = skip ? all.filter((r) => !skip.test(r.title || '')) : all;
+    const more = all.length > 0 && (hasNextLink($) || all.length >= CONFIG.pageSize);
     return { results, metadata: more ? { page: page + 1 } : undefined };
   }
 
@@ -402,7 +414,7 @@ class Source {
       completed: status === 'COMPLETED',
       tags,
       webURL: url,
-      medium: 'comics',
+      medium: MEDIUM === 'both' ? 'comics' : MEDIUM,
     };
     withImageAuth(info);
     const age = genreAge(tags);
@@ -504,7 +516,7 @@ class Source {
   }
 
   async getChapterDetails(mangaId, chapterId) {
-    const url = `${detailUrlOf(mangaId)}${String(chapterId).split('~').map(encodeURIComponent).join('/')}/`;
+    const url = `${detailUrlOf(mangaId)}${String(chapterId).split('~').map(seg).join('/')}/`;
     const html = await this.requestHTML(url);
     const $ = cheerio.load(html);
     const pages = [];
@@ -516,6 +528,19 @@ class Source {
       seen.add(src);
       pages.push(absolute(src));
     });
+    if (pages.length === 0 || (MEDIUM === 'novel' && $('.chapter-type-text').length > 0)) {
+      const body = $('.reading-content .text-left').first().length ? $('.reading-content .text-left').first() : $('.reading-content').first();
+      body.find('script, style, .code-block, .adsbygoogle, ins, noscript').remove();
+      const paragraphs = [];
+      body.find('p').each((_, el) => {
+        const text = cleanText($(el).text());
+        if (text) paragraphs.push(text);
+      });
+      if (paragraphs.join('').length >= 200) return { id: chapterId, mangaId, pages: [], text: paragraphs.join('\n\n') };
+    }
+    if (pages.length === 0 && /velnio-continue|complete the ad journey/i.test(html)) {
+      throw new Error(CONFIG.name + ' puts an ad step in front of this chapter (shown on every visit), so it can only be read on the site');
+    }
     if (pages.length === 0) throw new Error(CONFIG.name + ' returned no pages for this chapter');
     const details = { id: chapterId, mangaId, pages };
     withImageAuth(details);
