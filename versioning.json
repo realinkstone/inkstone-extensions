@@ -2401,32 +2401,6 @@
       "sha256": "242fee6f519597b92df85081db9aef61fa54f6ccd66f7303ccbbddf154e4f6ca"
     },
     {
-      "id": "anisascans",
-      "name": "Anisa Scans",
-      "version": "1.0.0",
-      "medium": "comics",
-      "website": "https://anisascans.in",
-      "iconUrl": "https://inkstone.web.app/anisascans/icon.png",
-      "hosts": [
-        "anisascans.in",
-        "*.anisascans.in"
-      ],
-      "description": "Manga・Manhwa・Manhua\n\nCatalog・6,000+",
-      "capabilities": [
-        "browse",
-        "search",
-        "genres",
-        "details",
-        "chapters",
-        "reader"
-      ],
-      "language": "en",
-      "contentRating": "safe",
-      "sha256": "b8d5e45240bc467183d63fc7d2756f509e3712bde5d16d98079fc0e1b706ebdb",
-      "status": "broken",
-      "statusNote": "The site's domain no longer points to a server."
-    },
-    {
       "id": "athreascans",
       "name": "Athrea Scans",
       "version": "1.0.0",
@@ -5179,9 +5153,10 @@
     {
       "id": "mangaisekaithai",
       "name": "MangaIsekaiThai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://www.mangaisekaithai.net",
+      "iconUrl": "https://inkstone.web.app/mangaisekaithai/icon.png",
       "hosts": [
         "mangaisekaithai.net",
         "*.mangaisekaithai.net"
@@ -5298,9 +5273,10 @@
     {
       "id": "rahpchanhdy",
       "name": "Rùa Hấp Chanh Dây",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://ruahapchanhday2.com",
+      "iconUrl": "https://inkstone.web.app/rahpchanhdy/icon.png",
       "hosts": [
         "ruahapchanhday2.com",
         "*.ruahapchanhday2.com"
@@ -5321,9 +5297,10 @@
     {
       "id": "richtoscan",
       "name": "RichtoScan",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://r1.richtoon.top",
+      "iconUrl": "https://inkstone.web.app/richtoscan/icon.png",
       "hosts": [
         "r1.richtoon.top",
         "*.r1.richtoon.top"
@@ -5391,9 +5368,10 @@
     {
       "id": "tanukimanga",
       "name": "Tanuki-Manga",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://www.tanuki-manga.net",
+      "iconUrl": "https://inkstone.web.app/tanukimanga/icon.png",
       "hosts": [
         "tanuki-manga.net",
         "*.tanuki-manga.net"

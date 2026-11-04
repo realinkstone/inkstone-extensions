@@ -50,7 +50,7 @@ Prefer to review a written plan before any code is written? This repo works with
 
 ## Extensions
 
-221 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
+220 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
 
 Each extension lives in the folder for what it offers: `comics`, `novels`, `mixed` for those that do both, or `anime`. The site still serves every one at `inkstone.web.app/<id>/index.js`, so the folders change nothing in the apps.
 
@@ -63,7 +63,6 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [Anikiga](comics/anikiga/index.js) | anikiga.com | Turkish | Safe | 1.0.1 |
 | [Anime-Sama](comics/animesama/index.js) | anime-sama.to | French | Mature | 1.0.1 |
 | [AnimeShinigami](comics/animeshinigami/index.js) | animeshinigami.com | Italian | Safe | 1.0.1 |
-| [Anisa Scans](comics/anisascans/index.js) | anisascans.in | English | Safe | 1.0.0 |
 | [Arena Scans](comics/arenascans/index.js) | arenascan.com | English | Mature | 1.0.0 |
 | [Aster Scans](comics/asterscans/index.js) | asterscans.com | English | Safe | 1.0.0 |
 | [AsuraScans](mixed/asurascans/index.js) | asurascans.com | English | Safe | 2.4.0 |
@@ -145,7 +144,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [MangaGo](comics/mangago/index.js) | mangago.me | English | Adult | 1.1.0 |
 | [MangaHere](comics/mangahere/index.js) | mangahere.cc | English | Adult | 1.1.1 |
 | [MangaHub](comics/mangahub/index.js) | mangahub.io | English | Adult | 1.0.1 |
-| [MangaIsekaiThai](comics/mangaisekaithai/index.js) | mangaisekaithai.net | Thai | Safe | 1.0.0 |
+| [MangaIsekaiThai](comics/mangaisekaithai/index.js) | mangaisekaithai.net | Thai | Safe | 1.0.1 |
 | [MangaK](comics/mangak/index.js) | mangak.io | English | Mature | 1.0.0 |
 | [Mangakakalot](comics/mangakakalot/index.js) | mangakakalot.gg | English | Adult | 1.2.1 |
 | [MangaKatana](comics/mangakatana/index.js) | mangakatana.com | English | Adult | 1.1.3 |
@@ -200,10 +199,10 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [Rawkuma](comics/rawkuma/index.js) | rawkuma.net | Japanese | Adult | 1.0.2 |
 | [ReManga](comics/remanga/index.js) | remanga.org | Russian | Adult | 1.2.1 |
 | [Renascans](comics/renascans/index.js) | renascans.net | English | Safe | 1.0.0 |
-| [RichtoScan](comics/richtoscan/index.js) | r1.richtoon.top | Spanish | Safe | 1.0.0 |
+| [RichtoScan](comics/richtoscan/index.js) | r1.richtoon.top | Spanish | Safe | 1.0.1 |
 | [RokariComics](comics/rokaricomics/index.js) | rokaricomics.com | English | Adult | 1.0.1 |
 | [Rolia Scan](comics/roliascan/index.js) | roliascan.com | English | Mature | 1.0.0 |
-| [Rùa Hấp Chanh Dây](comics/rahpchanhdy/index.js) | ruahapchanhday2.com | Vietnamese | Adult | 1.0.0 |
+| [Rùa Hấp Chanh Dây](comics/rahpchanhdy/index.js) | ruahapchanhday2.com | Vietnamese | Adult | 1.0.1 |
 | [Rüya Manga](comics/ryamanga/index.js) | ruyamanga2.com | Turkish | Safe | 1.0.1 |
 | [S2Manga](comics/s2manga/index.js) | s2read.com | English | Adult | 1.0.1 |
 | [SamuraiScan](comics/samuraiscan/index.js) | samurai.j5z.xyz | Spanish | Safe | 1.0.1 |
@@ -213,7 +212,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [Serein Scan](comics/sereinscan/index.js) | sereinscan.net | Turkish | Safe | 1.0.0 |
 | [Slow Manga](comics/slowmanga/index.js) | slow-manga.net | Thai | Mature | 1.0.0 |
 | [Speed Manga](comics/speedmanga/index.js) | speed-manga.com | Thai | Mature | 1.0.0 |
-| [Tanuki-Manga](comics/tanukimanga/index.js) | tanuki-manga.net | Thai | Mature | 1.0.0 |
+| [Tanuki-Manga](comics/tanukimanga/index.js) | tanuki-manga.net | Thai | Mature | 1.0.1 |
 | [Tapas](comics/tapas/index.js) | tapas.io | English | Mature | 1.2.0 |
 | [Tarot Scans](comics/tarotscans/index.js) | tarotscans.com | Turkish | Adult | 1.0.1 |
 | [TCB Scans](comics/tcbscans/index.js) | tcbonepiecechapters.com | English | Safe | 1.0.0 |
@@ -301,7 +300,6 @@ Anime extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 
 These extensions are known to be broken right now:
 
-- **Anisa Scans** (`anisascans`): The site's domain no longer points to a server.
 - **Renascans** (`renascans`): The site's API address (api.renascans.net) no longer exists.
 
 ## Credits
