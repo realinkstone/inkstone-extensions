@@ -146,7 +146,7 @@
     {
       "id": "mangakakalot",
       "name": "Mangakakalot",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "medium": "comics",
       "website": "https://www.mangakakalot.gg",
       "iconUrl": "https://inkstone.web.app/mangakakalot/icon.png",
@@ -406,7 +406,7 @@
     {
       "id": "rawkuma",
       "name": "Rawkuma",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://rawkuma.net",
       "iconUrl": "https://inkstone.web.app/rawkuma/icon.png",
@@ -588,7 +588,7 @@
     {
       "id": "manhwatop",
       "name": "ManhwaTop",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://manhwatop.com",
       "iconUrl": "https://inkstone.web.app/manhwatop/icon.png",
@@ -608,7 +608,7 @@
     {
       "id": "kunmanga",
       "name": "KunManga",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "medium": "comics",
       "website": "https://kunmanga.com",
       "iconUrl": "https://inkstone.web.app/kunmanga/icon.png",
@@ -628,7 +628,7 @@
     {
       "id": "manhwaclan",
       "name": "ManhwaClan",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://manhwaclan.com",
       "iconUrl": "https://inkstone.web.app/manhwaclan/icon.png",
@@ -668,7 +668,7 @@
     {
       "id": "novelfull",
       "name": "NovelFull",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "medium": "novel",
       "website": "https://novelfull.net",
       "iconUrl": "https://inkstone.web.app/novelfull/icon.png",
@@ -752,7 +752,7 @@
     {
       "id": "scribblehub",
       "name": "ScribbleHub",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "novel",
       "website": "https://www.scribblehub.com",
       "iconUrl": "https://inkstone.web.app/scribblehub/icon.png",
@@ -772,7 +772,7 @@
     {
       "id": "toongod",
       "name": "ToonGod",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://toongod.org",
       "iconUrl": "https://inkstone.web.app/toongod/icon.png",
@@ -792,7 +792,7 @@
     {
       "id": "nettruyen",
       "name": "NetTruyen",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://nettruyenvia.com",
       "iconUrl": "https://inkstone.web.app/nettruyen/icon.png",
@@ -851,7 +851,7 @@
     {
       "id": "manhuafast",
       "name": "ManhuaFast",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://manhuafast.net",
       "iconUrl": "https://inkstone.web.app/manhuafast/icon.png",
@@ -871,7 +871,7 @@
     {
       "id": "manhwa18",
       "name": "Manhwa18",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://manhwa18.cc",
       "iconUrl": "https://inkstone.web.app/manhwa18/icon.png",
@@ -891,7 +891,7 @@
     {
       "id": "mangahub",
       "name": "MangaHub",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://mangahub.io",
       "iconUrl": "https://inkstone.web.app/mangahub/icon.png",
@@ -1050,7 +1050,7 @@
     {
       "id": "lelscans",
       "name": "Lelscans",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "medium": "comics",
       "website": "https://lelscans.net",
       "iconUrl": "https://inkstone.web.app/lelscans/icon.png",
@@ -1149,7 +1149,7 @@
     {
       "id": "lectormanga",
       "name": "Lectormanga",
-      "version": "1.2.1",
+      "version": "1.2.2",
       "medium": "comics",
       "website": "https://lectormangass.net",
       "iconUrl": "https://inkstone.web.app/lectormanga/icon.png",
@@ -1189,7 +1189,7 @@
     {
       "id": "indomanhwa",
       "name": "Indomanhwa",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://indomanhwa.com",
       "iconUrl": "https://inkstone.web.app/indomanhwa/icon.png",
@@ -1267,7 +1267,7 @@
     {
       "id": "nirvanamanga",
       "name": "NirvanaManga",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://nirvanamanga.com",
       "iconUrl": "https://inkstone.web.app/nirvanamanga/icon.png",
@@ -1307,7 +1307,7 @@
     {
       "id": "turkmanga",
       "name": "Turkmanga",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://turkmanga.org",
       "iconUrl": "https://inkstone.web.app/turkmanga/icon.png",
@@ -1446,7 +1446,7 @@
     {
       "id": "mangascantrad",
       "name": "Manga-Scantrad",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://manga-scantrad.io",
       "iconUrl": "https://inkstone.web.app/mangascantrad/icon.png",
@@ -1829,7 +1829,7 @@
     {
       "id": "mangadex",
       "name": "MangaDex",
-      "version": "1.2.1",
+      "version": "1.2.2",
       "medium": "comics",
       "website": "https://mangadex.org",
       "iconUrl": "https://inkstone.web.app/mangadex/icon.png",
@@ -2834,7 +2834,7 @@
     {
       "id": "ravenscans",
       "name": "Raven Scans",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://ravenscans.org",
       "iconUrl": "https://inkstone.web.app/ravenscans/icon.png",
@@ -4004,7 +4004,7 @@
     {
       "id": "kazokuden",
       "name": "Kazoku Den",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://www.kazokuden.com",
       "iconUrl": "https://inkstone.web.app/kazokuden/icon.png",
@@ -4028,7 +4028,7 @@
     {
       "id": "mhscans",
       "name": "MHScans",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://mhscans.com",
       "iconUrl": "https://inkstone.web.app/mhscans/icon.png",
@@ -4052,7 +4052,7 @@
     {
       "id": "monopolyscan",
       "name": "Monopoly Scan",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://monopolymanhua.com",
       "iconUrl": "https://inkstone.web.app/monopolyscan/icon.png",
@@ -4076,7 +4076,7 @@
     {
       "id": "ragnarokscanlation",
       "name": "Ragnarok Scanlation",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://ragnarokscanlation.org",
       "iconUrl": "https://inkstone.web.app/ragnarokscanlation/icon.png",
@@ -4100,7 +4100,7 @@
     {
       "id": "rakuentranslations",
       "name": "Rakuen Translations",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://rakuentranslations.com",
       "iconUrl": "https://inkstone.web.app/rakuentranslations/icon.png",
@@ -4124,7 +4124,7 @@
     {
       "id": "samuraiscan",
       "name": "SamuraiScan",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://samurai.j5z.xyz",
       "iconUrl": "https://inkstone.web.app/samuraiscan/icon.png",
@@ -4148,7 +4148,7 @@
     {
       "id": "uchuujinprojects",
       "name": "Uchuujin Projects",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://uchuujinmangas.com",
       "iconUrl": "https://inkstone.web.app/uchuujinprojects/icon.png",
@@ -4172,7 +4172,7 @@
     {
       "id": "undertranslations",
       "name": "UnderTranslations",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://undertranslations.com",
       "iconUrl": "https://inkstone.web.app/undertranslations/icon.png",
@@ -4196,7 +4196,7 @@
     {
       "id": "yurionline",
       "name": "Yuri-Online",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://yuri-online.com",
       "iconUrl": "https://inkstone.web.app/yurionline/icon.png",
@@ -4220,7 +4220,7 @@
     {
       "id": "cafcomyaoi",
       "name": "Café com Yaoi",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://cafecomyaoi.com.br",
       "iconUrl": "https://inkstone.web.app/cafcomyaoi/icon.png",
@@ -4244,7 +4244,7 @@
     {
       "id": "hotcabaretscan",
       "name": "Hot Cabaret Scan",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://hotcabaretscan.com",
       "iconUrl": "https://inkstone.web.app/hotcabaretscan/icon.png",
@@ -4268,7 +4268,7 @@
     {
       "id": "kamisamaexplorer",
       "name": "Kami Sama Explorer",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://leitor.kamisama.com.br",
       "iconUrl": "https://inkstone.web.app/kamisamaexplorer/icon.png",
@@ -4291,7 +4291,7 @@
     {
       "id": "nebulosascan",
       "name": "Nebulosa Scan",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://nebulosascan.com",
       "iconUrl": "https://inkstone.web.app/nebulosascan/icon.png",
@@ -4339,7 +4339,7 @@
     {
       "id": "anikiga",
       "name": "Anikiga",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://anikiga.com",
       "iconUrl": "https://inkstone.web.app/anikiga/icon.png",
@@ -4387,7 +4387,7 @@
     {
       "id": "koreliscans",
       "name": "Koreli Scans",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://www.nabicix.com",
       "iconUrl": "https://inkstone.web.app/koreliscans/icon.png",
@@ -4411,7 +4411,7 @@
     {
       "id": "mangawow",
       "name": "MangaWOW",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://mangawow.org",
       "iconUrl": "https://inkstone.web.app/mangawow/icon.png",
@@ -4435,7 +4435,7 @@
     {
       "id": "ryamanga",
       "name": "Rüya Manga",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://www.ruyamanga2.com",
       "iconUrl": "https://inkstone.web.app/ryamanga/icon.png",
@@ -4483,7 +4483,7 @@
     {
       "id": "tortugaceviri",
       "name": "Tortuga Ceviri",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://tortugaceviri.com",
       "iconUrl": "https://inkstone.web.app/tortugaceviri/icon.png",
@@ -4506,7 +4506,7 @@
     {
       "id": "trkemangaoku",
       "name": "Türkçe Manga Oku",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://trmangaoku.com",
       "iconUrl": "https://inkstone.web.app/trkemangaoku/icon.png",
@@ -4553,7 +4553,7 @@
     {
       "id": "inumanga",
       "name": "Inu Manga",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://www.inu-manga.net",
       "iconUrl": "https://inkstone.web.app/inumanga/icon.png",
@@ -4601,7 +4601,7 @@
     {
       "id": "truyentuoitho",
       "name": "TruyenTuoiTho",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://truyentuoitho.com",
       "iconUrl": "https://inkstone.web.app/truyentuoitho/icon.png",
@@ -4625,7 +4625,7 @@
     {
       "id": "animeshinigami",
       "name": "AnimeShinigami",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://www.animeshinigami.com",
       "iconUrl": "https://inkstone.web.app/animeshinigami/icon.png",
@@ -4649,7 +4649,7 @@
     {
       "id": "klikmanga",
       "name": "KlikManga",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://klikmanga.org",
       "iconUrl": "https://inkstone.web.app/klikmanga/icon.png",
@@ -4672,7 +4672,7 @@
     {
       "id": "mangalik",
       "name": "مانجا ليك",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://mangalik.net",
       "iconUrl": "https://inkstone.web.app/mangalik/icon.png",
@@ -4696,7 +4696,7 @@
     {
       "id": "phoenixscans",
       "name": "Phoenix Scans",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://www.phoenixscans.com",
       "iconUrl": "https://inkstone.web.app/phoenixscans/icon.png",
@@ -4720,7 +4720,7 @@
     {
       "id": "lupiteam",
       "name": "LupiTeam",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://lupiteam.net",
       "iconUrl": "https://inkstone.web.app/lupiteam/icon.png",
@@ -4744,7 +4744,7 @@
     {
       "id": "bluesolo",
       "name": "Blue Solo",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://bluesolo.org",
       "iconUrl": "https://inkstone.web.app/bluesolo/icon.png",
@@ -4768,7 +4768,7 @@
     {
       "id": "fmteam",
       "name": "FMTEAM",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://fmteam.fr",
       "iconUrl": "https://inkstone.web.app/fmteam/icon.png",
@@ -4792,7 +4792,7 @@
     {
       "id": "mangacorporation",
       "name": "Manga-Corporation",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://manga-corporation.com",
       "iconUrl": "https://inkstone.web.app/mangacorporation/icon.png",
@@ -4816,7 +4816,7 @@
     {
       "id": "gtothegreatsite",
       "name": "GTO The Great Site",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://reader.gtothegreatsite.net",
       "iconUrl": "https://inkstone.web.app/gtothegreatsite/icon.png",
@@ -4840,7 +4840,7 @@
     {
       "id": "tuttoanimemanga",
       "name": "TuttoAnimeManga",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://tuttoanimemanga.net",
       "iconUrl": "https://inkstone.web.app/tuttoanimemanga/icon.png",
@@ -4983,6 +4983,30 @@
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
       "sha256": "03c525683b6cf8db344e12a6a1025776ad5820dba0e45c8141f2ac14e08ff999"
+    },
+    {
+      "id": "abertoverse",
+      "name": "AbertoVerse",
+      "version": "1.0.0",
+      "medium": "novel",
+      "website": "https://abertoverse.com",
+      "iconUrl": "https://inkstone.web.app/abertoverse/icon.png",
+      "hosts": [
+        "abertoverse.com",
+        "*.abertoverse.com"
+      ],
+      "description": "Web Novels\n\nCatalog・8",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "safe",
+      "sha256": "73aece4d6e34161ba2ce4f5a8724b1c300db279e2d8da1a514cc63a5454dd8f4"
     }
   ]
 }
