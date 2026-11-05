@@ -292,6 +292,26 @@ function dailymotionId(url) {
 
 const MAX_MIRROR_PAGES = 16;
 
+const EMBED_PLAYERS = [
+  { name: 'Rumble', test: /(?:^|\.)rumble\.com$/i },
+  { name: 'OK.ru', test: /(?:^|\.)ok\.ru$/i },
+  { name: 'mp4upload', test: /(?:^|\.)mp4upload\.com$/i },
+  { name: 'VidHide', test: /(?:^|\.)(?:morencius|vidhide|earnvids)\.com$/i },
+];
+const EMBEDS_PER_PLAYER = 2;
+
+function embedPlayerOf(url) {
+  const m = /^https?:\/\/([^\/:?#]+)/i.exec(String(url || ''));
+  if (!m) return null;
+  return EMBED_PLAYERS.find((p) => p.test.test(m[1])) || null;
+}
+
+function embedLabel(label, playerName) {
+  const text = cleanText(label) || 'Player';
+  const key = playerName.toLowerCase().replace(/[^a-z0-9]/g, '');
+  return text.toLowerCase().replace(/[^a-z0-9]/g, '').indexOf(key) !== -1 ? text : `${text} (${playerName})`;
+}
+
 const LANGUAGE_CODES = { en: 'en', id: 'id', ar: 'ar', es: 'es', pt: 'pt', fr: 'fr', th: 'th', vi: 'vi', tr: 'tr', ru: 'ru', zh: 'zh', ja: 'ja', ko: 'ko', hi: 'hi', de: 'de' };
 
 class Source {
@@ -509,7 +529,8 @@ class Source {
       }
     };
     await resolve();
-    for (let i = 0; i < mirrorPages.length && i < MAX_MIRROR_PAGES && videos.length < 2; i += 4) {
+    const playerPages = () => embeds.filter((e) => embedPlayerOf(e.src)).length;
+    for (let i = 0; i < mirrorPages.length && i < MAX_MIRROR_PAGES && (videos.length < 2 || playerPages() < 3); i += 4) {
       const pages = await Promise.all(
         mirrorPages.slice(i, i + 4).map((page) =>
           this.requestHTML(page.url, epUrl).then(
@@ -526,6 +547,13 @@ class Source {
       });
       await resolve();
     }
+    const perPlayer = {};
+    embeds.forEach((embed) => {
+      const player = embedPlayerOf(embed.src);
+      if (!player || (perPlayer[player.name] || 0) >= EMBEDS_PER_PLAYER) return;
+      perPlayer[player.name] = (perPlayer[player.name] || 0) + 1;
+      videos.push({ url: embed.src, type: 'embed', quality: embedLabel(embed.label, player.name), server: player.name });
+    });
     if (!videos.length) {
       const why = removed.length ? `Dailymotion took the video down ("${removed[0]}")` : 'the site may have no stream for it yet';
       throw new Error(CONFIG.name + ' lists this episode on no player this app can open (it opens Dailymotion players); ' + why);

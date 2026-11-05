@@ -411,6 +411,7 @@ async getVideos(mangaId, chapterId) {
 - **Keep the `quality` label short.** A master with 25 subtitle languages made a 300 character label; write `Softsub: English and 24 more` and list names only up to three.
 - **Embedded Dailymotion players.** Many video sites embed the same Dailymotion player. Its metadata call, `https://www.dailymotion.com/player/metadata/video/<id>`, answers the HLS master (`qualities.auto[0].url`) and the subtitle files, but only to a request that sends the site's episode page as `Referer`. Called with Dailymotion's own address as the `Referer` (for example from a Dailymotion tab in a browser) it answers 200 with `"private": true`, error `DM010` and no `qualities`, which looks like a dead video and is not. The master itself answers 403 to curl and Node and 200 to a real browser (checked 2026-11-05 on seven sites), so the test script's stream step fails for these sources whatever you do and everything before it passes. Prove playback another way: take the master address your extension returned, fetch it, one variant playlist and one segment in a real browser (all three answered 200 on every one of the seven), and say in your report that you did not try it in the app. Send `headers: { Referer: 'https://www.dailymotion.com/', Origin: 'https://www.dailymotion.com' }` on the stream: the Player's own probe got 403 on some manifests without them and 200 with them, and Apple's AVPlayer plays the stream with and without them (checked 2026-11-05), so they cost nothing. A Node 403 on a Dailymotion manifest is therefore not proof that the app fails; opening the master in AVPlayer (a few lines of Swift with `AVURLAsset` and `AVPlayerItem`, watching `status` and `error`) is the closest test you can run on a Mac.
 - **A mirror list can change shape.** AnimeStream sites usually put base64 of the player html in each `select.mirror option` value. LMAnime switched on 2026-11-05 to plain page addresses (`https://lmanime.com/<episode>/v/1/`, 10 to 21 per episode, each page holding one player iframe), and an extension that only decoded base64 dropped every mirror and kept just the default player, which is a Dailymotion video on some episodes only. Read both forms: decode a value that is not an address, fetch one that is (with the episode page as `Referer`, a few at a time, and stop once you have enough players you can open), and take the `iframe` `src` of each page. When a source starts failing with "no player", compare today's `select.mirror` values with what the extension expects before suspecting the site's streams.
+- **Player pages the app opens itself (`type: 'embed'`).** A `getVideos` entry `{ type: 'embed', url: '<player page address>', quality, server }` hands a player page to the Boundless Player, which resolves it to a stream before playback, so you do not write a resolver for each host. The hosts it opens, as of 2026-11-05 (iPhone build; the Android build is not rebuilt yet, and an older build lists the page address as a server that fails to open): `dailymotion.com` and `dai.ly`, `rumble.com`, `ok.ru`, `mp4upload.com`, and the VidHide family pages `morencius.com`, `vidhide.com` and `earnvids.com`. Send only those hosts as embed entries, put the streams you resolved yourself first and the embed entries after them, and keep `server` the player's name (`Dailymotion`, `Rumble`, `OK.ru`, `mp4upload`, `VidHide`). The manifest `hosts` must list the embed page host, every host the resolver asks and every host of the stream it returns: `www.dailymotion.com` or `*.dailymotion.com`, `rumble.com` and `*.rumble.cloud`, `ok.ru` and `*.mycdn.me` and `*.okcdn.ru` (OK.ru media hosts not seen yet), `*.mp4upload.com` (the port is ignored), `morencius.com` and `*.acek-cdn.com`; a stream on an unlisted host is dropped. Facts measured on a Mac with Apple's AVPlayer: mp4upload's media address answers 403 without `Referer: https://www.mp4upload.com/`; Rumble's `embedJS` API answers only a non browser User-Agent (a phone or Chrome agent gets a Cloudflare page) and its `.tar` files are not playable, only `ua.hls.auto.url`; a morencius page holds a packed script whose `links` object has the HLS master. A taken down video is gone on every host: Dailymotion answers 200 with an error and no `qualities` ("removed due to a breach of the Terms of Use"), mp4upload answers a 16 byte "deleted" page, so test embeds on a recent episode. OK.ru and the other VidHide hosts could not be tested from the author's network.
 - **Several servers.** Return one entry per working server, each labeled (KickAssAnime returns `VidStreaming` and `BirdStream`). Skip a server that fails and keep the others.
 - **An episode with no stream yet** is an `Error` with a message that says so, not an empty list (which shows "no videos" with no reason). Check the newest episodes of a new show and a few old ones: KickAssAnime lists some episodes with an empty server list (19 of 76 episodes sampled on 2026-10-23, new shows and old ones alike), and there the site has no stream to read. Say which case it is in the message (no server listed, or servers that gave no video).
 - **Skip times.** Use the site's own intro and outro times when it has them. AniZone reads them from a WebVTT chapters track whose cues are named Intro or Opening, and Credits, Outro or Ending.
@@ -606,6 +607,8 @@ const Source = sandbox.module.exports.Source;
 if (!check(typeof Source === 'function', 'exports a Source class', 'module.exports = { Source }')) finish();
 const source = new Source();
 
+// The player pages the Boundless Player opens itself (docs/design/video-embeds.md in its repo, 2026-11-05).
+const EMBED_HOSTS = ['dailymotion.com', 'dai.ly', 'rumble.com', 'ok.ru', 'mp4upload.com', 'morencius.com', 'vidhide.com', 'earnvids.com'];
 const anime = typeof source.getVideos === 'function';
 for (const method of ['getSearchResults', 'getMangaDetails', 'getChapters', anime ? 'getVideos' : 'getChapterDetails']) {
   check(typeof source[method] === 'function', `has ${method}()`);
@@ -872,10 +875,17 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
   const tryPlay = async (chapter, label, started) => {
     const videos = await withTimeout(source.getVideos(item.mangaId, chapter.id));
     if (!Array.isArray(videos) || videos.length === 0 || !videos.every((v) => isUrl(v.url))) return { ok: false, label, detail: 'getVideos gave no video with a full URL' };
-    const first = videos[0];
-    const answer = await withTimeout(fetch(first.url, { headers: first.headers ?? {} }), 30000);
-    const body = answer.ok ? await answer.text() : '';
-    const plays = answer.ok && (body.startsWith('#EXTM3U') || (answer.headers.get('content-type') ?? '').startsWith('video/'));
+    // An entry of type 'embed' is a player page the Boundless Player opens itself: it is checked on its shape, never fetched as a stream.
+    const embeds = videos.filter((v) => v.type === 'embed');
+    const streams = videos.filter((v) => v.type !== 'embed');
+    const first = streams[0] ?? embeds[0];
+    let answer = { ok: true, status: 'embed' };
+    let plays = true;
+    if (streams.length) {
+      answer = await withTimeout(fetch(first.url, { headers: first.headers ?? {} }), 30000);
+      const body = answer.ok ? await answer.text() : '';
+      plays = answer.ok && (body.startsWith('#EXTM3U') || (answer.headers.get('content-type') ?? '').startsWith('video/'));
+    }
     const subtitles = (first.subtitles ?? []).length;
     const took = `${((Date.now() - started) / 1000).toFixed(1)}s`;
     const skip = first.intro ? `, intro ${Math.round(first.intro.start / 1000)}s to ${Math.round(first.intro.end / 1000)}s` : '';
@@ -883,6 +893,11 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
     for (const video of videos) {
       const quality = video.quality === undefined ? 'a video' : `"${video.quality}"`;
       if (video.quality !== undefined && typeof video.quality !== 'string') problems.push(`${quality}: quality is not a string`);
+      if (video.server !== undefined && (typeof video.server !== 'string' || !video.server.trim())) problems.push(`${quality}: server must be a short non empty string`);
+      if (video.type === 'embed') {
+        const host = (() => { try { return new URL(video.url).hostname; } catch { return ''; } })();
+        if (!EMBED_HOSTS.some((h) => host === h || host.endsWith('.' + h))) problems.push(`${quality}: the app opens no player at ${host || video.url}; send an embed entry only for ${EMBED_HOSTS.join(', ')}`);
+      }
       if (video.headers !== undefined && (typeof video.headers !== 'object' || video.headers === null || Object.values(video.headers).some((v) => typeof v !== 'string'))) problems.push(`${quality}: headers must be an object of strings`);
       for (const kind of ['subtitles', 'audio']) {
         if (video[kind] === undefined) continue;
@@ -894,7 +909,8 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
         if (range !== undefined && !(range && Number.isFinite(range.start) && Number.isFinite(range.end) && range.end > range.start)) problems.push(`${quality}: ${kind} needs numbers start and end in milliseconds, with end after start`);
       }
     }
-    return { ok: plays, label, problems, detail: plays ? `${videos.length} video, ${subtitles} subtitle tracks${skip}, in ${took}` : `the stream answered ${answer.status}` };
+    const embedNote = embeds.length ? `, ${embeds.length} embed ${embeds.length === 1 ? 'entry' : 'entries'} the app opens (not run here)` : '';
+    return { ok: plays, label, problems, detail: plays ? `${videos.length} video${embedNote}, ${subtitles} subtitle tracks${skip}, in ${took}` : `the stream answered ${answer.status}` };
   };
   const tryOpen = async (chapter) => {
     const label = `chapter "${chapter.name ?? chapter.id}"`;

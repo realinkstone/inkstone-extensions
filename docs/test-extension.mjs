@@ -172,6 +172,8 @@ const Source = sandbox.module.exports.Source;
 if (!check(typeof Source === 'function', 'exports a Source class', 'module.exports = { Source }')) finish();
 const source = new Source();
 
+// The player pages the Boundless Player opens itself (docs/design/video-embeds.md in its repo, 2026-11-05).
+const EMBED_HOSTS = ['dailymotion.com', 'dai.ly', 'rumble.com', 'ok.ru', 'mp4upload.com', 'morencius.com', 'vidhide.com', 'earnvids.com'];
 const anime = typeof source.getVideos === 'function';
 for (const method of ['getSearchResults', 'getMangaDetails', 'getChapters', anime ? 'getVideos' : 'getChapterDetails']) {
   check(typeof source[method] === 'function', `has ${method}()`);
@@ -438,10 +440,17 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
   const tryPlay = async (chapter, label, started) => {
     const videos = await withTimeout(source.getVideos(item.mangaId, chapter.id));
     if (!Array.isArray(videos) || videos.length === 0 || !videos.every((v) => isUrl(v.url))) return { ok: false, label, detail: 'getVideos gave no video with a full URL' };
-    const first = videos[0];
-    const answer = await withTimeout(fetch(first.url, { headers: first.headers ?? {} }), 30000);
-    const body = answer.ok ? await answer.text() : '';
-    const plays = answer.ok && (body.startsWith('#EXTM3U') || (answer.headers.get('content-type') ?? '').startsWith('video/'));
+    // An entry of type 'embed' is a player page the Boundless Player opens itself: it is checked on its shape, never fetched as a stream.
+    const embeds = videos.filter((v) => v.type === 'embed');
+    const streams = videos.filter((v) => v.type !== 'embed');
+    const first = streams[0] ?? embeds[0];
+    let answer = { ok: true, status: 'embed' };
+    let plays = true;
+    if (streams.length) {
+      answer = await withTimeout(fetch(first.url, { headers: first.headers ?? {} }), 30000);
+      const body = answer.ok ? await answer.text() : '';
+      plays = answer.ok && (body.startsWith('#EXTM3U') || (answer.headers.get('content-type') ?? '').startsWith('video/'));
+    }
     const subtitles = (first.subtitles ?? []).length;
     const took = `${((Date.now() - started) / 1000).toFixed(1)}s`;
     const skip = first.intro ? `, intro ${Math.round(first.intro.start / 1000)}s to ${Math.round(first.intro.end / 1000)}s` : '';
@@ -449,6 +458,11 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
     for (const video of videos) {
       const quality = video.quality === undefined ? 'a video' : `"${video.quality}"`;
       if (video.quality !== undefined && typeof video.quality !== 'string') problems.push(`${quality}: quality is not a string`);
+      if (video.server !== undefined && (typeof video.server !== 'string' || !video.server.trim())) problems.push(`${quality}: server must be a short non empty string`);
+      if (video.type === 'embed') {
+        const host = (() => { try { return new URL(video.url).hostname; } catch { return ''; } })();
+        if (!EMBED_HOSTS.some((h) => host === h || host.endsWith('.' + h))) problems.push(`${quality}: the app opens no player at ${host || video.url}; send an embed entry only for ${EMBED_HOSTS.join(', ')}`);
+      }
       if (video.headers !== undefined && (typeof video.headers !== 'object' || video.headers === null || Object.values(video.headers).some((v) => typeof v !== 'string'))) problems.push(`${quality}: headers must be an object of strings`);
       for (const kind of ['subtitles', 'audio']) {
         if (video[kind] === undefined) continue;
@@ -460,7 +474,8 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
         if (range !== undefined && !(range && Number.isFinite(range.start) && Number.isFinite(range.end) && range.end > range.start)) problems.push(`${quality}: ${kind} needs numbers start and end in milliseconds, with end after start`);
       }
     }
-    return { ok: plays, label, problems, detail: plays ? `${videos.length} video, ${subtitles} subtitle tracks${skip}, in ${took}` : `the stream answered ${answer.status}` };
+    const embedNote = embeds.length ? `, ${embeds.length} embed ${embeds.length === 1 ? 'entry' : 'entries'} the app opens (not run here)` : '';
+    return { ok: plays, label, problems, detail: plays ? `${videos.length} video${embedNote}, ${subtitles} subtitle tracks${skip}, in ${took}` : `the stream answered ${answer.status}` };
   };
   const tryOpen = async (chapter) => {
     const label = `chapter "${chapter.name ?? chapter.id}"`;

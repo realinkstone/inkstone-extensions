@@ -5990,7 +5990,7 @@
     {
       "id": "animexin",
       "name": "AnimeXin",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "anime",
       "website": "https://animexin.dev",
       "iconUrl": "https://inkstone.web.app/animexin/icon.png",
@@ -5998,7 +5998,20 @@
         "animexin.dev",
         "*.animexin.dev",
         "dailymotion.com",
-        "*.dailymotion.com"
+        "*.dailymotion.com",
+        "rumble.com",
+        "*.rumble.com",
+        "*.rumble.cloud",
+        "ok.ru",
+        "*.ok.ru",
+        "*.mycdn.me",
+        "*.okcdn.ru",
+        "mp4upload.com",
+        "*.mp4upload.com",
+        "morencius.com",
+        "*.acek-cdn.com",
+        "vidhide.com",
+        "earnvids.com"
       ],
       "description": "Donghua\n\nCatalog・300+",
       "capabilities": [
@@ -6011,12 +6024,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "bbeb82846a6119916cdf78c74a5e071f05657c0c0243f53e827a62a3685e668f"
+      "sha256": "c9bbf3df70a9de1d4e152aab65f643bc2f91d7191bcdb44fb6fb3f78205e0f21"
     },
     {
       "id": "animekhor",
       "name": "AnimeKhor",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "anime",
       "website": "https://animekhor.org",
       "iconUrl": "https://inkstone.web.app/animekhor/icon.png",
@@ -6024,7 +6037,20 @@
         "animekhor.org",
         "*.animekhor.org",
         "dailymotion.com",
-        "*.dailymotion.com"
+        "*.dailymotion.com",
+        "rumble.com",
+        "*.rumble.com",
+        "*.rumble.cloud",
+        "ok.ru",
+        "*.ok.ru",
+        "*.mycdn.me",
+        "*.okcdn.ru",
+        "mp4upload.com",
+        "*.mp4upload.com",
+        "morencius.com",
+        "*.acek-cdn.com",
+        "vidhide.com",
+        "earnvids.com"
       ],
       "description": "Donghua\n\nCatalog・1,000+",
       "capabilities": [
@@ -6037,12 +6063,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "ff5b61a9291cf57e47052f0f858508a040762cdbba2e869f0b636184ee994cff"
+      "sha256": "a74be73d59092ced23e5e88ba318071101e3d7b69b5b48b926db1e4af04dffe9"
     },
     {
       "id": "luciferdonghua",
       "name": "LuciferDonghua",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "anime",
       "website": "https://luciferdonghua.org",
       "iconUrl": "https://inkstone.web.app/luciferdonghua/icon.png",
@@ -6050,7 +6076,20 @@
         "luciferdonghua.org",
         "*.luciferdonghua.org",
         "dailymotion.com",
-        "*.dailymotion.com"
+        "*.dailymotion.com",
+        "rumble.com",
+        "*.rumble.com",
+        "*.rumble.cloud",
+        "ok.ru",
+        "*.ok.ru",
+        "*.mycdn.me",
+        "*.okcdn.ru",
+        "mp4upload.com",
+        "*.mp4upload.com",
+        "morencius.com",
+        "*.acek-cdn.com",
+        "vidhide.com",
+        "earnvids.com"
       ],
       "description": "Donghua\n\nCatalog・200+",
       "capabilities": [
@@ -6063,12 +6102,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "8076ca5d92c559d3e692facc3dbca0c67415575d311f0ff93e720461f78d1ea8"
+      "sha256": "9dd059c3800ed168328accc8f0bbf075c2e6fafb0366136df0d8d701360cc9ea"
     },
     {
       "id": "donghua4k",
       "name": "Donghua4K",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "anime",
       "website": "https://donghua4k.net",
       "iconUrl": "https://inkstone.web.app/donghua4k/icon.png",
@@ -6076,7 +6115,20 @@
         "donghua4k.net",
         "*.donghua4k.net",
         "dailymotion.com",
-        "*.dailymotion.com"
+        "*.dailymotion.com",
+        "rumble.com",
+        "*.rumble.com",
+        "*.rumble.cloud",
+        "ok.ru",
+        "*.ok.ru",
+        "*.mycdn.me",
+        "*.okcdn.ru",
+        "mp4upload.com",
+        "*.mp4upload.com",
+        "morencius.com",
+        "*.acek-cdn.com",
+        "vidhide.com",
+        "earnvids.com"
       ],
       "description": "Donghua\n\nCatalog・40+",
       "capabilities": [
@@ -6089,12 +6141,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "5b1e8227c7eb73fc00d30932f63a7c77bec1b2e8bb682070e59bdf7d650029df"
+      "sha256": "f0bec07c676d18eaebd73c98eb8544a40cdf46a0bf49877b53d5446ece315531"
     },
     {
       "id": "naruldonghua",
       "name": "NarulDonghua",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "anime",
       "website": "https://naruldonghua.com",
       "iconUrl": "https://inkstone.web.app/naruldonghua/icon.png",
@@ -6102,7 +6154,20 @@
         "naruldonghua.com",
         "*.naruldonghua.com",
         "dailymotion.com",
-        "*.dailymotion.com"
+        "*.dailymotion.com",
+        "rumble.com",
+        "*.rumble.com",
+        "*.rumble.cloud",
+        "ok.ru",
+        "*.ok.ru",
+        "*.mycdn.me",
+        "*.okcdn.ru",
+        "mp4upload.com",
+        "*.mp4upload.com",
+        "morencius.com",
+        "*.acek-cdn.com",
+        "vidhide.com",
+        "earnvids.com"
       ],
       "description": "Donghua\n\nCatalog・900+",
       "capabilities": [
@@ -6115,12 +6180,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "a548d76348da2c7b4f39132712adfe0868404c749e0f6fc426527dde6d66f2d3"
+      "sha256": "4e961e04030f8cbe07f0ccbba9f8691491da406109fabffbcdb1513e31b414ea"
     },
     {
       "id": "anime4i",
       "name": "Anime4i",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "anime",
       "website": "https://anime4i.com",
       "iconUrl": "https://inkstone.web.app/anime4i/icon.png",
@@ -6128,7 +6193,20 @@
         "anime4i.com",
         "*.anime4i.com",
         "dailymotion.com",
-        "*.dailymotion.com"
+        "*.dailymotion.com",
+        "rumble.com",
+        "*.rumble.com",
+        "*.rumble.cloud",
+        "ok.ru",
+        "*.ok.ru",
+        "*.mycdn.me",
+        "*.okcdn.ru",
+        "mp4upload.com",
+        "*.mp4upload.com",
+        "morencius.com",
+        "*.acek-cdn.com",
+        "vidhide.com",
+        "earnvids.com"
       ],
       "description": "Donghua\n\nCatalog・200+",
       "capabilities": [
@@ -6141,12 +6219,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "6d8dd3788ec13f8dddf83f115fb349030199ae284cb0da3a3273d7ea92ef0dad"
+      "sha256": "962a3000acc4b0c5742c33f0536b5173afe2d5dbd455fd243014612d16f3afdf"
     },
     {
       "id": "lmanime",
       "name": "LMAnime",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "anime",
       "website": "https://lmanime.com",
       "iconUrl": "https://inkstone.web.app/lmanime/icon.png",
@@ -6154,7 +6232,20 @@
         "lmanime.com",
         "*.lmanime.com",
         "dailymotion.com",
-        "*.dailymotion.com"
+        "*.dailymotion.com",
+        "rumble.com",
+        "*.rumble.com",
+        "*.rumble.cloud",
+        "ok.ru",
+        "*.ok.ru",
+        "*.mycdn.me",
+        "*.okcdn.ru",
+        "mp4upload.com",
+        "*.mp4upload.com",
+        "morencius.com",
+        "*.acek-cdn.com",
+        "vidhide.com",
+        "earnvids.com"
       ],
       "description": "Donghua\n\nCatalog・300+",
       "capabilities": [
@@ -6167,12 +6258,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "82f9e71f7f35db06ac77888fb9c0564bdf772d628fdd7b28454afb05204f9dbf"
+      "sha256": "6be4a3938b519210f90a992999e3152b5b7cdd8b1900ab98d88c30ba9e67d35b"
     },
     {
       "id": "hydrahd",
       "name": "HydraHD",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "medium": "anime",
       "website": "https://hydrahd.gd",
       "iconUrl": "https://inkstone.web.app/hydrahd/icon.png",
@@ -6189,7 +6280,19 @@
         "*.paretocdn.site",
         "netrocdn.site",
         "*.netrocdn.site",
-        "*.workers.dev"
+        "*.workers.dev",
+        "hydrahd.ws",
+        "*.hydrahd.ws",
+        "hydrahd.com",
+        "*.hydrahd.com",
+        "hydrahd.io",
+        "*.hydrahd.io",
+        "hydrahd.cc",
+        "*.hydrahd.cc",
+        "hydrahd.ac",
+        "*.hydrahd.ac",
+        "hydrahd.me",
+        "*.hydrahd.me"
       ],
       "description": "Western\n\nCatalog・100,000+",
       "capabilities": [
