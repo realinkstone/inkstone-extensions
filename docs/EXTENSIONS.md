@@ -317,6 +317,7 @@ async getVideos(mangaId, chapterId) {
 - An entry, subtitle track or audio track without a full `url` is dropped silently. `headers` is an object of strings.
 - `quality` is read by the player: a height (`1080p`, `720p`, `4k`) ranks videos, and the words `Sub`, `Dub`, `Softsub` and `Hardsub` drive the audio preference and the sub and dub switch. Return an HLS master playlist once, as `Auto`; Sumizuri lists its qualities itself (only for an address whose path ends in `.m3u8`).
 - An episode with no stream yet should throw an `Error` with a clear message, not return an empty list.
+- Do not send `group` on video episodes: it means a release group, and the Boundless Player shows none for video. It reads `title`, `thumbnail` (a full http or https address), `duration` in seconds (over 100000 counts as milliseconds) and `summary` instead.
 - Episodes of a title with several seasons can carry `season`, `seasonName` and `seasonCover`. `mangaInfo` can carry a `banner`.
 - Sumizuri treats only `contentRating: "adult"` as adult.
 

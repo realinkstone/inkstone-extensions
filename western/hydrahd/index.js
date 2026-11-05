@@ -270,8 +270,7 @@ class Source {
     });
     if (!links.length) throw new Error('HydraHD lists no server for this title yet');
 
-    const videos = [];
-    const problems = [];
+    const tasks = [];
     const done = new Set();
     for (const link of links) {
       const vix = /^https?:\/\/vixsrc\.to\/(movie\/\d+|tv\/\d+\/\d+\/\d+)/.exec(link);
@@ -288,22 +287,21 @@ class Source {
       } else continue;
       if (done.has(key)) continue;
       done.add(key);
-      try {
-        videos.push(await run());
-      } catch (e) {
-        problems.push(e && e.message ? e.message : String(e));
-      }
+      tasks.push(run().then((video) => ({ video }), (error) => ({ error })));
     }
+    const answers = await Promise.all(tasks);
+    const videos = answers.filter((a) => a.video).map((a) => a.video);
     if (!videos.length) {
+      const challenged = answers.find((a) => a.error && a.error.kind === 'challenge');
+      if (challenged) throw challenged.error;
+      const problems = answers.map((a) => (a.error && a.error.message ? a.error.message : String(a.error)));
       throw new Error(problems.length ? `HydraHD: ${problems.join('; ')}` : 'HydraHD lists no server this app can play for this title (it reads only the VixSrc and VidSpark servers)');
     }
     return videos;
   }
 
   async vixSrc(path) {
-    const api = await this.requests.schedule(
-      App.createRequest({ url: `${VIX}/api/${path}`, method: 'GET', headers: { 'User-Agent': UA, Accept: 'application/json', Referer: `${VIX}/${path}` } })
-    );
+    const api = await this.send({ url: `${VIX}/api/${path}`, method: 'GET', headers: { 'User-Agent': UA, Accept: 'application/json', Referer: `${VIX}/${path}` } });
     if (api.status === 404) throw new Error('VixSrc has no stream for this title yet');
     if (api.status < 200 || api.status >= 300) throw new Error(`VixSrc: HTTP ${api.status}`);
     let src = '';
@@ -325,13 +323,11 @@ class Source {
   }
 
   async vidSpark(path) {
-    const api = await this.requests.schedule(
-      App.createRequest({
+    const api = await this.send({
         url: `${SPARK}/api/vidora/v1/${path}`,
         method: 'GET',
         headers: { 'User-Agent': UA, Accept: 'application/json', 'x-player-key': SPARK_KEY, Referer: `${SPARK}/${path}` },
-      })
-    );
+      });
     let data = null;
     try {
       data = JSON.parse(api.data);
@@ -361,14 +357,25 @@ class Source {
     return { id: chapterId, mangaId, pages: [] };
   }
 
+  async send(request) {
+    let last = null;
+    for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        return await this.requests.schedule(App.createRequest(request));
+      } catch (e) {
+        if (e && e.kind === 'challenge') throw e;
+        last = e;
+      }
+    }
+    throw last;
+  }
+
   async text(url, extraHeaders) {
-    const response = await this.requests.schedule(
-      App.createRequest({
+    const response = await this.send({
         url,
         method: 'GET',
         headers: Object.assign({ 'User-Agent': UA, Accept: 'text/html,application/xhtml+xml,application/vnd.apple.mpegurl,*/*' }, extraHeaders || {}),
-      })
-    );
+      });
     if (response.status === 404) throw new Error('HydraHD: not found (HTTP 404)');
     if (response.status < 200 || response.status >= 300) throw new Error(`HydraHD: HTTP ${response.status}`);
     return String(response.data || '');

@@ -65,6 +65,17 @@ function minutesOf(value) {
   return Math.round(seconds / 60);
 }
 
+function secondsOf(value) {
+  if (value === undefined || value === null || value === '') return undefined;
+  const text = String(value).trim();
+  let seconds = 0;
+  if (/^\d+(?::\d+){1,2}$/.test(text)) {
+    const parts = text.split(':').map(Number);
+    seconds = parts.length === 3 ? parts[0] * 3600 + parts[1] * 60 + parts[2] : parts[0] * 60 + parts[1];
+  } else if (/^\d+(?:\.\d+)?$/.test(text)) seconds = parseFloat(text);
+  return seconds > 0 ? Math.round(seconds) : undefined;
+}
+
 const LANGUAGE_NAMES = { en: 'English', ur: 'Urdu', ar: 'Arabic', hi: 'Hindi', pa: 'Punjabi', fr: 'French', es: 'Spanish', tr: 'Turkish' };
 
 function describeMaster(text) {
@@ -185,8 +196,7 @@ class Source {
     const s = await this.seriesOf(mangaId);
     if (s.seriesType === 'singleVideo') {
       if (s.drmEnabled === true) throw new Error('ARY Plus: this title is copy protected (DRM) and cannot be played here');
-      const mins = minutesOf(s.duration);
-      return [{ id: 'main', chapterId: 'main', name: 'Full telefilm', number: 1, group: mins ? `${mins} min` : undefined }];
+      return [{ id: 'main', chapterId: 'main', name: 'Full telefilm', number: 1, duration: secondsOf(s.duration) }];
     }
     const list = await this.episodesOf(mangaId);
     const rows = [];
@@ -194,14 +204,13 @@ class Source {
       if (!e || !e._id || e.drmEnabled === true || !e.videoSource) continue;
       const number = Number(e.videoEpNumber);
       const created = Date.parse(e.createdAd || '');
-      const mins = minutesOf(e.videoLength);
       rows.push({
         id: String(e._id),
         chapterId: String(e._id),
         name: String(e.title || (Number.isFinite(number) ? `Episode ${number}` : 'Episode')).trim(),
         number: Number.isFinite(number) ? number : undefined,
         time: Number.isFinite(created) ? created : undefined,
-        group: mins ? `${mins} min` : undefined,
+        duration: secondsOf(e.videoLength),
       });
     }
     if (!rows.length) throw new Error('ARY Plus has no playable episodes for this title yet');

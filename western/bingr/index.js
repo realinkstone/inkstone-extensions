@@ -142,7 +142,7 @@ function unseal(sealed) {
   return JSON.parse(utf8Text(body));
 }
 
-function sealedOf(html) {
+function flightOf(html) {
   const pieces = [];
   const re = /self\.__next_f\.push\(\[1,"((?:[^"\\]|\\.)*)"\]\)/g;
   let m;
@@ -152,13 +152,33 @@ function sealedOf(html) {
     } catch (e) {
     }
   }
-  const all = pieces.join('');
+  return pieces.join('');
+}
+
+function sealedOf(all) {
   const ref = /"sealed":"\$([0-9a-f]+)"/.exec(all);
   if (!ref) return null;
   const chunk = new RegExp('(?:^|\\n)' + ref[1] + ':T([0-9a-f]+),').exec(all);
   if (!chunk) return null;
   const start = chunk.index + chunk[0].length;
   return all.substr(start, parseInt(chunk[1], 16));
+}
+
+function tokenOf(all) {
+  const m = /"token":"([^"]+)"/.exec(all);
+  return m ? m[1] : '';
+}
+
+const ALTERNATES = {
+  singularity: { label: 'Edge', headers: true },
+  citadel: { label: 'Citadel' },
+  flux: { label: 'Flux' },
+  evion: { label: 'Evion', headers: true },
+};
+
+function subtitleFormat(url) {
+  const m = /\.(srt|vtt)(?:[?#]|$)/i.exec(String(url || ''));
+  return m ? m[1].toLowerCase() : undefined;
 }
 
 class Source {
@@ -278,10 +298,7 @@ class Source {
       const batch = rest.slice(i, i + 3);
       const answers = await Promise.all(
         batch.map((n) =>
-          this.json(`${SITE}/api/episodes?kind=tv&tmdb=${tmdb}&s=${n}`).catch((e) => {
-            console.error(`Bingr season ${n} failed: ${e && e.message}`);
-            return null;
-          })
+          this.season(tmdb, n)
         )
       );
       batch.forEach((n, at) => {
@@ -299,6 +316,9 @@ class Source {
         if (!Number.isFinite(number)) return;
         const name = cleanText(ep.title);
         const row = { id: `s${season}e${number}`, name: name ? `Episode ${number}: ${name}` : `Episode ${number}`, number, season };
+        if (name) row.title = name;
+        if (/^https?:\/\//.test(String(ep.still || ''))) row.thumbnail = String(ep.still);
+        if (cleanText(ep.overview)) row.summary = cleanText(ep.overview);
         const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(air);
         if (m) row.time = Date.UTC(+m[1], +m[2] - 1, +m[3]);
         rows.push(row);
@@ -310,12 +330,28 @@ class Source {
     return rows.map((r) => {
       const out = { id: r.id, chapterId: r.id, name: r.name, number: r.number };
       if (r.time !== undefined) out.time = r.time;
+      ['title', 'thumbnail', 'summary'].forEach((k) => {
+        if (r[k] !== undefined) out[k] = r[k];
+      });
       if (many) {
         out.season = String(r.season);
         out.seasonName = `Season ${r.season}`;
       }
       return out;
     });
+  }
+
+  async season(tmdb, n) {
+    let last = null;
+    for (let attempt = 0; attempt < 3; attempt++) {
+      try {
+        return await this.json(`${SITE}/api/episodes?kind=tv&tmdb=${tmdb}&s=${n}`);
+      } catch (e) {
+        if (e && e.kind === 'challenge') throw e;
+        last = e;
+      }
+    }
+    throw new Error(`Bingr: season ${n} did not load (${last && last.message}), try again`);
   }
 
   async getVideos(mangaId, chapterId) {
@@ -328,50 +364,98 @@ class Source {
       path = `/watch/tv/${tmdb}/${ep[1]}/${ep[2]}`;
     }
     let payload = null;
-    let page = '';
-    for (let attempt = 0; attempt < 3 && !payload; attempt++) {
-      page = await this.text(`${SITE}${path}`);
-      const sealed = sealedOf(page);
+    let token = '';
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const page = await this.text(`${SITE}${path}${attempt ? `?r=${attempt}` : ''}`);
+      const flight = flightOf(page);
+      const sealed = sealedOf(flight);
+      let found = null;
       if (sealed) {
         try {
-          payload = unseal(sealed);
+          found = unseal(sealed);
         } catch (e) {
-          payload = null;
+          found = null;
         }
+      }
+      if (found) {
+        payload = found;
+        token = tokenOf(flight);
+        if (Array.isArray(found.streams) && found.streams.length) break;
       }
     }
     if (!payload) throw new Error('Bingr: the title page held no stream list');
-    const streams = Array.isArray(payload.streams) ? payload.streams.filter((s) => s && /^https?:\/\//.test(String(s.url || ''))) : [];
-    if (!streams.length) throw new Error('Bingr has no stream for this title yet');
+    const usable = (list) => (Array.isArray(list) ? list.filter((s) => s && /^https?:\/\//.test(String(s.url || ''))) : []);
+
+    const main = usable(payload.streams);
     const rank = (s) => (/^english$/i.test(s.language) ? 0 : /^original$/i.test(s.language) ? 1 : 2);
     const height = (s) => parseInt(String(s.quality || '').replace(/\D/g, ''), 10) || 0;
-    streams.sort((x, y) => rank(x) - rank(y) || String(x.language).localeCompare(String(y.language)) || height(y) - height(x));
-    return streams.map((s) => this.videoOf(s));
+    main.sort((x, y) => rank(x) - rank(y) || String(x.language).localeCompare(String(y.language)) || height(y) - height(x));
+    const videos = main.map((s) => this.videoOf(s));
+
+    const ids = (Array.isArray(payload.servers) ? payload.servers : []).map((x) => x && x.id).filter((id) => ALTERNATES[id]);
+    const answers = token
+      ? await Promise.all(
+          ids.map((id) =>
+            this.alternate(kind, tmdb, id, token, chapterId).then(
+              (list) => ({ id, list }),
+              (error) => ({ id, error })
+            )
+          )
+        )
+      : [];
+    answers.forEach((a) => {
+      (a.list || []).forEach((s) => videos.push(this.videoOf(s, ALTERNATES[a.id])));
+    });
+    if (!videos.length) {
+      const challenged = answers.find((a) => a.error && a.error.kind === 'challenge');
+      if (challenged) throw challenged.error;
+      throw new Error(`Bingr: ${cleanText(payload.error) || 'no stream for this title yet'}`);
+    }
+    return videos;
   }
 
-  videoOf(stream) {
-    const lang = cleanText(stream.language) || 'Original';
-    const hard = /^(.*?)\s+sub$/i.exec(lang);
-    const name = AUDIO_NAMES[lang] || lang;
+  async alternate(kind, tmdb, provider, token, chapterId) {
+    let url = `${SITE}/api/sources?kind=${kind}&t=${encodeURIComponent(token)}&provider=${provider}&tmdb=${tmdb}`;
+    if (kind === 'tv') {
+      const ep = /^s(\d+)e(\d+)$/.exec(String(chapterId || ''));
+      if (!ep) return [];
+      url += `&s=${ep[1]}&e=${ep[2]}`;
+    }
+    const text = (await this.text(url, { Accept: 'text/plain,*/*' })).trim();
+    const body = unseal(text);
+    return Array.isArray(body.streams) ? body.streams.filter((s) => s && /^https?:\/\//.test(String(s.url || ''))) : [];
+  }
+
+  videoOf(stream, server) {
+    const lang = cleanText(stream.language);
     const parts = [];
-    if (hard) parts.push(`Original audio, Hardsub ${AUDIO_NAMES[hard[1]] || hard[1]}`);
-    else if (/^original$/i.test(lang)) parts.push('Original audio');
-    else if (/^english$/i.test(lang)) parts.push('English audio');
-    else parts.push(`${name} audio Dub`);
+    if (server) parts.push(server.label);
+    if (lang) {
+      const hard = /^(.*?)\s+sub$/i.exec(lang);
+      const name = AUDIO_NAMES[lang] || lang;
+      if (hard) parts.push(`Original audio, Hardsub ${AUDIO_NAMES[hard[1]] || hard[1]}`);
+      else if (/^original$/i.test(lang)) parts.push('Original audio');
+      else if (/^english$/i.test(lang)) parts.push('English audio');
+      else parts.push(`${name} audio Dub`);
+    }
     const quality = cleanText(stream.quality);
     if (quality) parts.push(quality);
     const subtitles = [];
     (Array.isArray(stream.subtitles) ? stream.subtitles : []).forEach((t) => {
       if (!t || !/^https?:\/\//.test(String(t.url || ''))) return;
       const label = cleanText(t.label || t.lang) || 'Subtitles';
-      subtitles.push({ url: t.url, label, language: SUBTITLE_CODES[label] || SUBTITLE_CODES[cleanText(t.lang)] || label, format: 'srt' });
+      const entry = { url: t.url, label, language: SUBTITLE_CODES[label] || SUBTITLE_CODES[cleanText(t.lang)] || label };
+      const format = subtitleFormat(t.url);
+      if (format) entry.format = format;
+      subtitles.push(entry);
     });
     if (subtitles.length) {
       const english = subtitles.some((t) => t.language === 'en');
       parts.push(subtitles.length <= 3 ? 'Softsub: ' + subtitles.map((t) => t.label).join(', ') : english ? `Softsub: English and ${subtitles.length - 1} more` : `Softsub: ${subtitles.length} languages`);
     }
-    const video = { url: stream.url, quality: parts.join(', '), type: 'hls' };
+    const video = { url: stream.url, quality: parts.join(', ') || 'Auto', type: 'hls' };
     if (subtitles.length) video.subtitles = subtitles;
+    if (server && server.headers) video.headers = { Referer: `${SITE}/`, Origin: SITE };
     return video;
   }
 
@@ -388,10 +472,21 @@ class Source {
     }
   }
 
+  async send(request) {
+    let last = null;
+    for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        return await this.requests.schedule(App.createRequest(request));
+      } catch (e) {
+        if (e && e.kind === 'challenge') throw e;
+        last = e;
+      }
+    }
+    throw last;
+  }
+
   async text(url, extraHeaders) {
-    const response = await this.requests.schedule(
-      App.createRequest({ url, method: 'GET', headers: Object.assign({ 'User-Agent': UA, Accept: 'text/html,application/xhtml+xml' }, extraHeaders || {}) })
-    );
+    const response = await this.send({ url, method: 'GET', headers: Object.assign({ 'User-Agent': UA, Accept: 'text/html,application/xhtml+xml' }, extraHeaders || {}) });
     if (response.status === 404) throw new Error('Bingr: not found (HTTP 404)');
     if (response.status < 200 || response.status >= 300) throw new Error(`Bingr: HTTP ${response.status}`);
     return String(response.data || '');

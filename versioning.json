@@ -5895,7 +5895,7 @@
     {
       "id": "aryplus",
       "name": "ARY Plus",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "anime",
       "website": "https://aryplus.tv",
       "iconUrl": "https://inkstone.web.app/aryplus/icon.png",
@@ -5916,7 +5916,7 @@
       ],
       "language": "ur",
       "contentRating": "safe",
-      "sha256": "a88f4db59367b181d8ce8000798b372f7664b201c818753690a903f9cbbe0cd1"
+      "sha256": "db0b270fb5669e2923e70929016dcff892c018087b96529937214a9fbd1a9ba7"
     },
     {
       "id": "anizone",
@@ -6172,7 +6172,7 @@
     {
       "id": "hydrahd",
       "name": "HydraHD",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://hydrahd.gd",
       "iconUrl": "https://inkstone.web.app/hydrahd/icon.png",
@@ -6181,8 +6181,15 @@
         "*.hydrahd.gd",
         "vixsrc.to",
         "*.vixsrc.to",
+        "vix-content.net",
+        "*.vix-content.net",
         "vidspark.to",
-        "*.vidspark.to"
+        "*.vidspark.to",
+        "paretocdn.site",
+        "*.paretocdn.site",
+        "netrocdn.site",
+        "*.netrocdn.site",
+        "*.workers.dev"
       ],
       "description": "Western\n\nCatalog・100,000+",
       "capabilities": [
@@ -6195,12 +6202,12 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "5d42ae5ae0a36594572f57ba0581b4cd18f74a57914acdad8b88419e239dd4b9"
+      "sha256": "a2013e286cd3c0bf056976b1260a3dba9706c9c7882fc161d295958e2c41ac14"
     },
     {
       "id": "pressplayz",
       "name": "PressPlayZ",
-      "version": "1.0.0",
+      "version": "1.0.2",
       "medium": "anime",
       "website": "https://pressplayz.top",
       "iconUrl": "https://inkstone.web.app/pressplayz/icon.png",
@@ -6208,7 +6215,12 @@
         "pressplayz.top",
         "*.pressplayz.top",
         "vidspark.to",
-        "*.vidspark.to"
+        "*.vidspark.to",
+        "paretocdn.site",
+        "*.paretocdn.site",
+        "netrocdn.site",
+        "*.netrocdn.site",
+        "*.workers.dev"
       ],
       "description": "Western",
       "capabilities": [
@@ -6221,18 +6233,25 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "10f4b5efba4dcaa450a10393d6128fe5c9ecc368a1405f8ad8bc49a87b567cb2"
+      "sha256": "2bc6330ce800030b8a78d300926eae647c5c0804a7d7e82ae62b76790bd4b7df"
     },
     {
       "id": "bingr",
       "name": "Bingr",
-      "version": "1.0.0",
+      "version": "1.0.2",
       "medium": "anime",
       "website": "https://bingr.one",
       "iconUrl": "https://inkstone.web.app/bingr/icon.png",
       "hosts": [
         "bingr.one",
-        "*.bingr.one"
+        "*.bingr.one",
+        "*.workers.dev",
+        "hakunaymatata.com",
+        "*.hakunaymatata.com",
+        "rousav.tech",
+        "*.rousav.tech",
+        "streamrip.fun",
+        "*.streamrip.fun"
       ],
       "description": "Western",
       "capabilities": [
@@ -6245,7 +6264,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "7e57e0a27044fed7ca15284130e35f551c323d38063867bf5b785197ba923d0c"
+      "sha256": "54ebd042ed1edc55e01aca92c261416fb49d3eb29ddd5213c634accb3bf28c3f"
     }
   ]
 }

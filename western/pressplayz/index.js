@@ -297,6 +297,10 @@ class Source {
           if (!Number.isFinite(number)) return;
           const name = cleanText(ep.name);
           const row = { id: `s${batch[at]}e${number}`, name: name ? `Episode ${number}: ${name}` : `Episode ${number}`, number, season: batch[at] };
+          if (name) row.title = name;
+          if (ep.still_path) row.thumbnail = posterOf(ep.still_path, 'w300');
+          if (cleanText(ep.overview)) row.summary = cleanText(ep.overview);
+          if (Number(ep.runtime) > 0) row.duration = Math.round(Number(ep.runtime) * 60);
           const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(air);
           if (m) row.time = Date.UTC(+m[1], +m[2] - 1, +m[3]);
           rows.push(row);
@@ -309,6 +313,9 @@ class Source {
     return rows.map((r) => {
       const out = { id: r.id, chapterId: r.id, name: r.name, number: r.number };
       if (r.time !== undefined) out.time = r.time;
+      ['title', 'thumbnail', 'summary', 'duration'].forEach((k) => {
+        if (r[k] !== undefined) out[k] = r[k];
+      });
       if (many) {
         out.season = String(r.season);
         out.seasonName = `Season ${r.season}`;
@@ -346,13 +353,11 @@ class Source {
   }
 
   async vidSpark(path) {
-    const api = await this.requests.schedule(
-      App.createRequest({
+    const api = await this.send({
         url: `${SPARK}/api/vidora/v1/${path}`,
         method: 'GET',
         headers: { 'User-Agent': UA, Accept: 'application/json', 'x-player-key': SPARK_KEY, Referer: `${SPARK}/${path}` },
-      })
-    );
+      });
     let data = null;
     try {
       data = JSON.parse(api.data);
@@ -389,13 +394,17 @@ class Source {
   }
 
   async season(tmdb, number) {
-    try {
-      const text = await this.text(`${SITE}/api/tmdb/season/${tmdb}/${number}`, { Accept: 'application/json' });
-      return JSON.parse(text);
-    } catch (e) {
-      console.error(`PressPlayZ season ${number} failed: ${e && e.message}`);
-      return null;
+    let last = null;
+    for (let attempt = 0; attempt < 3; attempt++) {
+      try {
+        const text = await this.text(`${SITE}/api/tmdb/season/${tmdb}/${number}`, { Accept: 'application/json' });
+        return JSON.parse(text);
+      } catch (e) {
+        if (e && e.kind === 'challenge') throw e;
+        last = e;
+      }
     }
+    throw new Error(`PressPlayZ: season ${number} did not load (${last && last.message}), try again`);
   }
 
   async watchPage(kind, tmdb) {
@@ -404,6 +413,7 @@ class Source {
       try {
         return await this.text(`${SITE}/watch/${kind}-x-${watchCode(tmdb)}`);
       } catch (e) {
+        if (e && e.kind === 'challenge') throw e;
         last = e;
       }
     }
@@ -411,14 +421,12 @@ class Source {
   }
 
   async action(name, body) {
-    const response = await this.requests.schedule(
-      App.createRequest({
+    const response = await this.send({
         url: `${SITE}/_actions/${name}/`,
         method: 'POST',
         headers: { 'User-Agent': UA, 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(body),
-      })
-    );
+      });
     if (response.status < 200 || response.status >= 300) throw new Error(`PressPlayZ: ${name} answered HTTP ${response.status}`);
     return devalueParse(String(response.data || '[]'));
   }
@@ -427,10 +435,21 @@ class Source {
     return { id: chapterId, mangaId, pages: [] };
   }
 
+  async send(request) {
+    let last = null;
+    for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        return await this.requests.schedule(App.createRequest(request));
+      } catch (e) {
+        if (e && e.kind === 'challenge') throw e;
+        last = e;
+      }
+    }
+    throw last;
+  }
+
   async text(url, extraHeaders) {
-    const response = await this.requests.schedule(
-      App.createRequest({ url, method: 'GET', headers: Object.assign({ 'User-Agent': UA, Accept: 'text/html,application/xhtml+xml' }, extraHeaders || {}) })
-    );
+    const response = await this.send({ url, method: 'GET', headers: Object.assign({ 'User-Agent': UA, Accept: 'text/html,application/xhtml+xml' }, extraHeaders || {}) });
     if (response.status === 404) throw new Error('PressPlayZ: not found (HTTP 404)');
     if (response.status < 200 || response.status >= 300) throw new Error(`PressPlayZ: HTTP ${response.status}`);
     return String(response.data || '');

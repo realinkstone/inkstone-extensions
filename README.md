@@ -340,7 +340,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 
 | Extension | Site | Language | Rating | Version |
 | --- | --- | --- | --- | --- |
-| [ARY Plus](drama/aryplus/index.js) | aryplus.tv | Urdu | Safe | 1.0.1 |
+| [ARY Plus](drama/aryplus/index.js) | aryplus.tv | Urdu | Safe | 1.0.2 |
 
 ### Western
 
@@ -348,9 +348,9 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 
 | Extension | Site | Language | Rating | Version |
 | --- | --- | --- | --- | --- |
-| [Bingr](western/bingr/index.js) | bingr.one | English | Mature | 1.0.0 |
-| [HydraHD](western/hydrahd/index.js) | hydrahd.gd | English | Mature | 1.0.0 |
-| [PressPlayZ](western/pressplayz/index.js) | pressplayz.top | English | Mature | 1.0.0 |
+| [Bingr](western/bingr/index.js) | bingr.one | English | Mature | 1.0.2 |
+| [HydraHD](western/hydrahd/index.js) | hydrahd.gd | English | Mature | 1.0.1 |
+| [PressPlayZ](western/pressplayz/index.js) | pressplayz.top | English | Mature | 1.0.2 |
 
 ## Known issues
 
