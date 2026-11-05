@@ -6368,6 +6368,38 @@
       "language": "en",
       "contentRating": "mature",
       "sha256": "b2e27ac8d3511b987067d4c03252794dc60cdf35d010253601f8824896b65c01"
+    },
+    {
+      "id": "kissasian",
+      "name": "KissAsian",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://kissasian.com.gr",
+      "iconUrl": "https://inkstone.web.app/kissasian/icon.png",
+      "hosts": [
+        "kissasian.com.gr",
+        "*.kissasian.com.gr",
+        "kissasian.com.lv",
+        "*.kissasian.com.lv",
+        "dramavibe.cfd",
+        "*.dramavibe.cfd",
+        "dramav2.xyz",
+        "*.dramav2.xyz",
+        "drama3.click",
+        "*.drama3.click"
+      ],
+      "description": "Drama\n\nCatalog・500+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "184d149fc3b8abfdce9a2a2456b36ec6f1a7a31a366720897eb669aabc60aa8c"
     }
   ]
 }
