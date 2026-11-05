@@ -25,6 +25,10 @@ function mapStatus(completed) {
 function storyTextToPlain(html) {
   if (!html) return '';
   const $ = cheerio.load(String(html));
+  $('img').each((_, el) => {
+    const src = ($(el).attr('src') || '').trim();
+    $(el).replaceWith(/^https?:\/\//.test(src) ? `\n\n![](${src})\n\n` : '');
+  });
   $('br').each((_, el) => {
     $(el).replaceWith('\n');
   });

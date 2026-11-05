@@ -2,6 +2,7 @@ const SITE_BASE = 'https://www.webtoons.com';
 const MOBILE_BASE = 'https://m.webtoons.com';
 const IMAGE_DOMAIN = 'https://webtoon-phinf.pstatic.net';
 const IMAGE_REFERER = 'https://www.webtoons.com/';
+const LANGUAGES = ['en', 'es'];
 
 const MOBILE_UA =
   'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1';
@@ -44,6 +45,11 @@ const WEEKDAYS = [
   { id: 'complete', key: 'COMPLETE', name: 'Complete' },
 ];
 
+function lang() {
+  const value = App.getSourceSetting('language');
+  return LANGUAGES.includes(value) ? value : 'en';
+}
+
 function normalizeWhitespace(str) {
   return (str || '').replace(/\s+/g, ' ').trim();
 }
@@ -68,7 +74,7 @@ function parseChapterId(chapterId) {
 }
 
 function parseHrefParts(href) {
-  const m = (href || '').match(/\/en\/([a-z0-9-]+)\/([a-z0-9-]+)\/list\?title_no=(\d+)/);
+  const m = (href || '').match(/\/[a-z-]+\/([a-z0-9-]+)\/([a-z0-9-]+)\/list\?title_no=(\d+)/);
   if (!m) return null;
   return { genreSeo: m[1], titleSlug: m[2], titleNo: m[3] };
 }
@@ -91,8 +97,8 @@ function parseAbbreviatedCount(text) {
 
 function mapStatus(text) {
   const s = (text || '').toLowerCase();
-  if (s.includes('complet')) return 'COMPLETED';
-  if (s.includes('hiatus')) return 'HIATUS';
+  if (s.includes('complet') || s.includes('finaliz')) return 'COMPLETED';
+  if (s.includes('hiatus') || s.includes('pausa')) return 'HIATUS';
   return 'ONGOING';
 }
 
@@ -101,11 +107,11 @@ function extractAgeRating(text) {
   return m ? parseInt(m[1], 10) : undefined;
 }
 
-function findLabeledDD($, label) {
+function findLabeledDD($, labels) {
   let found = null;
   $('.details_area dt').each((_, dt) => {
     if (found) return;
-    if (normalizeWhitespace($(dt).text()) === label) {
+    if (labels.includes(normalizeWhitespace($(dt).text()))) {
       found = $(dt).next('dd');
     }
   });
@@ -123,7 +129,7 @@ function parseGenreListItem(item) {
     referer: IMAGE_REFERER,
     author: item.twoAuthorNames || undefined,
     summary: item.synopsis || undefined,
-    webURL: `${SITE_BASE}/en/${genreSeo}/${titleSlug}/list?title_no=${titleNo}`,
+    webURL: `${SITE_BASE}/${lang()}/${genreSeo}/${titleSlug}/list?title_no=${titleNo}`,
     medium: 'comics',
   };
 }
@@ -141,7 +147,7 @@ function parseSearchItem(item) {
     referer: IMAGE_REFERER,
     author: uniqueAuthors.join(', ') || undefined,
     views: typeof item.readCount === 'number' ? item.readCount : undefined,
-    webURL: `${SITE_BASE}/en/${genreSeo}/${titleSlug}/list?title_no=${titleNo}`,
+    webURL: `${SITE_BASE}/${lang()}/${genreSeo}/${titleSlug}/list?title_no=${titleNo}`,
     medium: 'comics',
   };
 }
@@ -164,7 +170,7 @@ function parseOriginalsList($, dayKey, markCompleted) {
       referer: IMAGE_REFERER,
       views: parseAbbreviatedCount($el.find('.info_text .view_count').text()),
       tags: [normalizeWhitespace($el.find('.info_text .genre').text())].filter(Boolean),
-      webURL: `${SITE_BASE}/en/${parts.genreSeo}/${parts.titleSlug}/list?title_no=${parts.titleNo}`,
+      webURL: `${SITE_BASE}/${lang()}/${parts.genreSeo}/${parts.titleSlug}/list?title_no=${parts.titleNo}`,
       medium: 'comics',
     };
     if (markCompleted) manga.completed = true;
@@ -200,7 +206,7 @@ class Source {
 
     if (query) {
       const start = (page - 1) * 20 + 1;
-      const url = `${MOBILE_BASE}/en/search/result?keyword=${encodeURIComponent(query)}&searchType=WEBTOON&start=${start}`;
+      const url = `${MOBILE_BASE}/${lang()}/search/result?keyword=${encodeURIComponent(query)}&searchType=WEBTOON&start=${start}`;
       const json = await this.requestMobileJSON(url);
       const webtoonResult = (json && json.result && json.result.webtoonResult) || { titleList: [], totalCount: 0 };
       const titleList = webtoonResult.titleList || [];
@@ -212,7 +218,7 @@ class Source {
     const includedTags = (request && request.includedTags) || [];
     if (includedTags.length > 0 && includedTags[0] && includedTags[0].id) {
       const sortId = ['MANA', 'LIKEIT', 'UPDATE'].includes(request && request.sortId) ? request.sortId : 'MANA';
-      const url = `${MOBILE_BASE}/en/genres/${encodeURIComponent(includedTags[0].id)}/title?sortOrder=${sortId}&page=${page}`;
+      const url = `${MOBILE_BASE}/${lang()}/genres/${encodeURIComponent(includedTags[0].id)}/title?sortOrder=${sortId}&page=${page}`;
       const json = await this.requestMobileJSON(url);
       const items = Array.isArray(json) ? json : [];
       const results = items.map(parseGenreListItem);
@@ -222,7 +228,7 @@ class Source {
 
     const feedId = (request && request.feed) || 'monday';
     const day = WEEKDAYS.find((d) => d.id === feedId) || WEEKDAYS[0];
-    const html = await this.requestMobileHTML(`${MOBILE_BASE}/en/originals/${day.id}`);
+    const html = await this.requestMobileHTML(`${MOBILE_BASE}/${lang()}/originals/${day.id}`);
     const $ = cheerio.load(html);
     const results = parseOriginalsList($, day.key, day.id === 'complete');
     return { results };
@@ -230,7 +236,7 @@ class Source {
 
   async getMangaDetails(mangaId) {
     const { genreSeo, titleSlug, titleNo } = parseMangaId(mangaId);
-    const url = `${MOBILE_BASE}/en/${genreSeo}/${titleSlug}/list?title_no=${titleNo}`;
+    const url = `${MOBILE_BASE}/${lang()}/${genreSeo}/${titleSlug}/list?title_no=${titleNo}`;
     const html = await this.requestMobileHTML(url);
     const $ = cheerio.load(html);
 
@@ -246,10 +252,10 @@ class Source {
       if (t) tags.push(t);
     });
 
-    const statusDD = findLabeledDD($, 'Status');
+    const statusDD = findLabeledDD($, ['Status', 'Estado']);
     const status = mapStatus(statusDD ? statusDD.text() : '');
 
-    const ratingDD = findLabeledDD($, 'Content Rating');
+    const ratingDD = findLabeledDD($, ['Content Rating']);
     const ageRating = ratingDD ? extractAgeRating(ratingDD.text()) : undefined;
 
     const mangaInfo = {
@@ -272,7 +278,7 @@ class Source {
     const chapters = [];
     let cursor;
     for (let i = 0; i < 20; i++) {
-      let url = `${MOBILE_BASE}/api/v1/webtoon/${encodeURIComponent(titleNo)}/episodes?pageSize=500&readingLanguageCode=en`;
+      let url = `${MOBILE_BASE}/api/v1/webtoon/${encodeURIComponent(titleNo)}/episodes?pageSize=500&readingLanguageCode=${lang()}`;
       if (cursor !== undefined) url += `&cursor=${encodeURIComponent(cursor)}`;
       const json = await this.requestMobileJSON(url);
       const result = (json && json.result) || {};
@@ -302,7 +308,7 @@ class Source {
   async getChapterDetails(mangaId, chapterId) {
     const { genreSeo, titleSlug, titleNo } = parseMangaId(mangaId);
     const { episodeNo, episodeSlug } = parseChapterId(chapterId);
-    const url = `${SITE_BASE}/en/${genreSeo}/${titleSlug}/${episodeSlug}/viewer?title_no=${titleNo}&episode_no=${episodeNo}`;
+    const url = `${SITE_BASE}/${lang()}/${genreSeo}/${titleSlug}/${episodeSlug}/viewer?title_no=${titleNo}&episode_no=${episodeNo}`;
     const html = await this.requestDesktopHTML(url);
     const $ = cheerio.load(html);
 

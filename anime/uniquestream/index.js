@@ -36,7 +36,7 @@ function toTitle(item) {
 }
 
 function languageName(code) {
-  const names = { en: 'English', es: 'Spanish', pt: 'Portuguese', fr: 'French', de: 'German', it: 'Italian', ar: 'Arabic', ru: 'Russian', ja: 'Japanese', zh: 'Chinese', ko: 'Korean', id: 'Indonesian', ms: 'Malay', th: 'Thai', vi: 'Vietnamese' };
+  const names = { en: 'English', es: 'Spanish', pt: 'Portuguese', fr: 'French', de: 'German', it: 'Italian', ar: 'Arabic', ru: 'Russian', ja: 'Japanese', zh: 'Chinese', ko: 'Korean', id: 'Indonesian', ms: 'Malay', th: 'Thai', vi: 'Vietnamese', hi: 'Hindi', ta: 'Tamil', te: 'Telugu', pl: 'Polish' };
   const base = String(code || '').split('-')[0].toLowerCase();
   const name = names[base] || code;
   return code && code.indexOf('-') !== -1 ? `${name} (${code.split('-')[1]})` : name;
@@ -135,20 +135,23 @@ class Source {
   }
 
   async getVideos(mangaId, chapterId) {
-    const media = await this.json(`${API}/episode/${encodeURIComponent(chapterId)}/media/dash/ja-JP`);
-    const hls = media && media.hls;
-    if (!hls || !hls.playlist) throw new Error('UniqueStream: this episode has no stream yet');
-    const subtitles = (Array.isArray(hls.subtitles) ? hls.subtitles : [])
-      .filter((s) => s && s.url)
-      .map((s) => ({ url: s.url, label: languageName(s.language), language: s.language }));
-    return [
-      {
-        url: hls.playlist,
-        quality: hls.locale ? `Auto, ${languageName(hls.locale)} audio` : 'Auto',
+    const wanted = App.getSourceSetting('audio') || 'ja-JP';
+    const media = await this.json(`${API}/episode/${encodeURIComponent(chapterId)}/media/dash/${encodeURIComponent(wanted)}`);
+    const versions = [media && media.hls].concat((media && media.versions && media.versions.hls) || []).filter((v) => v && v.playlist);
+    if (!versions.length) throw new Error('UniqueStream: this episode has no stream yet');
+    const rank = (v) => (v.locale === wanted ? 0 : v.locale === 'ja-JP' ? 1 : 2);
+    const seen = new Set();
+    return versions
+      .filter((v) => !seen.has(v.locale) && seen.add(v.locale))
+      .sort((a, b) => rank(a) - rank(b))
+      .map((v) => ({
+        url: v.playlist,
+        quality: v.locale ? `Auto, ${languageName(v.locale)} audio` : 'Auto',
         headers: { Referer: `${SITE}/` },
-        subtitles,
-      },
-    ];
+        subtitles: (Array.isArray(v.subtitles) ? v.subtitles : [])
+          .filter((s) => s && s.url)
+          .map((s) => ({ url: s.url, label: languageName(s.language), language: s.language })),
+      }));
   }
 
   async getChapterDetails(mangaId, chapterId) {
