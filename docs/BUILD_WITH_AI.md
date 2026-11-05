@@ -23,7 +23,7 @@ Works with Claude, ChatGPT, Cursor, Codex, Gemini and anything else that can wri
 
 **Prefer to approve a plan before any code is written?** Use OpenSpec instead: [OPENSPEC.md](https://inkstone.web.app/docs/OPENSPEC.md).
 
-Inkstone is an independent project. It isn't part of Boundless Reader and isn't endorsed by it.
+Inkstone is an independent project. It isn't part of Boundless Reader or Sumizuri and isn't endorsed by either.
 
 ---
 

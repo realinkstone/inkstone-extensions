@@ -9,7 +9,7 @@
 
 Use OpenSpec when you want to read and approve the plan before any code gets written. If you'd rather just hand the job to an AI, use [BUILD_WITH_AI.md](BUILD_WITH_AI.md). Both end in the same place: a tested extension and a pull request.
 
-Inkstone is independent. It isn't part of Boundless Reader or OpenSpec, and neither endorses it.
+Inkstone is independent. It isn't part of Boundless Reader, Sumizuri or OpenSpec, and none of them endorses it.
 
 ## Set up once
 
