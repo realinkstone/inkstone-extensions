@@ -263,14 +263,13 @@ function decodeMirror(value) {
   const v = String(value || '').trim();
   if (!v) return '';
   try {
-    const raw = atob(v);
-    try {
-      return decodeURIComponent(escape(raw));
-    } catch (e) {
-      return raw;
-    }
+    return App.base64Decode(v);
   } catch (e) {
-    return '';
+    try {
+      return typeof atob === 'function' ? atob(v) : '';
+    } catch (e2) {
+      return '';
+    }
   }
 }
 

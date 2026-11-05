@@ -295,7 +295,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [FreeWebNovel](novels/freewebnovel/index.js) | freewebnovel.com | English | Adult | 1.2.2 |
 | [GoodNovel](novels/goodnovel/index.js) | goodnovel.com | English | Adult | 1.2.1 |
 | [JJWXC](novels/jjwxc/index.js) | jjwxc.net | Chinese | Mature | 1.3.0 |
-| [Lectulandia](novels/lectulandia/index.js) | ww3.lectulandia.co | Spanish | Mature | 1.0.0 |
+| [Lectulandia](novels/lectulandia/index.js) | ww3.lectulandia.co | Spanish | Mature | 1.0.1 |
 | [LibRead](novels/libread/index.js) | libread.com | English | Adult | 1.2.0 |
 | [MoboReader](novels/moboreader/index.js) | moboreader.com | English | Adult | 1.2.0 |
 | [Novel Archive](novels/novelarchive/index.js) | novelarchive.cc | English | Mature | 1.0.1 |
@@ -357,14 +357,14 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 
 | Extension | Site | Language | Rating | Version |
 | --- | --- | --- | --- | --- |
-| [Anime4i](donghua/anime4i/index.js) | anime4i.com | English | Safe | 1.0.3 |
-| [AnimeKhor](donghua/animekhor/index.js) | animekhor.org | English | Safe | 1.0.3 |
-| [AnimeXin](donghua/animexin/index.js) | animexin.dev | English | Safe | 1.0.3 |
-| [Donghua4K](donghua/donghua4k/index.js) | donghua4k.net | English | Safe | 1.0.3 |
-| [LMAnime](donghua/lmanime/index.js) | lmanime.com | English | Safe | 1.0.3 |
-| [LuciferDonghua](donghua/luciferdonghua/index.js) | luciferdonghua.org | English | Safe | 1.0.3 |
+| [Anime4i](donghua/anime4i/index.js) | anime4i.com | English | Safe | 1.0.4 |
+| [AnimeKhor](donghua/animekhor/index.js) | animekhor.org | English | Safe | 1.0.4 |
+| [AnimeXin](donghua/animexin/index.js) | animexin.dev | English | Safe | 1.0.4 |
+| [Donghua4K](donghua/donghua4k/index.js) | donghua4k.net | English | Safe | 1.0.4 |
+| [LMAnime](donghua/lmanime/index.js) | lmanime.com | English | Safe | 1.0.4 |
+| [LuciferDonghua](donghua/luciferdonghua/index.js) | luciferdonghua.org | English | Safe | 1.0.4 |
 | [MundoDonghua](donghua/mundodonghua/index.js) | mundodonghua.com | Spanish | Mature | 1.0.2 |
-| [NarulDonghua](donghua/naruldonghua/index.js) | naruldonghua.com | English | Safe | 1.0.3 |
+| [NarulDonghua](donghua/naruldonghua/index.js) | naruldonghua.com | English | Safe | 1.0.4 |
 
 ### Drama
 

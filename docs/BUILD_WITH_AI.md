@@ -143,7 +143,7 @@ function qs(params) {
 | `manager.schedule(request)` | Resolves to `{ status, headers, data }`. `data` is always a **string**, so `JSON.parse` it yourself. A 404 or 500 still resolves, so check `status`. Only network failures reject, and so does a host that is not in your `hosts`. The app waits out a 429 (or a 503 with a `Retry-After`) and retries it up to 3 times before you see the answer, and answers an identical GET (same address and headers) from a 90 second cache. |
 | `App.getSourceSetting(key)` | Reads a value the user set in your extension's settings. Always a string, or `undefined`. |
 | `App.createSourceStateManager()` | Returns `{ store(key, value), retrieve(key) }`, both async, for remembering things between calls. |
-| `App.base64Encode(text)` / `App.base64Decode(text)` | Base64 in and out, as UTF-8 text. `base64Decode` throws if the bytes are not valid UTF-8; use `atob` for binary data (one character per byte). |
+| `App.base64Encode(text)` / `App.base64Decode(text)` | Base64 in and out, as UTF-8 text. `base64Decode` throws if the bytes are not valid UTF-8. Boundless has `atob` for binary data (one character per byte), but Sumizuri's engine has none (its 0.2.0 source removes the one it needs while cheerio loads), so a bare `atob` call throws there: use `App.base64Decode` for text, and guard any `atob` with `typeof atob === 'function'`. A source that catches the error returns nothing, which looks like an empty site. The test script warns on a bare `atob`. |
 | `App.requestBrowserVerification({ url })` | Shows the page to the reader in the app's browser and resolves when they close it, or after 3 minutes. For a check that needs a person. The address must be on your `hosts`. Almost no extension needs it, because the app clears ordinary Cloudflare checks itself. |
 | `App.descrambleImage({ base64, headers })` | Puts back the pieces of one specific scrambled image scheme (a byte XOR and a 5 by 5 tile shuffle, switched on by `x-enc-*` and `x-scramble-*` response headers). Resolves to `{ base64 }` or `{ error }`. It is not a general descrambler. |
 | `App.executeInWebView({ url \| html + baseUrl, script, timeoutMs })` | Last resort. Runs your `script` inside a real browser view, for sites that only hand out a token through their own page scripts. It resolves to `{ value }` or `{ error }`. Read "When the site needs the web view" below first, because it is easy to make slow or flaky. |
@@ -617,7 +617,7 @@ const Source = sandbox.module.exports.Source;
 if (!check(typeof Source === 'function', 'exports a Source class', 'module.exports = { Source }')) finish();
 // Sumizuri's engine has no atob (its 0.2.0 source defines one only while cheerio loads, then deletes it); Boundless has one. A bare atob call throws in Sumizuri,
 // and a source that catches that returns nothing, so the failure looks like an empty site.
-if (/(^|[^.\w$])atob\s*\(/.test(code.split('\n').filter((line) => !/^\s*(\/\/|\/\*|\*)/.test(line)).join('\n'))) {
+if (!/typeof\s+atob/.test(code) && /(^|[^.\w$])atob\s*\(/.test(code.split('\n').filter((line) => !/^\s*(\/\/|\/\*|\*)/.test(line)).join('\n'))) {
   say('warn', 'calls atob, which Sumizuri does not have', 'use App.base64Decode(text), which both apps have (it reads UTF-8 text and throws on other bytes; guard a bare atob with typeof atob === "function")');
 }
 const source = new Source();

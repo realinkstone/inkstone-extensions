@@ -172,7 +172,7 @@ const Source = sandbox.module.exports.Source;
 if (!check(typeof Source === 'function', 'exports a Source class', 'module.exports = { Source }')) finish();
 // Sumizuri's engine has no atob (its 0.2.0 source defines one only while cheerio loads, then deletes it); Boundless has one. A bare atob call throws in Sumizuri,
 // and a source that catches that returns nothing, so the failure looks like an empty site.
-if (/(^|[^.\w$])atob\s*\(/.test(code.split('\n').filter((line) => !/^\s*(\/\/|\/\*|\*)/.test(line)).join('\n'))) {
+if (!/typeof\s+atob/.test(code) && /(^|[^.\w$])atob\s*\(/.test(code.split('\n').filter((line) => !/^\s*(\/\/|\/\*|\*)/.test(line)).join('\n'))) {
   say('warn', 'calls atob, which Sumizuri does not have', 'use App.base64Decode(text), which both apps have (it reads UTF-8 text and throws on other bytes; guard a bare atob with typeof atob === "function")');
 }
 const source = new Source();

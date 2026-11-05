@@ -6056,7 +6056,7 @@
     {
       "id": "animexin",
       "name": "AnimeXin",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "medium": "anime",
       "website": "https://animexin.dev",
       "iconUrl": "https://inkstone.web.app/animexin/icon.png",
@@ -6090,12 +6090,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "c9bbf3df70a9de1d4e152aab65f643bc2f91d7191bcdb44fb6fb3f78205e0f21"
+      "sha256": "6755d9ee97bf09084d2b2c2033e2b229b0ce473a2a71617edc2e01b032269932"
     },
     {
       "id": "animekhor",
       "name": "AnimeKhor",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "medium": "anime",
       "website": "https://animekhor.org",
       "iconUrl": "https://inkstone.web.app/animekhor/icon.png",
@@ -6129,12 +6129,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "a74be73d59092ced23e5e88ba318071101e3d7b69b5b48b926db1e4af04dffe9"
+      "sha256": "ad78db815a2bab0d228e0498613d6b5890c0b71c3e3fca1d10f619d93b6b0d48"
     },
     {
       "id": "luciferdonghua",
       "name": "LuciferDonghua",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "medium": "anime",
       "website": "https://luciferdonghua.org",
       "iconUrl": "https://inkstone.web.app/luciferdonghua/icon.png",
@@ -6168,12 +6168,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "9dd059c3800ed168328accc8f0bbf075c2e6fafb0366136df0d8d701360cc9ea"
+      "sha256": "d09c1cf56d5c6e9ddfd9d6b9e6b15bc108e8efa095e97394017a8ee2408af5ec"
     },
     {
       "id": "donghua4k",
       "name": "Donghua4K",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "medium": "anime",
       "website": "https://donghua4k.net",
       "iconUrl": "https://inkstone.web.app/donghua4k/icon.png",
@@ -6207,12 +6207,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "f0bec07c676d18eaebd73c98eb8544a40cdf46a0bf49877b53d5446ece315531"
+      "sha256": "ea25258ffc3123b8d6a9cbc6323f7d20e3a10c66734418ad07da0c5223095e1c"
     },
     {
       "id": "naruldonghua",
       "name": "NarulDonghua",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "medium": "anime",
       "website": "https://naruldonghua.com",
       "iconUrl": "https://inkstone.web.app/naruldonghua/icon.png",
@@ -6246,12 +6246,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "4e961e04030f8cbe07f0ccbba9f8691491da406109fabffbcdb1513e31b414ea"
+      "sha256": "ca9f1f2e1210004c799d541a9a94803e857916be9621a08bd674cf62f5021abf"
     },
     {
       "id": "anime4i",
       "name": "Anime4i",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "medium": "anime",
       "website": "https://anime4i.com",
       "iconUrl": "https://inkstone.web.app/anime4i/icon.png",
@@ -6285,12 +6285,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "962a3000acc4b0c5742c33f0536b5173afe2d5dbd455fd243014612d16f3afdf"
+      "sha256": "6d3764837981c5e7104bdf7e704469dae1e34783f731a045a2736a09ae723a97"
     },
     {
       "id": "lmanime",
       "name": "LMAnime",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "medium": "anime",
       "website": "https://lmanime.com",
       "iconUrl": "https://inkstone.web.app/lmanime/icon.png",
@@ -6324,7 +6324,7 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "6be4a3938b519210f90a992999e3152b5b7cdd8b1900ab98d88c30ba9e67d35b"
+      "sha256": "2462a7c174e2b522ebf9620d76a654179208e88f51982150e59fc3ae8eea0cdf"
     },
     {
       "id": "hydrahd",
@@ -7655,7 +7655,7 @@
     {
       "id": "lectulandia",
       "name": "Lectulandia",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "novel",
       "website": "https://ww3.lectulandia.co",
       "iconUrl": "https://inkstone.web.app/lectulandia/icon.png",
@@ -7679,7 +7679,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "797e6a1ede008a6d72c195185572721200345399d29934b9cd35a50de3596b9e"
+      "sha256": "4759da801a197b9d24f62083711e75ce4ace73a1c19b5de1f6d896c979e146a4"
     },
     {
       "id": "elejandria",
