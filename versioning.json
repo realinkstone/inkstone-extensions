@@ -1250,26 +1250,6 @@
       "sha256": "9abf0af080028c1ae03cd5fa7c2594b87779470fd5ade1c93b5808263673ab94"
     },
     {
-      "id": "sereinscan",
-      "name": "Serein Scan",
-      "version": "1.0.0",
-      "medium": "comics",
-      "website": "https://sereinscan.net",
-      "iconUrl": "https://sereinscan.net/wp-content/uploads/2025/06/cropped-SEREINSCANS-192x192.webp",
-      "description": "Manga・Manhwa・Manhua",
-      "capabilities": [
-        "browse",
-        "search",
-        "genres",
-        "details",
-        "chapters",
-        "reader"
-      ],
-      "language": "tr",
-      "contentRating": "safe",
-      "sha256": "3a2f2e3b8d2f474d1f751e525ee74820357964bc9776559af469b67bec43ede3"
-    },
-    {
       "id": "wamanga",
       "name": "WaManga",
       "version": "1.2.0",
