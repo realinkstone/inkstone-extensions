@@ -110,6 +110,166 @@ function ageFromGenres(genres) {
   return (Array.isArray(genres) ? genres : []).some((g) => /^mature$/i.test(String(g).trim())) ? 18 : 0;
 }
 
+const SEASON_ORDINALS = { first: 1, second: 2, third: 3, fourth: 4, fifth: 5, sixth: 6, seventh: 7, eighth: 8, ninth: 9, tenth: 10 };
+const SEASON_NOISE = /\b(sub|subs|subtitulado|subtitulada|espanol|latino|castellano|dub|dublado|doblado|hd|tv|uncensored|sin censura)\b/g;
+const SEASON_MAX_SIBLINGS = 14;
+
+function parseFranchise(title) {
+  let t = String(title || '')
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .replace(SEASON_NOISE, ' ')
+    .replace(/\b(?:19|20)\d{2}\b/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  let kind = 'main';
+  if (/\b(ova|oad|ona|original video animation)\b/.test(t)) kind = 'ova';
+  if (/\b(special|specials|recap|recaps|extra|extras|summary)\b/.test(t)) kind = 'special';
+  if (/\b(movie|movies|pelicula|peliculas|film|gekijouban)\b/.test(t)) kind = 'movie';
+  let season = null;
+  let final = false;
+  const take = (re, read) => {
+    const m = re.exec(t);
+    if (!m) return false;
+    season = read(m);
+    t = t.replace(re, ' ');
+    return true;
+  };
+  if (/\bfinal season\b/.test(t)) {
+    final = true;
+    t = t.replace(/\bfinal season\b/, ' ');
+  } else if (
+    !take(/\b(\d{1,2})(?:st|nd|rd|th) season\b/, (m) => Number(m[1])) &&
+    !take(/\b(first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth) season\b/, (m) => SEASON_ORDINALS[m[1]]) &&
+    !take(/\b(?:season|temporada|staffel|saison)s? (\d{1,2})\b/, (m) => Number(m[1])) &&
+    !take(/\bs(\d{1,2})\b/, (m) => Number(m[1])) &&
+    !take(/\s([2-9])$/, (m) => Number(m[1]))
+  ) {
+    take(/\s(ii|iii|iv)$/, (m) => ({ ii: 2, iii: 3, iv: 4 })[m[1]]);
+  }
+  t = t.replace(/\b(?:part|cour|parte) \d{1,2}\b/g, ' ').replace(/\b(ova|oad|ona|special|specials|recap|movie|pelicula|film)\b/g, ' ');
+  t = t.replace(/\s+/g, ' ').trim();
+  return { base: t, kind, season, final };
+}
+
+async function findFranchise(source, mangaId, ownTitle) {
+  const own = parseFranchise(ownTitle);
+  if (!own.base || own.base.length < 3) return [];
+  const words = own.base.split(' ');
+  const queries = [own.base];
+  if (words.length > 4) queries.push(words.slice(0, 4).join(' '));
+  const found = new Map();
+  for (const query of queries) {
+    let metadata;
+    for (let pageNumber = 0; pageNumber < 2; pageNumber++) {
+      let page;
+      try {
+        page = await source.getSearchResultsRaw({ title: query }, metadata);
+      } catch (e) {
+        break;
+      }
+      for (const r of (page && page.results) || []) {
+        if (!r || !r.mangaId || found.has(r.mangaId)) continue;
+        const p = parseFranchise(r.title);
+        const same = p.base === own.base || (p.kind !== 'main' && p.base.indexOf(own.base + ' ') === 0);
+        if (same) found.set(r.mangaId, { mangaId: r.mangaId, title: r.title, image: r.image, kind: p.kind, season: p.season, final: p.final });
+      }
+      metadata = page && page.metadata;
+      if (!metadata) break;
+    }
+    if (found.size > 1) break;
+  }
+  if (!found.has(mangaId)) found.set(mangaId, { mangaId, title: ownTitle, image: undefined, kind: own.kind, season: own.season, final: own.final });
+  return found.size > 1 ? Array.from(found.values()).slice(0, SEASON_MAX_SIBLINGS + 1) : [];
+}
+
+function numberSeasons(members) {
+  const seasons = members.filter((m) => m.kind === 'main');
+  let highest = 1;
+  for (const m of seasons) if (m.season) highest = Math.max(highest, m.season);
+  for (const m of seasons) {
+    if (m.final) m.number = highest + 1;
+    else m.number = m.season || 1;
+  }
+  return seasons;
+}
+
+const SEASON_GROUP_NAMES = { ova: 'OVAs', movie: 'Movies', special: 'Specials' };
+
+async function connectSeasons(source, mangaId, ownTitle) {
+  let members = [];
+  try {
+    members = await findFranchise(source, mangaId, ownTitle);
+  } catch (e) {
+    members = [];
+  }
+  const own = parseFranchise(ownTitle);
+  if (members.length < 2 || (own.kind !== 'main')) return source.getChaptersOfTitle(mangaId);
+  const seasons = numberSeasons(members);
+  if (seasons.length < 2 && members.filter((m) => m.kind !== 'main').length === 0) return source.getChaptersOfTitle(mangaId);
+  const lists = await Promise.all(
+    members.map((m) =>
+      m.mangaId === mangaId
+        ? source.getChaptersOfTitle(m.mangaId)
+        : source.getChaptersOfTitle(m.mangaId).catch(() => [])
+    )
+  );
+  const out = [];
+  const seen = new Set();
+  members.forEach((m, i) => {
+    const group = m.kind === 'main' ? null : SEASON_GROUP_NAMES[m.kind];
+    const name = m.final ? 'Final Season' : `Season ${m.number}`;
+    for (const chapter of lists[i] || []) {
+      if (!chapter || seen.has(chapter.id)) continue;
+      seen.add(chapter.id);
+      const tagged = Object.assign({}, chapter);
+      if (m.kind === 'main') {
+        if (tagged.season === undefined || tagged.season === null) {
+          tagged.season = String(m.number);
+          tagged.seasonName = name;
+        }
+        if (m.image && !tagged.seasonCover) tagged.seasonCover = m.image;
+      } else {
+        delete tagged.season;
+        tagged.seasonName = group;
+      }
+      out.push(tagged);
+    }
+  });
+  const rank = (chapter) => {
+    const s = chapter.season === undefined ? -1 : Number(chapter.season);
+    return Number.isFinite(s) ? s : -1;
+  };
+  return out
+    .map((chapter, index) => ({ chapter, index }))
+    .sort((a, b) => rank(b.chapter) - rank(a.chapter) || a.index - b.index)
+    .map((x) => x.chapter);
+}
+
+function collapseSeasons(page) {
+  if (!page || !Array.isArray(page.results)) return page;
+  const groups = new Map();
+  page.results.forEach((r, index) => {
+    const p = parseFranchise(r.title);
+    if (p.kind !== 'main' || !p.base) return;
+    const rank = p.final ? 99 : p.season || 1;
+    const list = groups.get(p.base) || [];
+    list.push({ index, rank });
+    groups.set(p.base, list);
+  });
+  const drop = new Set();
+  for (const list of groups.values()) {
+    if (list.length < 2) continue;
+    const lowest = list.reduce((a, b) => (b.rank < a.rank ? b : a));
+    if (lowest.rank !== 1) continue;
+    for (const x of list) if (x.index !== lowest.index) drop.add(x.index);
+  }
+  return drop.size ? Object.assign({}, page, { results: page.results.filter((r, index) => !drop.has(index)) }) : page;
+}
+
 class Source {
   constructor() {
     this.requests = App.createRequestManager({});
@@ -143,7 +303,7 @@ class Source {
     return ids;
   }
 
-  async getSearchResults(request, metadata) {
+  async getSearchResultsRaw(request, metadata) {
     const query = ((request && request.title) || '').trim();
     const tags = ((request && request.includedTags) || []).filter((t) => t && t.id);
     const feedId = (request && request.feed) || FEEDS[0].id;
@@ -236,6 +396,29 @@ class Source {
   }
 
   async getChapters(mangaId) {
+    return connectSeasons(this, mangaId, await this.seasonTitleOf(mangaId));
+  }
+
+  async getSearchResults(request, metadata) {
+    return collapseSeasons(await this.getSearchResultsRaw(request, metadata));
+  }
+
+  async seasonTitleOf(mangaId) {
+    this.seasonTitles = this.seasonTitles || new Map();
+    if (!this.seasonTitles.has(mangaId)) {
+      let title = '';
+      try {
+        const details = await this.getMangaDetails(mangaId);
+        title = String((details && details.mangaInfo && details.mangaInfo.title) || '');
+      } catch (e) {
+        title = '';
+      }
+      this.seasonTitles.set(mangaId, title || String(mangaId).split('/').pop().replace(/[-_]+/g, ' '));
+    }
+    return this.seasonTitles.get(mangaId);
+  }
+
+  async getChaptersOfTitle(mangaId) {
     const $ = cheerio.load(await this.requestHTML(detailUrlOf(mangaId)));
     const rows = [];
     const seen = new Set();
