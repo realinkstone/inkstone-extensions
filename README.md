@@ -347,7 +347,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [MonosChinos](anime/monoschinos/index.js) | monoschinos.st | Spanish | Mature | 1.0.2 |
 | [SerienStream](anime/serienstream/index.js) | serienstream.to | German | Mature | 1.0.3 |
 | [TioAnime](anime/tioanime/index.js) | tioanime.com | Spanish | Mature | 1.0.1 |
-| [UniqueStream](anime/uniquestream/index.js) | anime.uniquestream.net | English | Mature | 1.1.2 |
+| [UniqueStream](anime/uniquestream/index.js) | anime.uniquestream.net | English | Mature | 1.1.3 |
 | [VerAnime](anime/veranime/index.js) | verani.me | Spanish | Mature | 1.0.2 |
 | [VerAnimes](anime/veranimes/index.js) | wwv.veranimes.net | Spanish | Mature | 1.0.2 |
 

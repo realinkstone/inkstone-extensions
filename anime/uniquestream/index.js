@@ -201,12 +201,14 @@ class Source {
     const rank = (v) => (v.locale === wanted ? 0 : v.locale === 'ja-JP' ? 1 : 2);
     const seen = new Set();
     const chosen = versions.filter((v) => !seen.has(v.locale) && seen.add(v.locale)).sort((a, b) => rank(a) - rank(b));
-    const keys = await Promise.all(
-      chosen.map((v) => {
-        const id = v.media_id || (/\/([0-9a-f]{32})_[^/]+\/master\.m3u8/.exec(v.playlist) || [])[1] || media.media_id;
-        return id ? this.hlsKey(v.playlist, id) : '';
-      })
-    );
+    const ids = chosen.map((v) => v.media_id || (/\/([0-9a-f]{32})_[^/]+\/master\.m3u8/.exec(v.playlist) || [])[1] || media.media_id || '');
+    let keys = ids.map(() => '');
+    const lead = ids.findIndex(Boolean);
+    if (lead >= 0) {
+      const proven = await this.hlsKey(chosen[lead].playlist, ids[lead]);
+      if (proven && proven === ids[lead]) keys = ids.map((id) => (/^[0-9a-f]{32}$/.test(id) ? id : ''));
+      else keys = await Promise.all(chosen.map((v, i) => (i === lead ? proven : ids[i] ? this.hlsKey(v.playlist, ids[i]) : '')));
+    }
     return chosen.map((v, i) => {
       const video = {
         url: v.playlist,
