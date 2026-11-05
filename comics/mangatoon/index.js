@@ -32,6 +32,13 @@ function parseJSONOrNull(text) {
 const UA =
   'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1';
 
+const LANGUAGES = ['en', 'es'];
+
+function lang() {
+  const value = App.getSourceSetting('language');
+  return LANGUAGES.includes(value) ? value : 'en';
+}
+
 const PAGE_SIZE = 18;
 const FEED_SORT = { hottest: 0, updated: 1, completed: 2 };
 
@@ -54,10 +61,10 @@ function parseAbbreviatedCount(text) {
 
 function mapStatus(text) {
   const s = (text || '').toLowerCase();
-  if (s.includes('complet')) return 'COMPLETED';
-  if (s.includes('hiatus')) return 'HIATUS';
+  if (s.includes('complet') || s.includes('termin') || s.includes('finaliz')) return 'COMPLETED';
+  if (s.includes('hiatus') || s.includes('pausa')) return 'HIATUS';
   if (s.includes('cancel') || s.includes('drop')) return 'CANCELLED';
-  if (s.includes('going') || s.includes('ongoing')) return 'ONGOING';
+  if (s.includes('going') || s.includes('curso') || s.includes('actualiz')) return 'ONGOING';
   return 'UNKNOWN';
 }
 
@@ -100,8 +107,8 @@ function parseOpenAt(dateStr) {
 }
 
 function chapterDisplayName(ep) {
-  const base = (ep.title && cleanText(ep.title)) || `Episode ${ep.weight}`;
-  return ep.is_fee ? `${base} (Locked, Coins)` : base;
+  const base = (ep.title && cleanText(ep.title)) || `${lang() === 'es' ? 'Capítulo' : 'Episode'} ${ep.weight}`;
+  return ep.is_fee ? `${base} (${lang() === 'es' ? 'Bloqueado, monedas' : 'Locked, Coins'})` : base;
 }
 
 function extractContentId(href) {
@@ -145,13 +152,13 @@ class Source {
   }
 
   async getSearchTags() {
-    const html = await this.requestHTML(`${SITE_BASE}/en/genre/comic`);
+    const html = await this.requestHTML(`${SITE_BASE}/${lang()}/genre/comic`);
     const $ = cheerio.load(html);
     const tags = [];
     const seen = new Set();
     $('a.channel-a').each((_, el) => {
       const href = $(el).attr('href') || '';
-      const m = /^\/en\/genre\/category\/(\d+)\/0$/.exec(href);
+      const m = /^\/[a-z-]+\/genre\/category\/(\d+)\/0$/.exec(href);
       if (!m) return;
       const id = m[1];
       if (id === '0' || seen.has(id)) return;
@@ -174,7 +181,7 @@ class Source {
     if (title) {
       if (page > 1) return { results: [] };
 
-      const url = `${SITE_BASE}/en/search?word=${encodeURIComponent(title)}`;
+      const url = `${SITE_BASE}/${lang()}/search?word=${encodeURIComponent(title)}`;
       const html = await this.requestHTML(url, { allow404: true });
       if (!html) return { results: [] };
 
@@ -195,7 +202,7 @@ class Source {
     const feedId = (request && request.feed) || 'hottest';
     const sort = FEED_SORT[feedId] !== undefined ? FEED_SORT[feedId] : 0;
 
-    const url = `${SITE_BASE}/en/genre/category/${encodeURIComponent(tagId)}/${sort}?page=${page}`;
+    const url = `${SITE_BASE}/${lang()}/genre/category/${encodeURIComponent(tagId)}/${sort}?page=${page}`;
     const html = await this.requestHTML(url, { allow404: true });
     if (!html) return { results: [] };
 
@@ -214,7 +221,7 @@ class Source {
   }
 
   async getMangaDetails(mangaId) {
-    const url = `${SITE_BASE}/en/x?content_id=${encodeURIComponent(mangaId)}`;
+    const url = `${SITE_BASE}/${lang()}/x?content_id=${encodeURIComponent(mangaId)}`;
     const html = await this.requestHTML(url, { auth: true });
     const $ = cheerio.load(html);
 
@@ -233,7 +240,7 @@ class Source {
     });
 
     const authorRaw = cleanText($('.detail-author-name').first().text());
-    const author = authorRaw.replace(/^Author Name:\s*/i, '').trim() || undefined;
+    const author = authorRaw.replace(/^(Author Name|nombre de autor):\s*/i, '').trim() || undefined;
 
     const $descEl = $('.detail-description-short').first().clone();
     $descEl.find('br').replaceWith('\n');
@@ -263,7 +270,7 @@ class Source {
   }
 
   async getChapters(mangaId) {
-    const url = `${SITE_BASE}/en/x?content_id=${encodeURIComponent(mangaId)}`;
+    const url = `${SITE_BASE}/${lang()}/x?content_id=${encodeURIComponent(mangaId)}`;
     const html = await this.requestHTML(url, { auth: true });
     const episodes = extractEpisodes(html);
 
@@ -280,7 +287,7 @@ class Source {
   }
 
   async getChapterDetails(mangaId, chapterId) {
-    const url = `${SITE_BASE}/en/watch/${encodeURIComponent(mangaId)}/${encodeURIComponent(chapterId)}`;
+    const url = `${SITE_BASE}/${lang()}/watch/${encodeURIComponent(mangaId)}/${encodeURIComponent(chapterId)}`;
     const html = await this.requestHTML(url, { auth: true });
     const $ = cheerio.load(html);
 
