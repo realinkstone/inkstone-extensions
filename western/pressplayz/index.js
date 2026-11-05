@@ -378,7 +378,7 @@ class Source {
     const english = subtitles.some((t) => t.language === 'en');
     const parts = ['VidSpark', 'Auto'];
     if (subtitles.length) parts.push(subtitles.length <= 3 ? 'Softsub: ' + subtitles.map((t) => t.label).join(', ') : english ? `Softsub: English and ${subtitles.length - 1} more` : `Softsub: ${subtitles.length} languages`);
-    const video = { url: source.url, quality: parts.join(', '), type: 'hls', headers: { Referer: `${SPARK}/` } };
+    const video = { url: source.url, quality: parts.join(', '), type: 'hls', server: 'VidSpark', headers: { Referer: `${SPARK}/` } };
     if (subtitles.length) video.subtitles = subtitles;
     return video;
   }

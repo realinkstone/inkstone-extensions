@@ -499,7 +499,7 @@ class Source {
             const file = entry.urls && entry.urls[0];
             if (file) subtitles.push({ url: file, label: cleanText(entry.label) || code, language: LANGUAGE_CODES[String(code).slice(0, 2)] || String(code).slice(0, 2) });
           });
-          const video = { url: master, quality: streamLabel(embed.label), type: 'hls', headers: { Referer: 'https://www.dailymotion.com/', Origin: 'https://www.dailymotion.com' } };
+          const video = { url: master, quality: streamLabel(embed.label), type: 'hls', server: 'Dailymotion', headers: { Referer: 'https://www.dailymotion.com/', Origin: 'https://www.dailymotion.com' } };
           if (subtitles.length) video.subtitles = subtitles;
           videos.push(video);
         } catch (e) {

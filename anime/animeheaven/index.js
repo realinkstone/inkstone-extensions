@@ -181,6 +181,7 @@ class Source {
       url,
       quality: i === 0 ? '720p Hardsub' : `720p Hardsub (server ${i + 1})`,
       type: 'mp4',
+      server: i === 0 ? 'AnimeHeaven' : `AnimeHeaven ${i + 1}`,
     }));
   }
 

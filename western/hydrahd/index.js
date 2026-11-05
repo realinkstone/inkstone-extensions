@@ -319,7 +319,7 @@ class Source {
     const fhd = /canPlayFHD\s*=\s*true/.test(embed);
     const master = `${base}?token=${token}&expires=${expires}${fhd ? '&h=1' : ''}&lang=en`;
     const text = await this.text(master, undefined, true);
-    return { url: master, quality: 'VixSrc, ' + describeMaster(text), type: 'hls' };
+    return { url: master, quality: 'VixSrc, ' + describeMaster(text), type: 'hls', server: 'VixSrc' };
   }
 
   async vidSpark(path) {
@@ -348,7 +348,7 @@ class Source {
     const english = subtitles.some((t) => t.language === 'en');
     const parts = ['VidSpark', 'Auto'];
     if (subtitles.length) parts.push(subtitles.length <= 3 ? 'Softsub: ' + subtitles.map((t) => t.label).join(', ') : english ? `Softsub: English and ${subtitles.length - 1} more` : `Softsub: ${subtitles.length} languages`);
-    const video = { url: source.url, quality: parts.join(', '), type: 'hls', headers: { Referer: `${SPARK}/` } };
+    const video = { url: source.url, quality: parts.join(', '), type: 'hls', server: 'VidSpark', headers: { Referer: `${SPARK}/` } };
     if (subtitles.length) video.subtitles = subtitles;
     return video;
   }

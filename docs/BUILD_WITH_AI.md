@@ -390,6 +390,7 @@ async getVideos(mangaId, chapterId) {
 | --- | --- | --- |
 | `url` | yes | The stream, a full address. An entry without one is dropped silently. |
 | `quality` | no | A text label. Sumizuri reads it (see below). |
+| `server` | no | A short name for the server or host that serves this stream (`VixSrc`, `VidSpark`, `Dailymotion`, `Citadel`), the same string on every episode of the source. Send it when your source offers more than one server or can have another later. The Boundless Player is being changed to group its Servers panel by it, to remember the last one that played for each source and to start the next episode on it; builds that do not read it ignore it, so it is safe to send now. Keep `quality` for the resolution and the language, and keep the server name in `quality` as well until the grouping is released. |
 | `headers` | no | An object of strings sent with the stream requests, such as `Referer` and `Origin`. |
 | `subtitles` | no | `[{ url, label, language }]`. A track without a full `url` is dropped. `language` is a code such as `en`; the player picks the person's language by code or label. |
 | `audio` | no | Separate audio tracks, the same shape as `subtitles`. |

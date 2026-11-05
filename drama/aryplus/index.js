@@ -243,7 +243,7 @@ class Source {
     if (info.height) parts.push(`up to ${info.height}p`);
     let label = parts.join(' ');
     if (info.languages.length) label += `, ${info.languages.join(' and ')} Softsub`;
-    return [{ url, quality: label, type: 'hls' }];
+    return [{ url, quality: label, type: 'hls', server: 'ARY Plus' }];
   }
 
   async getChapterDetails(mangaId, chapterId) {

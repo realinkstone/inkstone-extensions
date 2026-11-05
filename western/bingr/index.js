@@ -453,7 +453,7 @@ class Source {
       const english = subtitles.some((t) => t.language === 'en');
       parts.push(subtitles.length <= 3 ? 'Softsub: ' + subtitles.map((t) => t.label).join(', ') : english ? `Softsub: English and ${subtitles.length - 1} more` : `Softsub: ${subtitles.length} languages`);
     }
-    const video = { url: stream.url, quality: parts.join(', ') || 'Auto', type: 'hls' };
+    const video = { url: stream.url, quality: parts.join(', ') || 'Auto', type: 'hls', server: server && server.label ? server.label : 'Bingr' };
     if (subtitles.length) video.subtitles = subtitles;
     if (server && server.headers) video.headers = { Referer: `${SITE}/`, Origin: SITE };
     return video;

@@ -242,6 +242,7 @@ class Source {
           url: absolute(f.file),
           quality: `${f.label} ${kind}`.trim(),
           type: 'mp4',
+          server: 'AnimeGG',
           headers: { Referer: `${SITE}/` },
         });
       }
