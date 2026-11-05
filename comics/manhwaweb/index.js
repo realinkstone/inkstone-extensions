@@ -15,6 +15,13 @@ function unique(titles) {
   return Array.from(new Map(titles.filter((title) => title.mangaId).map((title) => [title.mangaId, title])).values());
 }
 
+function ageFromTags(tags) {
+  const list = (Array.isArray(tags) ? tags : []).map((t) => String(t || '')).filter((t) => !/adult cast|elenco adulto/i.test(t));
+  if (list.some((t) => /hentai|er[o\u00f3]tic|smut|porn|\+\s?18|18\s?\+|xxx/i.test(t))) return 18;
+  if (list.some((t) => /ecchi|adulto|adult|mature|maduro/i.test(t))) return 16;
+  return 0;
+}
+
 class Source {
   constructor() {
     this.requests = App.createRequestManager({ rateLimit: { requestsPerSecond: 4 } });
@@ -33,6 +40,13 @@ class Source {
   }
 
   async getSearchResults(request, metadata) {
+    const page = await this.getSearchResultsUnrated(request, metadata);
+    const age = ageFromTags(((request && request.includedTags) || []).map((t) => (t && (t.label || t.id)) || ''));
+    if (age && page && Array.isArray(page.results)) page.results.forEach((r) => (r.ageRating = Math.max(r.ageRating || 0, age)));
+    return page;
+  }
+
+  async getSearchResultsUnrated(request, metadata) {
     const query = ((request && request.title) || '').trim();
     const tags = (request && request.includedTags) || [];
     const page = (metadata && metadata.page) || 1;
@@ -57,6 +71,16 @@ class Source {
   }
 
   async getMangaDetails(mangaId) {
+    const result = await this.getMangaDetailsUnrated(mangaId);
+    const info = result && result.mangaInfo;
+    if (info && info.ageRating === undefined) {
+      const age = ageFromTags(info.tags);
+      if (age) info.ageRating = age;
+    }
+    return result;
+  }
+
+  async getMangaDetailsUnrated(mangaId) {
     const comic = await this.get(`${API}/manhwa/see/${encodeURIComponent(mangaId)}`);
     const names = (list) => (list || []).map((person) => person.name).join(', ') || undefined;
     return {

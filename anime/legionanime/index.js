@@ -139,7 +139,13 @@ class Source {
     const genre = tags.map((tag) => encodeURIComponent(tag.id)).join('%2C');
     const offset = (page - 1) * 24;
     const url = `${API}/v2/directories?studio=0&not_genre=&year=&orderBy=${orderBy}&language=&type=&duration=&search=${encodeURIComponent(query)}&letter=0&limit=24&genre=${genre}&season=&page=${offset}&status=`;
-    const data = await this.apiPost(url);
+    let data;
+    try {
+      data = await this.apiPost(url);
+    } catch (e) {
+      if (query && /HTTP 500/.test(String(e && e.message))) return { results: [], metadata: undefined };
+      throw e;
+    }
     const list = Array.isArray(data && data.response) ? data.response : [];
     const results = list
       .filter((item) => item && item.id && item.nombre)

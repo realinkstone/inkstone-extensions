@@ -82,7 +82,15 @@ class Source {
       const order = request && request.feed === 'latest' ? 'updated' : 'rating';
       url = `${SITE}/animes?order=${order}&page=${page}`;
     }
-    const $ = cheerio.load(await this.get(url));
+    const { results, next } = this.parseList(cheerio.load(await this.get(url)));
+    const hentai = await this.hentaiSet();
+    results.forEach((r) => {
+      if (hentai.has(r.mangaId)) r.ageRating = 18;
+    });
+    return { results, metadata: results.length && next ? { page: page + 1 } : undefined };
+  }
+
+  parseList($) {
     const results = $('ul.ListAnimes li article')
       .map((i, el) => {
         const card = $(el);
@@ -94,16 +102,35 @@ class Source {
       })
       .get()
       .filter(Boolean);
-    const next = $('ul.pagination a[rel="next"]').length > 0;
-    return { results, metadata: results.length && next ? { page: page + 1 } : undefined };
+    return { results, next: $('ul.pagination a[rel="next"]').length > 0 };
+  }
+
+  async hentaiSet() {
+    if (this.hentaiIds) return this.hentaiIds;
+    const ids = new Set();
+    try {
+      for (let page = 1; page <= 8; page++) {
+        const { results, next } = this.parseList(cheerio.load(await this.get(`${SITE}/animes?genre[]=31&order=created&page=${page}`)));
+        results.forEach((r) => ids.add(r.mangaId));
+        if (!results.length || !next) break;
+      }
+    } catch (e) {
+      if (e && e.kind === 'challenge') throw e;
+      console.error('AnimeJL could not read the Hentai genre: ' + (e && e.message));
+      return ids;
+    }
+    this.hentaiIds = ids;
+    return ids;
   }
 
   async getMangaDetails(mangaId) {
     const $ = cheerio.load(await this.get(`${SITE}/anime/${mangaId}`));
     const status = $('span.fa-tv').text();
     const tags = $('nav.Nvgnrs a').map((i, el) => $(el).text().trim()).get().filter(Boolean);
+    const hentai = tags.indexOf('Hentai') !== -1 || (await this.hentaiSet()).has(mangaId);
     return {
       mangaInfo: {
+        ...(hentai ? { ageRating: 18 } : {}),
         title: $('div.Ficha div.Container .Title').first().text().trim() || mangaId,
         image: absolute($('div.AnimeCover div.Image figure img').first().attr('src')),
         desc: $('div.Description').first().text().trim().replace(/^"|"$/g, ''),

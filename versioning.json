@@ -6511,7 +6511,7 @@
     {
       "id": "animejl",
       "name": "AnimeJL",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://www.anime-jl.net",
       "iconUrl": "https://inkstone.web.app/animejl/icon.png",
@@ -6596,7 +6596,7 @@
       "contentRating": "adult",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "7487cc5c509e5ad94b379737e94aeaf86cc6c9b6e5efdb195d96b8898a45ed38"
+      "sha256": "21875771c8526bbf8447d445df8827a6780495dbaee07d72e3d994bf7f998a03"
     },
     {
       "id": "animelatinohd",
@@ -6682,11 +6682,11 @@
     {
       "id": "animemovil",
       "name": "AnimeMovil",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://tvanime.tv",
       "iconUrl": "https://inkstone.web.app/animemovil/icon.png",
-      "description": "Anime\n\nCatalog・5,600+",
+      "description": "Anime\n\nCatalog・5,000+",
       "capabilities": [
         "browse",
         "search",
@@ -6699,7 +6699,7 @@
       "contentRating": "adult",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "bde6a7d34e110401d69662016fbe8e83cd747724b79df8cd622062a0427d2703"
+      "sha256": "07f90eeadccc620732c1bb1b5ec90a18697c619756bbe68666ba02d47338da55"
     },
     {
       "id": "animeonlineninja",
@@ -6798,11 +6798,11 @@
     {
       "id": "asialiveaction",
       "name": "AsiaLiveAction",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://asialiveaction.com",
       "iconUrl": "https://inkstone.web.app/asialiveaction/icon.png",
-      "description": "Drama\n\nCatalog・1,700+\n\nRestrictions:\n・Rate Limit",
+      "description": "Drama\n\nCatalog・1,000+\n\nRestrictions:\n・Cloudflare Checks\n・Rate Limit",
       "capabilities": [
         "browse",
         "search",
@@ -6875,11 +6875,11 @@
     {
       "id": "cineplus123",
       "name": "CinePlus123",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://cineplus123.org",
       "iconUrl": "https://inkstone.web.app/cineplus123/icon.png",
-      "description": "Western\n\nCatalog: 10,000+\n\nRestrictions:\n・Rate Limit",
+      "description": "Western\n\nCatalog・10,000+\n\nRestrictions:\n・Rate Limit",
       "capabilities": [
         "browse",
         "search",
@@ -6919,11 +6919,11 @@
     {
       "id": "doramasflix",
       "name": "DoramasFlix",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://doramasflix.in",
       "iconUrl": "https://inkstone.web.app/doramasflix/icon.png",
-      "description": "Drama\n\nCatalog・3,500+\n\nRestrictions:\n・Rate Limit",
+      "description": "Drama\n\nCatalog・3,000+\n\nRestrictions:\n・Rate Limit",
       "capabilities": [
         "browse",
         "search",
@@ -6941,29 +6941,11 @@
     {
       "id": "doramasyt",
       "name": "DoramasYT",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://www.doramasyt.com",
       "iconUrl": "https://inkstone.web.app/doramasyt/icon.png",
-      "hosts": [
-        "www.doramasyt.com",
-        "voe.sx",
-        "*.voe.sx",
-        "shanelocaldog.com",
-        "luluvdo.com",
-        "lulustream.com",
-        "lulu.st",
-        "ok.ru",
-        "mixdrop.top",
-        "mixdrop.ag",
-        "mixdrop.is",
-        "yourupload.com",
-        "www.yourupload.com",
-        "mp4upload.com",
-        "www.mp4upload.com",
-        "streamtape.com"
-      ],
-      "description": "Drama\n\nCatalog・2,100+\n\nRestrictions:\n・Rate Limit",
+      "description": "Drama\n\nCatalog・2,000+\n\nRestrictions:\n・Rate Limit",
       "capabilities": [
         "browse",
         "search",
@@ -7006,7 +6988,7 @@
     {
       "id": "eternalmangas",
       "name": "Eternal Mangas",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://eternalmangas.org",
       "iconUrl": "https://inkstone.web.app/eternalmangas/icon.png",
@@ -7026,23 +7008,16 @@
       "contentRating": "adult",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "1a48775342eb63d17f8c63b3905dc4de2f07b74cf4f596c8ef01bc7349fd1c4a"
+      "sha256": "f966c87f2da8aa2e558240189de45a5da897bc38136337d172f2c45e15922325"
     },
     {
       "id": "gnula",
       "name": "Gnula",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://gnula.life",
       "iconUrl": "https://inkstone.web.app/gnula/icon.png",
-      "hosts": [
-        "gnula.life",
-        "player.gnula.life",
-        "vidhidepro.com",
-        "voe.sx",
-        "shanelocaldog.com"
-      ],
-      "description": "Western\n\nCatalog・23,000+",
+      "description": "Western\n\nCatalog・20,000+",
       "capabilities": [
         "browse",
         "search",
@@ -7081,7 +7056,7 @@
     {
       "id": "katanime",
       "name": "Katanime",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://katanime.net",
       "iconUrl": "https://inkstone.web.app/katanime/icon.png",
@@ -7112,7 +7087,7 @@
         "shannoncoldalready.com",
         "ashleyhardat.com"
       ],
-      "description": "Anime\n\nCatalog・3,600+",
+      "description": "Anime\n\nCatalog・3,000+",
       "capabilities": [
         "browse",
         "search",
@@ -7151,7 +7126,7 @@
     {
       "id": "leercapitulo",
       "name": "LeerCapitulo",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://www.leercapitulo.co",
       "iconUrl": "https://inkstone.web.app/leercapitulo/icon.png",
@@ -7171,12 +7146,12 @@
       "contentRating": "adult",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "811a3a1db271db24474556190661a06cdfe1dbd90b2cb2e461c70b906646af51"
+      "sha256": "8d6bdaaf77884c7c0e8f6424a4ad174c887ff3b75a4d2581ca05e845c27264cd"
     },
     {
       "id": "leermanhwas",
       "name": "Leer Manhwas",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://leermanhwas.com",
       "iconUrl": "https://inkstone.web.app/leermanhwas/icon.png",
@@ -7196,12 +7171,12 @@
       "contentRating": "adult",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "8a3667e0bae14d1106077aa3f15675cb8fdfe1572c4e58f8d7019e7d5327e69e"
+      "sha256": "4879f4f358698ae97f9d3eb6d0e01351ceb772ef5a8c0652142596c03a2032cd"
     },
     {
       "id": "legionanime",
       "name": "LegionAnime",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://legionanime.xyz",
       "iconUrl": "https://inkstone.web.app/legionanime/icon.png",
@@ -7218,7 +7193,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "a13b22d1c697fcb5095f22c77494adbe8924ac039e4b47c4794d6b6e066c9a8a"
+      "sha256": "ca0bab1e1cb6960c9ff8294eb315334bedf8b043ac2e67b8a7e5db7fa7bdc7d0"
     },
     {
       "id": "mangasin",
@@ -7296,7 +7271,7 @@
     {
       "id": "manhwaweb",
       "name": "ManhwaWeb",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://manhwaweb.com",
       "iconUrl": "https://inkstone.web.app/manhwaweb/icon.png",
@@ -7316,7 +7291,7 @@
       "contentRating": "adult",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "214ba92b94b4887c6a86b4a925a2cfe1e17b5f26dbac8cb539f9644f1edc25c2"
+      "sha256": "1c6ed658165b6ffa8f0b3b7cd01b69e57b1126195e0e3df77d5b7d3295ecabc7"
     },
     {
       "id": "marmota",
@@ -7347,11 +7322,11 @@
     {
       "id": "mundodonghua",
       "name": "MundoDonghua",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://www.mundodonghua.com",
       "iconUrl": "https://inkstone.web.app/mundodonghua/icon.png",
-      "description": "Donghua\n\nCatalog・350+",
+      "description": "Donghua\n\nCatalog・300+",
       "capabilities": [
         "browse",
         "search",
@@ -7369,14 +7344,14 @@
     {
       "id": "novelaenespanol",
       "name": "Novela en Español",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "novel",
       "website": "https://novelaenespanol.com",
       "iconUrl": "https://inkstone.web.app/novelaenespanol/icon.png",
       "hosts": [
         "novelaenespanol.com"
       ],
-      "description": "Light Novels・Web Novels\n\nCatalog・390+\n\nRestrictions:\n・Rate Limit",
+      "description": "Light Novels・Web Novels\n\nCatalog・300+\n\nRestrictions:\n・Rate Limit",
       "capabilities": [
         "browse",
         "search",
@@ -7466,7 +7441,7 @@
     {
       "id": "shadowmanga",
       "name": "Shadow Manga",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://shademanga.com",
       "iconUrl": "https://inkstone.web.app/shadowmanga/icon.png",
@@ -7486,7 +7461,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "a33610bbc0ea3495357658d2043ba5c1697618670d38c916bdef90c8cb274ff1"
+      "sha256": "d33f471d933e4192c307eccc69a0d9464242814b1b5e20f5fc1735a3a4190d91"
     },
     {
       "id": "tioanime",
@@ -7513,14 +7488,14 @@
     {
       "id": "traduccionesisekai",
       "name": "Traducciones Isekai",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "medium": "novel",
       "website": "https://traduccionesisekai.blogspot.com",
       "iconUrl": "https://inkstone.web.app/traduccionesisekai/icon.png",
       "hosts": [
         "traduccionesisekai.blogspot.com"
       ],
-      "description": "Web Novels・Light Novels\n\nCatalog・Re:Zero, Classroom of the Elite\n\nRestrictions:\n・Rate Limit",
+      "description": "Web Novels・Light Novels\n\nRestrictions:\n・Rate Limit",
       "capabilities": [
         "browse",
         "search",
@@ -7537,37 +7512,11 @@
     {
       "id": "veranime",
       "name": "VerAnime",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://verani.me",
       "iconUrl": "https://inkstone.web.app/veranime/icon.png",
-      "hosts": [
-        "verani.me",
-        "player.zilla-networks.com",
-        "voe.sx",
-        "*.voe.sx",
-        "shanelocaldog.com",
-        "luluvdo.com",
-        "lulustream.com",
-        "lulu.st",
-        "filelions.top",
-        "filelions.to",
-        "filelions.live",
-        "uqload.is",
-        "uqload.vc",
-        "uqload.to",
-        "ok.ru",
-        "mixdrop.ps",
-        "mixdrop.ag",
-        "mixdrop.co",
-        "yourupload.com",
-        "www.yourupload.com",
-        "mp4upload.com",
-        "www.mp4upload.com",
-        "mxdrop.sx",
-        "mixdrop.to"
-      ],
-      "description": "Anime\n\nCatalog・1,300+",
+      "description": "Anime\n\nCatalog・1,000+",
       "capabilities": [
         "browse",
         "search",
@@ -7630,7 +7579,7 @@
     {
       "id": "wikisourcees",
       "name": "Wikisource (Español)",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "novel",
       "website": "https://es.wikisource.org",
       "iconUrl": "https://inkstone.web.app/wikisourcees/icon.png",
@@ -7638,7 +7587,7 @@
         "es.wikisource.org",
         "upload.wikimedia.org"
       ],
-      "description": "Public domain books\n\nCatalog・Novels, short stories, legends, fables, essays, plays and poetry",
+      "description": "Public domain books",
       "capabilities": [
         "browse",
         "search",
