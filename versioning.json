@@ -7534,7 +7534,7 @@
     {
       "id": "veranimes",
       "name": "VerAnimes",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://wwv.veranimes.net",
       "iconUrl": "https://inkstone.web.app/veranimes/icon.png",
@@ -7559,7 +7559,9 @@
         "yourupload.com",
         "www.yourupload.com",
         "mp4upload.com",
-        "www.mp4upload.com"
+        "www.mp4upload.com",
+        "shannoncoldalready.com",
+        "ashleyhardat.com"
       ],
       "description": "Anime\n\nCatalog・6,000+",
       "capabilities": [
@@ -7623,6 +7625,51 @@
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
       "sha256": "de8bd37193cd6eba7693af3d9702bb3b5cc50a3667c3b68d1e13f5fa8843b8b6"
+    },
+    {
+      "id": "ikigaimangas",
+      "name": "Ikigai Mangas",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://ikigaimangas.com",
+      "iconUrl": "https://inkstone.web.app/ikigaimangas/icon.png",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・5,000+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "adult",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "630d4852a5921afa57623bf8db1d3db72368d4f32d705699cbfe8cb3b9a25f82"
+    },
+    {
+      "id": "mangolibreria",
+      "name": "MangoLibreria",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://lectorfenix.com",
+      "iconUrl": "https://inkstone.web.app/mangolibreria/icon.png",
+      "hosts": [
+        "lectorfenix.com"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・2,600+",
+      "capabilities": [
+        "browse",
+        "search",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "adult",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "997b9c42037b7f2277629f05c1ee31e2c677d4f108ef97399a39a3f943688a34"
     }
   ]
 }
