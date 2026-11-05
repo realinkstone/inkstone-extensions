@@ -170,10 +170,21 @@ try {
 }
 const Source = sandbox.module.exports.Source;
 if (!check(typeof Source === 'function', 'exports a Source class', 'module.exports = { Source }')) finish();
+// Sumizuri's engine has no atob (its 0.2.0 source defines one only while cheerio loads, then deletes it); Boundless has one. A bare atob call throws in Sumizuri,
+// and a source that catches that returns nothing, so the failure looks like an empty site.
+if (/(^|[^.\w$])atob\s*\(/.test(code.split('\n').filter((line) => !/^\s*(\/\/|\/\*|\*)/.test(line)).join('\n'))) {
+  say('warn', 'calls atob, which Sumizuri does not have', 'use App.base64Decode(text), which both apps have (it reads UTF-8 text and throws on other bytes; guard a bare atob with typeof atob === "function")');
+}
 const source = new Source();
 
 // The player pages the Boundless Player opens itself (docs/design/video-embeds.md in its repo, 2026-11-05).
-const EMBED_HOSTS = ['dailymotion.com', 'dai.ly', 'rumble.com', 'ok.ru', 'mp4upload.com', 'morencius.com', 'vidhide.com', 'earnvids.com'];
+const EMBED_HOSTS = ['dailymotion.com', 'dai.ly', 'rumble.com', 'ok.ru', 'mp4upload.com', 'morencius.com', 'vidhide.com', 'earnvids.com', 'vidmoly.org', 'vidmoly.biz', 'vidmoly.net', 'streamtape.com', 'streamtape.to', 'streamtape.net', 'streamtape.xyz', 'streamta.pe', 'mixdrop.top', 'mixdrop.ag', 'mixdrop.to', 'mixdrop.co', 'mixdrop.ps', 'mixdrop.si', 'mixdrop.bz', 'mixdrop.ch', 'mixdrop.cv', 'mxdrop.click'];
+const sniffed = new Set();
+const warnSniffer = (host) => {
+  if (sniffed.has(host)) return;
+  sniffed.add(host);
+  say('warn', `${host} has no resolver in the app, so its embed entry goes through the page sniffer`, 'fine for a player the site owns: the page host must be in hosts, and a player that needs a click, DRM, a captcha or a login will not open');
+};
 const anime = typeof source.getVideos === 'function';
 for (const method of ['getSearchResults', 'getMangaDetails', 'getChapters', anime ? 'getVideos' : 'getChapterDetails']) {
   check(typeof source[method] === 'function', `has ${method}()`);
@@ -461,7 +472,8 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
       if (video.server !== undefined && (typeof video.server !== 'string' || !video.server.trim())) problems.push(`${quality}: server must be a short non empty string`);
       if (video.type === 'embed') {
         const host = (() => { try { return new URL(video.url).hostname; } catch { return ''; } })();
-        if (!EMBED_HOSTS.some((h) => host === h || host.endsWith('.' + h))) problems.push(`${quality}: the app opens no player at ${host || video.url}; send an embed entry only for ${EMBED_HOSTS.join(', ')}`);
+        if (!/^https?:\/\//i.test(video.url)) problems.push(`${quality}: an embed entry needs a full http or https page address`);
+        else if (!EMBED_HOSTS.some((h) => host === h || host.endsWith('.' + h))) warnSniffer(host);
       }
       if (video.headers !== undefined && (typeof video.headers !== 'object' || video.headers === null || Object.values(video.headers).some((v) => typeof v !== 'string'))) problems.push(`${quality}: headers must be an object of strings`);
       for (const kind of ['subtitles', 'audio']) {

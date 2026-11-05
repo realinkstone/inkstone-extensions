@@ -36,9 +36,27 @@ class Source {
 
   async getSearchResults(request, metadata) {
     const page = await this.getSearchResultsUnrated(request, metadata);
-    const age = ageFromTags(((request && request.includedTags) || []).map((t) => (t && (t.label || t.id)) || ''));
-    if (age && page && Array.isArray(page.results)) page.results.forEach((r) => (r.ageRating = Math.max(r.ageRating || 0, age)));
+    const asked = (request && request.includedTags) || [];
+    if (asked.length && page && Array.isArray(page.results)) {
+      const names = await this.tagNames();
+      const age = ageFromTags(asked.map((t) => names[String(t && t.id)] || (t && (t.label || t.id)) || ''));
+      if (age) page.results.forEach((r) => (r.ageRating = Math.max(r.ageRating || 0, age)));
+    }
     return page;
+  }
+
+  async tagNames() {
+    if (this.tagNameMap) return this.tagNameMap;
+    const map = {};
+    try {
+      ((await this.getSearchTags()) || []).forEach((t) => {
+        if (t && t.id !== undefined) map[String(t.id)] = String(t.label || t.name || t.id);
+      });
+      this.tagNameMap = map;
+    } catch (e) {
+      if (e && e.kind === 'challenge') throw e;
+    }
+    return map;
   }
 
   async getSearchResultsUnrated(request, metadata) {

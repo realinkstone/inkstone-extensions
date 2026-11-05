@@ -6662,7 +6662,7 @@
     {
       "id": "animemovil",
       "name": "AnimeMovil",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "anime",
       "website": "https://tvanime.tv",
       "iconUrl": "https://inkstone.web.app/animemovil/icon.png",
@@ -6679,7 +6679,7 @@
       "contentRating": "adult",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "07f90eeadccc620732c1bb1b5ec90a18697c619756bbe68666ba02d47338da55"
+      "sha256": "6d0b1a3fb058cb2a4be752fd80b0776adf819e5ab3320b19041bcd0cac806301"
     },
     {
       "id": "animeonlineninja",
@@ -6968,7 +6968,7 @@
     {
       "id": "eternalmangas",
       "name": "Eternal Mangas",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://eternalmangas.org",
       "iconUrl": "https://inkstone.web.app/eternalmangas/icon.png",
@@ -6988,7 +6988,7 @@
       "contentRating": "adult",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "f966c87f2da8aa2e558240189de45a5da897bc38136337d172f2c45e15922325"
+      "sha256": "7e6e79cbcd0e0f57d07cadba5351d6562ed7eb16d26b0bf6be1256918a96274e"
     },
     {
       "id": "gnula",
@@ -7106,7 +7106,7 @@
     {
       "id": "leercapitulo",
       "name": "LeerCapitulo",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://www.leercapitulo.co",
       "iconUrl": "https://inkstone.web.app/leercapitulo/icon.png",
@@ -7126,12 +7126,12 @@
       "contentRating": "adult",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "8d6bdaaf77884c7c0e8f6424a4ad174c887ff3b75a4d2581ca05e845c27264cd"
+      "sha256": "d2839cf6a3802455adcc3ea4fe513e713ef60853bb73315a1a011376b506bdde"
     },
     {
       "id": "leermanhwas",
       "name": "Leer Manhwas",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://leermanhwas.com",
       "iconUrl": "https://inkstone.web.app/leermanhwas/icon.png",
@@ -7151,7 +7151,7 @@
       "contentRating": "adult",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "4879f4f358698ae97f9d3eb6d0e01351ceb772ef5a8c0652142596c03a2032cd"
+      "sha256": "a823a3259d79003c3950060c34490335c5e582e05b6a0cef687026f0d9aeafe1"
     },
     {
       "id": "legionanime",
@@ -7251,7 +7251,7 @@
     {
       "id": "manhwaweb",
       "name": "ManhwaWeb",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://manhwaweb.com",
       "iconUrl": "https://inkstone.web.app/manhwaweb/icon.png",
@@ -7271,7 +7271,7 @@
       "contentRating": "adult",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "1c6ed658165b6ffa8f0b3b7cd01b69e57b1126195e0e3df77d5b7d3295ecabc7"
+      "sha256": "860d1ebaac98b05929508c46f427a0f7ca479144450f5d8bf424c6ec459545e2"
     },
     {
       "id": "marmota",
@@ -7421,7 +7421,7 @@
     {
       "id": "shadowmanga",
       "name": "Shadow Manga",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://shademanga.com",
       "iconUrl": "https://inkstone.web.app/shadowmanga/icon.png",
@@ -7441,7 +7441,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "d33f471d933e4192c307eccc69a0d9464242814b1b5e20f5fc1735a3a4190d91"
+      "sha256": "2d0e8c9108fcb953aff4d7a601b6706496bb19ca43ff0273bb7779c09802e863"
     },
     {
       "id": "tioanime",

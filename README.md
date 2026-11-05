@@ -89,7 +89,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [Doodmanga](comics/doodmanga/index.js) | doodmanga.com | Thai | Safe | 1.0.0 |
 | [Dragon Translation](comics/dragontranslation/index.js) | dragontranslation.org | Spanish | Adult | 1.0.0 |
 | [Dynasty Scans](comics/dynastyscans/index.js) | dynasty-scans.com | English | Mature | 1.0.0 |
-| [Eternal Mangas](comics/eternalmangas/index.js) | eternalmangas.org | Spanish | Adult | 1.0.1 |
+| [Eternal Mangas](comics/eternalmangas/index.js) | eternalmangas.org | Spanish | Adult | 1.0.2 |
 | [Eva Scans](comics/evascans/index.js) | evascans.net | English | Adult | 1.0.1 |
 | [EzManga](mixed/ezmanga/index.js) | ezmanga.org | English | Safe | 1.0.1 |
 | [Flame Scans](comics/flamescans/index.js) | flamecomics.xyz | English | Safe | 1.0.0 |
@@ -137,8 +137,8 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [Kuro Manga](comics/kuromanga/index.js) | kuromanga.id | Indonesian | Mature | 1.0.0 |
 | [Lagoon Scans](comics/lagoonscans/index.js) | lagoonscans.com | English | Safe | 1.0.0 |
 | [Lectormanga](comics/lectormanga/index.js) | lectormangass.net | Spanish | Adult | 1.2.2 |
-| [Leer Manhwas](comics/leermanhwas/index.js) | leermanhwas.com | Spanish | Adult | 1.0.1 |
-| [LeerCapitulo](comics/leercapitulo/index.js) | leercapitulo.co | Spanish | Adult | 1.0.1 |
+| [Leer Manhwas](comics/leermanhwas/index.js) | leermanhwas.com | Spanish | Adult | 1.0.2 |
+| [LeerCapitulo](comics/leercapitulo/index.js) | leercapitulo.co | Spanish | Adult | 1.0.2 |
 | [LelManga](comics/lelmanga/index.js) | lelmanga.com | French | Adult | 1.0.0 |
 | [Lelscans](comics/lelscans/index.js) | lelscans.net | French | Safe | 1.1.1 |
 | [LHTranslation](comics/lhtranslation/index.js) | lhtranslation.net | English | Mature | 1.0.0 |
@@ -199,7 +199,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [ManhwaNex](comics/manhwanex/index.js) | manhwanex.com | English | Safe | 1.0.0 |
 | [ManhwaOnline](comics/manhwaonline/index.js) | manhwaonline.org | English | Mature | 1.0.0 |
 | [ManhwaTop](comics/manhwatop/index.js) | manhwatop.com | English | Adult | 1.0.1 |
-| [ManhwaWeb](comics/manhwaweb/index.js) | manhwaweb.com | Spanish | Adult | 1.0.1 |
+| [ManhwaWeb](comics/manhwaweb/index.js) | manhwaweb.com | Spanish | Adult | 1.0.2 |
 | [Marmota](comics/marmota/index.js) | marmota.me | Spanish | Safe | 1.0.0 |
 | [MGeko](comics/mgeko/index.js) | mgeko.cc | English | Safe | 1.0.0 |
 | [Mgread.io](comics/mangayy/index.js) | mgread.io | English | Mature | 2.0.0 |
@@ -235,7 +235,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [Sana Scans](comics/sanascans/index.js) | sanascans.com | English | Safe | 1.0.0 |
 | [Scan-VF](comics/scanvf/index.js) | scan-vf.net | French | Safe | 1.0.0 |
 | [Scythe Scans](comics/scythescans/index.js) | scythescans.com | English | Safe | 1.0.0 |
-| [Shadow Manga](comics/shadowmanga/index.js) | shademanga.com | Spanish | Mature | 1.0.1 |
+| [Shadow Manga](comics/shadowmanga/index.js) | shademanga.com | Spanish | Mature | 1.0.2 |
 | [SingManga](comics/singmanga/index.js) | sing-manga.com | Thai | Safe | 1.0.1 |
 | [Slow Manga](comics/slowmanga/index.js) | slow-manga.net | Thai | Mature | 1.0.2 |
 | [Speed Manga](comics/speedmanga/index.js) | speed-manga.com | Thai | Mature | 1.0.0 |
@@ -332,7 +332,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [AnimeHeaven](anime/animeheaven/index.js) | animeheaven.me | English | Mature | 1.0.1 |
 | [AnimeJL](anime/animejl/index.js) | anime-jl.net | Spanish | Adult | 1.0.1 |
 | [AnimeLatinoHD](anime/animelatinohd/index.js) | animelatinohd.com | Spanish | Mature | 1.0.0 |
-| [AnimeMovil](anime/animemovil/index.js) | tvanime.tv | Spanish | Adult | 1.0.1 |
+| [AnimeMovil](anime/animemovil/index.js) | tvanime.tv | Spanish | Adult | 1.0.2 |
 | [AnimeOnline.Ninja](anime/animeonlineninja/index.js) | ver2.animeonline.ninja | Spanish | Mature | 1.0.0 |
 | [AniWorld](anime/aniworld/index.js) | aniworld.to | German | Mature | 1.0.3 |
 | [AniZone](anime/anizone/index.js) | anizone.to | English | Mature | 1.0.2 |
