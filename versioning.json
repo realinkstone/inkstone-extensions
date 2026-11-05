@@ -6196,6 +6196,32 @@
       "language": "en",
       "contentRating": "mature",
       "sha256": "5d42ae5ae0a36594572f57ba0581b4cd18f74a57914acdad8b88419e239dd4b9"
+    },
+    {
+      "id": "pressplayz",
+      "name": "PressPlayZ",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://pressplayz.top",
+      "iconUrl": "https://inkstone.web.app/pressplayz/icon.png",
+      "hosts": [
+        "pressplayz.top",
+        "*.pressplayz.top",
+        "vidspark.to",
+        "*.vidspark.to"
+      ],
+      "description": "Western",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "10f4b5efba4dcaa450a10393d6128fe5c9ecc368a1405f8ad8bc49a87b567cb2"
     }
   ]
 }
