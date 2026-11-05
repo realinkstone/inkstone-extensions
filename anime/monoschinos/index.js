@@ -152,12 +152,23 @@ class Source {
     const players = $('button.play-video[data-player]')
       .map((i, el) => App.base64Decode($(el).attr('data-player')))
       .get();
-    const found = await Promise.all(players.map((url) => this.extract(url).catch(() => null)));
+    let challenge = null;
+    const found = await Promise.all(
+      players.map((url) =>
+        this.extract(url).catch((e) => {
+          if (e && e.kind === 'challenge') challenge = e;
+          return null;
+        })
+      )
+    );
     const videos = found
       .filter((video) => video && /^https?:\/\//.test(video.url))
       .sort((a, b) => SERVERS.indexOf(a.quality) - SERVERS.indexOf(b.quality))
       .map((video) => ({ ...video, headers: { ...video.headers, ...BROWSER } }));
-    if (!videos.length) throw new Error(`MonosChinos: none of the ${players.length} servers gave a playable video`);
+    if (!videos.length) {
+      if (challenge) throw challenge;
+      throw new Error(`MonosChinos: none of the ${players.length} servers gave a playable video`);
+    }
     return videos;
   }
 

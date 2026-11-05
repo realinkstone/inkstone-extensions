@@ -197,7 +197,12 @@ class Source {
         headers: { Referer: `${SITE}/` },
         subtitles: (Array.isArray(data.subtitles) ? data.subtitles : [])
           .filter((s) => s && s.file)
-          .map((s) => ({ url: s.file, label: s.title || s.language || 'Subtitles', language: s.language })),
+          .map((s) => {
+            const entry = { url: s.file, label: s.title || s.language || 'Subtitles', language: s.language };
+            const format = (/\.(ass|ssa|srt|vtt)(?:[?#]|$)/i.exec(String(s.file)) || [])[1];
+            if (format) entry.format = format.toLowerCase();
+            return entry;
+          }),
         intro: skips.intro,
         outro: skips.outro,
       },

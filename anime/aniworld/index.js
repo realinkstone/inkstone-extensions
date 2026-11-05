@@ -509,16 +509,19 @@ class Source {
     }
 
     const videos = [];
+    let challenge = null;
     for (const item of voeTargets) {
       try {
         const video = await this.resolveVoeRedirect(`${SITE}${item.target}`, epUrl, item.langKey, langMap.get(item.langKey));
         if (video) videos.push(video);
       } catch (e) {
+        if (e && e.kind === 'challenge') challenge = e;
         console.error('AniWorld VOE resolution error:', e);
       }
     }
 
     if (!videos.length) {
+      if (challenge) throw challenge;
       throw new Error('AniWorld: keiner der Stream-Server lieferte ein abspielbares Video');
     }
 

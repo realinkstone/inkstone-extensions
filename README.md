@@ -309,15 +309,15 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 
 | Extension | Site | Language | Rating | Version |
 | --- | --- | --- | --- | --- |
-| [Anikoto](anime/anikoto/index.js) | anikototv.to | English | Mature | 1.0.0 |
+| [Anikoto](anime/anikoto/index.js) | anikototv.to | English | Mature | 1.0.1 |
 | [AnimeGG](anime/animegg/index.js) | animegg.org | English | Mature | 1.0.0 |
 | [AnimeHeaven](anime/animeheaven/index.js) | animeheaven.me | English | Mature | 1.0.0 |
-| [AniWorld](anime/aniworld/index.js) | aniworld.to | German | Mature | 1.0.1 |
-| [AniZone](anime/anizone/index.js) | anizone.to | English | Mature | 1.0.0 |
+| [AniWorld](anime/aniworld/index.js) | aniworld.to | German | Mature | 1.0.2 |
+| [AniZone](anime/anizone/index.js) | anizone.to | English | Mature | 1.0.1 |
 | [KickAssAnime](anime/kickassanime/index.js) | kaa.lt | English | Mature | 1.0.1 |
 | [Miruro](anime/miruro/index.js) | miruro.cx | English | Mature | 1.0.0 |
-| [MonosChinos](anime/monoschinos/index.js) | monoschinos.st | Spanish | Mature | 1.0.0 |
-| [SerienStream](anime/serienstream/index.js) | serienstream.to | German | Mature | 1.0.1 |
+| [MonosChinos](anime/monoschinos/index.js) | monoschinos.st | Spanish | Mature | 1.0.1 |
+| [SerienStream](anime/serienstream/index.js) | serienstream.to | German | Mature | 1.0.2 |
 | [UniqueStream](anime/uniquestream/index.js) | anime.uniquestream.net | English | Mature | 1.0.1 |
 
 ### Donghua

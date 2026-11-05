@@ -367,6 +367,7 @@ class Source {
 
     const fallbackHost = await this.getFallbackHost();
     const videos = [];
+    let challenge = null;
 
     for (const group of groups) {
       try {
@@ -422,10 +423,12 @@ class Source {
           outro,
         });
       } catch (e) {
+        if (e && e.kind === 'challenge') challenge = e;
       }
     }
 
     if (!videos.length) {
+      if (challenge) throw challenge;
       throw new Error(`Anikoto: none of this episode's ${groups.length} server groups returned a playable stream`);
     }
     return videos;
