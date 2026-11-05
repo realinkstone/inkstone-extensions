@@ -140,8 +140,11 @@ class Source {
       .map((player) => ({ server, url: player.result, quality: `${name} ${label} (${audio})` }))));
     const found = await Promise.all(players.map((player) => this.extract(player).catch(() => null)));
     const videos = found.filter((video) => video && /^https?:\/\//.test(video.url)).map((video) => ({ ...video, headers: BROWSER }));
-    if (!videos.length) throw new Error(`PoseidonHD: none of the ${players.length} servers gave a playable video`);
-    return videos;
+    const embeds = players
+      .filter((player, i) => !(found[i] && /^https?:\/\//.test(found[i].url)))
+      .map((player) => ({ url: player.url, type: 'embed', quality: player.quality, server: String(player.quality).split(' ')[0] }));
+    if (!videos.length && !embeds.length) throw new Error(`PoseidonHD: none of the ${players.length} servers gave a playable video`);
+    return videos.concat(embeds);
   }
 
   async extract(player) {

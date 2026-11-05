@@ -6897,7 +6897,7 @@
     {
       "id": "cuevana",
       "name": "Cuevana",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://www.cuevana3.eu",
       "iconUrl": "https://inkstone.web.app/cuevana/icon.png",
@@ -6914,7 +6914,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "7d47cdc456c101259b209632cc2540c2a138dc14c3a3ef34922945b72b14a5a8"
+      "sha256": "ead7c8b7adde0c09effe5819b270e1faa88a820d69d0a439ea922886dcd768d2"
     },
     {
       "id": "doramasflix",
@@ -7013,7 +7013,7 @@
     {
       "id": "gnula",
       "name": "Gnula",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "anime",
       "website": "https://gnula.life",
       "iconUrl": "https://inkstone.web.app/gnula/icon.png",
@@ -7030,7 +7030,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "e32bbdc6eb0a52c99904d0a94926010f8abf961ca5e834e3daf964463de67bcc"
+      "sha256": "18367c0fd3dc18af4d1a85c52bb99a61d1254d48513995a173def10bb546b41b"
     },
     {
       "id": "jkanime",
@@ -7322,7 +7322,7 @@
     {
       "id": "mundodonghua",
       "name": "MundoDonghua",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "anime",
       "website": "https://www.mundodonghua.com",
       "iconUrl": "https://inkstone.web.app/mundodonghua/icon.png",
@@ -7339,7 +7339,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "92bf6a92ae0fc413ecfe977d9bf7eced508a5a509ba0280afbe31c9bfb2a7313"
+      "sha256": "18689e2f65f824da5c9355e88fb5750d9f5895f8cde8a0c55c4d6ca8cbc6d104"
     },
     {
       "id": "novelaenespanol",
@@ -7419,7 +7419,7 @@
     {
       "id": "poseidonhd",
       "name": "PoseidonHD",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://www.poseidonhd2.co",
       "iconUrl": "https://inkstone.web.app/poseidonhd/icon.png",
@@ -7436,7 +7436,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "6652a90eb5f51c640b8b7f5279dffe1592146dd46a0732af3b7863b20b019408"
+      "sha256": "6d635d8982973bf72d275f9f7a2c5ce0672a0f2b7af6ba721355e6406c035583"
     },
     {
       "id": "shadowmanga",

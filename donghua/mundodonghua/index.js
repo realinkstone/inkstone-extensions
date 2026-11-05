@@ -186,23 +186,47 @@ class Source {
   }
 
   async getVideos(mangaId, chapterId) {
-    const html = await this.get(`${SITE}/ver/${encodeURIComponent(mangaId)}/${encodeURIComponent(chapterId)}`);
+    const pageUrl = `${SITE}/ver/${encodeURIComponent(mangaId)}/${encodeURIComponent(chapterId)}`;
+    const html = await this.get(pageUrl);
     const chunks = html.split('eval(function(p,a,c,k,e').slice(1);
+    const code = chunks.map((chunk) => unpack(chunk)).join('\n');
     const urls = [];
-    for (const chunk of chunks) {
-      const code = unpack(chunk);
-      for (const match of code.matchAll(/https?:\/\/[\w.-]+[\w.,@?^=%&:/~+#-]*/g)) {
-        const candidate = match[0].replace(/\\+$/, '');
-        if (/(voe\.sx|vidhide|embedwish|streamwish)/.test(candidate)) urls.push(candidate);
-      }
+    for (const match of code.matchAll(/https?:\/\/[\w.-]+[\w.,@?^=%&:/~+#-]*/g)) {
+      const candidate = match[0].replace(/\\+$/, '');
+      if (/(voe\.sx|vidhide|embedwish|streamwish)/.test(candidate)) urls.push(candidate);
     }
     const found = await Promise.all(Array.from(new Set(urls)).map((url) => this.extract(url).catch(() => null)));
     const videos = found
       .filter((video) => video && /^https?:\/\//.test(video.url))
       .sort((a, b) => SERVERS.indexOf(a.quality) - SERVERS.indexOf(b.quality))
       .map((video) => ({ ...video, headers: { ...BROWSER, ...video.headers } }));
-    if (!videos.length) throw new Error(`MundoDonghua: none of the ${urls.length} servers gave a playable video`);
-    return videos;
+
+    const extras = [];
+    for (const block of code.matchAll(/\$\("#(\w+)"\)\.click\(function\(e\)\{[\s\S]*?url:"([^"]+)",data:\{"slug":"([^"]+)"\}[\s\S]*?\.attr\("src","([^"]+)"\+json\[id\]\["url"\]\)/g)) {
+      try {
+        const answer = await this.get(`${SITE}${block[2]}?slug=${encodeURIComponent(block[3])}`, { Referer: pageUrl, 'X-Requested-With': 'XMLHttpRequest' });
+        const list = JSON.parse(answer);
+        const first = Array.isArray(list) ? list[0] : Object.values(list || {})[0];
+        if (first && first.url) {
+          const name = block[1].replace(/play$/, '');
+          extras.push({ url: block[4] + first.url, type: 'embed', quality: name.charAt(0).toUpperCase() + name.slice(1), server: name.charAt(0).toUpperCase() + name.slice(1) });
+        }
+      } catch (e) {
+        if (e && e.kind === 'challenge') throw e;
+      }
+    }
+    const asura = /asura_player"\)[\s\S]{0,300}?file:"(https?:[^"]+)"/.exec(code);
+    if (asura) extras.push({ url: asura[1], quality: 'Asura', server: 'Asura', headers: { ...BROWSER, Referer: `${SITE}/` } });
+    const taken = new Set(found.filter(Boolean).map((v) => v.quality));
+    for (const match of code.matchAll(/<iframe src=\\?'(https?:\/\/[^'\\]+)/g)) {
+      const host = (/^https?:\/\/([^/]+)/.exec(match[1]) || [])[1] || '';
+      const name = host.replace(/^www\./, '');
+      if (extras.some((e) => e.url === match[1]) || videos.length && /(voe\.sx|vidhide|embedwish|streamwish)/.test(host) && taken.size) continue;
+      extras.push({ url: match[1], type: 'embed', quality: name, server: name });
+    }
+    const all = videos.concat(extras);
+    if (!all.length) throw new Error(`MundoDonghua: none of the ${urls.length} servers gave a playable video`);
+    return all;
   }
 
   async extract(url) {

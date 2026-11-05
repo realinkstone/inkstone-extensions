@@ -364,7 +364,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [Donghua4K](donghua/donghua4k/index.js) | donghua4k.net | English | Safe | 1.0.3 |
 | [LMAnime](donghua/lmanime/index.js) | lmanime.com | English | Safe | 1.0.3 |
 | [LuciferDonghua](donghua/luciferdonghua/index.js) | luciferdonghua.org | English | Safe | 1.0.3 |
-| [MundoDonghua](donghua/mundodonghua/index.js) | mundodonghua.com | Spanish | Mature | 1.0.1 |
+| [MundoDonghua](donghua/mundodonghua/index.js) | mundodonghua.com | Spanish | Mature | 1.0.2 |
 | [NarulDonghua](donghua/naruldonghua/index.js) | naruldonghua.com | English | Safe | 1.0.3 |
 
 ### Drama
@@ -389,11 +389,11 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [Bingr](western/bingr/index.js) | bingr.one | English | Mature | 1.0.3 |
 | [CineCalidad](western/cinecalidad/index.js) | cinecalidad.org | Spanish | Mature | 1.0.0 |
 | [CinePlus123](western/cineplus123/index.js) | cineplus123.org | Spanish | Mature | 1.0.1 |
-| [Cuevana](western/cuevana/index.js) | cuevana3.eu | Spanish | Mature | 1.0.0 |
-| [Gnula](western/gnula/index.js) | gnula.life | Spanish | Mature | 1.0.1 |
+| [Cuevana](western/cuevana/index.js) | cuevana3.eu | Spanish | Mature | 1.0.1 |
+| [Gnula](western/gnula/index.js) | gnula.life | Spanish | Mature | 1.0.2 |
 | [HydraHD](western/hydrahd/index.js) | hydrahd.gd | English | Mature | 1.0.4 |
 | [PelisForte](western/pelisforte/index.js) | www2.pelisforte.se | Spanish | Mature | 1.0.0 |
-| [PoseidonHD](western/poseidonhd/index.js) | poseidonhd2.co | Spanish | Mature | 1.0.0 |
+| [PoseidonHD](western/poseidonhd/index.js) | poseidonhd2.co | Spanish | Mature | 1.0.1 |
 | [PressPlayZ](western/pressplayz/index.js) | pressplayz.top | English | Mature | 1.0.3 |
 
 ## Known issues
