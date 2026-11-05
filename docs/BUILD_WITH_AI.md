@@ -245,9 +245,14 @@ A wrong field *name* never throws. The field just shows up blank, which is harde
 
 // getChapterDetails: novels
 { id, mangaId, pages: [], text: 'Chapter text' }   // one string, paragraphs joined with a blank line (an array is rejected)
+
+// getChapterDetails: a chapter that is a book file (EPUB, MOBI or PDF)
+{ id, mangaId, pages: [], text: 'Short notice with the link', book: { url: 'https://...', headers: { Cookie: '...' } } }
 ```
 
 It's `desc` (or `summary`), not `description`, and `status` must be one of those exact uppercase words. If the site's description is markdown or HTML, pass it on as written: the app's own description cleaner turns bold, italics, links, headings and entities into styled text, so stripping them yourself only loses the emphasis. Remove only what it leaves behind, such as a backslash before punctuation.
+
+**Book files (optional).** Some sites hand over a whole book instead of pages or text. Return `book: { url, headers }` next to an empty `pages`: Boundless Reader downloads the file itself (`headers` is optional, a `Cookie`, `Referer` or `User-Agent`, so it has to answer a plain download), turns an EPUB or MOBI into the text of the chapter and draws a PDF as pictures, once, and keeps the result. Files over 150 MB and PDFs over 1,500 pages are refused. Always add a short `text` notice as well, ideally with the file's link: an app version that does not know `book`, and a file that cannot be opened, show it instead of an empty chapter. The test script checks the shape of `book` but does not download it.
 
 **Volumes (optional).** A source that can list a title's volumes returns `volumesId` in the details: any id of its own choosing for the title's volumes edition (MangaFire uses the title's id plus `~volumes`, a suffix that is safe in URLs and never part of a real id). The app then shows a Chapters / Volumes switch. Volumes lists `getChapters(volumesId)` and reads a volume with `getChapterDetails(volumesId, volumeId)`, so the volumes are a second series as far as the extension is concerned, and their progress, history, downloads and read marks are kept apart from the chapters' (they would otherwise be mixed: Continue picks the furthest chapter number). Each volume is a chapter-shaped entry (`id`, `name` such as `Volume 3`, `number`, and a `group` line such as `9 chapters`). It must be a string id. Leave it out when the title has no volumes. Apps without the switch ignore it.
 
@@ -921,6 +926,13 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
       const isText = Array.isArray(read.pages) && read.pages.length === 0 && typeof read.text === 'string' && read.text.trim().length > 0;
       if (Array.isArray(read.pages) && read.pages.length === 0 && Array.isArray(read.text)) {
         return { ok: false, label, detail: 'text is an array; the app casts text to a string and throws, so join the paragraphs with a blank line' };
+      }
+      if (read.book !== undefined && read.book !== null) {
+        const book = read.book;
+        const headersOk = book.headers === undefined || book.headers === null || (typeof book.headers === 'object' && !Array.isArray(book.headers) && Object.values(book.headers).every((v) => typeof v === 'string'));
+        const shapeOk = typeof book === 'object' && !Array.isArray(book) && /^https?:\/\//i.test(String(book.url ?? '')) && headersOk;
+        if (!shapeOk) return { ok: false, label, detail: 'book must be { url: "https://...", headers?: { name: "text" } }; the app ignores a book that has no http or https url' };
+        return { ok: true, label, detail: `a book file on ${new URL(book.url).host}, which this script does not download (the app reads an EPUB or MOBI as text and draws a PDF)` };
       }
       const isImages = read.pages?.length > 0 && read.pages.every(isUrl);
       const took = `${((Date.now() - started) / 1000).toFixed(1)}s`;

@@ -487,6 +487,13 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
       if (Array.isArray(read.pages) && read.pages.length === 0 && Array.isArray(read.text)) {
         return { ok: false, label, detail: 'text is an array; the app casts text to a string and throws, so join the paragraphs with a blank line' };
       }
+      if (read.book !== undefined && read.book !== null) {
+        const book = read.book;
+        const headersOk = book.headers === undefined || book.headers === null || (typeof book.headers === 'object' && !Array.isArray(book.headers) && Object.values(book.headers).every((v) => typeof v === 'string'));
+        const shapeOk = typeof book === 'object' && !Array.isArray(book) && /^https?:\/\//i.test(String(book.url ?? '')) && headersOk;
+        if (!shapeOk) return { ok: false, label, detail: 'book must be { url: "https://...", headers?: { name: "text" } }; the app ignores a book that has no http or https url' };
+        return { ok: true, label, detail: `a book file on ${new URL(book.url).host}, which this script does not download (the app reads an EPUB or MOBI as text and draws a PDF)` };
+      }
       const isImages = read.pages?.length > 0 && read.pages.every(isUrl);
       const took = `${((Date.now() - started) / 1000).toFixed(1)}s`;
       return { ok: Boolean(isText || isImages), label, detail: isText ? 'text' : `${read.pages?.length ?? 0} pages in ${took}`, images: isImages ? read.pages : undefined, headers: read.headers, referer: read.referer };

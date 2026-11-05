@@ -292,6 +292,14 @@ none of those headers is shown as it came. Anything but a JSON `true` counts as
 false. Leave it out when your script descrambles pages itself with
 `App.descrambleImage`.
 
+**Book files (Boundless Reader).** A chapter can be a whole book: return `book: { url, headers }` next to an empty
+`pages`. `url` is an EPUB, MOBI or PDF that the app downloads itself, and `headers` is optional (a `Cookie`, a
+`Referer`, a `User-Agent`), so the file has to answer a plain download. An EPUB or a MOBI becomes the text of the chapter,
+and a PDF becomes its pages drawn as pictures on the device (the first open draws them and keeps them). Files over 150 MB and
+PDFs over 1,500 pages are refused, and nothing is added to the Local Files library. Also return a short `text` notice
+(the book's name and a link to the file works well): an app version that does not know `book`, and a file that cannot be
+opened, show that text instead of an empty chapter. A `book` that is not an object with an http or https `url` is ignored.
+
 ### Anime sources (Sumizuri and Boundless Player)
 
 **Anime extensions are for the video apps.** Boundless Reader is not compatible with them: it has no video player and does not call `getVideos`. [Sumizuri](https://sumizuri.notakari.com/) and Boundless Player play them. The details here follow Sumizuri's own documentation and engine (version 0.2.0); Boundless Player calls `getVideos` the same way, but test in Sumizuri first; the full walk-through is in [BUILD_WITH_AI.md](BUILD_WITH_AI.md).

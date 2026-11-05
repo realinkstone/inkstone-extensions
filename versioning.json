@@ -5577,7 +5577,7 @@
     {
       "id": "kmansin09",
       "name": "Kmansin09",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://kmansin09.top",
       "iconUrl": "https://inkstone.web.app/kmansin09/icon.png",
@@ -5601,7 +5601,7 @@
     {
       "id": "mangakimi",
       "name": "MangaKimi",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://www.mangakimi.com",
       "hosts": [
@@ -5696,7 +5696,7 @@
     {
       "id": "singmanga",
       "name": "SingManga",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://www.sing-manga.com",
       "iconUrl": "https://inkstone.web.app/singmanga/icon.png",
@@ -5720,7 +5720,7 @@
     {
       "id": "thaimanga",
       "name": "ThaiManga",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://www.thaimanga.net",
       "iconUrl": "https://inkstone.web.app/thaimanga/icon.png",
@@ -7488,14 +7488,15 @@
     {
       "id": "traduccionesisekai",
       "name": "Traducciones Isekai",
-      "version": "1.1.1",
+      "version": "1.2.1",
       "medium": "novel",
       "website": "https://traduccionesisekai.blogspot.com",
       "iconUrl": "https://inkstone.web.app/traduccionesisekai/icon.png",
       "hosts": [
-        "traduccionesisekai.blogspot.com"
+        "traduccionesisekai.blogspot.com",
+        "drive.usercontent.google.com"
       ],
-      "description": "Web Novels・Light Novels\n\nRestrictions:\n・Rate Limit",
+      "description": "Web Novels・Light Novels\n\nRestrictions:\n・Rate Limit\n・Book Files",
       "capabilities": [
         "browse",
         "search",
@@ -7507,7 +7508,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "f9f0d85622ea421fb62caec783917d2037cd9dda3af1b6a3d3f0e9b39a86ad00"
+      "sha256": "96952d4d50dc9bb9f945cbb18d424e63da4a487bd5a721c236a4feefffdf1a15"
     },
     {
       "id": "veranime",
@@ -7650,14 +7651,14 @@
     {
       "id": "mangolibreria",
       "name": "MangoLibreria",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://lectorfenix.com",
       "iconUrl": "https://inkstone.web.app/mangolibreria/icon.png",
       "hosts": [
         "lectorfenix.com"
       ],
-      "description": "Manga・Manhwa・Manhua\n\nCatalog・2,600+",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・2,000+",
       "capabilities": [
         "browse",
         "search",
@@ -7670,6 +7671,61 @@
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
       "sha256": "997b9c42037b7f2277629f05c1ee31e2c677d4f108ef97399a39a3f943688a34"
+    },
+    {
+      "id": "lectulandia",
+      "name": "Lectulandia",
+      "version": "1.0.0",
+      "medium": "novel",
+      "website": "https://ww3.lectulandia.co",
+      "iconUrl": "https://inkstone.web.app/lectulandia/icon.png",
+      "hosts": [
+        "ww3.lectulandia.co",
+        "lectulandia.co",
+        "www.antupload.com",
+        "antupload.com",
+        "assets.lectulandia.co"
+      ],
+      "description": "Books\n\nCatalog・50,000+\n\nRestrictions:\n・Rate Limit\n・Book Files",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "797e6a1ede008a6d72c195185572721200345399d29934b9cd35a50de3596b9e"
+    },
+    {
+      "id": "elejandria",
+      "name": "Elejandría",
+      "version": "1.0.0",
+      "medium": "novel",
+      "website": "https://www.elejandria.com",
+      "iconUrl": "https://inkstone.web.app/elejandria/icon.png",
+      "hosts": [
+        "www.elejandria.com",
+        "elejandria.com"
+      ],
+      "description": "Books\n\nCatalog・2,000+\n\nRestrictions:\n・Book Files",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "407691962dd2fe9688f3cdddff95e612eb03731e08a24945ca298b95f855b60d"
     }
   ]
 }
