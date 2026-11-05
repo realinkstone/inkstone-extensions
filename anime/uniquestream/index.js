@@ -42,9 +42,68 @@ function languageName(code) {
   return code && code.indexOf('-') !== -1 ? `${name} (${code.split('-')[1]})` : name;
 }
 
+function resolveUrl(base, rel) {
+  if (/^https?:\/\//i.test(rel)) return rel;
+  const origin = /^(https?:\/\/[^/]+)/i.exec(base)[1];
+  if (rel.charAt(0) === '/') return origin + rel;
+  const dir = base.split('?')[0].replace(/\/[^/]*$/, '/').slice(origin.length);
+  const parts = (dir + rel).split('?');
+  const out = [];
+  for (const piece of parts[0].split('/')) {
+    if (piece === '..') out.pop();
+    else if (piece !== '.' && piece !== '') out.push(piece);
+  }
+  return `${origin}/${out.join('/')}${parts.length > 1 ? `?${parts.slice(1).join('?')}` : ''}`;
+}
+
+function unwrapKey(wrapped, mediaId) {
+  const first16 = (hash) => CryptoJS.lib.WordArray.create(hash.words.slice(0, 4), 16);
+  const clear = CryptoJS.AES.decrypt({ ciphertext: CryptoJS.enc.Base64.parse(String(wrapped).trim()) }, first16(CryptoJS.SHA256(`key${mediaId}`)), {
+    iv: first16(CryptoJS.SHA256(`iv${mediaId}`)),
+    mode: CryptoJS.mode.CBC,
+    padding: CryptoJS.pad.Pkcs7,
+  });
+  const hex = CryptoJS.enc.Hex.stringify(clear);
+  return /^[0-9a-f]{32}$/.test(hex) ? hex : '';
+}
+
 class Source {
   constructor() {
     this.requests = App.createRequestManager({});
+    this.keys = new Map();
+  }
+
+  async text(url, headers) {
+    const response = await this.requests.schedule(App.createRequest({ url, method: 'GET', headers }));
+    if (response.status < 200 || response.status >= 300) throw new Error(`UniqueStream: HTTP ${response.status}`);
+    return String(response.data);
+  }
+
+  async hlsKey(playlist, mediaId) {
+    if (this.keys.has(mediaId)) return this.keys.get(mediaId);
+    let hex = '';
+    for (let attempt = 0; attempt < 2 && !hex; attempt++) {
+      try {
+        const headers = { Referer: `${SITE}/` };
+        let url = playlist;
+        let body = await this.text(url, headers);
+        let line = /#EXT-X-KEY:[^\n]*URI="([^"]+)"/.exec(body);
+        if (!line) {
+          const next = body.split(/\r?\n/).find((l) => l && l.charAt(0) !== '#');
+          if (next) {
+            url = resolveUrl(playlist, next.trim());
+            body = await this.text(url, headers);
+            line = /#EXT-X-KEY:[^\n]*URI="([^"]+)"/.exec(body);
+          }
+        }
+        if (!line) break;
+        hex = unwrapKey(await this.text(resolveUrl(url, line[1]), { Referer: `${SITE}/`, 'x-am-media-id': mediaId }), mediaId);
+      } catch (e) {
+        hex = '';
+      }
+    }
+    if (hex) this.keys.set(mediaId, hex);
+    return hex;
   }
 
   getSourceFeeds() {
@@ -141,10 +200,15 @@ class Source {
     if (!versions.length) throw new Error('UniqueStream: this episode has no stream yet');
     const rank = (v) => (v.locale === wanted ? 0 : v.locale === 'ja-JP' ? 1 : 2);
     const seen = new Set();
-    return versions
-      .filter((v) => !seen.has(v.locale) && seen.add(v.locale))
-      .sort((a, b) => rank(a) - rank(b))
-      .map((v) => ({
+    const chosen = versions.filter((v) => !seen.has(v.locale) && seen.add(v.locale)).sort((a, b) => rank(a) - rank(b));
+    const keys = await Promise.all(
+      chosen.map((v) => {
+        const id = v.media_id || (/\/([0-9a-f]{32})_[^/]+\/master\.m3u8/.exec(v.playlist) || [])[1] || media.media_id;
+        return id ? this.hlsKey(v.playlist, id) : '';
+      })
+    );
+    return chosen.map((v, i) => {
+      const video = {
         url: v.playlist,
         type: 'hls',
         server: 'UniqueStream',
@@ -153,7 +217,10 @@ class Source {
         subtitles: (Array.isArray(v.subtitles) ? v.subtitles : [])
           .filter((s) => s && s.url)
           .map((s) => ({ url: s.url, label: languageName(s.language), language: s.language })),
-      }));
+      };
+      if (keys[i]) video.hlsKey = keys[i];
+      return video;
+    });
   }
 
   async getChapterDetails(mangaId, chapterId) {

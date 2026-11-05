@@ -5988,7 +5988,7 @@
     {
       "id": "uniquestream",
       "name": "UniqueStream",
-      "version": "1.1.1",
+      "version": "1.1.2",
       "medium": "anime",
       "website": "https://anime.uniquestream.net",
       "iconUrl": "https://inkstone.web.app/uniquestream/icon.png",
@@ -6005,7 +6005,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "f7be49bef1412bf339817ee1373a4b52dcf02b70a665394b1fca7d21ab3736b4",
+      "sha256": "705cda4b39f32c452c74d98f7822fd21be436c6f1ea3f8bd0bafa7be24bc8245",
       "settingsSchema": [
         {
           "type": "select",

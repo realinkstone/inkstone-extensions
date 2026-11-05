@@ -470,6 +470,7 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
       const quality = video.quality === undefined ? 'a video' : `"${video.quality}"`;
       if (video.quality !== undefined && typeof video.quality !== 'string') problems.push(`${quality}: quality is not a string`);
       if (video.server !== undefined && (typeof video.server !== 'string' || !video.server.trim())) problems.push(`${quality}: server must be a short non empty string`);
+      if (video.hlsKey !== undefined && !/^[0-9a-f]{32}$/i.test(String(video.hlsKey))) problems.push(`${quality}: hlsKey must be 32 hex characters (the 16 byte AES key), not the key address`);
       if (video.type === 'embed') {
         const host = (() => { try { return new URL(video.url).hostname; } catch { return ''; } })();
         if (!/^https?:\/\//i.test(video.url)) problems.push(`${quality}: an embed entry needs a full http or https page address`);
