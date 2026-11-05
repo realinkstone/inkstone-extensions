@@ -349,7 +349,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | Extension | Site | Language | Rating | Version |
 | --- | --- | --- | --- | --- |
 | [Bingr](western/bingr/index.js) | bingr.one | English | Mature | 1.0.2 |
-| [HydraHD](western/hydrahd/index.js) | hydrahd.gd | English | Mature | 1.0.1 |
+| [HydraHD](western/hydrahd/index.js) | hydrahd.gd | English | Mature | 1.0.2 |
 | [PressPlayZ](western/pressplayz/index.js) | pressplayz.top | English | Mature | 1.0.2 |
 
 ## Known issues

@@ -301,7 +301,7 @@ class Source {
   }
 
   async vixSrc(path) {
-    const api = await this.send({ url: `${VIX}/api/${path}`, method: 'GET', headers: { 'User-Agent': UA, Accept: 'application/json', Referer: `${VIX}/${path}` } });
+    const api = await this.send({ url: `${VIX}/api/${path}`, method: 'GET', headers: { Accept: 'application/json', Referer: `${VIX}/${path}` } });
     if (api.status === 404) throw new Error('VixSrc has no stream for this title yet');
     if (api.status < 200 || api.status >= 300) throw new Error(`VixSrc: HTTP ${api.status}`);
     let src = '';
@@ -311,14 +311,14 @@ class Source {
       src = '';
     }
     if (!src) throw new Error('VixSrc gave no embed page for this title');
-    const embed = await this.text(`${VIX}${src}`, { Referer: `${VIX}/${path}` });
+    const embed = await this.text(`${VIX}${src}`, { Referer: `${VIX}/${path}` }, true);
     const token = (/'token':\s*'([^']+)'/.exec(embed) || [])[1];
     const expires = (/'expires':\s*'([^']+)'/.exec(embed) || [])[1];
     const base = (/\burl:\s*'(https:\/\/vixsrc\.to\/playlist\/\d+)'/.exec(embed) || [])[1];
     if (!token || !expires || !base) throw new Error('VixSrc: the embed page holds no playlist');
     const fhd = /canPlayFHD\s*=\s*true/.test(embed);
     const master = `${base}?token=${token}&expires=${expires}${fhd ? '&h=1' : ''}&lang=en`;
-    const text = await this.text(master);
+    const text = await this.text(master, undefined, true);
     return { url: master, quality: 'VixSrc, ' + describeMaster(text), type: 'hls' };
   }
 
@@ -370,11 +370,13 @@ class Source {
     throw last;
   }
 
-  async text(url, extraHeaders) {
+  async text(url, extraHeaders, deviceAgent) {
+    const headers = Object.assign({ Accept: 'text/html,application/xhtml+xml,application/vnd.apple.mpegurl,*/*' }, extraHeaders || {});
+    if (!deviceAgent) headers['User-Agent'] = UA;
     const response = await this.send({
         url,
         method: 'GET',
-        headers: Object.assign({ 'User-Agent': UA, Accept: 'text/html,application/xhtml+xml,application/vnd.apple.mpegurl,*/*' }, extraHeaders || {}),
+        headers,
       });
     if (response.status === 404) throw new Error('HydraHD: not found (HTTP 404)');
     if (response.status < 200 || response.status >= 300) throw new Error(`HydraHD: HTTP ${response.status}`);
