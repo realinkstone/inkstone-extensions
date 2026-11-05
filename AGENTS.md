@@ -1,6 +1,6 @@
 # Instructions for AI assistants
 
-This repository holds extensions for Boundless Reader and Sumizuri: one folder per site, each with an `index.js`, inside `comics/`, `novels/`, `mixed/` or `anime/` by what the site offers, plus `versioning.json`.
+This repository holds extensions for Boundless Reader and Sumizuri: one folder per site, each with an `index.js`, inside `comics/`, `novels/`, `mixed/`, `anime/`, `donghua/`, `drama/` or `western/` by what the site offers, plus `versioning.json`.
 
 ## Adding or fixing an extension
 
@@ -20,7 +20,7 @@ If they don't, follow `docs/BUILD_WITH_AI.md` directly.
 
 ## Rules
 
-- One folder per extension, named after its `id` (lowercase), containing `index.js`. It goes in `comics/` for `medium: "comics"`, `novels/` for `"novel"`, `mixed/` for `"both"` and `anime/` for `"anime"`, for example `comics/mysite/index.js`. Anime extensions add `getVideos` and only play in apps with a video player, such as Sumizuri. The site still serves each one at `/<id>/index.js`.
+- One folder per extension, named after its `id` (lowercase), containing `index.js`. It goes in `comics/` for `medium: "comics"`, `novels/` for `"novel"`, `mixed/` for `"both"` and, for video, `anime/`, `donghua/`, `drama/` or `western/` by the first word of the description (all four use `"anime"` as the medium), for example `comics/mysite/index.js`. Anime extensions add `getVideos` and only play in apps with a video player, such as Sumizuri. The site still serves each one at `/<id>/index.js`.
 - No comments in `index.js`. Put notes in the pull request.
 - Run the test script before finishing, and fix every `FAIL`:
 

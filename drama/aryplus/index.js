@@ -7,8 +7,9 @@ const PAGE_SIZE = 20;
 const CACHE_MS = 5 * 60 * 1000;
 
 const FEEDS = [
-  { id: 'dramas', name: 'Dramas' },
-  { id: 'telefilms', name: 'Telefilms' },
+  { id: 'dramas', name: 'Dramas', category: 'dramas' },
+  { id: 'latest', name: 'Latest on ARY Plus', category: 'latest on ary plus' },
+  { id: 'telefilms', name: 'Telefilms', category: 'telefilms' },
 ];
 
 const GENRES = [
@@ -46,6 +47,38 @@ function playable(s) {
   return s && s._id && s.drmEnabled !== true && s.isLive !== true;
 }
 
+const ACRONYMS = ['ARY', 'OST', 'TV', 'PTV', 'FM', 'DJ', 'UK', 'USA', 'UAE', 'PSL', 'CID', 'GM'];
+function prettyTitle(raw) {
+  const t = String(raw || '').replace(/\s+/g, ' ').trim();
+  if (!/[A-Za-z]/.test(t) || /[a-z]/.test(t)) return t;
+  return t.replace(/[A-Za-z][A-Za-z']*/g, (w) => (ACRONYMS.indexOf(w) !== -1 ? w : w.charAt(0) + w.slice(1).toLowerCase()));
+}
+
+function minutesOf(value) {
+  if (value === undefined || value === null || value === '') return 0;
+  const text = String(value).trim();
+  let seconds = 0;
+  if (/^\d+(?::\d+){1,2}$/.test(text)) {
+    const parts = text.split(':').map(Number);
+    seconds = parts.length === 3 ? parts[0] * 3600 + parts[1] * 60 + parts[2] : parts[0] * 60 + parts[1];
+  } else if (/^\d+(?:\.\d+)?$/.test(text)) seconds = parseFloat(text);
+  return Math.round(seconds / 60);
+}
+
+const LANGUAGE_NAMES = { en: 'English', ur: 'Urdu', ar: 'Arabic', hi: 'Hindi', pa: 'Punjabi', fr: 'French', es: 'Spanish', tr: 'Turkish' };
+
+function describeMaster(text) {
+  let height = 0;
+  for (const m of String(text || '').matchAll(/RESOLUTION=\d+x(\d+)/g)) height = Math.max(height, parseInt(m[1], 10));
+  const languages = [];
+  for (const m of String(text || '').matchAll(/#EXT-X-MEDIA:TYPE=SUBTITLES[^\n]*/g)) {
+    const code = (/LANGUAGE="([^"]+)"/i.exec(m[0]) || [])[1] || '';
+    const name = LANGUAGE_NAMES[code.toLowerCase().slice(0, 2)] || (code ? code.toUpperCase() : 'Subtitles');
+    if (languages.indexOf(name) === -1) languages.push(name);
+  }
+  return { height, languages };
+}
+
 class Source {
   constructor() {
     this.requests = App.createRequestManager({});
@@ -65,10 +98,16 @@ class Source {
     const age = ageOf(s.ageRating);
     this.ages.set(s._id, age);
     const tags = Array.isArray(s.genreId) ? s.genreId.map((g) => (g && g.title) || g).filter((g) => typeof g === 'string') : [];
+    const mins = minutesOf(s.duration);
+    const count = Number(s.episodeCount);
+    const what = s.seriesType === 'singleVideo' ? `Telefilm${mins ? `, ${mins} min` : ''}` : Number.isFinite(count) && count > 0 ? `${count} ${count === 1 ? 'episode' : 'episodes'}` : '';
+    const rated = String(s.ageRating || '').trim();
+    const summary = [what, rated ? `rated ${rated}` : ''].filter(Boolean).join(', ');
     return {
       mangaId: s._id,
-      title: String(s.title || s._id),
+      title: prettyTitle(s.title || s._id),
       image: imageUrl(s.imagePoster || s.imageCoverBig),
+      summary: summary || undefined,
       tags: tags.length ? tags : undefined,
       ageRating: age || undefined,
       webURL: `https://aryplus.tv/series/${s._id}`,
@@ -95,7 +134,7 @@ class Source {
       return { results };
     }
 
-    const category = included.length > 0 && included[0] && included[0].id ? String(included[0].id) : (FEEDS.find((f) => f.id === feedId) || FEEDS[0]).id;
+    const category = included.length > 0 && included[0] && included[0].id ? String(included[0].id) : (FEEDS.find((f) => f.id === feedId) || FEEDS[0]).category;
     const data = await this.json(`${API}/api/series/byCatID/status/pg/${encodeURIComponent(category)}/${COUNTRY}?limit=${PAGE_SIZE}&page=${page}`);
     const results = [];
     const seen = new Set();
@@ -119,7 +158,7 @@ class Source {
     const age = s.ageRating !== undefined ? ageOf(s.ageRating) : this.ages.get(mangaId) || 0;
     return {
       mangaInfo: {
-        title: String(s.title || mangaId),
+        title: prettyTitle(s.title || mangaId),
         image: imageUrl(s.imagePoster || s.imageCoverBig),
         banner: imageUrl(s.imageCoverDesktop) || undefined,
         author: cast.join(', ') || undefined,
@@ -146,7 +185,8 @@ class Source {
     const s = await this.seriesOf(mangaId);
     if (s.seriesType === 'singleVideo') {
       if (s.drmEnabled === true) throw new Error('ARY Plus: this title is copy protected (DRM) and cannot be played here');
-      return [{ id: 'main', chapterId: 'main', name: String(s.title || 'Full video'), number: 1 }];
+      const mins = minutesOf(s.duration);
+      return [{ id: 'main', chapterId: 'main', name: 'Full telefilm', number: 1, group: mins ? `${mins} min` : undefined }];
     }
     const list = await this.episodesOf(mangaId);
     const rows = [];
@@ -154,12 +194,14 @@ class Source {
       if (!e || !e._id || e.drmEnabled === true || !e.videoSource) continue;
       const number = Number(e.videoEpNumber);
       const created = Date.parse(e.createdAd || '');
+      const mins = minutesOf(e.videoLength);
       rows.push({
         id: String(e._id),
         chapterId: String(e._id),
-        name: String(e.title || (Number.isFinite(number) ? `Episode ${number}` : 'Episode')),
+        name: String(e.title || (Number.isFinite(number) ? `Episode ${number}` : 'Episode')).trim(),
         number: Number.isFinite(number) ? number : undefined,
         time: Number.isFinite(created) ? created : undefined,
+        group: mins ? `${mins} min` : undefined,
       });
     }
     if (!rows.length) throw new Error('ARY Plus has no playable episodes for this title yet');
@@ -181,14 +223,18 @@ class Source {
     }
     if (!/^https?:\/\//i.test(url)) throw new Error('ARY Plus has no video for this episode yet');
 
-    let soft = false;
+    let info = { height: 0, languages: [] };
     try {
       const master = await this.requests.schedule(App.createRequest({ url, method: 'GET', headers: { 'User-Agent': UA } }));
-      soft = master.status === 200 && /#EXT-X-MEDIA:TYPE=SUBTITLES/i.test(String(master.data || ''));
+      if (master.status === 200) info = describeMaster(master.data);
     } catch (e) {
-      soft = false;
+      info = { height: 0, languages: [] };
     }
-    return [{ url, quality: soft ? 'Auto Softsub' : 'Auto', type: 'hls' }];
+    const parts = ['Auto'];
+    if (info.height) parts.push(`up to ${info.height}p`);
+    let label = parts.join(' ');
+    if (info.languages.length) label += `, ${info.languages.join(' and ')} Softsub`;
+    return [{ url, quality: label, type: 'hls' }];
   }
 
   async getChapterDetails(mangaId, chapterId) {

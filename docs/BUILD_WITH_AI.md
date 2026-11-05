@@ -617,8 +617,10 @@ if (existsSync(listPath)) {
     check(['comics', 'novel', 'both', 'anime'].includes(entry.medium), 'medium is comics, novel, both or anime', entry.medium);
     check((entry.medium === 'anime') === anime, 'an anime source has getVideos, and only an anime source', entry.medium);
     const typeFolder = path.basename(path.dirname(folder));
-    const wantedFolder = { comics: 'comics', novel: 'novels', both: 'mixed', anime: 'anime' }[entry.medium];
-    if (['comics', 'novels', 'mixed', 'anime'].includes(typeFolder)) {
+    // A video source has the medium "anime" whatever it shows; the first word of its description (Anime, Donghua, Drama, Western) picks the folder.
+    const videoFolder = String(entry.description ?? '').split('\n')[0].split('・')[0].trim().toLowerCase();
+    const wantedFolder = entry.medium === 'anime' ? (['anime', 'donghua', 'drama', 'western'].includes(videoFolder) ? videoFolder : 'anime') : { comics: 'comics', novel: 'novels', both: 'mixed' }[entry.medium];
+    if (['comics', 'novels', 'mixed', 'anime', 'donghua', 'drama', 'western'].includes(typeFolder)) {
       check(typeFolder === wantedFolder, 'sits in the folder for its medium', `${typeFolder}/ holds it, ${wantedFolder}/ fits "${entry.medium}"`);
       const commentLines = code.split('\n').filter((line) => /^\s*(\/\/|\/\*|\*\/|\*\s)/.test(line)).length;
       if (commentLines) say('warn', `${commentLines} comment lines in a file that sits in the repository layout`, 'the repository holds extensions without comments (keep your commented copy elsewhere)');
@@ -1019,7 +1021,7 @@ Add an entry to `versioning.json`, and make the extension's folder name equal th
 ## Step 5: List it on Inkstone
 
 1. Fork [realinkstone/inkstone-extensions](https://github.com/realinkstone/inkstone-extensions).
-2. Add your folder under the one that matches what it offers, as `comics/<id>/index.js` (manga, manhwa, webtoons), `novels/<id>/index.js`, `mixed/<id>/index.js` (both) or `anime/<id>/index.js`, and add your entry to the `versioning.json` at the top of the repository. The site serves every extension at `/<id>/index.js` whatever its folder, so the folder changes nothing in the app.
+2. Add your folder under the one that matches what it offers, as `comics/<id>/index.js` (manga, manhwa, webtoons), `novels/<id>/index.js`, `mixed/<id>/index.js` (both) or, for video, `anime/<id>/index.js`, `donghua/<id>/index.js`, `drama/<id>/index.js` or `western/<id>/index.js` (a video source has `medium: "anime"` whatever it shows, and the first word of its description decides the folder), and add your entry to the `versioning.json` at the top of the repository. The site serves every extension at `/<id>/index.js` whatever its folder, so the folder changes nothing in the app.
 3. Open a pull request. Your report (below) works as the description.
 
 No GitHub? Share the folder on the [Inkstone Discord](https://discord.gg/6pX2XgFYcs) instead. Every submission is tried against the live site before it's listed.

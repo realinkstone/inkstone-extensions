@@ -197,8 +197,10 @@ if (existsSync(listPath)) {
     check(['comics', 'novel', 'both', 'anime'].includes(entry.medium), 'medium is comics, novel, both or anime', entry.medium);
     check((entry.medium === 'anime') === anime, 'an anime source has getVideos, and only an anime source', entry.medium);
     const typeFolder = path.basename(path.dirname(folder));
-    const wantedFolder = { comics: 'comics', novel: 'novels', both: 'mixed', anime: 'anime' }[entry.medium];
-    if (['comics', 'novels', 'mixed', 'anime'].includes(typeFolder)) {
+    // A video source has the medium "anime" whatever it shows; the first word of its description (Anime, Donghua, Drama, Western) picks the folder.
+    const videoFolder = String(entry.description ?? '').split('\n')[0].split('・')[0].trim().toLowerCase();
+    const wantedFolder = entry.medium === 'anime' ? (['anime', 'donghua', 'drama', 'western'].includes(videoFolder) ? videoFolder : 'anime') : { comics: 'comics', novel: 'novels', both: 'mixed' }[entry.medium];
+    if (['comics', 'novels', 'mixed', 'anime', 'donghua', 'drama', 'western'].includes(typeFolder)) {
       check(typeFolder === wantedFolder, 'sits in the folder for its medium', `${typeFolder}/ holds it, ${wantedFolder}/ fits "${entry.medium}"`);
       const commentLines = code.split('\n').filter((line) => /^\s*(\/\/|\/\*|\*\/|\*\s)/.test(line)).length;
       if (commentLines) say('warn', `${commentLines} comment lines in a file that sits in the repository layout`, 'the repository holds extensions without comments (keep your commented copy elsewhere)');

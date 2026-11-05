@@ -10,7 +10,7 @@ Want an AI assistant to do the building? Give it [docs/BUILD_WITH_AI.md](docs/BU
 
 ## Add an extension
 
-1. Make a folder named after the extension id (lowercase) with an `index.js` inside. Put it in `comics/`, `novels/`, `mixed/` (for sites with both) or `anime/`, matching the `medium` in `versioning.json`.
+1. Make a folder named after the extension id (lowercase) with an `index.js` inside. Put it in `comics/`, `novels/`, `mixed/` (for sites with both) or, for video, `anime/`, `donghua/`, `drama/` or `western/` (the first word of the description says which; the medium is `anime` for all four), matching the `medium` in `versioning.json`.
 2. Add an entry for it to `versioning.json`. Copying a similar extension's entry is the easy way.
 3. Set `contentRating` honestly: `safe`, `mature` or `adult`. If the site rates titles one by one, also return each title's own minimum age as `ageRating` (0, 16 or 18).
 4. Test it against the live site with `npm install` then `node docs/test-extension.mjs <type>/<id>/index.js "search term"`. It checks compatibility and that browse, search, every feed, details, chapters and reading all return real results, and that the first cover and page image load. Fix every `FAIL`.

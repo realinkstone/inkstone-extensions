@@ -31,6 +31,9 @@ comics/<id>/index.js       extensions for manga, manhwa and webtoons
 novels/<id>/index.js       extensions for novels
 mixed/<id>/index.js        extensions that do both
 anime/<id>/index.js        anime extensions, for apps that play video such as Sumizuri
+donghua/<id>/index.js      donghua (Chinese animation) extensions, the same video format
+drama/<id>/index.js        drama extensions (live action series and telefilms), the same video format
+western/<id>/index.js      western series, films and cartoons, the same video format
 versioning.json            the list your app reads
 docs/assets/               the Add to Boundless and Add to Sumizuri buttons
 docs/BUILD_WITH_AI.md      have an AI assistant build one for you
@@ -50,7 +53,7 @@ Prefer to review a written plan before any code is written? This repo works with
 
 ## Extensions
 
-239 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
+242 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
 
 Each extension lives in the folder for what it offers: `comics`, `novels`, `mixed` for those that do both, or `anime`. The site still serves every one at `inkstone.web.app/<id>/index.js`, so the folders change nothing in the apps.
 
@@ -302,7 +305,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 
 ### Anime
 
-Anime extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays them. Boundless skips them for now.
+Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays them. Boundless skips them for now.
 
 | Extension | Site | Language | Rating | Version |
 | --- | --- | --- | --- | --- |
@@ -310,10 +313,20 @@ Anime extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [AnimeGG](anime/animegg/index.js) | animegg.org | English | Mature | 1.0.0 |
 | [AnimeHeaven](anime/animeheaven/index.js) | animeheaven.me | English | Mature | 1.0.0 |
 | [AniWorld](anime/aniworld/index.js) | aniworld.to | German | Mature | 1.0.1 |
-| [ARY Plus](anime/aryplus/index.js) | aryplus.tv | Urdu | Safe | 1.0.0 |
+| [AniZone](anime/anizone/index.js) | anizone.to | English | Mature | 1.0.0 |
+| [KickAssAnime](anime/kickassanime/index.js) | kaa.lt | English | Mature | 1.0.1 |
 | [Miruro](anime/miruro/index.js) | miruro.cx | English | Mature | 1.0.0 |
 | [MonosChinos](anime/monoschinos/index.js) | monoschinos.st | Spanish | Mature | 1.0.0 |
 | [SerienStream](anime/serienstream/index.js) | serienstream.to | German | Mature | 1.0.1 |
+| [UniqueStream](anime/uniquestream/index.js) | anime.uniquestream.net | English | Mature | 1.0.1 |
+
+### Drama
+
+Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays them. Boundless skips them for now.
+
+| Extension | Site | Language | Rating | Version |
+| --- | --- | --- | --- | --- |
+| [ARY Plus](drama/aryplus/index.js) | aryplus.tv | Urdu | Safe | 1.0.1 |
 
 ## Known issues
 

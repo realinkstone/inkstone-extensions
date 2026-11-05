@@ -49,7 +49,7 @@ It looks for `versioning.json` one folder above your extension, the same layout 
 - For two titles: details have a `desc` and an allowed `status` (a warning if every title comes out `UNKNOWN`, which usually means the mapping misses the site's wording or an accent), and the title, author and description are plain strings. The chapter list isn't empty, every chapter id is unique, chapter fields have the types the app casts to (strings for `name`, `group` and `volume`, numbers for `number` and `time`), chapter times are in milliseconds, and the first and last chapters open with real image URLs (or text, for novels).
 - Every host your extension called is listed in `hosts`.
 - A response that is a bot check (Cloudflare's "Just a moment", a "Browser verification" page, or a 403 saying the bot challenge was not passed) is named as one, with a hint, instead of showing up as `unexpected token '<'`.
-- A file that sits in the repository layout (`comics/`, `novels/`, `mixed/`, `anime/`) has no comment lines, because the repository holds extensions without comments (a warning).
+- A file that sits in the repository layout (`comics/`, `novels/`, `mixed/`, `anime/`, `donghua/`, `drama/`, `western/`) has no comment lines, because the repository holds extensions without comments (a warning).
 
 Requests that set no `User-Agent` are sent with an iPhone web view agent, the way Boundless sends them, so a site that treats browser agents differently from plain ones shows up here and not only on a phone.
 

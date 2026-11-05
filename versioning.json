@@ -5895,7 +5895,7 @@
     {
       "id": "aryplus",
       "name": "ARY Plus",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://aryplus.tv",
       "iconUrl": "https://inkstone.web.app/aryplus/icon.png",
@@ -5916,7 +5916,76 @@
       ],
       "language": "ur",
       "contentRating": "safe",
-      "sha256": "74a3e98838f3595bf7c634ec6dd2b1bb75df91d5d94dfbc298cdf3bb0df76be5"
+      "sha256": "a88f4db59367b181d8ce8000798b372f7664b201c818753690a903f9cbbe0cd1"
+    },
+    {
+      "id": "anizone",
+      "name": "AniZone",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://anizone.to",
+      "iconUrl": "https://inkstone.web.app/anizone/icon.png",
+      "hosts": [
+        "anizone.to",
+        "*.xin-cdn.xyz",
+        "*.vid-cdn.xyz"
+      ],
+      "description": "Anime\n\nCatalog・2,000+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "7c2a1cf4ab40672dcdea037fd1dd502ec9c371c7a3db5785bd69f944f7ac050d"
+    },
+    {
+      "id": "kickassanime",
+      "name": "KickAssAnime",
+      "version": "1.0.1",
+      "medium": "anime",
+      "website": "https://kaa.lt",
+      "iconUrl": "https://inkstone.web.app/kickassanime/icon.png",
+      "hosts": [
+        "kaa.lt",
+        "krussdomi.com"
+      ],
+      "description": "Anime\n\nCatalog・3,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "7fb2a3e2a5d1868c0c2b27a59378493ac8f42884c36c82586843fff611598072"
+    },
+    {
+      "id": "uniquestream",
+      "name": "UniqueStream",
+      "version": "1.0.1",
+      "medium": "anime",
+      "website": "https://anime.uniquestream.net",
+      "iconUrl": "https://inkstone.web.app/uniquestream/icon.png",
+      "hosts": [
+        "anime.uniquestream.net"
+      ],
+      "description": "Anime\n\nCatalog・3,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "0705d46e4e7e3a02dfc02cd0212eb7989353d849bcb6fef8e4e26c43a4d13fa4"
     }
   ]
 }

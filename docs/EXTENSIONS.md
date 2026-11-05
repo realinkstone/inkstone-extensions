@@ -335,7 +335,7 @@ your-repo/
 
 The app resolves each bundle as `<repo>/<id>/index.js`, so the folder name must
 equal the `id`. In the Inkstone repository the folder sits inside `comics/`, `novels/`,
-`mixed/` or `anime/`, and the site serves it without that folder. `capabilities` is a
+`mixed/`, `anime/`, `donghua/`, `drama/` or `western/` (a video source has `medium: "anime"` whatever it shows, and the first word of its description decides the folder), and the site serves it without that folder. `capabilities` is a
 landing-page-only label the app never reads, but `description`, `medium`, `website`,
 `iconUrl`, `language`, `contentRating` and `settingsSchema` are all read (with `id`, `name`, `version`,
 `sha256` and `hosts`) and copied onto the installed record at install/update time. The app ignores
