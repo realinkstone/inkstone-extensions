@@ -104,6 +104,11 @@ class Source {
   }
 
   async getVideos(mangaId, chapterId) {
+    const videos = await this.getVideosUnnamed(mangaId, chapterId);
+    return videos.map((video) => (video.server ? video : Object.assign({}, video, { server: String(video.quality || 'Server').split(' ')[0] })));
+  }
+
+  async getVideosUnnamed(mangaId, chapterId) {
     const episode = payload(await this.json(`${SITE}/media/${encodeURIComponent(mangaId)}/${encodeURIComponent(chapterId)}/__data.json`), 'embeds');
     const players = ((episode.embeds && episode.embeds.SUB) || []).filter((player) => player && player.url);
     const found = await Promise.all(players.map((player) => this.extract(player).catch(() => null)));

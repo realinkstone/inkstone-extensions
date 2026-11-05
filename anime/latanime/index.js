@@ -90,6 +90,11 @@ class Source {
   }
 
   async getVideos(mangaId, chapterId) {
+    const videos = await this.getVideosUnnamed(mangaId, chapterId);
+    return videos.map((video) => (video.server ? video : Object.assign({}, video, { server: String(video.quality || 'Server').split(' ')[0] })));
+  }
+
+  async getVideosUnnamed(mangaId, chapterId) {
     const $ = cheerio.load(await this.get(`${SITE}/ver/${encodeURIComponent(chapterId)}`));
     const players = $('[data-player]')
       .map((i, el) => App.base64Decode($(el).attr('data-player')))

@@ -150,6 +150,11 @@ class Source {
   }
 
   async getVideos(mangaId, chapterId) {
+    const videos = await this.getVideosUnnamed(mangaId, chapterId);
+    return videos.map((video) => (video.server ? video : Object.assign({}, video, { server: 'Vimeos' })));
+  }
+
+  async getVideosUnnamed(mangaId, chapterId) {
     const { kind, id } = partsOf(mangaId);
     const postId = kind === 'movies' ? id : String(chapterId);
     const data = await this.json(`${API}/player?postId=${encodeURIComponent(postId)}&demo=0`);

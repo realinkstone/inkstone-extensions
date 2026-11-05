@@ -199,6 +199,11 @@ class Source {
   }
 
   async getVideos(mangaId, chapterId) {
+    const videos = await this.getVideosUnnamed(mangaId, chapterId);
+    return videos.map((video) => (video.server ? video : Object.assign({}, video, { server: String(video.quality || 'Server').split(' ')[0] })));
+  }
+
+  async getVideosUnnamed(mangaId, chapterId) {
     const data = await this.apiPost(`${API}/v2/episode_links/${encodeURIComponent(chapterId)}`);
     const players = ((data && data.response && data.response.players) || [])
       .map((player) => ({ option: player.option || '', url: decodePlayerUrl(player.name) }))

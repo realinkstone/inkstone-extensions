@@ -131,6 +131,11 @@ class Source {
   }
 
   async getVideos(mangaId, chapterId) {
+    const videos = await this.getVideosUnnamed(mangaId, chapterId);
+    return videos.map((video) => (video.server ? video : Object.assign({}, video, { server: String(video.quality || 'Server').split(' ')[0] })));
+  }
+
+  async getVideosUnnamed(mangaId, chapterId) {
     const episodeUrl = `${SITE}/ver/${encodeURIComponent(chapterId)}`;
     const html = await this.get(episodeUrl);
     const opt = (/class="opt"[^>]*data-encrypt="([^"]+)"/.exec(html) || /data-encrypt="([^"]+)"/.exec(html) || [])[1];

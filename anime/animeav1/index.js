@@ -86,7 +86,7 @@ class Source {
     const videos = found
       .filter((video) => video && /^https?:\/\//.test(video.url))
       .sort((a, b) => SERVERS.indexOf(a.server) - SERVERS.indexOf(b.server))
-      .map(({ server, language, ...video }) => ({ ...video, quality: `${server} ${language === 'DUB' ? 'Dub' : 'Sub'}`, headers: { ...video.headers, ...BROWSER } }));
+      .map(({ server, language, ...video }) => ({ ...video, server, quality: `${server} ${language === 'DUB' ? 'Dub' : 'Sub'}`, headers: { ...video.headers, ...BROWSER } }));
     if (!videos.length) throw new Error(`AnimeAV1: none of the ${servers.length} servers gave a playable video`);
     return videos;
   }

@@ -206,6 +206,11 @@ class Source {
   }
 
   async getVideos(mangaId, chapterId) {
+    const videos = await this.getVideosUnnamed(mangaId, chapterId);
+    return videos.map((video) => (video.server ? video : Object.assign({}, video, { server: 'Direct' })));
+  }
+
+  async getVideosUnnamed(mangaId, chapterId) {
     const url = /^https?:\/\//.test(chapterId) ? chapterId : `${FILES}/${chapterId.replace(/^\/+/, '')}`;
     const res = (/\b(\d{3,4}p)\b/i.exec(decodeURIComponent(url)) || [])[1] || '1080p';
     return [

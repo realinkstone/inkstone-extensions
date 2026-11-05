@@ -183,7 +183,7 @@ class Source {
     const videos = found
       .filter((v) => v && /^https?:\/\//.test(v.url))
       .sort((a, b) => SERVERS.indexOf(a.server) - SERVERS.indexOf(b.server))
-      .map(({ server, ...v }) => ({ ...v, headers: { ...v.headers, ...BROWSER } }));
+      .map((v) => ({ ...v, headers: { ...v.headers, ...BROWSER } }));
 
     if (!videos.length) throw new Error(`CinePlus123: none of the ${validEmbeds.length} servers gave a playable video`);
     return videos;

@@ -202,12 +202,16 @@ class Source {
       })
     );
 
-    const videos = resolved.filter((v) => v && v.url);
-    if (!videos.length) {
+    const videos = resolved.filter((v) => v && v.url).map((v) => Object.assign({}, v, { server: v.server || v.quality }));
+    const seen = new Set();
+    const embeds = serverEntries
+      .filter((entry, i) => !(resolved[i] && resolved[i].url) && /^https?:\/\//.test(entry.url) && !seen.has(entry.url) && seen.add(entry.url))
+      .map((entry) => ({ url: entry.url, type: 'embed', quality: entry.label, server: String(entry.label).trim() || 'Server' }));
+    if (!videos.length && !embeds.length) {
       throw new Error(`AsiaLiveAction: none of the ${serverEntries.length} servers gave a playable video`);
     }
 
-    return videos;
+    return videos.concat(embeds);
   }
 
   async extract(rawUrl) {

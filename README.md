@@ -327,29 +327,29 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | Extension | Site | Language | Rating | Version |
 | --- | --- | --- | --- | --- |
 | [Anikoto](anime/anikoto/index.js) | anikototv.to | English | Mature | 1.0.2 |
-| [AnimeAV1](anime/animeav1/index.js) | animeav1.com | Spanish | Mature | 1.0.0 |
+| [AnimeAV1](anime/animeav1/index.js) | animeav1.com | Spanish | Mature | 1.0.1 |
 | [AnimeGG](anime/animegg/index.js) | animegg.org | English | Mature | 1.0.1 |
 | [AnimeHeaven](anime/animeheaven/index.js) | animeheaven.me | English | Mature | 1.0.1 |
-| [AnimeJL](anime/animejl/index.js) | anime-jl.net | Spanish | Adult | 1.0.1 |
+| [AnimeJL](anime/animejl/index.js) | anime-jl.net | Spanish | Adult | 1.0.2 |
 | [AnimeLatinoHD](anime/animelatinohd/index.js) | animelatinohd.com | Spanish | Mature | 1.0.0 |
 | [AnimeMovil](anime/animemovil/index.js) | tvanime.tv | Spanish | Adult | 1.0.2 |
 | [AnimeOnline.Ninja](anime/animeonlineninja/index.js) | ver2.animeonline.ninja | Spanish | Mature | 1.0.0 |
 | [AniWorld](anime/aniworld/index.js) | aniworld.to | German | Mature | 1.0.3 |
 | [AniZone](anime/anizone/index.js) | anizone.to | English | Mature | 1.0.2 |
-| [Beatz Anime](anime/beatzanime/index.js) | beatz-anime.net | Spanish | Mature | 1.0.0 |
-| [HentaiLA](anime/hentaila/index.js) | hentaila.com | Spanish | Adult | 1.0.0 |
+| [Beatz Anime](anime/beatzanime/index.js) | beatz-anime.net | Spanish | Mature | 1.0.1 |
+| [HentaiLA](anime/hentaila/index.js) | hentaila.com | Spanish | Adult | 1.0.1 |
 | [JKAnime](anime/jkanime/index.js) | jkanime.net | Spanish | Mature | 1.0.0 |
-| [Katanime](anime/katanime/index.js) | katanime.net | Spanish | Mature | 1.0.1 |
+| [Katanime](anime/katanime/index.js) | katanime.net | Spanish | Mature | 1.0.2 |
 | [KickAssAnime](anime/kickassanime/index.js) | kaa.lt | English | Mature | 1.0.2 |
-| [Latanime](anime/latanime/index.js) | latanime.org | Spanish | Mature | 1.0.0 |
-| [LegionAnime](anime/legionanime/index.js) | legionanime.xyz | Spanish | Mature | 1.0.1 |
+| [Latanime](anime/latanime/index.js) | latanime.org | Spanish | Mature | 1.0.1 |
+| [LegionAnime](anime/legionanime/index.js) | legionanime.xyz | Spanish | Mature | 1.0.2 |
 | [Miruro](anime/miruro/index.js) | miruro.cx | English | Mature | 1.0.2 |
 | [MonosChinos](anime/monoschinos/index.js) | monoschinos.st | Spanish | Mature | 1.0.2 |
 | [SerienStream](anime/serienstream/index.js) | serienstream.to | German | Mature | 1.0.3 |
-| [TioAnime](anime/tioanime/index.js) | tioanime.com | Spanish | Mature | 1.0.0 |
+| [TioAnime](anime/tioanime/index.js) | tioanime.com | Spanish | Mature | 1.0.1 |
 | [UniqueStream](anime/uniquestream/index.js) | anime.uniquestream.net | English | Mature | 1.1.2 |
 | [VerAnime](anime/veranime/index.js) | verani.me | Spanish | Mature | 1.0.1 |
-| [VerAnimes](anime/veranimes/index.js) | wwv.veranimes.net | Spanish | Mature | 1.0.1 |
+| [VerAnimes](anime/veranimes/index.js) | wwv.veranimes.net | Spanish | Mature | 1.0.2 |
 
 ### Donghua
 
@@ -373,9 +373,9 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | Extension | Site | Language | Rating | Version |
 | --- | --- | --- | --- | --- |
 | [ARY Plus](drama/aryplus/index.js) | aryplus.tv | Urdu | Safe | 1.0.3 |
-| [AsiaLiveAction](drama/asialiveaction/index.js) | asialiveaction.com | Spanish | Mature | 1.0.1 |
+| [AsiaLiveAction](drama/asialiveaction/index.js) | asialiveaction.com | Spanish | Mature | 1.0.2 |
 | [DoramasFlix](drama/doramasflix/index.js) | doramasflix.in | Spanish | Mature | 1.0.1 |
-| [DoramasYT](drama/doramasyt/index.js) | doramasyt.com | Spanish | Mature | 1.0.1 |
+| [DoramasYT](drama/doramasyt/index.js) | doramasyt.com | Spanish | Mature | 1.0.2 |
 | [KissAsian](drama/kissasian/index.js) | kissasian.com.gr | English | Mature | 1.0.0 |
 | [MyAsianTV](drama/myasiantv/index.js) | ww7.myasiantv.rest | English | Mature | 1.0.0 |
 
@@ -386,8 +386,8 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | Extension | Site | Language | Rating | Version |
 | --- | --- | --- | --- | --- |
 | [Bingr](western/bingr/index.js) | bingr.one | English | Mature | 1.0.3 |
-| [CineCalidad](western/cinecalidad/index.js) | cinecalidad.org | Spanish | Mature | 1.0.0 |
-| [CinePlus123](western/cineplus123/index.js) | cineplus123.org | Spanish | Mature | 1.0.1 |
+| [CineCalidad](western/cinecalidad/index.js) | cinecalidad.org | Spanish | Mature | 1.0.1 |
+| [CinePlus123](western/cineplus123/index.js) | cineplus123.org | Spanish | Mature | 1.0.2 |
 | [Cuevana](western/cuevana/index.js) | cuevana3.eu | Spanish | Mature | 1.0.1 |
 | [Gnula](western/gnula/index.js) | gnula.life | Spanish | Mature | 1.0.2 |
 | [HydraHD](western/hydrahd/index.js) | hydrahd.gd | English | Mature | 1.0.4 |
