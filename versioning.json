@@ -7488,14 +7488,15 @@
     {
       "id": "traduccionesisekai",
       "name": "Traducciones Isekai",
-      "version": "1.1.1",
+      "version": "1.2.1",
       "medium": "novel",
       "website": "https://traduccionesisekai.blogspot.com",
       "iconUrl": "https://inkstone.web.app/traduccionesisekai/icon.png",
       "hosts": [
-        "traduccionesisekai.blogspot.com"
+        "traduccionesisekai.blogspot.com",
+        "drive.usercontent.google.com"
       ],
-      "description": "Web Novels・Light Novels\n\nRestrictions:\n・Rate Limit",
+      "description": "Web Novels・Light Novels\n\nRestrictions:\n・Rate Limit\n・Drive light novels need a reader that opens PDF books",
       "capabilities": [
         "browse",
         "search",
@@ -7507,7 +7508,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "f9f0d85622ea421fb62caec783917d2037cd9dda3af1b6a3d3f0e9b39a86ad00"
+      "sha256": "6643cbb1a5e0f85edf9d52f8b39712d13006fb84464037b89f8e5a0188fd8227"
     },
     {
       "id": "veranime",
@@ -7534,7 +7535,7 @@
     {
       "id": "veranimes",
       "name": "VerAnimes",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://wwv.veranimes.net",
       "iconUrl": "https://inkstone.web.app/veranimes/icon.png",
@@ -7559,7 +7560,9 @@
         "yourupload.com",
         "www.yourupload.com",
         "mp4upload.com",
-        "www.mp4upload.com"
+        "www.mp4upload.com",
+        "shannoncoldalready.com",
+        "ashleyhardat.com"
       ],
       "description": "Anime\n\nCatalog・6,000+",
       "capabilities": [
@@ -7623,6 +7626,95 @@
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
       "sha256": "de8bd37193cd6eba7693af3d9702bb3b5cc50a3667c3b68d1e13f5fa8843b8b6"
+    },
+    {
+      "id": "lectulandia",
+      "name": "Lectulandia",
+      "version": "1.0.0",
+      "medium": "novel",
+      "website": "https://ww3.lectulandia.co",
+      "hosts": [
+        "ww3.lectulandia.co",
+        "lectulandia.co",
+        "www.antupload.com",
+        "antupload.com",
+        "assets.lectulandia.co"
+      ],
+      "description": "Books・Novels in EPUB and PDF\n\nCatalog・50,000+ books\n\nRestrictions:\n・Needs a reader that opens EPUB/PDF books",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres"
+      ],
+      "language": "es",
+      "contentRating": "safe",
+      "sha256": "f531906355b1c21b5a4cd26fc5bcd8b480a0886184c0017ebb464d7183057985"
+    },
+    {
+      "id": "elejandria",
+      "name": "Elejandría",
+      "version": "1.0.0",
+      "medium": "novel",
+      "website": "https://www.elejandria.com",
+      "hosts": [
+        "www.elejandria.com",
+        "elejandria.com"
+      ],
+      "description": "Free and legal books in Spanish (public domain and author-released)\n\nCatalog・2,300+ books, ePub and PDF\n\nRestrictions:\n・Needs a reader that opens EPUB/PDF books",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "1f4965b2783628af32b50963ca4672bff4a8a17ebd67f1e5acbed24bf0d074d1"
+    },
+    {
+      "id": "ikigaimangas",
+      "name": "Ikigai Mangas",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://ikigaimangas.com",
+      "description": "Manhwa・Manhua・Manga\n\nCatalog・6,000+\n\nRestrictions:\n・Rate Limit\n・Page images need the reader to send the source's headers",
+      "capabilities": [
+        "browse",
+        "search",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "adult",
+      "iconUrl": "https://ikigaimangas.com/favicon.ico",
+      "sha256": "b9b166536c1dfbe04a815ce73f8cd8eec9bd7213adc2ef217aecac82b8868655"
+    },
+    {
+      "id": "mangolibreria",
+      "name": "MangoLibreria",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://lectorfenix.com",
+      "description": "Manhwa・Manhua・Manga\n\nCatalog・2,000+\n\nRestrictions:\n・Page images need the reader to send the source's headers",
+      "capabilities": [
+        "browse",
+        "search",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "adult",
+      "iconUrl": "https://lectorfenix.com/favicon.ico",
+      "sha256": "2511901298a26aca721de541e731662e2343701586d8b614d597b7e2cdec3058",
+      "hosts": [
+        "lectorfenix.com"
+      ]
     }
   ]
 }

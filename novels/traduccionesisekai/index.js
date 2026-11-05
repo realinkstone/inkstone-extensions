@@ -5,11 +5,21 @@ const NOVELS = [
   { mangaId: 'extras-y-e', title: 'Extras y especiales de Re:Zero', image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi8SDj-QPWM1pQ9eFO76XhLSWOxyeqyzF1W9XYlIZtuKdpjYKc7EFf5Qt6ppwpIaSIqGTBVfF1rQDuge99-I2o3EdW5xB8bYTLmkuTJ7b5GVbt2d-Bdc9irG37vgvLEzZUcuFQuYao91Ng/s1600/Cool.jpg', medium: 'novel' },
   { mangaId: 'classroom-of-elite', title: 'Classroom of the Elite', image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjsWBI-kx4s89ePG9tY3eiFLXMxjfnepG4qkDweNCKmSftVAuouibLCr3p9Cx8DDXNZzVoCEL9PWFZFfgVbECiQtf4XQJ05soyOIvN8a0hYUVNZhe6yoj7TAyqWyd3VyS8Fx0dhqJHO9gk/s1600/1217321-0-q80.jpg', medium: 'novel' },
   { mangaId: 'la-diosa-del-bano', title: 'La Diosa del Baño', image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjSkkYTGBT88Qp1Y8ux2wQvWOiKvROd-EawuvqP-RFrmmM4ChCN5UBz96lboXFvsJlQbSotOGAoyly1uHvt_kGKDmbNG_KT9wlQLKbIFcP8TCvsMU7E0AhY55Jg8CQN7IQvR0Y1oVFAPZo/s1600/Portada2.jpg' },
-  { mangaId: 'la-diosa-del-bano', title: 'La Diosa del Baño', image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjSkkYTGBT88Qp1Y8ux2wQvWOiKvROd-EawuvqP-RFrmmM4ChCN5UBz96lboXFvsJlQbSotOGAoyly1uHvt_kGKDmbNG_KT9wlQLKbIFcP8TCvsMU7E0AhY55Jg8CQN7IQvR0Y1oVFAPZo/s1600/Portada2.jpg' },
+  { mangaId: 'kono-subarashii-sekai-ni-shukufuku-o', title: 'Konosuba (PDF)', image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEigxXUfhrW5Q5YK1LFoa35ajvgW-tI_TfDvoDhqkSbQAU6lCiTeXD3VsayA3gVqAY05xabNFzkxL1leuPsARXp62duIbsaBO0cuc-NWiTfzZqmbujnn25iatEhR10aBQABriVN6LW7vpVs/s1600/konosuba2.png' },
+  { mangaId: 'overlord', title: 'Overlord (PDF)', image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjvockoUj7AzKc_f3E32nJh0SW0Lbss8XwnVNoN0AUx1BDAwqgOAZCu7r1IgMNT86DUb-E0Xa3c1hN4dhMJ_DBex-zrYwv8CTCQctKPEsIHfr1yKz-rbrGx8zCPYdzFMIquNcmlATcYxvQ/s1600/Overlord+Anime+Characters.jpg' },
+  { mangaId: 'tensei-shitara-slime-datta-ken', title: 'Tensei Shitara Slime Datta Ken (PDF)', image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKtIqX_5-VCBYS5ZXusWMEW7qb-C0PYFSs4vqGkIlr5yQdu234_g72Oy7QPbvqj45Bj2ZbW2wB87WL8nPkS26i9tRztuZbGc16zR-8YBIPLpm4yyH7H6J8wg9GkVl6vRt49oBpY7kak_E/s1600/tensei-shitara-slime-datta-ken.jpg' },
+  { mangaId: 'no-game-no-life', title: 'No Game No Life (PDF)', image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjBVYdX50u9scZ6_31A_YD4cHz6xdf7L59Zc07SKNfg_aDn10HDfasw6cJwtL5UsnUAO-Snbca7DctYG0DVJSe_h38U2dNesrkRMh05l5mCU3oPgCGZiTkChmZF8aVEzJ5auif_1WKXKjk/s1600/No-Game-No-Life-Anime-Visual.jpg' },
+  { mangaId: 'seirei-tsukai-no-bladedance', title: 'Seirei Tsukai no Bladedance (PDF)', image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjRwj3InpfEt9zvTqax5WaBp5-6fKIR8ZW5GaBzYvzk8ME1rZTSryVKVApfnnpBHlm5sC2AXVVyRQeDIYBgxXVElTCINSkoyjAahAOI6zqiX7Qi7644tT9iUV5gbzGkhj2wIWll2jSgidg/s640/STnBD_Nimura_Yuuji_visual.jpg' },
+  { mangaId: 'mondaiji-tachi-ga-isekai-kara-kuru', title: 'Mondaiji-tachi ga Isekai kara Kuru Sou Desu yo? (PDF)', image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhIxyp9-k_WgoewWrPcmVDG0lJMuwb8Z2BAViV0-my-WV4TmzoaGG7dR9rJfoIVK9lYtV_3Bw-5aUjo1B7SpJAAEqYdPSn3a7vpQPVuYmMThSVbNnqQwN_cPOBKBaD8GrTG6NF9ZFl_fVA/s640/Mondaiji_cover.jpg' },
 ];
 
 function chapterPath(href) {
   const match = /traduccionesisekai\.blogspot\.[a-z.]+\/((?:\d{4}\/\d{2}|p)\/[^?#"]+\.html)/.exec(href || '');
+  return match ? match[1] : null;
+}
+
+function driveIdOf(href) {
+  const match = /drive\.google\.com\/(?:open\?id=|file\/d\/|uc\?(?:export=download&(?:amp;)?)?id=)([\w-]{20,})/.exec(href || '');
   return match ? match[1] : null;
 }
 
@@ -64,10 +74,21 @@ class Source {
       seen.add(chapterId);
       chapters.push({ id: chapterId, chapterId, name, time: dateOf(chapterId) });
     });
+    $('.post-body a[href]').each((i, el) => {
+      const file = driveIdOf($(el).attr('href'));
+      const name = $(el).text().replace(/\s+/g, ' ').trim();
+      if (!file || !name || seen.has(file)) return;
+      seen.add(file);
+      chapters.push({ id: `drive~${file}`, chapterId: `drive~${file}`, name });
+    });
     return chapters.map((chapter, i) => ({ ...chapter, number: i + 1 })).reverse();
   }
 
   async getChapterDetails(mangaId, chapterId) {
+    if (chapterId.startsWith('drive~')) {
+      const file = chapterId.slice('drive~'.length);
+      return { id: chapterId, mangaId, pages: [], book: { url: `https://drive.usercontent.google.com/download?id=${file}&export=download&confirm=t` } };
+    }
     const $ = cheerio.load(await this.get(`${SITE}/${chapterId}`));
     const body = $('.post-body').first();
     const picture = (img) => {
