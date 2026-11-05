@@ -3476,7 +3476,7 @@
     {
       "id": "miruro",
       "name": "Miruro",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "anime",
       "website": "https://miruro.cx",
       "iconUrl": "https://miruro.cx/icon-dark-1024x1024.png",
@@ -3502,7 +3502,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "8462086ec430e7e05117b682f979321bd8436a2b5bb373b4a90b9695d25d2118"
+      "sha256": "bb188d9890cf87638ecfeba458ae61f36b1d557672052567d6554653201fa1e2"
     },
     {
       "id": "akazascans",

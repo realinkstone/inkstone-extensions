@@ -343,7 +343,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [KickAssAnime](anime/kickassanime/index.js) | kaa.lt | English | Mature | 1.0.2 |
 | [Latanime](anime/latanime/index.js) | latanime.org | Spanish | Mature | 1.0.0 |
 | [LegionAnime](anime/legionanime/index.js) | legionanime.xyz | Spanish | Mature | 1.0.1 |
-| [Miruro](anime/miruro/index.js) | miruro.cx | English | Mature | 1.0.1 |
+| [Miruro](anime/miruro/index.js) | miruro.cx | English | Mature | 1.0.2 |
 | [MonosChinos](anime/monoschinos/index.js) | monoschinos.st | Spanish | Mature | 1.0.2 |
 | [SerienStream](anime/serienstream/index.js) | serienstream.to | German | Mature | 1.0.3 |
 | [TioAnime](anime/tioanime/index.js) | tioanime.com | Spanish | Mature | 1.0.0 |

@@ -490,12 +490,15 @@ class Source {
             if (seenUrls.has(streamUrl)) continue;
             seenUrls.add(streamUrl);
 
-            const reqHeaders =
+            let reqHeaders =
               isHls && useProxy
                 ? { Referer: `${SITE}/`, Origin: SITE }
                 : Object.keys(headers).length
                   ? headers
                   : { Referer: `${SITE}/` };
+            if (provId === 'hop' && reqHeaders.Referer && !reqHeaders.Origin) {
+              reqHeaders = Object.assign({}, reqHeaders, { Origin: String(reqHeaders.Referer).replace(/\/+$/, '') });
+            }
 
             const resLabel = st && st.quality ? ` ${st.quality}` : '';
             videos.push({
