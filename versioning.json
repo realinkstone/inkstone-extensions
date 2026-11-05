@@ -5891,6 +5891,32 @@
       "language": "en",
       "contentRating": "mature",
       "sha256": "24e53c6fea8d7bfb24bc3aac862b54334bd71e9f1bf1889f75ea77adf497443f"
+    },
+    {
+      "id": "aryplus",
+      "name": "ARY Plus",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://aryplus.tv",
+      "iconUrl": "https://inkstone.web.app/aryplus/icon.png",
+      "hosts": [
+        "aryplus.tv",
+        "*.aryplus.tv",
+        "aryzap.com",
+        "*.aryzap.com"
+      ],
+      "description": "Drama\n\nCatalog・300+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "ur",
+      "contentRating": "safe",
+      "sha256": "74a3e98838f3595bf7c634ec6dd2b1bb75df91d5d94dfbc298cdf3bb0df76be5"
     }
   ]
 }

@@ -50,7 +50,7 @@ Prefer to review a written plan before any code is written? This repo works with
 
 ## Extensions
 
-238 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
+239 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
 
 Each extension lives in the folder for what it offers: `comics`, `novels`, `mixed` for those that do both, or `anime`. The site still serves every one at `inkstone.web.app/<id>/index.js`, so the folders change nothing in the apps.
 
@@ -310,6 +310,7 @@ Anime extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [AnimeGG](anime/animegg/index.js) | animegg.org | English | Mature | 1.0.0 |
 | [AnimeHeaven](anime/animeheaven/index.js) | animeheaven.me | English | Mature | 1.0.0 |
 | [AniWorld](anime/aniworld/index.js) | aniworld.to | German | Mature | 1.0.1 |
+| [ARY Plus](anime/aryplus/index.js) | aryplus.tv | Urdu | Safe | 1.0.0 |
 | [Miruro](anime/miruro/index.js) | miruro.cx | English | Mature | 1.0.0 |
 | [MonosChinos](anime/monoschinos/index.js) | monoschinos.st | Spanish | Mature | 1.0.0 |
 | [SerienStream](anime/serienstream/index.js) | serienstream.to | German | Mature | 1.0.1 |
