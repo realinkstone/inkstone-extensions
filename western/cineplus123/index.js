@@ -38,6 +38,13 @@ function voeSource(payload) {
   return JSON.parse(App.base64Decode(shifted.split('').reverse().join(''))).source;
 }
 
+function hostLabel(url) {
+  const host = ((/^https?:\/\/([^/]+)/.exec(url) || [])[1] || '').replace(/^www\./, '');
+  const parts = host.split('.');
+  const name = parts.length > 1 ? parts[parts.length - 2] : parts[0];
+  return name ? name.charAt(0).toUpperCase() + name.slice(1) : 'Server';
+}
+
 class Source {
   constructor() {
     this.requests = App.createRequestManager({ rateLimit: { requestsPerSecond: 4 } });
@@ -185,8 +192,13 @@ class Source {
       .sort((a, b) => SERVERS.indexOf(a.server) - SERVERS.indexOf(b.server))
       .map((v) => ({ ...v, headers: { ...v.headers, ...BROWSER } }));
 
-    if (!videos.length) throw new Error(`CinePlus123: none of the ${validEmbeds.length} servers gave a playable video`);
-    return videos;
+    const seen = new Set();
+    const pageOf = (url) => String(url).replace(/^\/\//, 'https://').replace(/^http:/, 'https:');
+    const embedEntries = validEmbeds
+      .filter((e, i) => !(found[i] && /^https?:\/\//.test(found[i].url)) && /^https?:\/\//.test(pageOf(e.url)) && !seen.has(pageOf(e.url)) && seen.add(pageOf(e.url)))
+      .map((e) => ({ url: pageOf(e.url), type: 'embed', quality: e.title || hostLabel(e.url), server: hostLabel(pageOf(e.url)) }));
+    if (!videos.length && !embedEntries.length) throw new Error(`CinePlus123: none of the ${validEmbeds.length} servers gave a playable video`);
+    return videos.concat(embedEntries);
   }
 
   async extract(rawUrl, title) {

@@ -6855,7 +6855,7 @@
     {
       "id": "cineplus123",
       "name": "CinePlus123",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "anime",
       "website": "https://cineplus123.org",
       "iconUrl": "https://inkstone.web.app/cineplus123/icon.png",
@@ -6872,7 +6872,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "f49ae783bd00a803790c52576d50925cac7c60e10d76bd747f0e4ce1066e87aa"
+      "sha256": "151de5cc426a878e4f36770d272647e126a546a35df809e23614870dc045189b"
     },
     {
       "id": "cuevana",
@@ -7493,7 +7493,7 @@
     {
       "id": "veranime",
       "name": "VerAnime",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "anime",
       "website": "https://verani.me",
       "iconUrl": "https://inkstone.web.app/veranime/icon.png",
@@ -7510,7 +7510,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "88e2224a5072df054a0c31e838e6beb25b35f8005324de4b0831d8b9cd852fea"
+      "sha256": "4c7dc8e9f68fed9868e651ab0ed5100bcf7e3ae3152d9d0e13f1b16e7bd12f0f"
     },
     {
       "id": "veranimes",

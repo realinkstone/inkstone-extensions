@@ -47,6 +47,13 @@ function parseEpisode($, el, seasonPrefix) {
   };
 }
 
+function hostLabel(url) {
+  const host = ((/^https?:\/\/([^/]+)/.exec(url) || [])[1] || '').replace(/^www\./, '');
+  const parts = host.split('.');
+  const name = parts.length > 1 ? parts[parts.length - 2] : parts[0];
+  return name ? name.charAt(0).toUpperCase() + name.slice(1) : 'Server';
+}
+
 class Source {
   constructor() {
     this.requests = App.createRequestManager({ rateLimit: { requestsPerSecond: 6 } });
@@ -177,11 +184,16 @@ class Source {
       .sort((a, b) => SERVERS.indexOf(a.server) - SERVERS.indexOf(b.server))
       .map(({ server, lang, ...video }) => ({
         ...video,
+        server,
         quality: lang ? `${server} (${lang})` : server,
         headers: { ...video.headers, ...BROWSER },
       }));
-    if (!videos.length) throw new Error(`VerAnime: none of the ${entries.length} servers gave a playable video`);
-    return videos;
+    const seen = new Set();
+    const embeds = entries
+      .filter((entry, i) => !(found[i] && /^https?:\/\//.test(found[i].url)) && !seen.has(entry.url) && seen.add(entry.url))
+      .map((entry) => ({ url: entry.url, type: 'embed', quality: entry.lang ? `${hostLabel(entry.url)} (${entry.lang})` : hostLabel(entry.url), server: hostLabel(entry.url) }));
+    if (!videos.length && !embeds.length) throw new Error(`VerAnime: none of the ${entries.length} servers gave a playable video`);
+    return videos.concat(embeds);
   }
 
   async extract({ url, lang }) {
