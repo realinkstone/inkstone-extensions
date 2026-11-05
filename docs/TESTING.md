@@ -31,7 +31,7 @@ It looks for `versioning.json` one folder above your extension, the same layout 
 - The code does not use something that differs between the engines Boundless runs on (JavaScriptCore on iPhone, iPad and Mac, QuickJS on Android): `Intl`, `toLocaleString()`, `WeakRef`, `queueMicrotask`. These are warnings, because Node cannot show the difference.
 - It exports a `Source` class with `getSearchResults`, `getMangaDetails`, `getChapters` and `getChapterDetails`.
 - `getSourceFeeds()` is synchronous and every feed has an `id` and `name`.
-- Your `versioning.json` entry exists and has a version, `medium`, `contentRating`, `website`, `language`, `description` and `capabilities`.
+- Your `versioning.json` entry exists and has a version, `medium`, `contentRating`, `website`, `language`, `description` and `capabilities`. A `Catalog・` line that is not rounded down to one significant digit (`11,000+` instead of `10,000+`) is a warning that names the number to write.
 - Your `sha256` matches the file.
 
 **Live results (real requests)**
@@ -83,6 +83,7 @@ Aim for zero `FAIL`. Try a few different search words, including one that should
 | `HTTP 403` or `HTTP 503` | Bot protection. See below. |
 | `answered a bot check (browser verification page ...)` | The site sends browser looking agents to its own check page. Try a plain `User-Agent` such as `Boundless/1.0 (+https://boundless.moe)`, or fall back to one when that page comes back. |
 | `first cover loads` or `first page image loads` fails | The image host refuses the request: a hotlink check that needs a `referer`, or an agent it blocks. Return `referer` or `headers` (covers on the title, pages on the chapter result) that work. |
+| `first cover needs the site's Referer` fails | The image host answers a Cloudflare check to a request with no `Referer` and the image to one with the site's. Set `referer` on every result and on the details that carry the image; the app sends only what you return. |
 | `feed "..." returns titles` fails | A declared feed returns nothing without a query. Fix its request or remove the feed. |
 | `page 3 differs from page 2` fails | The site ignores the page number past the first pages, so the pager never ends. |
 | `status is UNKNOWN on all titles checked` | The status mapping misses the site's wording. Print the raw status text of a dozen titles and match it, including accents. |
@@ -91,7 +92,8 @@ Aim for zero `FAIL`. Try a few different search words, including one that should
 
 ## What it can't test
 
-- **Cloudflare challenges.** Boundless solves these in a hidden browser view, but plain Node can't, so a protected site answers with a check here even though it works in the app. The script names the check and skips that step with a warning. Test those in Boundless.
+- **Cloudflare challenges.** Boundless solves these in a hidden browser view, but plain Node can't, so a protected site answers with a check here even though it works in the app. The script names the check and skips that step with a warning. Test those in Boundless. For an image the script first retries once with the site's `Referer`: if that loads, a missing `referer` is the bug and it fails instead of warning.
+- **Video hosts that refuse Node.** Some stream hosts (Dailymotion's HLS master) answer 403 to Node and curl and 200 to a real browser, so the step that fetches the first stream fails for those sources while every earlier check passes. Fetch the master, one variant playlist and one segment in a real browser instead, and report that it was not tried in the app. Episode numbers are not checked (`number` is optional): read the lists yourself for episodes that have none.
 - **The engines.** The script runs your file in Node. Boundless runs it on JavaScriptCore (iPhone, iPad, Mac) and QuickJS (Android), which differ from Node and from each other in `Intl`, number formatting and how date text is read. The script reads your code for the known differences; it cannot run it on both. If you can, try the extension on an iPhone or Mac and on Android.
 - **`App.executeInWebView`.** That only runs inside the app. The script skips those steps with a warning and tells you so at the end.
 - **How it looks.** The script checks the data, not the screen. Open the extension in Boundless and look at it.

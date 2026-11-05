@@ -210,6 +210,12 @@ if (existsSync(listPath)) {
     check(/^[a-z]{2,3}$/.test(entry.language ?? ''), 'language is a short code like en', entry.language);
     check(entry.description && entry.capabilities?.length, 'has a description and capabilities');
     if ((entry.description ?? '').length > 300) say('warn', 'description is long', `${entry.description.length} characters: keep the short shape (a line of types, a Catalog line, a Restrictions list) and put the rest in the file header and your report`);
+    // The Catalog line is rounded down to one significant digit with a plus (300+, 1,000+, 20,000+), never a measured count.
+    const catalog = /Catalog・([\d,]+)\+/.exec(entry.description ?? '');
+    if (catalog) {
+      const digits = catalog[1].replace(/,/g, '');
+      if (digits.replace(/0+$/, '').length > 1) say('warn', 'Catalog is not rounded down to one significant digit', `${catalog[1]}+ should read ${(Number(digits[0]) * 10 ** (digits.length - 1)).toLocaleString('en-US')}+`);
+    }
     const digest = createHash('sha256').update(readFileSync(file)).digest('hex');
     if (entry.sha256) check(entry.sha256 === digest, 'sha256 matches the file', entry.sha256 === digest ? '' : 'run shasum -a 256 and update it');
     else say('warn', 'no sha256 yet', `shasum -a 256 gives ${digest.slice(0, 12)}...`);
@@ -301,6 +307,21 @@ async function checkImage(what, url, headers, { cover = false } = {}) {
   const host = new URL(url).hostname;
   if (shot.error) return check(false, `${what} loads`, `${host}: ${shot.error}`);
   if (shot.kind === 'Cloudflare') {
+    // An image host can answer the check only to requests with no Referer (AnimeXin: 403 without the site's address, 200 with it).
+    // That is a bug in the extension, not a check for the app to clear: the app sends only the headers the result carries.
+    const sentReferer = Object.keys(headers ?? {}).some((k) => k.toLowerCase() === 'referer');
+    let site = '';
+    try {
+      site = new URL(entry?.website ?? '').origin;
+    } catch {
+      site = '';
+    }
+    if (!sentReferer && site) {
+      const again = await loadImage(url, { ...headers, Referer: `${site}/` });
+      if (!again.error && again.status >= 200 && again.status < 300 && /^image\//i.test(again.type)) {
+        return check(false, `${what} needs the site's Referer`, `${host} answers a Cloudflare check without one and the image with Referer ${site}/. Set referer: '${site}/' on every result and on the details that carry this image (the app sends only the headers you return)`);
+      }
+    }
     skippedInApp = true;
     return say('warn', `${what} hit a Cloudflare check, so it was skipped`, botCheckHint({ host, kind: shot.kind, status: shot.status }));
   }

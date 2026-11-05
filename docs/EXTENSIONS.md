@@ -8,7 +8,7 @@ Browse, Search, Detail and Reader screens.
 The format keeps the surface area small: implement a handful of methods on
 that class and the app can browse, search and read through your source.
 
-Boundless Reader and Sumizuri both load Inkstone extensions. This page describes Boundless's runtime. Anime extensions are for Sumizuri only: Boundless is not compatible with them (see [Anime sources](#anime-sources-sumizuri-only)).
+Boundless Reader and Sumizuri both load Inkstone extensions. This page describes Boundless's runtime. Anime extensions are for the video apps, Sumizuri and Boundless Player: Boundless Reader is not compatible with them (see [Anime sources](#anime-sources-sumizuri-and-boundless-player)).
 Building with an AI assistant? Give it [BUILD_WITH_AI.md](BUILD_WITH_AI.md).
 To check an extension works, see [TESTING.md](TESTING.md).
 
@@ -279,7 +279,10 @@ one page URL with and without a `Referer` header matching your site and
 compare the status codes. If covers are blocked the same way, put `referer` on
 the title as well, on Browse results and in `mangaInfo` (a `headers` object of
 strings works too, on the title and on the chapter details; a `Referer` in
-`headers` wins over `referer`).
+`headers` wins over `referer`). The refusal can also be a Cloudflare check page
+(HTTP 403, `cf-mitigated: challenge`) that an image host shows only to requests
+with no `Referer`: the test script retries such an image once with the site's
+`Referer` and fails, naming the `referer` to return, when that loads.
 
 **Scrambled pages (Boundless only).** Return `scrambled: true` next to `pages`
 to ask the app to put each page back in order after it downloads it. Today the
@@ -289,9 +292,9 @@ none of those headers is shown as it came. Anything but a JSON `true` counts as
 false. Leave it out when your script descrambles pages itself with
 `App.descrambleImage`.
 
-### Anime sources (Sumizuri only)
+### Anime sources (Sumizuri and Boundless Player)
 
-**Anime extensions are for Sumizuri compatibility.** Boundless is not compatible with them: it has no video player and does not call `getVideos`. Use [Sumizuri](https://sumizuri.notakari.com/) to install and test them. The details here follow Sumizuri's own documentation and engine (version 0.2.0); the full walk-through is in [BUILD_WITH_AI.md](BUILD_WITH_AI.md).
+**Anime extensions are for the video apps.** Boundless Reader is not compatible with them: it has no video player and does not call `getVideos`. [Sumizuri](https://sumizuri.notakari.com/) and Boundless Player play them. The details here follow Sumizuri's own documentation and engine (version 0.2.0); Boundless Player calls `getVideos` the same way, but test in Sumizuri first; the full walk-through is in [BUILD_WITH_AI.md](BUILD_WITH_AI.md).
 
 Set `medium` to `anime` and list `videos` in `capabilities`. Episodes are chapters (`getChapters` as usual, newest first), and one extra method plays an episode. It returns a **list**, not an object:
 

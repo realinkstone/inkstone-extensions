@@ -53,7 +53,7 @@ Prefer to review a written plan before any code is written? This repo works with
 
 ## Extensions
 
-242 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
+249 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
 
 Each extension lives in the folder for what it offers: `comics`, `novels`, `mixed` for those that do both, or `anime`. The site still serves every one at `inkstone.web.app/<id>/index.js`, so the folders change nothing in the apps.
 
@@ -319,6 +319,20 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [MonosChinos](anime/monoschinos/index.js) | monoschinos.st | Spanish | Mature | 1.0.0 |
 | [SerienStream](anime/serienstream/index.js) | serienstream.to | German | Mature | 1.0.1 |
 | [UniqueStream](anime/uniquestream/index.js) | anime.uniquestream.net | English | Mature | 1.0.1 |
+
+### Donghua
+
+Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays them. Boundless skips them for now.
+
+| Extension | Site | Language | Rating | Version |
+| --- | --- | --- | --- | --- |
+| [Anime4i](donghua/anime4i/index.js) | anime4i.com | English | Safe | 1.0.0 |
+| [AnimeKhor](donghua/animekhor/index.js) | animekhor.org | English | Safe | 1.0.0 |
+| [AnimeXin](donghua/animexin/index.js) | animexin.dev | English | Safe | 1.0.0 |
+| [Donghua4K](donghua/donghua4k/index.js) | donghua4k.net | English | Safe | 1.0.0 |
+| [LMAnime](donghua/lmanime/index.js) | lmanime.com | English | Safe | 1.0.0 |
+| [LuciferDonghua](donghua/luciferdonghua/index.js) | luciferdonghua.org | English | Safe | 1.0.0 |
+| [NarulDonghua](donghua/naruldonghua/index.js) | naruldonghua.com | English | Safe | 1.0.0 |
 
 ### Drama
 

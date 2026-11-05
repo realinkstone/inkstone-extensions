@@ -5545,7 +5545,7 @@
         "kmansin09.top",
         "*.kmansin09.top"
       ],
-      "description": "Manga・Manhwa・Manhua\n\nCatalog・2,500+",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・2,000+",
       "capabilities": [
         "browse",
         "search",
@@ -5568,7 +5568,7 @@
         "mangakimi.com",
         "*.mangakimi.com"
       ],
-      "description": "Manga・Manhwa・Manhua\n\nCatalog・12,000+",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・10,000+",
       "capabilities": [
         "browse",
         "search",
@@ -5664,7 +5664,7 @@
         "sing-manga.com",
         "*.sing-manga.com"
       ],
-      "description": "Manga・Manhwa・Manhua\n\nCatalog・1,200+",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・1,000+",
       "capabilities": [
         "browse",
         "search",
@@ -5688,7 +5688,7 @@
         "thaimanga.net",
         "*.thaimanga.net"
       ],
-      "description": "Manga・Manhwa・Manhua\n\nCatalog・12,000+",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・10,000+",
       "capabilities": [
         "browse",
         "search",
@@ -5855,7 +5855,7 @@
         "animegg.org",
         "*.animegg.org"
       ],
-      "description": "Anime\n\nCatalog・11,000+",
+      "description": "Anime\n\nCatalog・10,000+",
       "capabilities": [
         "browse",
         "search",
@@ -5986,6 +5986,188 @@
       "language": "en",
       "contentRating": "mature",
       "sha256": "0705d46e4e7e3a02dfc02cd0212eb7989353d849bcb6fef8e4e26c43a4d13fa4"
+    },
+    {
+      "id": "animexin",
+      "name": "AnimeXin",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://animexin.dev",
+      "iconUrl": "https://inkstone.web.app/animexin/icon.png",
+      "hosts": [
+        "animexin.dev",
+        "*.animexin.dev",
+        "dailymotion.com",
+        "*.dailymotion.com"
+      ],
+      "description": "Donghua\n\nCatalog・300+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "safe",
+      "sha256": "0fd62b7af65244c45177400aac8d52d3f979f60bf94ddc938d5991349b627033"
+    },
+    {
+      "id": "animekhor",
+      "name": "AnimeKhor",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://animekhor.org",
+      "iconUrl": "https://inkstone.web.app/animekhor/icon.png",
+      "hosts": [
+        "animekhor.org",
+        "*.animekhor.org",
+        "dailymotion.com",
+        "*.dailymotion.com"
+      ],
+      "description": "Donghua\n\nCatalog・1,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "safe",
+      "sha256": "a866f23a2b3404c26beb509a6a1da9fce356261eb6e8e0b1dac4ec352a24067b"
+    },
+    {
+      "id": "luciferdonghua",
+      "name": "LuciferDonghua",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://luciferdonghua.org",
+      "iconUrl": "https://inkstone.web.app/luciferdonghua/icon.png",
+      "hosts": [
+        "luciferdonghua.org",
+        "*.luciferdonghua.org",
+        "dailymotion.com",
+        "*.dailymotion.com"
+      ],
+      "description": "Donghua\n\nCatalog・200+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "safe",
+      "sha256": "25f805a286d59898d84e998b8b61f0bc37fad2caa4dfb1de1a055081a6852dd1"
+    },
+    {
+      "id": "donghua4k",
+      "name": "Donghua4K",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://donghua4k.net",
+      "iconUrl": "https://inkstone.web.app/donghua4k/icon.png",
+      "hosts": [
+        "donghua4k.net",
+        "*.donghua4k.net",
+        "dailymotion.com",
+        "*.dailymotion.com"
+      ],
+      "description": "Donghua\n\nCatalog・40+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "safe",
+      "sha256": "456c560f67a7728883fc5df8588e4287cd90634e11342ab25846f7a5ab7f2551"
+    },
+    {
+      "id": "naruldonghua",
+      "name": "NarulDonghua",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://naruldonghua.com",
+      "iconUrl": "https://inkstone.web.app/naruldonghua/icon.png",
+      "hosts": [
+        "naruldonghua.com",
+        "*.naruldonghua.com",
+        "dailymotion.com",
+        "*.dailymotion.com"
+      ],
+      "description": "Donghua\n\nCatalog・900+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "safe",
+      "sha256": "3c053e2361bc262e18b27144a0651ce665cb71ad110ae61936b6536df316c9f7"
+    },
+    {
+      "id": "anime4i",
+      "name": "Anime4i",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://anime4i.com",
+      "iconUrl": "https://inkstone.web.app/anime4i/icon.png",
+      "hosts": [
+        "anime4i.com",
+        "*.anime4i.com",
+        "dailymotion.com",
+        "*.dailymotion.com"
+      ],
+      "description": "Donghua\n\nCatalog・200+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "safe",
+      "sha256": "75f621133e11fdd1409858b1ba7c659ac822b9b9c40682a855e7b14557e675a4"
+    },
+    {
+      "id": "lmanime",
+      "name": "LMAnime",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://lmanime.com",
+      "iconUrl": "https://inkstone.web.app/lmanime/icon.png",
+      "hosts": [
+        "lmanime.com",
+        "*.lmanime.com",
+        "dailymotion.com",
+        "*.dailymotion.com"
+      ],
+      "description": "Donghua\n\nCatalog・300+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "safe",
+      "sha256": "d02cf2e82afe6813533f06f4d127201a7f3b9cc28ee3e51fa8d48e3b67cde539"
     }
   ]
 }
