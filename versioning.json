@@ -7710,7 +7710,7 @@
     {
       "id": "myasiantv",
       "name": "MyAsianTV",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "anime",
       "website": "https://ww7.myasiantv.rest",
       "iconUrl": "https://inkstone.web.app/myasiantv/icon.png",
@@ -7749,7 +7749,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "26b60646ddc16718d9776ecee1d575415ddd6136d9c6a5392d5b9d70ce3ce3ae"
+      "sha256": "3c2229fa6229f1896b9eff68f2a45a4c193f078e82b4123d07dbbb80f1530562"
     }
   ]
 }

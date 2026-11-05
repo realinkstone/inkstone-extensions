@@ -377,7 +377,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [DoramasFlix](drama/doramasflix/index.js) | doramasflix.in | Spanish | Mature | 1.0.1 |
 | [DoramasYT](drama/doramasyt/index.js) | doramasyt.com | Spanish | Mature | 1.0.3 |
 | [KissAsian](drama/kissasian/index.js) | kissasian.com.gr | English | Mature | 1.0.1 |
-| [MyAsianTV](drama/myasiantv/index.js) | ww7.myasiantv.rest | English | Mature | 1.0.1 |
+| [MyAsianTV](drama/myasiantv/index.js) | ww7.myasiantv.rest | English | Mature | 1.0.2 |
 
 ### Western
 

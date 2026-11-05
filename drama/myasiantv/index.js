@@ -443,9 +443,11 @@ class Source {
     const epUrl = episodeUrlOf(chapterId);
     const $ = cheerio.load(await this.requestHTML(epUrl));
     let frame = '';
+    const TRACKERS = /(^|\.)(googletagmanager|google-analytics|doubleclick|facebook|googlesyndication)\.(com|net)$/i;
     $('iframe').each((_, f) => {
       const src = absolute($(f).attr('src') || $(f).attr('data-src') || '');
-      if (!frame && /^https?:\/\//.test(src)) frame = src;
+      if (!/^https?:\/\//.test(src) || TRACKERS.test(hostOf(src))) return;
+      if (!frame || (/\/embed\//.test(src) && !/\/embed\//.test(frame))) frame = src;
     });
     if (!frame) throw new Error('MyAsianTV shows no player for this episode yet');
 
