@@ -50,7 +50,7 @@ Prefer to review a written plan before any code is written? This repo works with
 
 ## Extensions
 
-219 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
+220 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
 
 Each extension lives in the folder for what it offers: `comics`, `novels`, `mixed` for those that do both, or `anime`. The site still serves every one at `inkstone.web.app/<id>/index.js`, so the folders change nothing in the apps.
 
@@ -293,6 +293,7 @@ Anime extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [Anikoto](anime/anikoto/index.js) | anikototv.to | English | Mature | 1.0.0 |
 | [AniWorld](anime/aniworld/index.js) | aniworld.to | German | Mature | 1.0.0 |
 | [Miruro](anime/miruro/index.js) | miruro.cx | English | Mature | 1.0.0 |
+| [MonosChinos](anime/monoschinos/index.js) | monoschinos.st | Spanish | Mature | 1.0.0 |
 | [SerienStream](anime/serienstream/index.js) | serienstream.to | German | Mature | 1.0.0 |
 
 ## Known issues
@@ -306,7 +307,7 @@ These extensions are known to be broken right now:
 Thanks to the people who built extensions for Inkstone.
 
 - [omfgitsjesus](https://discord.com/users/177424485526274048): HiperDEX
-- [matsukiender-star](https://github.com/matsukiender-star): KuManga, ZonaTMO.org
+- [matsukiender-star](https://github.com/matsukiender-star): KuManga, MonosChinos, ZonaTMO.org
 
 ## Contributing
 
