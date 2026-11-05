@@ -7726,6 +7726,50 @@
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
       "sha256": "407691962dd2fe9688f3cdddff95e612eb03731e08a24945ca298b95f855b60d"
+    },
+    {
+      "id": "myasiantv",
+      "name": "MyAsianTV",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://ww7.myasiantv.rest",
+      "iconUrl": "https://inkstone.web.app/myasiantv/icon.png",
+      "hosts": [
+        "myasiantv.rest",
+        "*.myasiantv.rest",
+        "myasiantv.com.bz",
+        "*.myasiantv.com.bz",
+        "zumivids.com",
+        "*.zumivids.com",
+        "vidmoly.org",
+        "vidmoly.biz",
+        "vidmoly.net",
+        "*.vmget.online",
+        "*.vmpx.online",
+        "streamtape.com",
+        "streamtape.to",
+        "streamtape.net",
+        "*.tapecontent.net",
+        "mixdrop.top",
+        "mixdrop.ag",
+        "mixdrop.to",
+        "mxdrop.click",
+        "*.mxcontent.net",
+        "hglink.to",
+        "*.hglink.to"
+      ],
+      "description": "Drama\n\nCatalog・2,000+\n\nRestrictions:\n・Cloudflare Checks",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "1d1a02d846120b50aa0b71f601d81bba0e4a78114737de193df3635685b4c00c"
     }
   ]
 }
