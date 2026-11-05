@@ -6222,6 +6222,30 @@
       "language": "en",
       "contentRating": "mature",
       "sha256": "10f4b5efba4dcaa450a10393d6128fe5c9ecc368a1405f8ad8bc49a87b567cb2"
+    },
+    {
+      "id": "bingr",
+      "name": "Bingr",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://bingr.one",
+      "iconUrl": "https://inkstone.web.app/bingr/icon.png",
+      "hosts": [
+        "bingr.one",
+        "*.bingr.one"
+      ],
+      "description": "Western",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "7e57e0a27044fed7ca15284130e35f551c323d38063867bf5b785197ba923d0c"
     }
   ]
 }
