@@ -290,6 +290,8 @@ function dailymotionId(url) {
   return p ? p[1] : '';
 }
 
+const MAX_MIRROR_PAGES = 16;
+
 const LANGUAGE_CODES = { en: 'en', id: 'id', ar: 'ar', es: 'es', pt: 'pt', fr: 'fr', th: 'th', vi: 'vi', tr: 'tr', ru: 'ru', zh: 'zh', ja: 'ja', ko: 'ko', hi: 'hi', de: 'de' };
 
 class Source {
@@ -464,41 +466,70 @@ class Source {
       seenEmbed.add(src);
       embeds.push({ label: cleanText(label) || 'Player', src });
     };
+    const mirrorPages = [];
     $('select.mirror option').each((_, o) => {
       const value = $(o).attr('value') || '';
-      if (value) add($(o).text(), embedUrlFrom(decodeMirror(value)));
+      if (/^https?:\/\//i.test(value)) mirrorPages.push({ label: $(o).text(), url: value });
+      else if (value) add($(o).text(), embedUrlFrom(decodeMirror(value)));
     });
     $('#pembed iframe, .video-content iframe, .player-embed iframe').each((_, f) => add('Player', absolute($(f).attr('src') || $(f).attr('data-src') || '')));
-
     const videos = [];
     const seenVideo = new Set();
-    for (const embed of embeds) {
-      const id = dailymotionId(embed.src);
-      if (!id || seenVideo.has(id)) continue;
-      seenVideo.add(id);
-      try {
-        const response = await this.requests.schedule(
-          App.createRequest({ url: `https://www.dailymotion.com/player/metadata/video/${id}`, method: 'GET', headers: { 'User-Agent': UA, Accept: 'application/json', Referer: epUrl } })
-        );
-        if (response.status < 200 || response.status >= 300) continue;
-        const meta = JSON.parse(response.data);
-        const master = meta && meta.qualities && meta.qualities.auto && meta.qualities.auto[0] && meta.qualities.auto[0].url;
-        if (!master) continue;
-        const subtitles = [];
-        const data = (meta.subtitles && meta.subtitles.data) || {};
-        Object.keys(data).forEach((code) => {
-          const entry = data[code] || {};
-          const file = entry.urls && entry.urls[0];
-          if (file) subtitles.push({ url: file, label: cleanText(entry.label) || code, language: LANGUAGE_CODES[String(code).slice(0, 2)] || String(code).slice(0, 2) });
-        });
-        const video = { url: master, quality: streamLabel(embed.label), type: 'hls' };
-        if (subtitles.length) video.subtitles = subtitles;
-        videos.push(video);
-      } catch (e) {
-        console.error(CONFIG.name + ' Dailymotion lookup failed: ' + (e && e.message));
+    const removed = [];
+    const resolve = async () => {
+      for (const embed of embeds) {
+        const id = dailymotionId(embed.src);
+        if (!id || seenVideo.has(id)) continue;
+        seenVideo.add(id);
+        try {
+          const response = await this.requests.schedule(
+            App.createRequest({ url: `https://www.dailymotion.com/player/metadata/video/${id}`, method: 'GET', headers: { 'User-Agent': UA, Accept: 'application/json', Referer: epUrl } })
+          );
+          if (response.status < 200 || response.status >= 300) continue;
+          const meta = JSON.parse(response.data);
+          const master = meta && meta.qualities && meta.qualities.auto && meta.qualities.auto[0] && meta.qualities.auto[0].url;
+          if (!master) {
+            const reason = meta && meta.error && cleanText(meta.error.message);
+            if (reason && removed.indexOf(reason) === -1) removed.push(reason);
+            continue;
+          }
+          const subtitles = [];
+          const data = (meta.subtitles && meta.subtitles.data) || {};
+          Object.keys(data).forEach((code) => {
+            const entry = data[code] || {};
+            const file = entry.urls && entry.urls[0];
+            if (file) subtitles.push({ url: file, label: cleanText(entry.label) || code, language: LANGUAGE_CODES[String(code).slice(0, 2)] || String(code).slice(0, 2) });
+          });
+          const video = { url: master, quality: streamLabel(embed.label), type: 'hls', headers: { Referer: 'https://www.dailymotion.com/', Origin: 'https://www.dailymotion.com' } };
+          if (subtitles.length) video.subtitles = subtitles;
+          videos.push(video);
+        } catch (e) {
+          console.error(CONFIG.name + ' Dailymotion lookup failed: ' + (e && e.message));
+        }
       }
+    };
+    await resolve();
+    for (let i = 0; i < mirrorPages.length && i < MAX_MIRROR_PAGES && videos.length < 2; i += 4) {
+      const pages = await Promise.all(
+        mirrorPages.slice(i, i + 4).map((page) =>
+          this.requestHTML(page.url, epUrl).then(
+            (text) => ({ page, text }),
+            (error) => {
+              if (error && error.kind === 'challenge') throw error;
+              return null;
+            }
+          )
+        )
+      );
+      pages.forEach((entry) => {
+        if (entry) add(entry.page.label, embedUrlFrom(cheerio.load(entry.text)('iframe').first().toString()));
+      });
+      await resolve();
     }
-    if (!videos.length) throw new Error(CONFIG.name + ' lists this episode on no player this app can open (it opens Dailymotion players); the site may have no stream for it yet');
+    if (!videos.length) {
+      const why = removed.length ? `Dailymotion took the video down ("${removed[0]}")` : 'the site may have no stream for it yet';
+      throw new Error(CONFIG.name + ' lists this episode on no player this app can open (it opens Dailymotion players); ' + why);
+    }
     return videos;
   }
 
@@ -506,8 +537,10 @@ class Source {
     return { id: chapterId, mangaId, pages: [] };
   }
 
-  async requestHTML(url) {
-    const response = await this.requests.schedule(App.createRequest({ url, method: 'GET', headers: { 'User-Agent': UA } }));
+  async requestHTML(url, referer) {
+    const headers = { 'User-Agent': UA };
+    if (referer) headers.Referer = referer;
+    const response = await this.requests.schedule(App.createRequest({ url, method: 'GET', headers }));
     if (response.status === 401 || response.status === 403) {
       throw new Error(`${CONFIG.name} HTTP ${response.status}: the site refused the request`);
     }

@@ -326,13 +326,13 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 
 | Extension | Site | Language | Rating | Version |
 | --- | --- | --- | --- | --- |
-| [Anime4i](donghua/anime4i/index.js) | anime4i.com | English | Safe | 1.0.0 |
-| [AnimeKhor](donghua/animekhor/index.js) | animekhor.org | English | Safe | 1.0.0 |
-| [AnimeXin](donghua/animexin/index.js) | animexin.dev | English | Safe | 1.0.0 |
-| [Donghua4K](donghua/donghua4k/index.js) | donghua4k.net | English | Safe | 1.0.0 |
-| [LMAnime](donghua/lmanime/index.js) | lmanime.com | English | Safe | 1.0.0 |
-| [LuciferDonghua](donghua/luciferdonghua/index.js) | luciferdonghua.org | English | Safe | 1.0.0 |
-| [NarulDonghua](donghua/naruldonghua/index.js) | naruldonghua.com | English | Safe | 1.0.0 |
+| [Anime4i](donghua/anime4i/index.js) | anime4i.com | English | Safe | 1.0.1 |
+| [AnimeKhor](donghua/animekhor/index.js) | animekhor.org | English | Safe | 1.0.1 |
+| [AnimeXin](donghua/animexin/index.js) | animexin.dev | English | Safe | 1.0.1 |
+| [Donghua4K](donghua/donghua4k/index.js) | donghua4k.net | English | Safe | 1.0.1 |
+| [LMAnime](donghua/lmanime/index.js) | lmanime.com | English | Safe | 1.0.1 |
+| [LuciferDonghua](donghua/luciferdonghua/index.js) | luciferdonghua.org | English | Safe | 1.0.1 |
+| [NarulDonghua](donghua/naruldonghua/index.js) | naruldonghua.com | English | Safe | 1.0.1 |
 
 ### Drama
 

@@ -5990,7 +5990,7 @@
     {
       "id": "animexin",
       "name": "AnimeXin",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://animexin.dev",
       "iconUrl": "https://inkstone.web.app/animexin/icon.png",
@@ -6011,12 +6011,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "0fd62b7af65244c45177400aac8d52d3f979f60bf94ddc938d5991349b627033"
+      "sha256": "fe82f91cbd4491180f2e38807d3a746feacf490b74db0b96aecf2a81f9318c4b"
     },
     {
       "id": "animekhor",
       "name": "AnimeKhor",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://animekhor.org",
       "iconUrl": "https://inkstone.web.app/animekhor/icon.png",
@@ -6037,12 +6037,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "a866f23a2b3404c26beb509a6a1da9fce356261eb6e8e0b1dac4ec352a24067b"
+      "sha256": "deabd711576437d9f67995666ec347995ba99220170c42c9c5fd94fbbef358c6"
     },
     {
       "id": "luciferdonghua",
       "name": "LuciferDonghua",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://luciferdonghua.org",
       "iconUrl": "https://inkstone.web.app/luciferdonghua/icon.png",
@@ -6063,12 +6063,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "25f805a286d59898d84e998b8b61f0bc37fad2caa4dfb1de1a055081a6852dd1"
+      "sha256": "caa348530b3ae31328d71d4d77d5bdee411c25d7365572f60101b114e08dab5f"
     },
     {
       "id": "donghua4k",
       "name": "Donghua4K",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://donghua4k.net",
       "iconUrl": "https://inkstone.web.app/donghua4k/icon.png",
@@ -6089,12 +6089,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "456c560f67a7728883fc5df8588e4287cd90634e11342ab25846f7a5ab7f2551"
+      "sha256": "cad8e212ef0d8d27b1791beaa6785833d2d3f5dff2dc8c26813c660b6545cb4b"
     },
     {
       "id": "naruldonghua",
       "name": "NarulDonghua",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://naruldonghua.com",
       "iconUrl": "https://inkstone.web.app/naruldonghua/icon.png",
@@ -6115,12 +6115,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "3c053e2361bc262e18b27144a0651ce665cb71ad110ae61936b6536df316c9f7"
+      "sha256": "b3790e07b452c45291557b0f75fc6b8497e50a7c079bbf97baf5e4ccb19a18e7"
     },
     {
       "id": "anime4i",
       "name": "Anime4i",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://anime4i.com",
       "iconUrl": "https://inkstone.web.app/anime4i/icon.png",
@@ -6141,12 +6141,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "75f621133e11fdd1409858b1ba7c659ac822b9b9c40682a855e7b14557e675a4"
+      "sha256": "0e8d8942edc164341a86374f8b9e4818a242798edb841865fc5fe5d8430470e0"
     },
     {
       "id": "lmanime",
       "name": "LMAnime",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://lmanime.com",
       "iconUrl": "https://inkstone.web.app/lmanime/icon.png",
@@ -6167,7 +6167,7 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "d02cf2e82afe6813533f06f4d127201a7f3b9cc28ee3e51fa8d48e3b67cde539"
+      "sha256": "429b2bba0f99a423735e25bdceb78e4ca86ca4859c22b091e50b209e284640d7"
     },
     {
       "id": "hydrahd",
