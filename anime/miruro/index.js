@@ -450,6 +450,7 @@ class Source {
             url: String(s.file),
             label: String(s.label || s.language || 'English').trim(),
             language: String(s.language || 'en').trim(),
+            ...(s.format ? { format: String(s.format).toLowerCase() } : {}),
           }))
           .filter((s) => /^https?:\/\//i.test(s.url));
 
@@ -500,6 +501,7 @@ class Source {
             videos.push({
               url: streamUrl,
               quality: `${trackLabel} · ${provLabel} (${srvName})${resLabel}`,
+              server: provLabel,
               headers: reqHeaders,
               subtitles: subtitles.length ? subtitles : undefined,
               intro,

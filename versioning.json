@@ -3420,7 +3420,7 @@
     {
       "id": "anikoto",
       "name": "Anikoto",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "anime",
       "website": "https://anikototv.to",
       "iconUrl": "https://anikototv.to/AnikotoTheme/assets/images/favicon.png",
@@ -3451,12 +3451,12 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "c06b7fd1fa912e05d02d41d9627ae70c0fcc50a92f7db5b9b448f13c341de75c"
+      "sha256": "9c3cd634dbf4dc8c80fbafd46b8e3e033018ddb25907b7c6d7686a9b5363fe2b"
     },
     {
       "id": "aniworld",
       "name": "AniWorld",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "anime",
       "website": "https://aniworld.to",
       "iconUrl": "https://aniworld.to/public/img/apple-icon-180x180.png",
@@ -3471,12 +3471,12 @@
       ],
       "language": "de",
       "contentRating": "mature",
-      "sha256": "71c824d77778582f4fc6f7c651debede626ffb04005e35795ea194ba7cb70293"
+      "sha256": "7b773a60b2881b4b8ef9959ae97f759164e120b3dbddecce833f2e76ba50ef95"
     },
     {
       "id": "serienstream",
       "name": "SerienStream",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "anime",
       "website": "https://serienstream.to",
       "iconUrl": "https://serienstream.to/apple-touch-icon.png",
@@ -3491,12 +3491,12 @@
       ],
       "language": "de",
       "contentRating": "mature",
-      "sha256": "199e512835af3024e164c3f39515cbcebe1e71a6abda3fa81b6873d8a0b3ec74"
+      "sha256": "15f1e29da02583d89d058d4a0bad9ecc1f136e36002ab547d177ea7f2d634701"
     },
     {
       "id": "miruro",
       "name": "Miruro",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://miruro.cx",
       "iconUrl": "https://miruro.cx/icon-dark-1024x1024.png",
@@ -3522,7 +3522,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "520b4a2969e6825a4a7d500ed7e7ba775d5a89dd18f289bd0b8e1675ae87aee8"
+      "sha256": "8462086ec430e7e05117b682f979321bd8436a2b5bb373b4a90b9695d25d2118"
     },
     {
       "id": "akazascans",
@@ -5463,7 +5463,7 @@
     {
       "id": "monoschinos",
       "name": "MonosChinos",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "anime",
       "website": "https://monoschinos.st",
       "iconUrl": "https://inkstone.web.app/monoschinos/icon.png",
@@ -5498,7 +5498,7 @@
       ],
       "language": "es",
       "contentRating": "mature",
-      "sha256": "dc5fb7c7dbc3dc7a87df742cedd3ffaaeb807e680a79a8a0b911234a2be9765e",
+      "sha256": "6be258c85ef3a182ab9521d0bac116f463f1023f6cc36be71b7970fde7ef83ef",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star"
     },
@@ -5961,7 +5961,7 @@
     {
       "id": "anizone",
       "name": "AniZone",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "anime",
       "website": "https://anizone.to",
       "iconUrl": "https://inkstone.web.app/anizone/icon.png",
@@ -5980,12 +5980,12 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "7fa7283ec89b68bc3587fcb236f4aa5f8e35ff930cc3de5e2fe0f5911e6194c2"
+      "sha256": "03b56c93a3817a085f855b28a258a8ca2a121aef7c285ee15bbf1496e13e25ad"
     },
     {
       "id": "kickassanime",
       "name": "KickAssAnime",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "anime",
       "website": "https://kaa.lt",
       "iconUrl": "https://inkstone.web.app/kickassanime/icon.png",
@@ -6003,12 +6003,12 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "7fb2a3e2a5d1868c0c2b27a59378493ac8f42884c36c82586843fff611598072"
+      "sha256": "ea3e6333ef2001d2392dfdff48da9cd788b59c54c8eb0da9d9363618ccce355f"
     },
     {
       "id": "uniquestream",
       "name": "UniqueStream",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "medium": "anime",
       "website": "https://anime.uniquestream.net",
       "iconUrl": "https://inkstone.web.app/uniquestream/icon.png",
@@ -6025,7 +6025,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "25112f3fbb744151d88175c83cf23c3022052a7e7c49536ef188b013420f9e00",
+      "sha256": "f7be49bef1412bf339817ee1373a4b52dcf02b70a665394b1fca7d21ab3736b4",
       "settingsSchema": [
         {
           "type": "select",

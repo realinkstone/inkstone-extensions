@@ -160,9 +160,13 @@ class Source {
         const subtitles = (Array.isArray(props.subtitles) ? props.subtitles : [])
           .filter((s) => s && s.src)
           .map((s) => ({ url: absolute(s.src), label: s.name || s.language || 'Subtitles', language: s.language }));
+        const manifest = absolute(props.manifest);
+        const kind = /\.mpd(?:[?#]|$)/i.test(manifest) ? 'dash' : /\.m3u8(?:[?#]|$)/i.test(manifest) ? 'hls' : undefined;
         videos.push({
-          url: absolute(props.manifest),
+          url: manifest,
+          ...(kind ? { type: kind } : {}),
           quality: server.name || 'Auto',
+          server: server.name || 'KickAssAnime',
           headers: { Referer: PLAYER_REFERER, Origin: PLAYER_REFERER.replace(/\/$/, '') },
           subtitles,
         });
@@ -170,7 +174,7 @@ class Source {
       }
     }
     if (!videos.length) throw new Error(`KickAssAnime: none of this episode's ${servers.length} servers gave a video`);
-    return videos;
+    return videos.some((v) => v.type === 'hls') ? videos.filter((v) => v.type !== 'dash') : videos;
   }
 
   async getChapterDetails(mangaId, chapterId) {

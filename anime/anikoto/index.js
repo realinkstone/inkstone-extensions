@@ -414,6 +414,7 @@ class Source {
         videos.push({
           url: streamUrl,
           quality: qualityLabelOf(group.type),
+          server: 'Anikoto',
           headers: {
             Referer: `${PLAYER_ORIGIN}/`,
             Origin: PLAYER_ORIGIN,

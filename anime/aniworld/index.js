@@ -592,6 +592,7 @@ class Source {
     return {
       url: streamUrl,
       quality: qualityLabelForLang(langKey, langMeta),
+      server: 'VOE',
       headers: {
         Referer: `${playerOrigin}/`,
         'User-Agent': UA,

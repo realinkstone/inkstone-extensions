@@ -146,6 +146,8 @@ class Source {
       .sort((a, b) => rank(a) - rank(b))
       .map((v) => ({
         url: v.playlist,
+        type: 'hls',
+        server: 'UniqueStream',
         quality: v.locale ? `Auto, ${languageName(v.locale)} audio` : 'Auto',
         headers: { Referer: `${SITE}/` },
         subtitles: (Array.isArray(v.subtitles) ? v.subtitles : [])

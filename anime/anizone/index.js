@@ -194,6 +194,7 @@ class Source {
       {
         url: data.src,
         quality: 'Auto',
+        server: 'AniZone',
         headers: { Referer: `${SITE}/` },
         subtitles: (Array.isArray(data.subtitles) ? data.subtitles : [])
           .filter((s) => s && s.file)
