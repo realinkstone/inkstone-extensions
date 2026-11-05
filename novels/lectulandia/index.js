@@ -157,7 +157,7 @@ class Source {
       if (!match) return;
       let code;
       try {
-        code = atob(decodeURIComponent(match[1]));
+        code = App.base64Decode(decodeURIComponent(match[1]));
       } catch (_) {
         return;
       }
@@ -185,7 +185,7 @@ class Source {
       const href = link.attr('href') || $('#downloadContainer a').first().attr('href') || '';
       const match = /[?&]d=([^&]+)/.exec(href);
       if (!match) throw new Error('Lectulandia: enlace de descarga no encontrado');
-      code = atob(decodeURIComponent(match[1]));
+      code = App.base64Decode(decodeURIComponent(match[1]));
     }
     const fileUrl = `https://www.antupload.com/file/${code}`;
     const response = await this.requests.schedule(App.createRequest({

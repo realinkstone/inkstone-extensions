@@ -7675,7 +7675,7 @@
     {
       "id": "lectulandia",
       "name": "Lectulandia",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "novel",
       "website": "https://ww3.lectulandia.co",
       "iconUrl": "https://inkstone.web.app/lectulandia/icon.png",
@@ -7699,7 +7699,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "797e6a1ede008a6d72c195185572721200345399d29934b9cd35a50de3596b9e"
+      "sha256": "4759da801a197b9d24f62083711e75ce4ace73a1c19b5de1f6d896c979e146a4"
     },
     {
       "id": "elejandria",
