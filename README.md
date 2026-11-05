@@ -53,7 +53,7 @@ Prefer to review a written plan before any code is written? This repo works with
 
 ## Extensions
 
-249 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
+250 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
 
 Each extension lives in the folder for what it offers: `comics`, `novels`, `mixed` for those that do both, or `anime`. The site still serves every one at `inkstone.web.app/<id>/index.js`, so the folders change nothing in the apps.
 
@@ -341,6 +341,14 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | Extension | Site | Language | Rating | Version |
 | --- | --- | --- | --- | --- |
 | [ARY Plus](drama/aryplus/index.js) | aryplus.tv | Urdu | Safe | 1.0.1 |
+
+### Western
+
+Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays them. Boundless skips them for now.
+
+| Extension | Site | Language | Rating | Version |
+| --- | --- | --- | --- | --- |
+| [HydraHD](western/hydrahd/index.js) | hydrahd.gd | English | Mature | 1.0.0 |
 
 ## Known issues
 

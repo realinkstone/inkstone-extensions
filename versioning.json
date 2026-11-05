@@ -6168,6 +6168,34 @@
       "language": "en",
       "contentRating": "safe",
       "sha256": "d02cf2e82afe6813533f06f4d127201a7f3b9cc28ee3e51fa8d48e3b67cde539"
+    },
+    {
+      "id": "hydrahd",
+      "name": "HydraHD",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://hydrahd.gd",
+      "iconUrl": "https://inkstone.web.app/hydrahd/icon.png",
+      "hosts": [
+        "hydrahd.gd",
+        "*.hydrahd.gd",
+        "vixsrc.to",
+        "*.vixsrc.to",
+        "vidspark.to",
+        "*.vidspark.to"
+      ],
+      "description": "Western\n\nCatalog・100,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "5d42ae5ae0a36594572f57ba0581b4cd18f74a57914acdad8b88419e239dd4b9"
     }
   ]
 }
