@@ -326,30 +326,30 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 
 | Extension | Site | Language | Rating | Version |
 | --- | --- | --- | --- | --- |
-| [Anikoto](anime/anikoto/index.js) | anikototv.to | English | Mature | 1.0.5 |
-| [AnimeAV1](anime/animeav1/index.js) | animeav1.com | Spanish | Mature | 1.0.4 |
-| [AnimeGG](anime/animegg/index.js) | animegg.org | English | Mature | 1.0.4 |
-| [AnimeHeaven](anime/animeheaven/index.js) | animeheaven.me | English | Mature | 1.0.4 |
-| [AnimeJL](anime/animejl/index.js) | anime-jl.net | Spanish | Adult | 1.0.7 |
-| [AnimeLatinoHD](anime/animelatinohd/index.js) | animelatinohd.com | Spanish | Mature | 1.0.3 |
+| [Anikoto](anime/anikoto/index.js) | anikototv.to | English | Mature | 1.0.6 |
+| [AnimeAV1](anime/animeav1/index.js) | animeav1.com | Spanish | Mature | 1.0.5 |
+| [AnimeGG](anime/animegg/index.js) | animegg.org | English | Mature | 1.0.5 |
+| [AnimeHeaven](anime/animeheaven/index.js) | animeheaven.me | English | Mature | 1.0.5 |
+| [AnimeJL](anime/animejl/index.js) | anime-jl.net | Spanish | Adult | 1.0.8 |
+| [AnimeLatinoHD](anime/animelatinohd/index.js) | animelatinohd.com | Spanish | Mature | 1.0.4 |
 | [AnimeMovil](anime/animemovil/index.js) | tvanime.tv | Spanish | Adult | 1.0.2 |
-| [AnimeOnline.Ninja](anime/animeonlineninja/index.js) | ver2.animeonline.ninja | Spanish | Mature | 1.0.3 |
+| [AnimeOnline.Ninja](anime/animeonlineninja/index.js) | ver2.animeonline.ninja | Spanish | Mature | 1.0.4 |
 | [AniWorld](anime/aniworld/index.js) | aniworld.to | German | Mature | 1.0.3 |
-| [AniZone](anime/anizone/index.js) | anizone.to | English | Mature | 1.0.5 |
+| [AniZone](anime/anizone/index.js) | anizone.to | English | Mature | 1.0.6 |
 | [Beatz Anime](anime/beatzanime/index.js) | beatz-anime.net | Spanish | Mature | 1.0.1 |
-| [HentaiLA](anime/hentaila/index.js) | hentaila.com | Spanish | Adult | 1.0.4 |
-| [JKAnime](anime/jkanime/index.js) | jkanime.net | Spanish | Mature | 1.0.3 |
-| [Katanime](anime/katanime/index.js) | katanime.net | Spanish | Mature | 1.0.5 |
-| [KickAssAnime](anime/kickassanime/index.js) | kaa.lt | English | Mature | 1.0.5 |
-| [Latanime](anime/latanime/index.js) | latanime.org | Spanish | Mature | 1.0.4 |
+| [HentaiLA](anime/hentaila/index.js) | hentaila.com | Spanish | Adult | 1.0.5 |
+| [JKAnime](anime/jkanime/index.js) | jkanime.net | Spanish | Mature | 1.0.4 |
+| [Katanime](anime/katanime/index.js) | katanime.net | Spanish | Mature | 1.0.6 |
+| [KickAssAnime](anime/kickassanime/index.js) | kaa.lt | English | Mature | 1.0.6 |
+| [Latanime](anime/latanime/index.js) | latanime.org | Spanish | Mature | 1.0.5 |
 | [LegionAnime](anime/legionanime/index.js) | legionanime.xyz | Spanish | Mature | 1.0.2 |
-| [Miruro](anime/miruro/index.js) | miruro.cx | English | Mature | 1.0.5 |
-| [MonosChinos](anime/monoschinos/index.js) | monoschinos.st | Spanish | Mature | 1.0.5 |
+| [Miruro](anime/miruro/index.js) | miruro.cx | English | Mature | 1.0.6 |
+| [MonosChinos](anime/monoschinos/index.js) | monoschinos.st | Spanish | Mature | 1.0.6 |
 | [SerienStream](anime/serienstream/index.js) | serienstream.to | German | Mature | 1.0.3 |
-| [TioAnime](anime/tioanime/index.js) | tioanime.com | Spanish | Mature | 1.0.4 |
+| [TioAnime](anime/tioanime/index.js) | tioanime.com | Spanish | Mature | 1.0.5 |
 | [UniqueStream](anime/uniquestream/index.js) | anime.uniquestream.net | English | Mature | 1.1.4 |
-| [VerAnime](anime/veranime/index.js) | verani.me | Spanish | Mature | 1.0.5 |
-| [VerAnimes](anime/veranimes/index.js) | wwv.veranimes.net | Spanish | Mature | 1.0.5 |
+| [VerAnime](anime/veranime/index.js) | verani.me | Spanish | Mature | 1.0.6 |
+| [VerAnimes](anime/veranimes/index.js) | wwv.veranimes.net | Spanish | Mature | 1.0.6 |
 
 ### Donghua
 
@@ -357,14 +357,14 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 
 | Extension | Site | Language | Rating | Version |
 | --- | --- | --- | --- | --- |
-| [Anime4i](donghua/anime4i/index.js) | anime4i.com | English | Safe | 1.0.7 |
-| [AnimeKhor](donghua/animekhor/index.js) | animekhor.org | English | Safe | 1.0.7 |
-| [AnimeXin](donghua/animexin/index.js) | animexin.dev | English | Safe | 1.0.7 |
-| [Donghua4K](donghua/donghua4k/index.js) | donghua4k.net | English | Safe | 1.0.7 |
-| [LMAnime](donghua/lmanime/index.js) | lmanime.com | English | Safe | 1.0.8 |
-| [LuciferDonghua](donghua/luciferdonghua/index.js) | luciferdonghua.org | English | Safe | 1.0.7 |
-| [MundoDonghua](donghua/mundodonghua/index.js) | mundodonghua.com | Spanish | Mature | 1.0.5 |
-| [NarulDonghua](donghua/naruldonghua/index.js) | naruldonghua.com | English | Safe | 1.0.7 |
+| [Anime4i](donghua/anime4i/index.js) | anime4i.com | English | Safe | 1.0.8 |
+| [AnimeKhor](donghua/animekhor/index.js) | animekhor.org | English | Safe | 1.0.8 |
+| [AnimeXin](donghua/animexin/index.js) | animexin.dev | English | Safe | 1.0.8 |
+| [Donghua4K](donghua/donghua4k/index.js) | donghua4k.net | English | Safe | 1.0.8 |
+| [LMAnime](donghua/lmanime/index.js) | lmanime.com | English | Safe | 1.0.9 |
+| [LuciferDonghua](donghua/luciferdonghua/index.js) | luciferdonghua.org | English | Safe | 1.0.8 |
+| [MundoDonghua](donghua/mundodonghua/index.js) | mundodonghua.com | Spanish | Mature | 1.0.6 |
+| [NarulDonghua](donghua/naruldonghua/index.js) | naruldonghua.com | English | Safe | 1.0.8 |
 
 ### Drama
 
@@ -373,11 +373,11 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | Extension | Site | Language | Rating | Version |
 | --- | --- | --- | --- | --- |
 | [ARY Plus](drama/aryplus/index.js) | aryplus.tv | Urdu | Safe | 1.0.3 |
-| [AsiaLiveAction](drama/asialiveaction/index.js) | asialiveaction.com | Spanish | Mature | 1.0.5 |
+| [AsiaLiveAction](drama/asialiveaction/index.js) | asialiveaction.com | Spanish | Mature | 1.0.6 |
 | [DoramasFlix](drama/doramasflix/index.js) | doramasflix.in | Spanish | Mature | 1.0.1 |
-| [DoramasYT](drama/doramasyt/index.js) | doramasyt.com | Spanish | Mature | 1.0.5 |
-| [KissAsian](drama/kissasian/index.js) | kissasian.com.gr | English | Mature | 1.0.3 |
-| [MyAsianTV](drama/myasiantv/index.js) | ww7.myasiantv.rest | English | Mature | 1.0.4 |
+| [DoramasYT](drama/doramasyt/index.js) | doramasyt.com | Spanish | Mature | 1.0.6 |
+| [KissAsian](drama/kissasian/index.js) | kissasian.com.gr | English | Mature | 1.0.4 |
+| [MyAsianTV](drama/myasiantv/index.js) | ww7.myasiantv.rest | English | Mature | 1.0.5 |
 
 ### Western
 

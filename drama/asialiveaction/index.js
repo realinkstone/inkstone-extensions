@@ -170,7 +170,7 @@ async function connectSeasons(source, mangaId, ownTitle, composite) {
     .map((x) => x.chapter);
 }
 
-function collapseSeasons(page) {
+function collapseSeasons(page, request) {
   if (!page || !Array.isArray(page.results)) return page;
   const parsed = page.results.map((r) => parseFranchise(r.title));
   const groups = new Map();
@@ -208,13 +208,23 @@ function collapseSeasons(page) {
       deferred.set(head, list);
     } else rest.push({ r, index });
   });
-  if (!drop.size && !deferred.size) return page;
-  const results = [];
-  for (const x of rest) {
-    results.push(x.r);
-    for (const d of deferred.get(x.index) || []) results.push(d);
+  let results = page.results;
+  if (drop.size || deferred.size) {
+    results = [];
+    for (const x of rest) {
+      results.push(x.r);
+      for (const d of deferred.get(x.index) || []) results.push(d);
+    }
   }
-  return Object.assign({}, page, { results });
+  const typed = request && request.title ? parseFranchise(request.title) : null;
+  if (typed && typed.base.length >= 3) {
+    const exact = results.filter((r) => {
+      const p = parseFranchise(r.title);
+      return p.kind === 'main' && p.base === typed.base;
+    });
+    if (exact.length && results[0] !== exact[0]) results = exact.concat(results.filter((r) => exact.indexOf(r) < 0));
+  }
+  return results === page.results ? page : Object.assign({}, page, { results });
 }
 
 class Source {
@@ -324,7 +334,7 @@ class Source {
   }
 
   async getSearchResults(request, metadata) {
-    return collapseSeasons(await this.getSearchResultsRaw(request, metadata));
+    return collapseSeasons(await this.getSearchResultsRaw(request, metadata), request);
   }
 
   async seasonTitleOf(mangaId) {
