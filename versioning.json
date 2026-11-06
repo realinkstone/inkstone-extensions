@@ -5915,7 +5915,7 @@
     {
       "id": "aryplus",
       "name": "ARY Plus",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "medium": "anime",
       "website": "https://aryplus.tv",
       "iconUrl": "https://inkstone.web.app/aryplus/icon.png",
@@ -5936,7 +5936,7 @@
       ],
       "language": "ur",
       "contentRating": "safe",
-      "sha256": "7d1125b20df37e68206cee45c3875a13f3683b4d301429e2f6ee9d9e814f02ff"
+      "sha256": "96760e8c7bc9fe00581eb6652892d31ac0d30bc8bcf190fd1d620c8bfc15e928"
     },
     {
       "id": "anizone",

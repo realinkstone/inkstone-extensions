@@ -187,9 +187,36 @@ class Source {
     const hit = this.episodeCache.get(mangaId);
     if (hit && Date.now() - hit.at < CACHE_MS) return hit.list;
     const data = await this.json(`${API}/api/cdn/${encodeURIComponent(mangaId)}`);
-    const list = Array.isArray(data && data.episode) ? data.episode : [];
+    const list = (Array.isArray(data && data.episode) ? data.episode : []).slice();
+    await this.addNewest(list);
     this.episodeCache.set(mangaId, { at: Date.now(), list });
     return list;
+  }
+
+  async addNewest(list) {
+    if (!list.length) return;
+    const seen = new Set(list.map((e) => String(e && e._id)));
+    let last = list.reduce((a, b) => (Number(b && b.videoEpNumber) > Number(a && a.videoEpNumber) ? b : a), list[0]);
+    let nextId = '';
+    try {
+      const detail = await this.json(`${API}/api/cdn/ep/${encodeURIComponent(String(last._id))}`);
+      nextId = String((detail && detail.episode && detail.episode.nextEpId) || '');
+    } catch (e) {
+      return;
+    }
+    for (let step = 0; nextId && !seen.has(nextId) && step < 60; step++) {
+      let episode = null;
+      try {
+        const detail = await this.json(`${API}/api/cdn/ep/${encodeURIComponent(nextId)}`);
+        episode = detail && detail.episode && detail.episode._id ? detail.episode : null;
+      } catch (e) {
+        episode = null;
+      }
+      if (!episode) return;
+      seen.add(nextId);
+      list.push(episode);
+      nextId = String(episode.nextEpId || '');
+    }
   }
 
   async getChapters(mangaId) {
