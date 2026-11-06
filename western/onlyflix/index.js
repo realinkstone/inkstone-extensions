@@ -216,7 +216,8 @@ class Source {
         };
       });
     if (!videos.length) throw new Error('OnlyFlix: this title has no server yet');
-    return videos;
+    const first = (v) => (/vidfast/i.test(v.server) ? 0 : 1);
+    return videos.map((v, i) => ({ v, i })).sort((a, b) => first(a.v) - first(b.v) || a.i - b.i).map((x) => x.v);
   }
 
   async getChapterDetails(mangaId, chapterId) {

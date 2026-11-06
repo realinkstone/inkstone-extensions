@@ -391,7 +391,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [Cuevana](western/cuevana/index.js) | cuevana3.eu | Spanish | Mature | 1.0.1 |
 | [Gnula](western/gnula/index.js) | gnula.life | Spanish | Mature | 1.0.2 |
 | [HydraHD](western/hydrahd/index.js) | hydrahd.gd | English | Mature | 1.0.4 |
-| [OnlyFlix](western/onlyflix/index.js) | onlyflix.to | English | Mature | 1.0.0 |
+| [OnlyFlix](western/onlyflix/index.js) | onlyflix.to | English | Mature | 1.0.1 |
 | [PelisForte](western/pelisforte/index.js) | www2.pelisforte.se | Spanish | Mature | 1.0.0 |
 | [PoseidonHD](western/poseidonhd/index.js) | poseidonhd2.co | Spanish | Mature | 1.0.1 |
 | [PressPlayZ](western/pressplayz/index.js) | pressplayz.top | English | Mature | 1.0.3 |
