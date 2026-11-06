@@ -33,6 +33,8 @@ function hostLabel(url) {
   const host = ((/^https?:\/\/([^/]+)/.exec(String(url)) || [])[1] || '').replace(/^www\./, '');
   const parts = host.split('.');
   const name = parts.length > 1 ? parts[parts.length - 2] : parts[0];
+  const known = { ok: 'OK.ru', yourupload: 'YourUpload', mixdroop: 'MixDrop', mixdrop: 'MixDrop', voe: 'VOE', vgfplay: 'VGFPlay', mp4upload: 'Mp4Upload', streamtape: 'Streamtape', mail: 'Mail.ru' };
+  if (known[name]) return known[name];
   return name ? name.charAt(0).toUpperCase() + name.slice(1) : 'Server';
 }
 
@@ -382,13 +384,15 @@ class Source {
       .filter((video) => video && /^https?:\/\//.test(video.url))
       .sort((a, b) => SERVERS.indexOf(a.quality) - SERVERS.indexOf(b.quality))
       .map((video) => ({ ...video, headers: { ...video.headers, ...BROWSER } }));
+    const NEVER_PLAYS = /(^|\.)(netu\.ac|netu\.tv|hqq\.to|hqq\.tv|waaw\.tv|embedsb\.com|sbface\.com|sbfull\.com|sbplay\.org|mega\.nz)$/i;
     const seenPlayers = new Set();
     const embeds = players
       .map((url) => String(url || '').trim().replace(/^\/\//, 'https://').replace(/^http:/, 'https:'))
-      .filter((url, i) => !(found[i] && /^https?:\/\//.test(found[i].url)) && /^https?:\/\/\S+$/.test(url) && !seenPlayers.has(url) && seenPlayers.add(url))
+      .filter((url, i) => !(found[i] && /^https?:\/\//.test(found[i].url)) && /^https?:\/\/\S+$/.test(url) && !NEVER_PLAYS.test((/^https?:\/\/([^/]+)/.exec(url) || [])[1] || '') && !seenPlayers.has(url) && seenPlayers.add(url))
       .map((url) => ({ url, type: 'embed', quality: hostLabel(url), server: hostLabel(url) }));
-    if (!videos.length && !embeds.length) throw new Error(`Latanime: none of the ${players.length} servers gave a playable video`);
-    return videos.concat(embeds);
+    if (videos.length) return videos;
+    if (!embeds.length) throw new Error(`Latanime: none of the ${players.length} servers gave a playable video`);
+    return embeds;
   }
 
   async extract(url) {

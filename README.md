@@ -330,7 +330,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [AnimeAV1](anime/animeav1/index.js) | animeav1.com | Spanish | Mature | 1.0.6 |
 | [AnimeGG](anime/animegg/index.js) | animegg.org | English | Mature | 1.0.6 |
 | [AnimeHeaven](anime/animeheaven/index.js) | animeheaven.me | English | Mature | 1.0.6 |
-| [AnimeJL](anime/animejl/index.js) | anime-jl.net | Spanish | Adult | 1.0.10 |
+| [AnimeJL](anime/animejl/index.js) | anime-jl.net | Spanish | Adult | 1.0.11 |
 | [AnimeLatinoHD](anime/animelatinohd/index.js) | animelatinohd.com | Spanish | Mature | 1.0.5 |
 | [AnimeMovil](anime/animemovil/index.js) | tvanime.tv | Spanish | Adult | 1.0.2 |
 | [AnimeOnline.Ninja](anime/animeonlineninja/index.js) | ver2.animeonline.ninja | Spanish | Mature | 1.0.5 |
@@ -341,15 +341,15 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [JKAnime](anime/jkanime/index.js) | jkanime.net | Spanish | Mature | 1.0.5 |
 | [Katanime](anime/katanime/index.js) | katanime.net | Spanish | Mature | 1.0.7 |
 | [KickAssAnime](anime/kickassanime/index.js) | kaa.lt | English | Mature | 1.0.7 |
-| [Latanime](anime/latanime/index.js) | latanime.org | Spanish | Mature | 1.0.7 |
+| [Latanime](anime/latanime/index.js) | latanime.org | Spanish | Mature | 1.0.8 |
 | [LegionAnime](anime/legionanime/index.js) | legionanime.xyz | Spanish | Mature | 1.0.2 |
 | [Miruro](anime/miruro/index.js) | miruro.cx | English | Mature | 1.0.7 |
 | [MonosChinos](anime/monoschinos/index.js) | monoschinos.st | Spanish | Mature | 1.0.7 |
 | [SerienStream](anime/serienstream/index.js) | serienstream.to | German | Mature | 1.0.3 |
-| [TioAnime](anime/tioanime/index.js) | tioanime.com | Spanish | Mature | 1.0.7 |
+| [TioAnime](anime/tioanime/index.js) | tioanime.com | Spanish | Mature | 1.0.8 |
 | [UniqueStream](anime/uniquestream/index.js) | anime.uniquestream.net | English | Mature | 1.1.4 |
-| [VerAnime](anime/veranime/index.js) | verani.me | Spanish | Mature | 1.0.7 |
-| [VerAnimes](anime/veranimes/index.js) | wwv.veranimes.net | Spanish | Mature | 1.0.8 |
+| [VerAnime](anime/veranime/index.js) | verani.me | Spanish | Mature | 1.0.8 |
+| [VerAnimes](anime/veranimes/index.js) | wwv.veranimes.net | Spanish | Mature | 1.0.9 |
 
 ### Donghua
 
@@ -387,7 +387,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | --- | --- | --- | --- | --- |
 | [Bingr](western/bingr/index.js) | bingr.one | English | Mature | 1.0.3 |
 | [CineCalidad](western/cinecalidad/index.js) | cinecalidad.org | Spanish | Mature | 1.0.1 |
-| [CinePlus123](western/cineplus123/index.js) | cineplus123.org | Spanish | Mature | 1.0.4 |
+| [CinePlus123](western/cineplus123/index.js) | cineplus123.org | Spanish | Mature | 1.0.5 |
 | [Cuevana](western/cuevana/index.js) | cuevana3.eu | Spanish | Mature | 1.0.1 |
 | [Gnula](western/gnula/index.js) | gnula.life | Spanish | Mature | 1.0.2 |
 | [HydraHD](western/hydrahd/index.js) | hydrahd.gd | English | Mature | 1.0.4 |

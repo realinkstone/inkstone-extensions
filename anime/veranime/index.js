@@ -48,9 +48,11 @@ function parseEpisode($, el, seasonPrefix) {
 }
 
 function hostLabel(url) {
-  const host = ((/^https?:\/\/([^/]+)/.exec(url) || [])[1] || '').replace(/^www\./, '');
+  const host = ((/^https?:\/\/([^/]+)/.exec(String(url)) || [])[1] || '').replace(/^www\./, '');
   const parts = host.split('.');
   const name = parts.length > 1 ? parts[parts.length - 2] : parts[0];
+  const known = { ok: 'OK.ru', yourupload: 'YourUpload', mixdroop: 'MixDrop', mixdrop: 'MixDrop', voe: 'VOE', vgfplay: 'VGFPlay', mp4upload: 'Mp4Upload', streamtape: 'Streamtape', mail: 'Mail.ru' };
+  if (known[name]) return known[name];
   return name ? name.charAt(0).toUpperCase() + name.slice(1) : 'Server';
 }
 
