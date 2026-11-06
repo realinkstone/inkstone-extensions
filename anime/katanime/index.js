@@ -114,6 +114,8 @@ async function findFranchise(source, mangaId, ownTitle) {
   const words = own.base.split(' ');
   const queries = [own.base];
   if (words.length > 4) queries.push(words.slice(0, 4).join(' '));
+  const spelled = String(ownTitle || '').replace(/\([^)]*\)/g, ' ').replace(/\s+/g, ' ').trim().split(' ').slice(0, 3).join(' ');
+  if (spelled && queries.indexOf(spelled) < 0) queries.push(spelled);
   const found = new Map();
   for (const query of queries) {
     let metadata;

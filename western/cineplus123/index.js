@@ -145,10 +145,21 @@ class Source {
       const match = /\/capitulo\/([^/?#]+)/.exec(href);
       if (!match) return;
       const chapterId = `capitulo/${match[1]}`;
-      const name = $(el).find('.episodiotitle a').text().trim() || `Episodio ${i + 1}`;
+      const title = $(el).find('.episodiotitle a').text().trim();
       const numMatch = /(\d+)\s*-\s*(\d+)/.exec($(el).find('.numerando').text().trim());
-      const number = numMatch ? (+numMatch[1] * 1000 + +numMatch[2]) : (i + 1);
-      chapters.push({ id: chapterId, name, number });
+      if (!numMatch) {
+        chapters.push({ id: chapterId, name: title || `Episodio ${i + 1}`, number: i + 1 });
+        return;
+      }
+      const season = +numMatch[1];
+      const number = +numMatch[2];
+      chapters.push({
+        id: chapterId,
+        name: title ? `Episodio ${number}: ${title}` : `Episodio ${number}`,
+        number,
+        season: String(season),
+        seasonName: season === 0 ? 'Especiales' : `Temporada ${season}`,
+      });
     });
     return chapters;
   }
