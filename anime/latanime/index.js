@@ -180,9 +180,9 @@ async function connectSeasons(source, mangaId, ownTitle, composite) {
 
 function collapseSeasons(page) {
   if (!page || !Array.isArray(page.results)) return page;
+  const parsed = page.results.map((r) => parseFranchise(r.title));
   const groups = new Map();
-  page.results.forEach((r, index) => {
-    const p = parseFranchise(r.title);
+  parsed.forEach((p, index) => {
     if (p.kind !== 'main' || !p.base) return;
     const rank = p.final ? 99 : p.season || 1;
     const list = groups.get(p.base) || [];
@@ -190,13 +190,39 @@ function collapseSeasons(page) {
     groups.set(p.base, list);
   });
   const drop = new Set();
-  for (const list of groups.values()) {
-    if (list.length < 2) continue;
+  const heads = new Map();
+  for (const [base, list] of groups) {
     const lowest = list.reduce((a, b) => (b.rank < a.rank ? b : a));
-    if (lowest.rank !== 1) continue;
+    heads.set(base, lowest.index);
+    if (list.length < 2 || lowest.rank !== 1) continue;
     for (const x of list) if (x.index !== lowest.index) drop.add(x.index);
   }
-  return drop.size ? Object.assign({}, page, { results: page.results.filter((r, index) => !drop.has(index)) }) : page;
+  const headOf = (p) => {
+    let best = '';
+    for (const base of heads.keys()) {
+      const sameName = p.kind !== 'main' && p.base === base;
+      if ((sameName || p.base.indexOf(base + ' ') === 0) && base.length > best.length) best = base;
+    }
+    return best ? heads.get(best) : -1;
+  };
+  const deferred = new Map();
+  const rest = [];
+  page.results.forEach((r, index) => {
+    if (drop.has(index)) return;
+    const head = headOf(parsed[index]);
+    if (head > index) {
+      const list = deferred.get(head) || [];
+      list.push(r);
+      deferred.set(head, list);
+    } else rest.push({ r, index });
+  });
+  if (!drop.size && !deferred.size) return page;
+  const results = [];
+  for (const x of rest) {
+    results.push(x.r);
+    for (const d of deferred.get(x.index) || []) results.push(d);
+  }
+  return Object.assign({}, page, { results });
 }
 
 class Source {
