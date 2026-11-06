@@ -26,6 +26,12 @@ function slugOf(href) {
 const SEASON_ORDINALS = { first: 1, second: 2, third: 3, fourth: 4, fifth: 5, sixth: 6, seventh: 7, eighth: 8, ninth: 9, tenth: 10 };
 const SEASON_NOISE = /\b(sub|subs|subtitulado|subtitulada|espanol|latino|castellano|dub|dublado|doblado|hd|tv|uncensored|sin censura)\b/g;
 const SEASON_MAX_SIBLINGS = 14;
+const SEASON_SEP = '@@';
+function splitSeasonId(mangaId, chapterId) {
+  const text = String(chapterId === undefined || chapterId === null ? '' : chapterId);
+  const at = text.indexOf(SEASON_SEP);
+  return at > 0 ? { mangaId: text.slice(0, at), chapterId: text.slice(at + SEASON_SEP.length) } : { mangaId, chapterId };
+}
 
 function parseFranchise(title) {
   let t = String(title || '')
@@ -112,7 +118,7 @@ function numberSeasons(members) {
 
 const SEASON_GROUP_NAMES = { ova: 'OVAs', movie: 'Movies', special: 'Specials' };
 
-async function connectSeasons(source, mangaId, ownTitle) {
+async function connectSeasons(source, mangaId, ownTitle, composite) {
   let members = [];
   try {
     members = await findFranchise(source, mangaId, ownTitle);
@@ -139,6 +145,10 @@ async function connectSeasons(source, mangaId, ownTitle) {
       if (!chapter || seen.has(chapter.id)) continue;
       seen.add(chapter.id);
       const tagged = Object.assign({}, chapter);
+      if (composite && m.mangaId !== mangaId) {
+        tagged.id = m.mangaId + SEASON_SEP + chapter.id;
+        if (tagged.chapterId !== undefined) tagged.chapterId = tagged.id;
+      }
       if (m.kind === 'main') {
         if (tagged.season === undefined || tagged.season === null) {
           tagged.season = String(m.number);
@@ -229,7 +239,7 @@ class Source {
   }
 
   async getChapters(mangaId) {
-    return connectSeasons(this, mangaId, await this.seasonTitleOf(mangaId));
+    return connectSeasons(this, mangaId, await this.seasonTitleOf(mangaId), true);
   }
 
   async getSearchResults(request, metadata) {
@@ -259,6 +269,7 @@ class Source {
   }
 
   async getVideos(mangaId, chapterId) {
+    ({ mangaId, chapterId } = splitSeasonId(mangaId, chapterId));
     const html = await this.get(`${SITE}/media/${encodeURIComponent(mangaId)}/${encodeURIComponent(chapterId)}`);
     const embeds = (/embeds:\{([\s\S]*?)\},downloads:/.exec(html) || [])[1] || '';
     const servers = [];
