@@ -74,12 +74,18 @@ function splitSeasonId(mangaId, chapterId) {
 }
 
 function parseFranchise(title) {
-  let t = String(title || '')
+  const folded = String(title || '')
     .normalize('NFD')
     .replace(/[̀-ͯ]/g, '')
     .toLowerCase()
     .replace(/&/g, ' and ')
-    .replace(/[^a-z0-9]+/g, ' ')
+    .replace(/[^a-z0-9]+/g, ' ');
+  let lang = '';
+  if (/\blatino\b/.test(folded)) lang = 'latino';
+  else if (/\bcastellano\b/.test(folded)) lang = 'castellano';
+  else if (/\b(sub|subs|subtitulado|subtitulada)\b/.test(folded)) lang = 'sub';
+  else if (/\b(dub|dublado|doblado)\b/.test(folded)) lang = 'dub';
+  let t = folded
     .replace(SEASON_NOISE, ' ')
     .replace(/\b(?:19|20)\d{2}\b/g, ' ')
     .replace(/\s+/g, ' ')
@@ -111,7 +117,7 @@ function parseFranchise(title) {
   }
   t = t.replace(/\b(?:part|cour|parte) \d{1,2}\b/g, ' ').replace(/\b(ova|oad|ona|special|specials|recap|movie|pelicula|film)\b/g, ' ');
   t = t.replace(/\s+/g, ' ').trim();
-  return { base: t, kind, season, final };
+  return { base: t, kind, season, final, lang };
 }
 
 async function findFranchise(source, mangaId, ownTitle) {
@@ -134,15 +140,33 @@ async function findFranchise(source, mangaId, ownTitle) {
         if (!r || !r.mangaId || found.has(r.mangaId)) continue;
         const p = parseFranchise(r.title);
         const same = p.base === own.base || (p.kind !== 'main' && p.base.indexOf(own.base + ' ') === 0);
-        if (same) found.set(r.mangaId, { mangaId: r.mangaId, title: r.title, image: r.image, kind: p.kind, season: p.season, final: p.final });
+        if (same) found.set(r.mangaId, { mangaId: r.mangaId, title: r.title, image: r.image, kind: p.kind, season: p.season, final: p.final, base: p.base, lang: p.lang });
       }
       metadata = page && page.metadata;
       if (!metadata) break;
     }
     if (found.size > 1) break;
   }
-  if (!found.has(mangaId)) found.set(mangaId, { mangaId, title: ownTitle, image: undefined, kind: own.kind, season: own.season, final: own.final });
-  return found.size > 1 ? Array.from(found.values()).slice(0, SEASON_MAX_SIBLINGS + 1) : [];
+  if (!found.has(mangaId)) found.set(mangaId, { mangaId, title: ownTitle, image: undefined, kind: own.kind, season: own.season, final: own.final, base: own.base, lang: own.lang });
+  return found.size > 1 ? pickVariants(Array.from(found.values()), mangaId, own.lang) : [];
+}
+
+function pickVariants(members, mangaId, ownLang) {
+  const keyOf = (m) => (m.kind === 'main' ? `main:${m.final ? 'final' : m.season || 1}` : `${m.kind}:${m.base}`);
+  const score = (m) => (m.mangaId === mangaId ? 3 : m.lang && m.lang === ownLang ? 2 : !m.lang ? 1 : 0);
+  const best = new Map();
+  for (const m of members) {
+    const key = keyOf(m);
+    if (!best.has(key) || score(m) > score(best.get(key))) best.set(key, m);
+  }
+  const chosen = Array.from(best.values());
+  const rank = (m) => (m.mangaId === mangaId ? 0 : m.kind === 'main' ? 1 : 2);
+  return chosen
+    .map((m, index) => ({ m, index }))
+    .sort((a, b) => rank(a.m) - rank(b.m) || a.index - b.index)
+    .slice(0, SEASON_MAX_SIBLINGS + 1)
+    .sort((a, b) => a.index - b.index)
+    .map((x) => x.m);
 }
 
 function numberSeasons(members) {
@@ -169,12 +193,28 @@ async function connectSeasons(source, mangaId, ownTitle, composite) {
   if (members.length < 2 || (own.kind !== 'main')) return source.getChaptersOfTitle(mangaId);
   const seasons = numberSeasons(members);
   if (seasons.length < 2 && members.filter((m) => m.kind !== 'main').length === 0) return source.getChaptersOfTitle(mangaId);
-  const lists = await Promise.all(
-    members.map((m) =>
-      m.mangaId === mangaId
-        ? source.getChaptersOfTitle(m.mangaId)
-        : source.getChaptersOfTitle(m.mangaId).catch(() => [])
-    )
+  const lists = new Array(members.length);
+  const ownAt = members.findIndex((m) => m.mangaId === mangaId);
+  if (ownAt >= 0) lists[ownAt] = await source.getChaptersOfTitle(members[ownAt].mangaId);
+  const todo = members.map((m, i) => i).filter((i) => i !== ownAt);
+  const readSibling = async (i) => {
+    for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        const list = await source.getChaptersOfTitle(members[i].mangaId);
+        if (list && list.length) return list;
+      } catch (e) {
+      }
+    }
+    return [];
+  };
+  let cursor = 0;
+  await Promise.all(
+    [0, 1, 2].map(async () => {
+      while (cursor < todo.length) {
+        const i = todo[cursor++];
+        lists[i] = await readSibling(i);
+      }
+    })
   );
   const out = [];
   const seen = new Set();
@@ -182,12 +222,14 @@ async function connectSeasons(source, mangaId, ownTitle, composite) {
     const group = m.kind === 'main' ? null : SEASON_GROUP_NAMES[m.kind];
     const name = m.final ? 'Final Season' : `Season ${m.number}`;
     for (const chapter of lists[i] || []) {
-      if (!chapter || seen.has(chapter.id)) continue;
-      seen.add(chapter.id);
+      if (!chapter) continue;
+      const finalId = composite && m.mangaId !== mangaId ? m.mangaId + SEASON_SEP + chapter.id : chapter.id;
+      if (seen.has(finalId)) continue;
+      seen.add(finalId);
       const tagged = Object.assign({}, chapter);
-      if (composite && m.mangaId !== mangaId) {
-        tagged.id = m.mangaId + SEASON_SEP + chapter.id;
-        if (tagged.chapterId !== undefined) tagged.chapterId = tagged.id;
+      if (finalId !== chapter.id) {
+        tagged.id = finalId;
+        if (tagged.chapterId !== undefined) tagged.chapterId = finalId;
       }
       if (m.kind === 'main') {
         if (tagged.season === undefined || tagged.season === null) {
