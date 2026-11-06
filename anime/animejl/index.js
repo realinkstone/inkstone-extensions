@@ -52,6 +52,13 @@ function voeSource(payload) {
   return JSON.parse(App.base64Decode(shifted.split('').reverse().join(''))).source;
 }
 
+function hostLabel(url) {
+  const host = ((/^https?:\/\/([^/]+)/.exec(String(url)) || [])[1] || '').replace(/^www\./, '');
+  const parts = host.split('.');
+  const name = parts.length > 1 ? parts[parts.length - 2] : parts[0];
+  return name ? name.charAt(0).toUpperCase() + name.slice(1) : 'Server';
+}
+
 const SEASON_ORDINALS = { first: 1, second: 2, third: 3, fourth: 4, fifth: 5, sixth: 6, seventh: 7, eighth: 8, ninth: 9, tenth: 10 };
 const SEASON_NOISE = /\b(sub|subs|subtitulado|subtitulada|espanol|latino|castellano|dub|dublado|doblado|hd|tv|uncensored|sin censura)\b/g;
 const SEASON_MAX_SIBLINGS = 14;
@@ -447,8 +454,13 @@ class Source {
       .filter((video) => video && /^https?:\/\//.test(video.url))
       .sort((a, b) => SERVERS.indexOf(a.quality) - SERVERS.indexOf(b.quality))
       .map((video) => ({ ...video, headers: { ...video.headers, ...BROWSER } }));
-    if (!videos.length) throw new Error(`AnimeJL: none of the ${players.length} servers gave a playable video`);
-    return videos;
+    const seenPlayers = new Set();
+    const embeds = players
+      .map((url) => String(url || '').trim().replace(/^\/\//, 'https://').replace(/^http:/, 'https:'))
+      .filter((url, i) => !(found[i] && /^https?:\/\//.test(found[i].url)) && /^https?:\/\/\S+$/.test(url) && !seenPlayers.has(url) && seenPlayers.add(url))
+      .map((url) => ({ url, type: 'embed', quality: hostLabel(url), server: hostLabel(url) }));
+    if (!videos.length && !embeds.length) throw new Error(`AnimeJL: none of the ${players.length} servers gave a playable video`);
+    return videos.concat(embeds);
   }
 
   async extract(url) {

@@ -204,8 +204,9 @@ class Source {
     const json = await this.ajax(html, page, 'mcp_get_available_players', (postId) => `post_id=${encodeURIComponent(postId)}&type=${isMovie ? 'movie' : 'episode'}`);
     const players = json && json.success && json.data && Array.isArray(json.data.players) ? json.data.players : [];
     const seen = new Set();
+    const DEAD = /cdnm|vidapi|balance|nontongo/i;
     const videos = players
-      .filter((p) => p && /^https?:\/\/\S+$/i.test(String(p.url || '')) && !seen.has(p.url) && seen.add(p.url))
+      .filter((p) => p && /^https?:\/\/\S+$/i.test(String(p.url || '')) && !DEAD.test(`${p.name} ${String(p.url).split('/')[2]}`) && !seen.has(p.url) && seen.add(p.url))
       .map((p) => {
         const name = clean(p.name) || 'Server';
         return {
