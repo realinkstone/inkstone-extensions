@@ -7738,6 +7738,26 @@
       "language": "en",
       "contentRating": "mature",
       "sha256": "295674a2c9b4164130b9759917cb62fafe7475e526b6b3ff0c67e0fc0f55d9e8"
+    },
+    {
+      "id": "onlyflix",
+      "name": "OnlyFlix",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://onlyflix.to",
+      "iconUrl": "https://inkstone.web.app/onlyflix/icon.png",
+      "description": "Western\n\nCatalog・50,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "e6b3e258f42f81894ba9b4a0db3d064d419c7a6fa0e711948d0b85ea7250e013"
     }
   ]
 }
