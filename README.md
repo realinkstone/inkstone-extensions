@@ -330,7 +330,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [AnimeAV1](anime/animeav1/index.js) | animeav1.com | Spanish | Mature | 1.0.4 |
 | [AnimeGG](anime/animegg/index.js) | animegg.org | English | Mature | 1.0.4 |
 | [AnimeHeaven](anime/animeheaven/index.js) | animeheaven.me | English | Mature | 1.0.4 |
-| [AnimeJL](anime/animejl/index.js) | anime-jl.net | Spanish | Adult | 1.0.6 |
+| [AnimeJL](anime/animejl/index.js) | anime-jl.net | Spanish | Adult | 1.0.7 |
 | [AnimeLatinoHD](anime/animelatinohd/index.js) | animelatinohd.com | Spanish | Mature | 1.0.3 |
 | [AnimeMovil](anime/animemovil/index.js) | tvanime.tv | Spanish | Adult | 1.0.2 |
 | [AnimeOnline.Ninja](anime/animeonlineninja/index.js) | ver2.animeonline.ninja | Spanish | Mature | 1.0.3 |
@@ -361,7 +361,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [AnimeKhor](donghua/animekhor/index.js) | animekhor.org | English | Safe | 1.0.7 |
 | [AnimeXin](donghua/animexin/index.js) | animexin.dev | English | Safe | 1.0.7 |
 | [Donghua4K](donghua/donghua4k/index.js) | donghua4k.net | English | Safe | 1.0.7 |
-| [LMAnime](donghua/lmanime/index.js) | lmanime.com | English | Safe | 1.0.7 |
+| [LMAnime](donghua/lmanime/index.js) | lmanime.com | English | Safe | 1.0.8 |
 | [LuciferDonghua](donghua/luciferdonghua/index.js) | luciferdonghua.org | English | Safe | 1.0.7 |
 | [MundoDonghua](donghua/mundodonghua/index.js) | mundodonghua.com | Spanish | Mature | 1.0.5 |
 | [NarulDonghua](donghua/naruldonghua/index.js) | naruldonghua.com | English | Safe | 1.0.7 |
