@@ -6843,7 +6843,7 @@
     {
       "id": "cineplus123",
       "name": "CinePlus123",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "medium": "anime",
       "website": "https://cineplus123.org",
       "iconUrl": "https://inkstone.web.app/cineplus123/icon.png",
@@ -6860,7 +6860,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "151de5cc426a878e4f36770d272647e126a546a35df809e23614870dc045189b"
+      "sha256": "fa2b5f877df4ba54beef91c7636e9e4f5190db3e180116d25050a096420fcb82"
     },
     {
       "id": "cuevana",

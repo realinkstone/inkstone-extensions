@@ -194,8 +194,9 @@ class Source {
 
     const seen = new Set();
     const pageOf = (url) => String(url).replace(/^\/\//, 'https://').replace(/^http:/, 'https:');
+    const NEVER_PLAYS = /(^|\.)(netu\.ac|netu\.tv|hqq\.to|hqq\.tv|waaw\.tv|sbface\.com)$/i;
     const embedEntries = validEmbeds
-      .filter((e, i) => !(found[i] && /^https?:\/\//.test(found[i].url)) && /^https?:\/\//.test(pageOf(e.url)) && !seen.has(pageOf(e.url)) && seen.add(pageOf(e.url)))
+      .filter((e, i) => !(found[i] && /^https?:\/\//.test(found[i].url)) && /^https?:\/\//.test(pageOf(e.url)) && !NEVER_PLAYS.test((/^https?:\/\/([^/]+)/.exec(pageOf(e.url)) || [])[1] || '') && !seen.has(pageOf(e.url)) && seen.add(pageOf(e.url)))
       .map((e) => ({ url: pageOf(e.url), type: 'embed', quality: e.title || hostLabel(e.url), server: hostLabel(pageOf(e.url)) }));
     if (!videos.length && !embedEntries.length) throw new Error(`CinePlus123: none of the ${validEmbeds.length} servers gave a playable video`);
     return videos.concat(embedEntries);

@@ -387,7 +387,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | --- | --- | --- | --- | --- |
 | [Bingr](western/bingr/index.js) | bingr.one | English | Mature | 1.0.3 |
 | [CineCalidad](western/cinecalidad/index.js) | cinecalidad.org | Spanish | Mature | 1.0.1 |
-| [CinePlus123](western/cineplus123/index.js) | cineplus123.org | Spanish | Mature | 1.0.3 |
+| [CinePlus123](western/cineplus123/index.js) | cineplus123.org | Spanish | Mature | 1.0.4 |
 | [Cuevana](western/cuevana/index.js) | cuevana3.eu | Spanish | Mature | 1.0.1 |
 | [Gnula](western/gnula/index.js) | gnula.life | Spanish | Mature | 1.0.2 |
 | [HydraHD](western/hydrahd/index.js) | hydrahd.gd | English | Mature | 1.0.4 |
