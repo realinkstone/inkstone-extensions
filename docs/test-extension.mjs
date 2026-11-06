@@ -79,6 +79,11 @@ const App = {
       }
       const host = new URL(request.url).hostname;
       requests.push(host);
+      // The app refuses a request to a host outside the manifest's `hosts` (the call comes back Blocked), so do the same here: a source that
+      // swallows that error (UniqueStream did, and lost its stream keys on every device while this test passed) now fails where it can be seen.
+      if (entry?.hosts?.length && !entry.hosts.some((p) => (p.startsWith('*.') ? host.endsWith(p.slice(1)) : host === p))) {
+        throw Object.assign(new Error(`${host} is not on this extension's allowed hosts list (add it to "hosts" in versioning.json)`), { kind: 'blocked' });
+      }
       let res;
       try {
         res = await fetch(request.url, {

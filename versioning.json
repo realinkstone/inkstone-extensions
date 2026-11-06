@@ -5988,12 +5988,14 @@
     {
       "id": "uniquestream",
       "name": "UniqueStream",
-      "version": "1.1.3",
+      "version": "1.1.4",
       "medium": "anime",
       "website": "https://anime.uniquestream.net",
       "iconUrl": "https://inkstone.web.app/uniquestream/icon.png",
       "hosts": [
-        "anime.uniquestream.net"
+        "anime.uniquestream.net",
+        "mediacache.cc",
+        "*.mediacache.cc"
       ],
       "description": "Anime\n\nCatalog・3,000+",
       "capabilities": [
@@ -6005,7 +6007,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "0f07ce94f5b3a11bb6bffb1854013093ced8e670c6d8973b541f3dec84f071d3",
+      "sha256": "ec0e2d4acf2d5cc648325b8dc36580a3028e42a0ed712f97190d49c9bc69869f",
       "settingsSchema": [
         {
           "type": "select",
@@ -6491,7 +6493,7 @@
     {
       "id": "animejl",
       "name": "AnimeJL",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "medium": "anime",
       "website": "https://www.anime-jl.net",
       "iconUrl": "https://inkstone.web.app/animejl/icon.png",
@@ -6500,6 +6502,8 @@
         "anime-jl.net",
         "vidhide.com",
         "*.vidhide.com",
+        "vidhidevip.com",
+        "*.vidhidevip.com",
         "vidhidepre.com",
         "vidhidepro.com",
         "morencius.com",

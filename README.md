@@ -330,7 +330,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [AnimeAV1](anime/animeav1/index.js) | animeav1.com | Spanish | Mature | 1.0.2 |
 | [AnimeGG](anime/animegg/index.js) | animegg.org | English | Mature | 1.0.2 |
 | [AnimeHeaven](anime/animeheaven/index.js) | animeheaven.me | English | Mature | 1.0.2 |
-| [AnimeJL](anime/animejl/index.js) | anime-jl.net | Spanish | Adult | 1.0.3 |
+| [AnimeJL](anime/animejl/index.js) | anime-jl.net | Spanish | Adult | 1.0.4 |
 | [AnimeLatinoHD](anime/animelatinohd/index.js) | animelatinohd.com | Spanish | Mature | 1.0.1 |
 | [AnimeMovil](anime/animemovil/index.js) | tvanime.tv | Spanish | Adult | 1.0.2 |
 | [AnimeOnline.Ninja](anime/animeonlineninja/index.js) | ver2.animeonline.ninja | Spanish | Mature | 1.0.1 |
@@ -347,7 +347,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [MonosChinos](anime/monoschinos/index.js) | monoschinos.st | Spanish | Mature | 1.0.3 |
 | [SerienStream](anime/serienstream/index.js) | serienstream.to | German | Mature | 1.0.3 |
 | [TioAnime](anime/tioanime/index.js) | tioanime.com | Spanish | Mature | 1.0.2 |
-| [UniqueStream](anime/uniquestream/index.js) | anime.uniquestream.net | English | Mature | 1.1.3 |
+| [UniqueStream](anime/uniquestream/index.js) | anime.uniquestream.net | English | Mature | 1.1.4 |
 | [VerAnime](anime/veranime/index.js) | verani.me | Spanish | Mature | 1.0.3 |
 | [VerAnimes](anime/veranimes/index.js) | wwv.veranimes.net | Spanish | Mature | 1.0.3 |
 

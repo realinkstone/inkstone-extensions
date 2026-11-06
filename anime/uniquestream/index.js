@@ -99,6 +99,7 @@ class Source {
         if (!line) break;
         hex = unwrapKey(await this.text(resolveUrl(url, line[1]), { Referer: `${SITE}/`, 'x-am-media-id': mediaId }), mediaId);
       } catch (e) {
+        if (e && (e.kind === 'blocked' || e.kind === 'challenge' || /allowed hosts/.test(String(e.message)))) throw e;
         hex = '';
       }
     }
