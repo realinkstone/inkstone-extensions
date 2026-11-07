@@ -76,6 +76,13 @@ function secondsOf(value) {
   return seconds > 0 ? Math.round(seconds) : undefined;
 }
 
+function createdOf(id) {
+  const m = /^([0-9a-f]{8})[0-9a-f]{16}$/i.exec(String(id || ''));
+  if (!m) return undefined;
+  const ms = parseInt(m[1], 16) * 1000;
+  return ms > Date.UTC(2020, 0, 1) && ms < Date.now() + 86400000 ? ms : undefined;
+}
+
 const LANGUAGE_NAMES = { en: 'English', ur: 'Urdu', ar: 'Arabic', hi: 'Hindi', pa: 'Punjabi', fr: 'French', es: 'Spanish', tr: 'Turkish' };
 
 function describeMaster(text) {
@@ -188,34 +195,46 @@ class Source {
     if (hit && Date.now() - hit.at < CACHE_MS) return hit.list;
     const data = await this.json(`${API}/api/cdn/${encodeURIComponent(mangaId)}`);
     const list = (Array.isArray(data && data.episode) ? data.episode : []).slice();
-    await this.addNewest(list);
+    await this.addMissing(list);
     this.episodeCache.set(mangaId, { at: Date.now(), list });
     return list;
   }
 
-  async addNewest(list) {
+  async addMissing(list) {
     if (!list.length) return;
     const seen = new Set(list.map((e) => String(e && e._id)));
-    let last = list.reduce((a, b) => (Number(b && b.videoEpNumber) > Number(a && a.videoEpNumber) ? b : a), list[0]);
-    let nextId = '';
-    try {
-      const detail = await this.json(`${API}/api/cdn/ep/${encodeURIComponent(String(last._id))}`);
-      nextId = String((detail && detail.episode && detail.episode.nextEpId) || '');
-    } catch (e) {
-      return;
+    const numbered = list.filter((e) => e && e._id && Number.isFinite(Number(e.videoEpNumber))).sort((a, b) => Number(a.videoEpNumber) - Number(b.videoEpNumber));
+    const starts = [];
+    for (let i = 0; i < numbered.length; i++) {
+      const next = numbered[i + 1];
+      if (!next || Number(next.videoEpNumber) - Number(numbered[i].videoEpNumber) > 1) starts.push(numbered[i]);
     }
-    for (let step = 0; nextId && !seen.has(nextId) && step < 60; step++) {
-      let episode = null;
+    if (!numbered.length) starts.push(list[list.length - 1]);
+    let budget = 80;
+    for (const first of starts.slice(-20).reverse()) {
+      if (budget <= 0) return;
+      let nextId = '';
       try {
-        const detail = await this.json(`${API}/api/cdn/ep/${encodeURIComponent(nextId)}`);
-        episode = detail && detail.episode && detail.episode._id ? detail.episode : null;
+        budget--;
+        const detail = await this.json(`${API}/api/cdn/ep/${encodeURIComponent(String(first._id))}`);
+        nextId = String((detail && detail.episode && detail.episode.nextEpId) || '');
       } catch (e) {
-        episode = null;
+        continue;
       }
-      if (!episode) return;
-      seen.add(nextId);
-      list.push(episode);
-      nextId = String(episode.nextEpId || '');
+      while (nextId && !seen.has(nextId) && budget > 0) {
+        budget--;
+        let episode = null;
+        try {
+          const detail = await this.json(`${API}/api/cdn/ep/${encodeURIComponent(nextId)}`);
+          episode = detail && detail.episode && detail.episode._id ? detail.episode : null;
+        } catch (e) {
+          episode = null;
+        }
+        if (!episode) break;
+        seen.add(nextId);
+        list.push(episode);
+        nextId = String(episode.nextEpId || '');
+      }
     }
   }
 
@@ -230,7 +249,7 @@ class Source {
     for (const e of list) {
       if (!e || !e._id || e.drmEnabled === true || !e.videoSource) continue;
       const number = Number(e.videoEpNumber);
-      const created = Date.parse(e.createdAd || '');
+      const created = Date.parse(e.createdAd || '') || createdOf(e._id);
       rows.push({
         id: String(e._id),
         chapterId: String(e._id),
