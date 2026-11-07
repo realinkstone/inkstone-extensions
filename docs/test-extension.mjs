@@ -451,6 +451,21 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
     if (info && info.image !== undefined && info.image !== null) check(isUrl(info.image), 'the cover in details is an absolute URL');
     check([info?.title, info?.author, info?.desc, info?.summary].every((v) => v === undefined || v === null || typeof v === 'string'), 'title, author and description are plain strings', 'join several author names into one string, the app throws on a list');
     if (info && info.contentRating !== undefined && info.ageRating === undefined) warnIgnoredRating('details');
+    if (info && info.cast !== undefined) {
+      const cast = info.cast;
+      const shaped = Array.isArray(cast) && cast.length > 0 && cast.every((c) => c && typeof c.name === 'string' && c.name.trim() && (c.image === undefined || isUrl(c.image)) && (c.role === undefined || typeof c.role === 'string') && (c.feed === undefined || (typeof c.feed === 'string' && c.feed)));
+      check(shaped, 'cast is a list of { name, image?, role?, feed? } with full image addresses', 'name, role and feed are strings and image is a full URL; leave the field out when there is no cast');
+      // A tapped person opens getSearchResults({ title: '', feed }), so that call has to answer a list of titles.
+      const tappable = shaped ? cast.find((c) => c.feed) : null;
+      if (tappable) {
+        const shown = await step(`cast feed of ${tappable.name}`, () => source.getSearchResults({ title: '', feed: tappable.feed }, undefined));
+        if (shown) {
+          const titles = shown.value?.results ?? shown.value;
+          check(Array.isArray(titles) && titles.every((r) => r.mangaId && typeof r.title === 'string'), 'a cast feed answers a list of titles (results with mangaId and title)', 'a person who is tapped gets this list');
+          if (Array.isArray(titles) && !titles.length) say('warn', `the cast feed of ${tappable.name} has no titles`, 'a tapped person with nothing to show reads as a broken screen');
+        }
+      }
+    }
   }
   const chapters = await step('chapters', () => source.getChapters(item.mangaId));
   if (!chapters) continue;

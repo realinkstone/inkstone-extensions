@@ -5,6 +5,8 @@ const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 const COUNTRY = 'PK';
 const PAGE_SIZE = 20;
 const CACHE_MS = 5 * 60 * 1000;
+const DIGITAL = 'https://arydigital.tv';
+const LONG_CACHE_MS = 6 * 60 * 60 * 1000;
 
 const FEEDS = [
   { id: 'dramas', name: 'Dramas', category: 'dramas' },
@@ -83,6 +85,50 @@ function createdOf(id) {
   return ms > Date.UTC(2020, 0, 1) && ms < Date.now() + 86400000 ? ms : undefined;
 }
 
+function squash(text) {
+  let t = String(text || '').toLowerCase();
+  if (typeof t.normalize === 'function') t = t.normalize('NFKD');
+  return t.replace(/[\u0300-\u036f]/g, '').replace(/&/g, 'and').replace(/[^a-z0-9]/g, '');
+}
+
+function distance(a, b) {
+  let row = [];
+  for (let j = 0; j <= b.length; j++) row.push(j);
+  for (let i = 1; i <= a.length; i++) {
+    const next = [i];
+    for (let j = 1; j <= b.length; j++) next.push(Math.min(row[j] + 1, next[j - 1] + 1, row[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)));
+    row = next;
+  }
+  return row[b.length];
+}
+
+function sameTitle(a, b) {
+  const x = squash(a);
+  const y = squash(b);
+  if (!x || !y) return false;
+  if (x === y) return true;
+  return x.length >= 12 && y.length >= 12 && x.replace(/\D/g, '') === y.replace(/\D/g, '') && distance(x, y) <= 1;
+}
+
+function samePerson(a, b) {
+  const x = squash(a);
+  const y = squash(b);
+  if (!x || !y) return false;
+  if (x === y) return true;
+  const wa = String(a).toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
+  const wb = String(b).toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
+  const small = wa.length <= wb.length ? wa : wb;
+  const big = wa.length <= wb.length ? wb : wa;
+  if (small.length >= 2 && small.every((w) => big.indexOf(w) !== -1)) return true;
+  return x.length >= 8 && x[0] === y[0] && distance(x, y) <= 2;
+}
+
+function isClip(s) {
+  if (/\bOST\b|teaser|trailer|promo/i.test(String(s && s.title))) return true;
+  const mins = minutesOf(s && s.duration);
+  return !!s && s.seriesType === 'singleVideo' && mins > 0 && mins < 20;
+}
+
 const LANGUAGE_NAMES = { en: 'English', ur: 'Urdu', ar: 'Arabic', hi: 'Hindi', pa: 'Punjabi', fr: 'French', es: 'Spanish', tr: 'Turkish' };
 
 function describeMaster(text) {
@@ -102,6 +148,9 @@ class Source {
     this.requests = App.createRequestManager({});
     this.ages = new Map();
     this.episodeCache = new Map();
+    this.castCache = new Map();
+    this.digital = null;
+    this.catalogCache = null;
   }
 
   getSourceFeeds() {
@@ -139,6 +188,8 @@ class Source {
     const feedId = (request && request.feed) || FEEDS[0].id;
     const page = (metadata && metadata.page) || 1;
 
+    if (/^cast(?:name)?:/.test(feedId) && !query) return this.castTitles(feedId);
+
     if (query) {
       const data = await this.json(`${API}/api/v2/search`, { method: 'POST', body: { query } });
       const list = Array.isArray(data && data.series) ? data.series : [];
@@ -165,6 +216,136 @@ class Source {
     return { results, metadata: more ? { page: page + 1 } : undefined };
   }
 
+  async html(url) {
+    const response = await this.requests.schedule(App.createRequest({ url, method: 'GET', headers: { 'User-Agent': UA, Accept: 'text/html' } }));
+    if (response.status < 200 || response.status >= 300) throw new Error(`ARY Digital: HTTP ${response.status}`);
+    return response.data;
+  }
+
+  async digitalSlugs() {
+    if (this.digital && Date.now() - this.digital.at < LONG_CACHE_MS) return this.digital.list;
+    const xml = await this.html(`${DIGITAL}/drama.xml`);
+    const list = [];
+    for (const m of String(xml).matchAll(/<loc>\s*https:\/\/arydigital\.tv\/drama\/([a-z0-9-]+)\/?\s*<\/loc>/g)) if (list.indexOf(m[1]) === -1) list.push(m[1]);
+    this.digital = { at: Date.now(), list };
+    return list;
+  }
+
+  async digitalCast(title) {
+    const slug = (await this.digitalSlugs()).find((x) => sameTitle(x.replace(/-/g, ' '), title));
+    if (!slug) return [];
+    const $ = cheerio.load(await this.html(`${DIGITAL}/drama/${slug}/`));
+    const cards = [];
+    $('article.cast-card').each((i, el) => {
+      const card = $(el);
+      const name = card.find('h4').first().text().replace(/\s+/g, ' ').trim();
+      const path = card.find('a').first().attr('href') || '';
+      const src = card.find('img').first().attr('src') || '';
+      if (!name) return;
+      cards.push({
+        name,
+        role: card.find('span').first().text().replace(/\s+/g, ' ').trim(),
+        path: /^\/pakistani-(?:actors|actresses)\/[a-z0-9-]+\/?$/.test(path) ? path : '',
+        image: /^\/_next\/image\/\?url=/.test(src) ? `${DIGITAL}${src}` : /^https:\/\//.test(src) ? src : '',
+      });
+    });
+    return cards;
+  }
+
+  async castOf(mangaId, title, names) {
+    const hit = this.castCache.get(mangaId);
+    if (hit && Date.now() - hit.at < LONG_CACHE_MS) return hit.list;
+    let cards = [];
+    try {
+      cards = await this.digitalCast(title);
+    } catch (e) {
+      cards = [];
+    }
+    const used = new Set();
+    const list = [];
+    const entry = (card, name) => {
+      const out = { name: card ? card.name : name };
+      if (card && card.image) out.image = card.image;
+      if (card && card.role) out.role = card.role;
+      out.feed = card && card.path ? `cast:${card.path}` : `castname:${name}`;
+      return out;
+    };
+    for (const name of names) {
+      const i = cards.findIndex((c, k) => !used.has(k) && samePerson(c.name, name));
+      if (i >= 0) used.add(i);
+      list.push(entry(i >= 0 ? cards[i] : null, name));
+    }
+    cards.forEach((c, k) => {
+      if (!used.has(k)) list.push(entry(c, c.name));
+    });
+    const result = list.slice(0, 30);
+    this.castCache.set(mangaId, { at: Date.now(), list: result });
+    return result.length ? result : undefined;
+  }
+
+  async catalog() {
+    if (this.catalogCache && Date.now() - this.catalogCache.at < CACHE_MS * 6) return this.catalogCache.list;
+    const url = (page) => `${API}/api/series/byCatID/status/pg/dramas/${COUNTRY}?limit=${PAGE_SIZE}&page=${page}`;
+    const first = await this.json(url(1));
+    const total = Math.min(Math.max(Number(first && first.pagination && first.pagination.totalPages) || 1, 1), 40);
+    const pages = [first];
+    for (let from = 2; from <= total; from += 4) {
+      const batch = [];
+      for (let page = from; page < from + 4 && page <= total; page++) batch.push(this.json(url(page)).catch(() => null));
+      pages.push(...(await Promise.all(batch)));
+    }
+    const list = [];
+    const seen = new Set();
+    for (const data of pages) {
+      for (const s of (data && data.series) || []) {
+        if (!playable(s) || seen.has(s._id)) continue;
+        seen.add(s._id);
+        list.push(s);
+      }
+    }
+    this.catalogCache = { at: Date.now(), list };
+    return list;
+  }
+
+  async castTitles(feedId) {
+    const found = new Map();
+    let name = '';
+    if (feedId.indexOf('cast:') === 0) {
+      const path = feedId.slice(5);
+      if (!/^\/pakistani-(?:actors|actresses)\/[a-z0-9-]+\/?$/.test(path)) throw new Error('ARY Plus: not a cast page');
+      try {
+        const $ = cheerio.load(await this.html(`${DIGITAL}${path}`));
+        name = $('h1').first().text().replace(/\s+/g, ' ').trim();
+        const slugs = [];
+        $('a[href^="/drama/"]').each((i, el) => {
+          const m = /^\/drama\/([a-z0-9-]+)\/?$/.exec($(el).attr('href') || '');
+          if (m && slugs.indexOf(m[1]) === -1) slugs.push(m[1]);
+        });
+        const catalog = slugs.length ? await this.catalog() : [];
+        for (const slug of slugs) {
+          const s = catalog.find((c) => sameTitle(slug.replace(/-/g, ' '), c.title));
+          if (s) found.set(s._id, s);
+        }
+      } catch (e) {
+        found.clear();
+      }
+      if (!name) name = path.split('/').filter(Boolean).pop().replace(/-/g, ' ');
+    } else {
+      name = feedId.slice('castname:'.length).trim();
+    }
+    if (name) {
+      try {
+        const data = await this.json(`${API}/api/v2/search`, { method: 'POST', body: { query: name } });
+        for (const s of Array.isArray(data && data.series) ? data.series : []) {
+          if (playable(s) && s.cast_match && !isClip(s) && !found.has(s._id)) found.set(s._id, s);
+        }
+      } catch (e) {
+        if (!found.size) throw e;
+      }
+    }
+    return { results: [...found.values()].map((s) => this.card(s)) };
+  }
+
   async seriesOf(mangaId) {
     return this.json(`${API}/api/series/${encodeURIComponent(mangaId)}`);
   }
@@ -180,6 +361,7 @@ class Source {
         image: imageUrl(s.imagePoster || s.imageCoverBig),
         banner: imageUrl(s.imageCoverDesktop) || undefined,
         author: cast.join(', ') || undefined,
+        cast: await this.castOf(mangaId, s.title, cast),
         desc: String(s.description || '').trim() || undefined,
         status: 'UNKNOWN',
         tags,
