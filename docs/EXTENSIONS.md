@@ -357,7 +357,7 @@ equal the `id`. In the Inkstone repository the folder sits inside `comics/`, `no
 landing-page-only label the app never reads, but `description`, `medium`, `website`,
 `iconUrl`, `language`, `contentRating` and `settingsSchema` are all read (with `id`, `name`, `version`,
 `sha256` and `hosts`) and copied onto the installed record at install/update time. The app ignores
-`status`, `statusNote`, `author`, `authorUrl` and `minApiVersion`: they are for registries and websites. They drive real
+`status`, `statusNote`, `author`, `authorUrl` and `minApiVersion`: they are for registries and websites. `tags` (see below) is for apps that sort or hide whole sources. They drive real
 in-app behavior (category filtering, the source icon, content-rating gating,
 per-source settings screens), not just this repo's own listing pages.
 
@@ -386,6 +386,31 @@ Restrictions:
 
 Anything longer, such as what you could not test, belongs in the comment at the top of
 `index.js` and in your pull request report, not in the description.
+
+### Tags: the optional `tags` field
+
+`tags` is an array of lowercase slugs on the `versioning.json` entry. It labels what a source carries
+or which app it is for, so an app can sort, filter or hide a whole source without opening it. An app
+that does not know a tag, or the field, ignores it, and a source without `tags` is for everyone.
+
+```json
+"contentRating": "adult",
+"tags": ["hentai", "sumizuri-exclusive"]
+```
+
+| Tag | Meaning | What an app does |
+| --- | --- | --- |
+| `hentai` | The source lists hentai titles, alone or next to regular ones | Apps may filter, group or hide it |
+| `explicit` | The source lists other sexually explicit content (pornographic live action, erotica) | Same |
+| `sumizuri-exclusive` | The source is only for Sumizuri | The Boundless apps (Reader and Player) do not list it |
+| `boundless-exclusive` | The source is only for the Boundless apps | Sumizuri does not list it |
+
+- Set `hentai` or `explicit` only for what you saw on the site, and give the source `contentRating: "adult"`
+  (`npm run hash` refuses `hentai` or `explicit` on any other rating). They label the source; a source
+  that mixes regular and explicit titles still rates the explicit ones one by one with `ageRating`.
+- The two exclusive tags are the maintainers' call, because they decide which app lists a source. Leave
+  them off in a pull request. A source never carries both.
+- `tags` is read from the manifest, so changing it needs a version bump like any other manifest change.
 
 ### Settings: the optional `settingsSchema` field
 

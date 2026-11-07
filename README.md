@@ -330,14 +330,14 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [AnimeAV1](anime/animeav1/index.js) | animeav1.com | Spanish | Mature | 1.0.7 |
 | [AnimeGG](anime/animegg/index.js) | animegg.org | English | Mature | 1.0.7 |
 | [AnimeHeaven](anime/animeheaven/index.js) | animeheaven.me | English | Mature | 1.0.7 |
-| [AnimeJL](anime/animejl/index.js) | anime-jl.net | Spanish | Adult | 1.0.12 |
+| [AnimeJL](anime/animejl/index.js) | anime-jl.net | Spanish | Adult | 1.0.13 |
 | [AnimeLatinoHD](anime/animelatinohd/index.js) | animelatinohd.com | Spanish | Mature | 1.0.6 |
-| [AnimeMovil](anime/animemovil/index.js) | tvanime.tv | Spanish | Adult | 1.0.3 |
+| [AnimeMovil](anime/animemovil/index.js) | tvanime.tv | Spanish | Adult | 1.0.4 |
 | [AnimeOnline.Ninja](anime/animeonlineninja/index.js) | ver2.animeonline.ninja | Spanish | Mature | 1.0.6 |
 | [AniWorld](anime/aniworld/index.js) | aniworld.to | German | Mature | 1.0.3 |
 | [AniZone](anime/anizone/index.js) | anizone.to | English | Mature | 1.0.8 |
 | [Beatz Anime](anime/beatzanime/index.js) | beatz-anime.net | Spanish | Mature | 1.0.2 |
-| [HentaiLA](anime/hentaila/index.js) | hentaila.com | Spanish | Adult | 1.0.7 |
+| [HentaiLA](anime/hentaila/index.js) | hentaila.com | Spanish | Adult | 1.0.8 |
 | [JKAnime](anime/jkanime/index.js) | jkanime.net | Spanish | Mature | 1.0.6 |
 | [Katanime](anime/katanime/index.js) | katanime.net | Spanish | Mature | 1.0.8 |
 | [KickAssAnime](anime/kickassanime/index.js) | kaa.lt | English | Mature | 1.0.8 |

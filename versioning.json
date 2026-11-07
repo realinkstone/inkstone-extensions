@@ -6475,7 +6475,7 @@
     {
       "id": "animejl",
       "name": "AnimeJL",
-      "version": "1.0.12",
+      "version": "1.0.13",
       "medium": "anime",
       "website": "https://www.anime-jl.net",
       "iconUrl": "https://inkstone.web.app/animejl/icon.png",
@@ -6562,6 +6562,9 @@
       ],
       "language": "es",
       "contentRating": "adult",
+      "tags": [
+        "hentai"
+      ],
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
       "sha256": "b94874fdeb6e77e805099687b8403e25eff7756fdc321c6b8176c9d3c47c54eb"
@@ -6650,7 +6653,7 @@
     {
       "id": "animemovil",
       "name": "AnimeMovil",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "medium": "anime",
       "website": "https://tvanime.tv",
       "iconUrl": "https://inkstone.web.app/animemovil/icon.png",
@@ -6665,6 +6668,9 @@
       ],
       "language": "es",
       "contentRating": "adult",
+      "tags": [
+        "hentai"
+      ],
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
       "sha256": "4a7a585ca7adeefa409f5da3bdffba455d4fcf921d31cbdfd609dee7b8d296b4"
@@ -7576,7 +7582,7 @@
     {
       "id": "hentaila",
       "name": "HentaiLA",
-      "version": "1.0.7",
+      "version": "1.0.8",
       "medium": "anime",
       "website": "https://hentaila.com",
       "iconUrl": "https://inkstone.web.app/hentaila/icon.png",
@@ -7591,6 +7597,10 @@
       ],
       "language": "es",
       "contentRating": "adult",
+      "tags": [
+        "hentai",
+        "sumizuri-exclusive"
+      ],
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
       "sha256": "f905e0f7e4995352fff2ae9e4f889447cd9c42c133fea53b9422801d7bc785d7"

@@ -224,6 +224,18 @@ if (existsSync(listPath)) {
       if (commentLines) say('warn', `${commentLines} comment lines in a file that sits in the repository layout`, 'the repository holds extensions without comments (keep your commented copy elsewhere)');
     }
     check(['safe', 'mature', 'adult'].includes(entry.contentRating), 'contentRating is safe, mature or adult', entry.contentRating);
+    if (entry.tags !== undefined) {
+      const tags = entry.tags;
+      const wellFormed = Array.isArray(tags) && tags.length > 0 && tags.every((t) => typeof t === 'string' && /^[a-z0-9]+(-[a-z0-9]+)*$/.test(t)) && new Set(tags).size === tags.length;
+      check(wellFormed, 'tags is a list of unique lowercase slugs', JSON.stringify(tags));
+      if (wellFormed) {
+        const known = ['hentai', 'explicit', 'boundless-exclusive', 'sumizuri-exclusive'];
+        const unknown = tags.filter((t) => !known.includes(t));
+        if (unknown.length) say('warn', `tags the docs do not define: ${unknown.join(', ')}`, `the defined tags are ${known.join(', ')}`);
+        check(!(tags.includes('boundless-exclusive') && tags.includes('sumizuri-exclusive')), 'does not carry both exclusive tags');
+        check(!tags.some((t) => t === 'hentai' || t === 'explicit') || entry.contentRating === 'adult', 'a hentai or explicit source is rated adult', entry.contentRating);
+      }
+    }
     check(isUrl(entry.website), 'website is a full URL');
     check(/^[a-z]{2,3}$/.test(entry.language ?? ''), 'language is a short code like en', entry.language);
     check(entry.description && entry.capabilities?.length, 'has a description and capabilities');
