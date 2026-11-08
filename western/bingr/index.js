@@ -174,7 +174,39 @@ const ALTERNATES = {
   citadel: { label: 'Citadel' },
   flux: { label: 'Flux' },
   evion: { label: 'Evion', headers: true },
+  nimbus: { label: 'Nimbus' },
 };
+const ALTERNATE_LIMIT_MS = 12000;
+
+function within(ms, promise) {
+  return new Promise((resolve, reject) => {
+    let done = false;
+    setTimeout(() => {
+      if (!done) {
+        done = true;
+        reject(new Error('timed out'));
+      }
+    }, ms);
+    promise.then(
+      (value) => {
+        if (!done) {
+          done = true;
+          resolve(value);
+        }
+      },
+      (error) => {
+        if (!done) {
+          done = true;
+          reject(error);
+        }
+      }
+    );
+  });
+}
+
+function pause(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 function subtitleFormat(url) {
   const m = /\.(srt|vtt)(?:[?#]|$)/i.exec(String(url || ''));
@@ -396,7 +428,7 @@ class Source {
     const answers = token
       ? await Promise.all(
           ids.map((id) =>
-            this.alternate(kind, tmdb, id, token, chapterId).then(
+            within(ALTERNATE_LIMIT_MS, this.alternate(kind, tmdb, id, token, chapterId)).then(
               (list) => ({ id, list }),
               (error) => ({ id, error })
             )
@@ -486,7 +518,13 @@ class Source {
   }
 
   async text(url, extraHeaders) {
-    const response = await this.send({ url, method: 'GET', headers: Object.assign({ 'User-Agent': UA, Accept: 'text/html,application/xhtml+xml' }, extraHeaders || {}) });
+    let response = null;
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const target = attempt ? `${url}${url.indexOf('?') >= 0 ? '&' : '?'}r=${attempt}` : url;
+      response = await this.send({ url: target, method: 'GET', headers: Object.assign({ 'User-Agent': UA, Accept: 'text/html,application/xhtml+xml' }, extraHeaders || {}) });
+      if (response.status !== 429 && (response.status < 502 || response.status > 504)) break;
+      if (attempt < 2) await pause(700 * (attempt + 1));
+    }
     if (response.status === 404) throw new Error('Bingr: not found (HTTP 404)');
     if (response.status < 200 || response.status >= 300) throw new Error(`Bingr: HTTP ${response.status}`);
     return String(response.data || '');
