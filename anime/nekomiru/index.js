@@ -476,16 +476,16 @@ class Source {
     const list = (Array.isArray(data.subtitles) ? data.subtitles : []).filter((t) => t && /^https?:\/\//.test(clean(t.proxyUrl || t.url)));
     const server = list.length ? list[0].source : '';
     const out = [];
-    const seen = new Map();
+    const seen = new Set();
     for (const t of list) {
       if (t.source !== server) continue;
       const raw = clean(t.label) || 'Subtitles';
       const base = clean(raw.split(' (')[0].replace(/^[-\s]+/, '')) || raw;
       const qualifier = (/(Brazilian|Castilian|Latin American|European|Simplified|Traditional|SDH|Crunchyroll)/i.exec(raw) || [])[1];
-      let label = qualifier && qualifier.toLowerCase() !== base.toLowerCase() ? `${base} (${qualifier})` : base;
-      const count = (seen.get(label) || 0) + 1;
-      seen.set(label, count);
-      if (count > 1) label = `${label} ${count}`;
+      const named = qualifier && qualifier.toLowerCase() !== base.toLowerCase() ? `${base} (${qualifier})` : base;
+      let label = named;
+      for (let n = 2; seen.has(label.toLowerCase()); n++) label = `${named} ${n}`;
+      seen.add(label.toLowerCase());
       out.push({ url: clean(t.proxyUrl || t.url), label, language: LANGUAGES[base.toLowerCase()] || base, format: 'vtt' });
     }
     return out.filter((t) => t.language === 'en').concat(out.filter((t) => t.language !== 'en'));

@@ -7862,7 +7862,37 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "7da8be33c495087e513ef98c5b1aba6322ca61741b4b71c9d2de13f10abb3ce3"
+      "sha256": "860ffcf5bdc1205f9970a4c9facd282e7d83385193e8093582a59cfb608977b6"
+    },
+    {
+      "id": "just4anime",
+      "name": "Just4Anime",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://just4anime.online",
+      "iconUrl": "https://inkstone.web.app/just4anime/icon.png",
+      "hosts": [
+        "just4anime.online",
+        "*.just4anime.online",
+        "anilist.co",
+        "*.anilist.co",
+        "tmdb.org",
+        "*.tmdb.org",
+        "thetvdb.com",
+        "*.thetvdb.com"
+      ],
+      "description": "Anime\n\nCatalog・20,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "9a064920547e79a1ddb25b47867dfab92757b933f4c1d067f4a3f5a2de4c034b"
     }
   ]
 }
