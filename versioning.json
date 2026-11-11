@@ -6393,7 +6393,7 @@
     {
       "id": "bingr",
       "name": "Bingr",
-      "version": "1.0.4",
+      "version": "1.0.5",
       "medium": "anime",
       "website": "https://bingr.one",
       "iconUrl": "https://inkstone.web.app/bingr/icon.png",
@@ -6419,7 +6419,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "7a99388ab70cf5c71006c9416629853ed47520a6ec56103949464f7f96657f74"
+      "sha256": "6e9db6d927f55c993d3292189945d9c87d8b9db7fbfbaecab25ad1e8eac13790"
     },
     {
       "id": "kissasian",
