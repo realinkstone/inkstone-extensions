@@ -53,7 +53,7 @@ Prefer to review a written plan before any code is written? This repo works with
 
 ## Extensions
 
-296 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
+297 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
 
 Each extension lives in the folder for what it offers: `comics`, `novels`, `mixed` for those that do both, or `anime`. The site still serves every one at `inkstone.web.app/<id>/index.js`, so the folders change nothing in the apps.
 
@@ -361,6 +361,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [AnimeKhor](donghua/animekhor/index.js) | animekhor.org | English | Safe | 1.0.10 |
 | [AnimeXin](donghua/animexin/index.js) | animexin.dev | English | Safe | 1.0.10 |
 | [Donghua4K](donghua/donghua4k/index.js) | donghua4k.net | English | Safe | 1.0.10 |
+| [DonghuaWorld](donghua/donghuaworld/index.js) | donghuaworld.com | English | Safe | 1.0.0 |
 | [LMAnime](donghua/lmanime/index.js) | lmanime.com | English | Safe | 1.0.11 |
 | [LuciferDonghua](donghua/luciferdonghua/index.js) | luciferdonghua.org | English | Safe | 1.0.10 |
 | [MundoDonghua](donghua/mundodonghua/index.js) | mundodonghua.com | Spanish | Mature | 1.0.8 |
@@ -385,7 +386,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 
 | Extension | Site | Language | Rating | Version |
 | --- | --- | --- | --- | --- |
-| [Bingr](western/bingr/index.js) | bingr.one | English | Mature | 1.0.5 |
+| [Bingr](western/bingr/index.js) | bingr.one | English | Mature | 1.0.6 |
 | [CineCalidad](western/cinecalidad/index.js) | cinecalidad.org | Spanish | Mature | 1.0.1 |
 | [CinePlus123](western/cineplus123/index.js) | cineplus123.org | Spanish | Mature | 1.0.6 |
 | [Cuevana](western/cuevana/index.js) | cuevana3.eu | Spanish | Mature | 1.0.1 |

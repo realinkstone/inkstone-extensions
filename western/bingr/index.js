@@ -397,8 +397,9 @@ class Source {
     }
     let payload = null;
     let token = '';
+    const fresh = Date.now().toString(36);
     for (let attempt = 0; attempt < 3; attempt++) {
-      const page = await this.text(`${SITE}${path}${attempt ? `?r=${attempt}` : ''}`);
+      const page = await this.text(`${SITE}${path}${attempt ? `?r=${fresh}${attempt}` : ''}`);
       const flight = flightOf(page);
       const sealed = sealedOf(flight);
       let found = null;

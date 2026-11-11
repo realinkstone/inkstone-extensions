@@ -6393,7 +6393,7 @@
     {
       "id": "bingr",
       "name": "Bingr",
-      "version": "1.0.5",
+      "version": "1.0.6",
       "medium": "anime",
       "website": "https://bingr.one",
       "iconUrl": "https://inkstone.web.app/bingr/icon.png",
@@ -6419,7 +6419,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "6e9db6d927f55c993d3292189945d9c87d8b9db7fbfbaecab25ad1e8eac13790"
+      "sha256": "fd7bd1e490686e7e6c53f2a3b786e293ce6fc16861cf4529671669b8da53037f"
     },
     {
       "id": "kissasian",
@@ -7770,6 +7770,32 @@
       "language": "en",
       "contentRating": "mature",
       "sha256": "7997ad72b4c7c55ee625f3d5b17c22a914e9c902c1254711f5a8a88ed2b93cef"
+    },
+    {
+      "id": "donghuaworld",
+      "name": "DonghuaWorld",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://donghuaworld.com",
+      "iconUrl": "https://inkstone.web.app/donghuaworld/icon.png",
+      "hosts": [
+        "donghuaworld.com",
+        "*.donghuaworld.com",
+        "dailymotion.com",
+        "*.dailymotion.com"
+      ],
+      "description": "Donghua\n\nCatalog・900+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "safe",
+      "sha256": "01dca78a95c4c507f270daf610aabb6d1416140c25a9eb13ed27881dc6bb8dee"
     }
   ]
 }
