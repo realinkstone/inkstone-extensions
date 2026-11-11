@@ -347,7 +347,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [LegionAnime](anime/legionanime/index.js) | legionanime.xyz | Spanish | Mature | 1.0.2 |
 | [Miruro](anime/miruro/index.js) | miruro.cx | English | Mature | 1.0.8 |
 | [MonosChinos](anime/monoschinos/index.js) | monoschinos.st | Spanish | Mature | 1.0.8 |
-| [Nekomiru](anime/nekomiru/index.js) | nekomiru.com | English | Mature | 1.0.0 |
+| [Nekomiru](anime/nekomiru/index.js) | nekomiru.com | English | Mature | 1.0.1 |
 | [SerienStream](anime/serienstream/index.js) | serienstream.to | German | Mature | 1.0.3 |
 | [TioAnime](anime/tioanime/index.js) | tioanime.com | Spanish | Mature | 1.0.9 |
 | [UniqueStream](anime/uniquestream/index.js) | anime.uniquestream.net | English | Mature | 1.1.4 |
