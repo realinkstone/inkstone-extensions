@@ -7796,6 +7796,73 @@
       "language": "en",
       "contentRating": "safe",
       "sha256": "01dca78a95c4c507f270daf610aabb6d1416140c25a9eb13ed27881dc6bb8dee"
+    },
+    {
+      "id": "animeparadise",
+      "name": "AnimeParadise",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://www.animeparadise.moe",
+      "iconUrl": "https://inkstone.web.app/animeparadise/icon.png",
+      "hosts": [
+        "animeparadise.moe",
+        "*.animeparadise.moe",
+        "anilist.co",
+        "*.anilist.co",
+        "tmdb.org",
+        "*.tmdb.org",
+        "kitsu.app",
+        "*.kitsu.app",
+        "backblazeb2.com",
+        "*.backblazeb2.com"
+      ],
+      "description": "Anime\n\nCatalog・1,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "5aa0592d20b0ea0a995db6ce3327e2237591c2900e1ed022fde06fa5f2fbfdac"
+    },
+    {
+      "id": "nekomiru",
+      "name": "Nekomiru",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://nekomiru.com",
+      "iconUrl": "https://inkstone.web.app/nekomiru/icon.png",
+      "hosts": [
+        "nekomiru.com",
+        "*.nekomiru.com",
+        "nexabloom.top",
+        "*.nexabloom.top",
+        "crystaldrift.world",
+        "*.crystaldrift.world",
+        "*.workers.dev",
+        "anilist.co",
+        "*.anilist.co",
+        "myanimelist.net",
+        "*.myanimelist.net",
+        "thetvdb.com",
+        "*.thetvdb.com"
+      ],
+      "description": "Anime\n\nCatalog・3,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "7da8be33c495087e513ef98c5b1aba6322ca61741b4b71c9d2de13f10abb3ce3"
     }
   ]
 }
