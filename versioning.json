@@ -7933,6 +7933,27 @@
       "language": "en",
       "contentRating": "mature",
       "sha256": "8d591d1622c4168fc59f87215349cad98c36d6200bed185d4744c0cfc000f06d"
+    },
+    {
+      "id": "katdrama",
+      "name": "Kat Drama",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://k-drama.in",
+      "iconUrl": "https://inkstone.web.app/katdrama/icon.png",
+      "hosts": [],
+      "description": "Drama\n\nCatalog・5,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "3e3304c64fcbd83c95f0227d888fa1fd802e4445e034a5b24f875c72acfb4d1e"
     }
   ]
 }

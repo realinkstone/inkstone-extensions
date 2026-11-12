@@ -53,7 +53,7 @@ Prefer to review a written plan before any code is written? This repo works with
 
 ## Extensions
 
-301 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
+302 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
 
 Each extension lives in the folder for what it offers: `comics`, `novels`, `mixed` for those that do both, or `anime`. The site still serves every one at `inkstone.web.app/<id>/index.js`, so the folders change nothing in the apps.
 
@@ -381,6 +381,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [AsiaLiveAction](drama/asialiveaction/index.js) | asialiveaction.com | Spanish | Mature | 1.0.8 |
 | [DoramasFlix](drama/doramasflix/index.js) | doramasflix.in | Spanish | Mature | 1.0.1 |
 | [DoramasYT](drama/doramasyt/index.js) | doramasyt.com | Spanish | Mature | 1.0.8 |
+| [Kat Drama](drama/katdrama/index.js) | k-drama.in | English | Mature | 1.0.0 |
 | [KissAsian](drama/kissasian/index.js) | kissasian.com.gr | English | Mature | 1.0.6 |
 | [MyAsianTV](drama/myasiantv/index.js) | ww7.myasiantv.rest | English | Mature | 1.0.7 |
 
