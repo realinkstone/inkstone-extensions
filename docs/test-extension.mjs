@@ -492,7 +492,8 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
     if (streams.length) {
       answer = await withTimeout(fetch(first.url, { headers: first.headers ?? {} }), 30000);
       const body = answer.ok ? await answer.text() : '';
-      plays = answer.ok && (body.startsWith('#EXTM3U') || (answer.headers.get('content-type') ?? '').startsWith('video/'));
+      // A DASH manifest (type 'dash', an .mpd) is XML that opens with an MPD element; HLS opens with #EXTM3U; a plain file answers a video content type.
+      plays = answer.ok && (body.startsWith('#EXTM3U') || (answer.headers.get('content-type') ?? '').startsWith('video/') || /<MPD[\s>]/.test(body.slice(0, 4000)));
     }
     const subtitles = (first.subtitles ?? []).length;
     const took = `${((Date.now() - started) / 1000).toFixed(1)}s`;

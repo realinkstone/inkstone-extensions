@@ -7954,6 +7954,26 @@
       "language": "en",
       "contentRating": "mature",
       "sha256": "3e3304c64fcbd83c95f0227d888fa1fd802e4445e034a5b24f875c72acfb4d1e"
+    },
+    {
+      "id": "onetouchtv",
+      "name": "OneTouch TV",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://onetouchtv.xyz",
+      "iconUrl": "https://inkstone.web.app/onetouchtv/icon.png",
+      "hosts": [],
+      "description": "Drama・Movies\n\nCatalog・10,000+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "152d6f74828eb1886eb07b72b577502d1413756a58737ac27207cce591d5ca3a"
     }
   ]
 }

@@ -944,7 +944,8 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
     if (streams.length) {
       answer = await withTimeout(fetch(first.url, { headers: first.headers ?? {} }), 30000);
       const body = answer.ok ? await answer.text() : '';
-      plays = answer.ok && (body.startsWith('#EXTM3U') || (answer.headers.get('content-type') ?? '').startsWith('video/'));
+      // A DASH manifest (type 'dash', an .mpd) is XML that opens with an MPD element; HLS opens with #EXTM3U; a plain file answers a video content type.
+      plays = answer.ok && (body.startsWith('#EXTM3U') || (answer.headers.get('content-type') ?? '').startsWith('video/') || /<MPD[\s>]/.test(body.slice(0, 4000)));
     }
     const subtitles = (first.subtitles ?? []).length;
     const took = `${((Date.now() - started) / 1000).toFixed(1)}s`;
@@ -1242,3 +1243,6 @@ End with something the user can read in thirty seconds:
 | Waiting for every extra server of a video site with `Promise.all` and no time limit | One server that never answers holds up the whole list of streams; race each with a timer (`setTimeout` and a flag that says it already settled, because `clearTimeout` is missing in older builds) and carry on with what answered |
 | Retrying a 429 or 502 at once with the same address | The app serves a repeated GET from a cache and the failure comes back; wait a little longer each time and change the query of each retry (`r=1`, `r=2`), and stop after three |
 | Calling a site's stream list "broken" from one title or one episode | Streams and dubs differ per episode (The Remarried Empress has a Hindi dub on episode 1 only, and a check that picked season 6 of Phineas and Ferb found nothing); sample many titles, the first episode and the latest, and test every stream's master, playlist and first segment |
+| Writing the Catalog line from the number of titles a site lists | A list can be mostly empty: OneTouch TV lists about 29,000 titles, but the details of 90 titles spread over the whole list showed that about half had an episode that plays, a movie with an empty episode list never had a stream (16 of 16), and upcoming titles (981 of 5,932 movies) never do; read the details of a few dozen titles spread over the list before writing the number, and keep upcoming titles out of browse lists |
+| Believing a stream answer without asking its segment | A playlist can load while its segment host has no DNS record (check three public resolvers), so the player starts and stalls; ask the first segment for a kilobyte (through a master's first variant, or a DASH manifest's initialization segment) and drop the streams that fail, and say so when none is left |
+| Testing a rate limit with a repeated sweep | An edge cache answers repeats without counting them: 120 requests looked free, then 21 uncached ones in 7 seconds drew a 429 with Retry-After 10. Use different addresses, then pace under the limit. A cached answer can also be stale (a dead segment host in one answer, a live one in the same call with another query), so when an answer is a 404 or its streams are dead, ask once more with a fresh query |
