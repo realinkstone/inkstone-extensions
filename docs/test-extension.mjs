@@ -514,6 +514,7 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
         if (video[kind] === undefined) continue;
         if (!Array.isArray(video[kind])) problems.push(`${quality}: ${kind} must be a list`);
         else if (video[kind].some((track) => !track || !isUrl(track.url))) problems.push(`${quality}: a ${kind} track has no full URL`);
+        else if (kind === 'subtitles' && video[kind].some((track) => track.offset !== undefined && !(Number.isInteger(track.offset) && Math.abs(track.offset) <= 600000))) problems.push(`${quality}: a subtitles track offset must be whole milliseconds between -600000 and 600000 (positive moves the cues later)`);
       }
       for (const kind of ['intro', 'outro']) {
         const range = video[kind];

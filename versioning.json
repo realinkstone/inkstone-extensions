@@ -7958,7 +7958,7 @@
     {
       "id": "cno",
       "name": "Cno.to",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://cno.to",
       "iconUrl": "https://inkstone.web.app/cno/icon.png",
@@ -7974,7 +7974,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "be0c02a243a9ede825e6591242170e6511ccfe032aa9006a1f8405073fab6a2a"
+      "sha256": "b2b7c33dda3babcec9e66f6b91abb785d029c8c50097781abe6b973769e48bea"
     }
   ]
 }

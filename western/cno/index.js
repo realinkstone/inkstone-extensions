@@ -74,6 +74,18 @@ function ageOfTitle(d) {
   return a === undefined ? b : b === undefined ? a : Math.max(a, b);
 }
 
+function shiftOf(pick) {
+  const sync = pick && pick.status === 'ready' ? pick.sync : null;
+  if (!sync) return 0;
+  const offset = Number(sync.offset);
+  const scale = Number(sync.scale);
+  const confidence = Number(sync.confidence);
+  if (!Number.isFinite(offset) || !Number.isFinite(scale) || !Number.isFinite(confidence)) return 0;
+  if ((Array.isArray(sync.segments) && sync.segments.length) || Math.abs(scale - 1) >= 5e-4) return 0;
+  if (!(confidence >= 0.2 || (confidence >= 0.06 && Math.abs(offset) <= 1.5)) || Math.abs(offset) < 0.15) return 0;
+  return Math.round(Math.max(-600, Math.min(600, offset)) * 1000);
+}
+
 function hasOwnStream(sources) {
   return (Array.isArray(sources) ? sources : []).some((s) => s && s.kind === 'hls' && s.url);
 }
@@ -356,6 +368,7 @@ class Source {
     const { kind, id } = parseId(mangaId);
     let key;
     let sources;
+    let next = null;
     let minutes = 0;
     if (kind === 'movie') {
       const d = await this.detail('movie', id);
@@ -374,9 +387,14 @@ class Source {
       }
       key = `tv/${id}/${m[1]}/${m[2]}`;
       sources = d.sources;
+      next = d.next && Number.isFinite(Number(d.next.season)) && Number.isFinite(Number(d.next.episode)) ? { season: Number(d.next.season), episode: Number(d.next.episode) } : null;
       minutes = Number(d.episode && d.episode.runtime) || Number(d.show && d.show.runtime) || 0;
     }
     const owns = (Array.isArray(sources) ? sources : []).filter((s) => s && s.kind === 'hls' && s.url);
+    if (owns.length && next) {
+      const follow = /^(.*\/tv\/\d+\/)\d+\/\d+(.*)$/.exec(owns[0].url);
+      if (follow) this.warm(`tv/${id}/${next.season}/${next.episode}`, `${follow[1]}${next.season}/${next.episode}${follow[2]}`);
+    }
     if (!owns.length) {
       throw new Error(`Cno.to has no stream of its own for this ${kind === 'movie' ? 'movie' : 'episode'} (its other players are pages of other sites, which this extension does not open)`);
     }
@@ -418,13 +436,17 @@ class Source {
   async subtitles(key, stream) {
     let files = [];
     let best = null;
+    let shift = 0;
     try {
-      const [list, pick] = await Promise.all([
-        this.call(`/api/subs/list/${key}`).catch(() => null),
-        this.call(`/api/subs/best/${key}/en?stream=${encodeURIComponent(stream)}`).catch(() => null),
-      ]);
+      const bestPath = `/api/subs/best/${key}/en?stream=${encodeURIComponent(stream)}`;
+      let [list, pick] = await Promise.all([this.call(`/api/subs/list/${key}`).catch(() => null), this.call(bestPath).catch(() => null)]);
+      for (let wait = 0; wait < 4 && pick && pick.status === 'pending'; wait++) {
+        await pause(1000);
+        pick = await this.call(bestPath).catch(() => null);
+      }
       files = list && Array.isArray(list.files) ? list.files : [];
       best = pick && pick.status === 'ready' && pick.file ? String(pick.file) : null;
+      shift = best ? shiftOf(pick) : 0;
     } catch (e) {
       return [];
     }
@@ -440,7 +462,7 @@ class Source {
     const out = [];
     const english = byLanguage.get('en') || [];
     const chosen = [];
-    if (best) chosen.push({ id: best, label: clean((english.find((f) => String(f.id) === best) || {}).label) || 'English' });
+    if (best) chosen.push({ id: best, shift, label: clean((english.find((f) => String(f.id) === best) || {}).label) || 'English' });
     for (const f of english) {
       if (chosen.length >= 3) break;
       if (!chosen.some((c) => c.id === String(f.id))) chosen.push({ id: String(f.id), label: clean(f.label) || 'English' });
@@ -450,7 +472,9 @@ class Source {
       let label = c.label;
       for (let n = 2; taken.has(label.toLowerCase()); n++) label = `${c.label} ${n}`;
       taken.add(label.toLowerCase());
-      out.push({ url: fileUrl(c.id), label, language: 'en', format: 'vtt' });
+      const track = { url: fileUrl(c.id), label, language: 'en', format: 'vtt' };
+      if (c.shift) track.offset = c.shift;
+      out.push(track);
     }
     const others = [];
     for (const [lang, list] of byLanguage) {

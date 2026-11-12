@@ -401,7 +401,7 @@ async getVideos(mangaId, chapterId) {
 | `quality` | no | A text label. Sumizuri reads it (see below). |
 | `server` | no | A short name for the server or host that serves this stream (`VixSrc`, `VidSpark`, `Dailymotion`, `Citadel`), the same string on every episode of the source. Send it when your source offers more than one server or can have another later. The Boundless Player is being changed to group its Servers panel by it, to remember the last one that played for each source and to start the next episode on it; builds that do not read it ignore it, so it is safe to send now. Keep `quality` for the resolution and the language, and keep the server name in `quality` as well until the grouping is released. |
 | `headers` | no | An object of strings sent with the stream requests, such as `Referer` and `Origin`. |
-| `subtitles` | no | `[{ url, label, language }]`. A track without a full `url` is dropped. `language` is a code such as `en`; the player picks the person's language by code or label. |
+| `subtitles` | no | `[{ url, label, language, offset? }]`. A track without a full `url` is dropped. `language` is a code such as `en`; the player picks the person's language by code or label. `offset` is optional whole **milliseconds** that move the track's cues later (positive) or earlier (negative), for a file you know is out of step with the stream and only when the site's own player applies the same shift; the Boundless Player is being changed to read it, Sumizuri ignores it. |
 | `audio` | no | Separate audio tracks, the same shape as `subtitles`. |
 | `intro`, `outro` | no | `{ start, end }` in **milliseconds**, with `end` after `start` or the range is ignored. The player offers to skip them. |
 
@@ -966,6 +966,7 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
         if (video[kind] === undefined) continue;
         if (!Array.isArray(video[kind])) problems.push(`${quality}: ${kind} must be a list`);
         else if (video[kind].some((track) => !track || !isUrl(track.url))) problems.push(`${quality}: a ${kind} track has no full URL`);
+        else if (kind === 'subtitles' && video[kind].some((track) => track.offset !== undefined && !(Number.isInteger(track.offset) && Math.abs(track.offset) <= 600000))) problems.push(`${quality}: a subtitles track offset must be whole milliseconds between -600000 and 600000 (positive moves the cues later)`);
       }
       for (const kind of ['intro', 'outro']) {
         const range = video[kind];
