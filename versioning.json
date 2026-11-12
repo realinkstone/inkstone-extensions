@@ -7974,6 +7974,27 @@
       "language": "en",
       "contentRating": "mature",
       "sha256": "152d6f74828eb1886eb07b72b577502d1413756a58737ac27207cce591d5ca3a"
+    },
+    {
+      "id": "cno",
+      "name": "Cno.to",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://cno.to",
+      "iconUrl": "https://inkstone.web.app/cno/icon.png",
+      "hosts": [],
+      "description": "Western・Anime\n\nCatalog・10,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "be0c02a243a9ede825e6591242170e6511ccfe032aa9006a1f8405073fab6a2a"
     }
   ]
 }
