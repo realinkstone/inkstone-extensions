@@ -7800,7 +7800,7 @@
     {
       "id": "animeparadise",
       "name": "AnimeParadise",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://www.animeparadise.moe",
       "iconUrl": "https://inkstone.web.app/animeparadise/icon.png",
@@ -7827,7 +7827,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "5aa0592d20b0ea0a995db6ce3327e2237591c2900e1ed022fde06fa5f2fbfdac"
+      "sha256": "4ed137530b51c5c74d3f1cc81d4e7b9d7bb7c514fe97f6a07138b4dee344a998"
     },
     {
       "id": "nekomiru",
@@ -7867,7 +7867,7 @@
     {
       "id": "just4anime",
       "name": "Just4Anime",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://just4anime.online",
       "iconUrl": "https://inkstone.web.app/just4anime/icon.png",
@@ -7892,7 +7892,47 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "9a064920547e79a1ddb25b47867dfab92757b933f4c1d067f4a3f5a2de4c034b"
+      "sha256": "add1dd7a7ee0820a01788ad31612b40521ebe82f8728a75d017572cd91ce1bd4"
+    },
+    {
+      "id": "xanime",
+      "name": "Xanime",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://xanime.me",
+      "iconUrl": "https://inkstone.web.app/xanime/icon.png",
+      "hosts": [
+        "xanime.me",
+        "*.xanime.me",
+        "anilist.co",
+        "*.anilist.co",
+        "xanivsrc1.org",
+        "xanivsrc2.org",
+        "xanivsrc3.org",
+        "xanivsrc4.org",
+        "xanivsrc5.org",
+        "xanivsrc6.org",
+        "xanivsrc7.org",
+        "xanivsrc8.org",
+        "xanivsrc9.org",
+        "xanivsrc10.org",
+        "xanivsrc11.org",
+        "xanivsrc12.org",
+        "xanivsrc13.org",
+        "xanivsrc14.org"
+      ],
+      "description": "Anime\n\nCatalog・10,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "8d591d1622c4168fc59f87215349cad98c36d6200bed185d4744c0cfc000f06d"
     }
   ]
 }

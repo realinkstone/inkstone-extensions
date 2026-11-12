@@ -53,7 +53,7 @@ Prefer to review a written plan before any code is written? This repo works with
 
 ## Extensions
 
-300 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
+301 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
 
 Each extension lives in the folder for what it offers: `comics`, `novels`, `mixed` for those that do both, or `anime`. The site still serves every one at `inkstone.web.app/<id>/index.js`, so the folders change nothing in the apps.
 
@@ -334,13 +334,13 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [AnimeLatinoHD](anime/animelatinohd/index.js) | animelatinohd.com | Spanish | Mature | 1.0.6 |
 | [AnimeMovil](anime/animemovil/index.js) | tvanime.tv | Spanish | Adult | 1.0.4 |
 | [AnimeOnline.Ninja](anime/animeonlineninja/index.js) | ver2.animeonline.ninja | Spanish | Mature | 1.0.6 |
-| [AnimeParadise](anime/animeparadise/index.js) | animeparadise.moe | English | Mature | 1.0.0 |
+| [AnimeParadise](anime/animeparadise/index.js) | animeparadise.moe | English | Mature | 1.0.1 |
 | [AniWorld](anime/aniworld/index.js) | aniworld.to | German | Mature | 1.0.3 |
 | [AniZone](anime/anizone/index.js) | anizone.to | English | Mature | 1.0.8 |
 | [Beatz Anime](anime/beatzanime/index.js) | beatz-anime.net | Spanish | Mature | 1.0.2 |
 | [HentaiLA](anime/hentaila/index.js) | hentaila.com | Spanish | Adult | 1.0.8 |
 | [JKAnime](anime/jkanime/index.js) | jkanime.net | Spanish | Mature | 1.0.6 |
-| [Just4Anime](anime/just4anime/index.js) | just4anime.online | English | Mature | 1.0.0 |
+| [Just4Anime](anime/just4anime/index.js) | just4anime.online | English | Mature | 1.0.1 |
 | [Katanime](anime/katanime/index.js) | katanime.net | Spanish | Mature | 1.0.8 |
 | [KickAssAnime](anime/kickassanime/index.js) | kaa.lt | English | Mature | 1.0.8 |
 | [Latanime](anime/latanime/index.js) | latanime.org | Spanish | Mature | 1.0.9 |
@@ -353,6 +353,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [UniqueStream](anime/uniquestream/index.js) | anime.uniquestream.net | English | Mature | 1.1.4 |
 | [VerAnime](anime/veranime/index.js) | verani.me | Spanish | Mature | 1.0.9 |
 | [VerAnimes](anime/veranimes/index.js) | wwv.veranimes.net | Spanish | Mature | 1.0.10 |
+| [Xanime](anime/xanime/index.js) | xanime.me | English | Mature | 1.0.0 |
 
 ### Donghua
 

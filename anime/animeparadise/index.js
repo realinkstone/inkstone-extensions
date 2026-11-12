@@ -21,6 +21,11 @@ function imageOf(poster) {
   return poster.large || poster.medium || poster.original || poster.small || '';
 }
 
+function gridImageOf(poster) {
+  if (!poster) return '';
+  return poster.medium || imageOf(poster);
+}
+
 function ageOf(item) {
   const genres = Array.isArray(item && item.genres) ? item.genres : [];
   if (genres.some((g) => /^ecchi$/i.test(g))) return 16;
@@ -322,7 +327,7 @@ class Source {
     const out = {
       mangaId: link,
       title: clean(item.title),
-      image: imageOf(item.posterImage),
+      image: gridImageOf(item.posterImage),
       medium: 'anime',
     };
     if (age !== undefined) out.ageRating = age;
@@ -346,7 +351,7 @@ class Source {
         seen.add(origin.link);
         if (origin._id) this.ids.set(origin.link, origin._id);
         const known = this.ages.get(origin.link);
-        const card = { mangaId: origin.link, title: clean(origin.title), image: imageOf(origin.posterImage), medium: 'anime', summary: ep.number ? `Episode ${clean(ep.number)}` : undefined };
+        const card = { mangaId: origin.link, title: clean(origin.title), image: gridImageOf(origin.posterImage), medium: 'anime', summary: ep.number ? `Episode ${clean(ep.number)}` : undefined };
         if (known !== undefined) card.ageRating = known;
         results.push(card);
       }

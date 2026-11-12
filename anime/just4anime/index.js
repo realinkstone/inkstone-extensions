@@ -23,6 +23,10 @@ const SERVERS = [
   { code: 'xan', name: 'Xan' },
 ];
 
+function gridImage(url) {
+  return String(url || '').replace('/cover/large/', '/cover/medium/');
+}
+
 function clean(text) {
   return String(text || '').replace(/\s+/g, ' ').trim();
 }
@@ -340,7 +344,7 @@ class Source {
     if (!item || !item.id) return null;
     const title = titleOf(item.title);
     if (!title) return null;
-    const image = clean(item.image || (item.coverImage && (item.coverImage.large || item.coverImage.extraLarge)));
+    const image = gridImage(clean(item.image || (item.coverImage && (item.coverImage.large || item.coverImage.extraLarge))));
     const out = { mangaId: String(item.id), title, image, medium: 'anime' };
     const count = Number(item.totalEpisodes || item.currentEpisodeCount);
     const bits = [];
