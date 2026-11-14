@@ -8,7 +8,7 @@ Browse, Search, Detail and Reader screens.
 The format keeps the surface area small: implement a handful of methods on
 that class and the app can browse, search and read through your source.
 
-Boundless Reader and Sumizuri both load Inkstone extensions. This page describes Boundless's runtime. Anime extensions are for the video apps, Sumizuri and Boundless Player: Boundless Reader is not compatible with them (see [Anime sources](#anime-sources-sumizuri-and-boundless-player)).
+Boundless Reader, Boundless Player and Sumizuri all load Inkstone extensions. This page describes Boundless's runtime. Anime extensions are for the video apps, Sumizuri and Boundless Player: Boundless Reader is not compatible with them (see [Anime sources](#anime-sources-sumizuri-and-boundless-player)).
 Building with an AI assistant? Give it [BUILD_WITH_AI.md](BUILD_WITH_AI.md).
 To check an extension works, see [TESTING.md](TESTING.md).
 
