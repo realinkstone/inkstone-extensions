@@ -7958,7 +7958,7 @@
     {
       "id": "cno",
       "name": "Cno.to",
-      "version": "1.0.1",
+      "version": "1.0.5",
       "medium": "anime",
       "website": "https://cno.to",
       "iconUrl": "https://inkstone.web.app/cno/icon.png",
@@ -7974,7 +7974,28 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "b2b7c33dda3babcec9e66f6b91abb785d029c8c50097781abe6b973769e48bea"
+      "sha256": "988790395b3426ef105d3a91f596b42f0a6b2ab79d5337b2b07cc4ffa91fec83"
+    },
+    {
+      "id": "watchanimeworld",
+      "name": "Watch Anime World",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://watchanimeworld.one",
+      "iconUrl": "https://inkstone.web.app/watchanimeworld/icon.png",
+      "hosts": [],
+      "description": "Anime・Cartoons・Movies\n\nCatalog・400+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "hi",
+      "contentRating": "mature",
+      "sha256": "cfa09ac7439d7cc53f908d53620ba1405efb493e3d7e3a4e97a83756c78cce48"
     }
   ]
 }

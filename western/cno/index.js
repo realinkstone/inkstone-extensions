@@ -1,4 +1,21 @@
 const SITE = 'https://cno.to';
+
+function artOf(d) {
+  if (!d || !/^\/[\w.-]+\.png$/.test(String(d.logo || ''))) return null;
+  return { logo: String(d.logo), backdrop: /^\/[\w.-]+\.jpg$/.test(String(d.backdrop || '')) ? String(d.backdrop) : '' };
+}
+
+function embedsOf(sources) {
+  const out = [];
+  const seen = new Set();
+  for (const s of Array.isArray(sources) ? sources : []) {
+    if (!s || s.kind !== 'embed' || !/^https:\/\/(cinesrc\.st|vidfast\.vc)\//.test(String(s.url))) continue;
+    if (seen.has(s.url)) continue;
+    seen.add(s.url);
+    out.push({ url: String(s.url), type: 'embed', quality: clean(s.label) || 'Player', server: clean(s.label) || 'Player' });
+  }
+  return out;
+}
 const IMG = 'https://image.tmdb.org/t/p/';
 const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36';
 
@@ -158,15 +175,15 @@ class Source {
     try {
       if (kind === 'movie') {
         const d = await this.detail('movie', id);
-        out = { hls: hasOwnStream(d.sources), age: ageOfTitle(d) };
+        out = { hls: hasOwnStream(d.sources), age: ageOfTitle(d), art: artOf(d) };
       } else {
         try {
           const d = await this.call(`/api/tv/${id}/episode/1/1`);
-          out = { hls: hasOwnStream(d.sources), age: ageOfTitle(d.show) };
+          out = { hls: hasOwnStream(d.sources), age: ageOfTitle(d.show), art: artOf(d.show) };
         } catch (e) {
           if (!/404|not found/i.test(String(e.message))) throw e;
           const d = await this.detail('tv', id);
-          out = { hls: false, age: ageOfTitle(d) };
+          out = { hls: false, age: ageOfTitle(d), art: artOf(d) };
         }
       }
       this.probes.set(key, out);
@@ -190,6 +207,13 @@ class Source {
     if (probe && probe.hls === false) bits.push('no stream');
     out.summary = bits.join(', ');
     if (probe && probe.age !== undefined) out.ageRating = probe.age;
+    if (item.year) out.year = String(item.year);
+    const backdrop = item.backdrop || (probe && probe.art && probe.art.backdrop);
+    if (probe && probe.art && probe.art.logo && backdrop) {
+      out.logo = `${IMG}w500${probe.art.logo}`;
+      out.backdrop = `${IMG}w780${backdrop}`;
+    }
+    if (Array.isArray(item.genres) && item.genres.length) out.tags = item.genres.map(clean).filter(Boolean);
     return out;
   }
 
@@ -304,6 +328,26 @@ class Source {
     if (cast.length) info.cast = cast;
     const age = ageOfTitle(d);
     if (age !== undefined) info.ageRating = age;
+    const art = artOf(d);
+    if (art && art.backdrop) {
+      info.logo = `${IMG}w500${art.logo}`;
+      info.backdrop = `${IMG}w1280${art.backdrop}`;
+    }
+    if (d.year) info.year = String(d.year);
+    const photos = [];
+    const shots = d.photos && typeof d.photos === 'object' ? d.photos : {};
+    for (const [group, kindName, size, limit] of [['stills', 'still', 'w780', 12], ['posters', 'poster', 'w500', 10]]) {
+      for (const f of (Array.isArray(shots[group]) ? shots[group] : []).slice(0, limit)) {
+        if (f && /^\/[\w.-]+\.(jpg|png)$/.test(String(f.path || ''))) photos.push({ url: `${IMG}${size}${f.path}`, kind: kindName });
+      }
+    }
+    if (photos.length) info.photos = photos;
+    const related = [];
+    for (const it of Array.isArray(d.recommendations) ? d.recommendations.slice(0, 20) : []) {
+      const card = this.card(it, null);
+      if (card && card.image) related.push({ mangaId: card.mangaId, title: card.title, image: card.image, year: it.year ? String(it.year) : undefined });
+    }
+    if (related.length) info.related = related;
     return { mangaInfo: info };
   }
 
@@ -312,8 +356,8 @@ class Source {
     if (kind === 'movie') {
       const d = await this.detail('movie', id);
       const own = (Array.isArray(d.sources) ? d.sources : []).find((s) => s && s.kind === 'hls' && s.url);
-      if (!own) throw new Error('Cno.to has no stream of its own for this movie (its other players are pages of other sites, which this extension does not open)');
-      this.warm(`movie/${id}`, own.url);
+      if (!own && !embedsOf(d.sources).length) throw new Error('Cno.to has no player for this movie');
+      if (own) this.warm(`movie/${id}`, own.url);
       return [{ id: 'movie', chapterId: 'movie', name: 'Full movie', number: 1 }];
     }
     const d = await this.detail('tv', id);
@@ -395,8 +439,10 @@ class Source {
       const follow = /^(.*\/tv\/\d+\/)\d+\/\d+(.*)$/.exec(owns[0].url);
       if (follow) this.warm(`tv/${id}/${next.season}/${next.episode}`, `${follow[1]}${next.season}/${next.episode}${follow[2]}`);
     }
+    const embeds = embedsOf(sources);
     if (!owns.length) {
-      throw new Error(`Cno.to has no stream of its own for this ${kind === 'movie' ? 'movie' : 'episode'} (its other players are pages of other sites, which this extension does not open)`);
+      if (!embeds.length) throw new Error(`Cno.to has no player for this ${kind === 'movie' ? 'movie' : 'episode'}`);
+      return embeds;
     }
     const relative = (u) => String(u).replace(/^https?:\/\/[^/]+/, '');
     const [masters, subtitles, skips] = await Promise.all([
@@ -429,8 +475,8 @@ class Source {
       if (skips.outro) video.outro = skips.outro;
       videos.push(video);
     });
-    if (!videos.length) throw new Error("Cno.to's own stream is not ready for this title yet. Try again in a minute.");
-    return videos;
+    if (!videos.length && !embeds.length) throw new Error("Cno.to's own stream is not ready for this title yet. Try again in a minute.");
+    return videos.concat(embeds);
   }
 
   async subtitles(key, stream) {

@@ -211,8 +211,16 @@ just blank in the UI, which is much harder to debug than a crash.
   medium: 'comics' | 'novel',
   ageRating: 0 | 16 | 18,   // minimum age, only if the site rates titles one by one
   rating, views, chapters, completed, releaseDate, publisher,
+  logo: 'https://…',      // optional: the title's own logo, a transparent PNG
+  backdrop: 'https://…',  // optional: a landscape picture; with `logo` the Boundless Player draws a landscape card
+  year: '2026',           // optional: shown with the first tag when the pointer is on a landscape card
+  photos: [{ url: 'https://…', kind: 'still' | 'poster' }],   // optional, on mangaInfo: a Photos rail on the title's page
+  related: [{ mangaId, title, image, year }],                  // optional, on mangaInfo: More Like This, titles of the same source
 }
 ```
+
+`logo` and `backdrop` are https addresses that load with no header. Send both or neither: a card with
+only one stays a poster. (Boundless Player, 2026-11-12; other readers ignore them.)
 
 The app reads `mangaId`, `title`, `image`, `desc` or `summary`, `tags`, `chapters`, `completed`,
 `publisher`, `status`, `ageRating`, `medium`, `author`, `rating`, `volumesId`, and `referer` or
