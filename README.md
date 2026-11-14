@@ -1,6 +1,6 @@
 # Inkstone
 
-**Extension Registry.** Community-made extensions that add content to Boundless Reader and Sumizuri. Free and open source under the MIT license.
+**Extension Registry.** Community-made extensions that add content to Boundless Reader, Boundless Player and Sumizuri. Free and open source under the MIT license.
 
 Each extension is one small JavaScript file that your app downloads and runs on your device (in a sandbox, in Boundless Reader).
 
@@ -9,12 +9,14 @@ The full catalog and docs live at [inkstone.web.app](https://inkstone.web.app). 
 ## Add it to your app
 
 <p align="center">
-  <a href="https://inkstone.web.app/boundless"><img src="docs/assets/add-to-boundless.svg" alt="Add to Boundless" height="56"></a>
+  <a href="https://inkstone.web.app/boundless"><img src="docs/assets/add-to-boundless.svg" alt="Add to Boundless Reader" height="52"></a>
   &nbsp;
-  <a href="https://inkstone.web.app/sumizuri"><img src="docs/assets/add-to-sumizuri.svg" alt="Add to Sumizuri" height="56"></a>
+  <a href="https://inkstone.web.app/boundless-player"><img src="docs/assets/add-to-boundless-player.svg" alt="Add to Boundless Player" height="52"></a>
+  &nbsp;
+  <a href="https://inkstone.web.app/sumizuri"><img src="docs/assets/add-to-sumizuri.svg" alt="Add to Sumizuri" height="52"></a>
 </p>
 
-Tap a button on the device that has the app. It opens the app and asks you to confirm. Or paste this into Boundless Reader's extension settings, or into Sumizuri (Browse, then Repos, then Add a repo):
+Tap a button on the device that has the app. It opens the app and asks you to confirm. Or paste this into Boundless Reader's or Boundless Player's extension settings (Add a Repository), or into Sumizuri (Browse, then Repos, then Add a repo):
 
 ```
 https://inkstone.web.app
@@ -35,7 +37,7 @@ donghua/<id>/index.js      donghua (Chinese animation) extensions, the same vide
 drama/<id>/index.js        drama extensions (live action series and telefilms), the same video format
 western/<id>/index.js      western series, films and cartoons, the same video format
 versioning.json            the list your app reads
-docs/assets/               the Add to Boundless and Add to Sumizuri buttons
+docs/assets/               the Add to Boundless Reader, Boundless Player and Sumizuri buttons
 docs/BUILD_WITH_AI.md      have an AI assistant build one for you
 docs/EXTENSIONS.md         how an extension works
 docs/TESTING.md            check an extension works
