@@ -7996,6 +7996,31 @@
       "language": "hi",
       "contentRating": "mature",
       "sha256": "cfa09ac7439d7cc53f908d53620ba1405efb493e3d7e3a4e97a83756c78cce48"
+    },
+    {
+      "id": "mangade",
+      "name": "MangaDE",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://mangade.io",
+      "iconUrl": "https://inkstone.web.app/mangade/icon.png",
+      "hosts": [
+        "mangade.io",
+        "api.mangade.io",
+        "s3-load.ttr.group"
+      ],
+      "description": "Manhwa・Manga・Manhua\n\nCatalog・10,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "a116aa159ead5a8399d2b6af0bd504cda5bf31953e6bc9deb576d6e37d195c5f"
     }
   ]
 }
