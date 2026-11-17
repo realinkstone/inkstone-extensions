@@ -5,6 +5,10 @@ const MAX_OFFSET_PLUS_LIMIT = 10000;
 
 const PLAIN_UA = 'Boundless/1.0 (+https://boundless.moe)';
 
+const PROBE_WORKERS = 6;
+const SETTLE_ROUNDS = 3;
+const SETTLE_BUDGET_MS = 15000;
+
 function isBotCheck(response, error) {
   if (error) return !!(error.kind === 'challenge' || /challenge|bot check/i.test(String(error.message || '')));
   const body = String(response.data || '').slice(0, 600);
@@ -268,16 +272,86 @@ class Source {
   }
 
   async getChapterDetails(mangaId, chapterId) {
-    const json = await this.requestJSON(`${API_BASE}/at-home/server/${encodeURIComponent(chapterId)}`);
-    const baseUrl = json.baseUrl;
-    const chapter = json.chapter || {};
+    const home = await this.atHome(chapterId);
     const useDataSaver = App.getSourceSetting('dataSaver') === 'true';
-    const fileNames = useDataSaver ? chapter.dataSaver : chapter.data;
-    const quality = useDataSaver ? 'data-saver' : 'data';
-    const pages = (fileNames || [])
-      .filter((f) => typeof f === 'string')
-      .map((f) => `${baseUrl}/${quality}/${chapter.hash}/${f}`);
+    const pages = await this.settlePages(chapterId, home, useDataSaver);
     return { id: chapterId, mangaId, pages };
+  }
+
+  atHome(chapterId) {
+    return this.requestJSON(`${API_BASE}/at-home/server/${encodeURIComponent(chapterId)}`);
+  }
+
+  pageUrls(home, saver) {
+    const chapter = (home && home.chapter) || {};
+    const quality = saver ? 'data-saver' : 'data';
+    return ((saver ? chapter.dataSaver : chapter.data) || [])
+      .filter((f) => typeof f === 'string')
+      .map((f) => `${home.baseUrl}/${quality}/${chapter.hash}/${f}`);
+  }
+
+  async probePage(url, round) {
+    try {
+      const manager = App.createRequestManager({});
+      const request = App.createRequest({ url, method: 'HEAD', headers: { 'User-Agent': PLAIN_UA, 'X-Check': String(round) } });
+      const response = await Promise.race([manager.schedule(request), new Promise((resolve) => setTimeout(() => resolve(null), 4000))]);
+      if (!response) return null;
+      if (response.status >= 200 && response.status < 300) return true;
+      return response.status === 404 || response.status >= 500 ? false : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async probeAll(urls, round) {
+    const found = new Array(urls.length).fill(null);
+    let next = 0;
+    const worker = async () => {
+      while (next < urls.length) {
+        const i = next++;
+        found[i] = await this.probePage(urls[i], round);
+      }
+    };
+    await Promise.all(Array.from({ length: Math.min(PROBE_WORKERS, urls.length) }, worker));
+    return found;
+  }
+
+  async settlePages(chapterId, home, saver) {
+    let pages = this.pageUrls(home, saver);
+    if (pages.length === 0) return pages;
+    const started = Date.now();
+    const last = pages.length - 1;
+    const sample = Array.from(new Set([0, Math.floor(last / 3), Math.floor((2 * last) / 3), last]));
+    const first = await Promise.all(sample.map((i) => this.probePage(pages[i], 0)));
+    if (!first.some((ok) => ok === false)) return pages;
+
+    let spare = this.pageUrls(home, !saver);
+    let found = [];
+    for (let round = 1; round <= SETTLE_ROUNDS && Date.now() - started < SETTLE_BUDGET_MS; round++) {
+      found = await this.probeAll(pages, round);
+      const missing = found.filter((ok) => ok === false).length;
+      if (missing === 0) return pages;
+      if (round === 1 && missing * 2 > pages.length) {
+        try {
+          const fresh = await this.atHome(chapterId);
+          const freshPages = this.pageUrls(fresh, saver);
+          if (freshPages.length === pages.length) {
+            pages = freshPages;
+            spare = this.pageUrls(fresh, !saver);
+          }
+        } catch (e) {
+        }
+      } else if (round < SETTLE_ROUNDS) {
+        await new Promise((resolve) => setTimeout(resolve, 1200));
+      }
+    }
+    const replaceable = spare.length === pages.length ? found.map((ok, i) => (ok === false ? i : -1)).filter((i) => i >= 0) : [];
+    if (replaceable.length === 0 || Date.now() - started > SETTLE_BUDGET_MS) return pages;
+    const other = await this.probeAll(replaceable.map((i) => spare[i]), SETTLE_ROUNDS + 1);
+    return pages.map((url, i) => {
+      const at = replaceable.indexOf(i);
+      return at >= 0 && other[at] === true ? spare[i] : url;
+    });
   }
 
   async requestJSON(url) {
