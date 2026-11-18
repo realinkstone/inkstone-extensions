@@ -55,7 +55,7 @@ Prefer to review a written plan before any code is written? This repo works with
 
 ## Extensions
 
-351 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
+352 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
 
 Each extension lives in the folder for what it offers: `comics`, `novels`, `mixed` for those that do both, or `anime`. The site still serves every one at `inkstone.web.app/<id>/index.js`, so the folders change nothing in the apps.
 
@@ -217,7 +217,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [Mgread.io](comics/mangayy/index.js) | mgread.io | English | Mature | 2.0.0 |
 | [MHScans](comics/mhscans/index.js) | mhscans.com | Spanish | Safe | 1.1.0 |
 | [Monopoly Scan](comics/monopolyscan/index.js) | monopolymanhua.com | Spanish | Safe | 1.0.2 |
-| [Natomanga](comics/natomanga/index.js) | natomanga.com | English | Adult | 1.2.0 |
+| [Natomanga](comics/natomanga/index.js) | natumanga.com | English | Adult | 1.3.0 |
 | [Naver Webtoon](comics/navercomic/index.js) | comic.naver.com | Korean | Mature | 1.2.0 |
 | [Nebulosa Scan](comics/nebulosascan/index.js) | nebulosascan.com | Brazilian Portuguese | Mature | 1.0.2 |
 | [NekoScans](comics/nekoscans/index.js) | nekoproject.org | Spanish | Safe | 1.0.0 |
@@ -240,7 +240,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [Rawkuma](comics/rawkuma/index.js) | rawkuma.net | Japanese | Adult | 1.0.2 |
 | [ReadManga.cc](comics/readmangacc/index.js) | readmanga.cc | English | Mature | 1.0.0 |
 | [ReManga](comics/remanga/index.js) | remanga.org | Russian | Adult | 1.2.2 |
-| [Renascans](comics/renascans/index.js) | renascans.net | English | Safe | 1.1.0 |
+| [Renascans](comics/renascans/index.js) | renascans.net | English | Safe | 1.1.1 |
 | [RichtoScan](comics/richtoscan/index.js) | r1.richtoon.top | Spanish | Safe | 1.0.1 |
 | [RokariComics](comics/rokaricomics/index.js) | rokaricomics.com | English | Adult | 1.0.1 |
 | [Rolia Scan](comics/roliascan/index.js) | roliascan.com | English | Mature | 1.0.0 |
@@ -318,7 +318,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [LightNovel.to](novels/lightnovelto/index.js) | lightnovel.to | English | Mature | 1.0.0 |
 | [LNMTL](novels/lnmtl/index.js) | lnmtl.com | English | Mature | 1.0.0 |
 | [MoboReader](novels/moboreader/index.js) | moboreader.com | English | Adult | 1.2.0 |
-| [Novel Archive](novels/novelarchive/index.js) | novelarchive.cc | English | Mature | 1.0.1 |
+| [Novel Archive](novels/novelarchive/index.js) | novelarchive.st | English | Mature | 1.0.2 |
 | [Novela en Español](novels/novelaenespanol/index.js) | novelaenespanol.com | Spanish | Mature | 1.0.1 |
 | [NovelasLigeras](novels/novelasligeras/index.js) | novelasligeras.net | Spanish | Adult | 1.0.1 |
 | [NovelBuddy](novels/novelbuddy/index.js) | novelbuddy.me | English | Adult | 1.2.0 |
@@ -359,6 +359,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | --- | --- | --- | --- | --- |
 | [9ime](anime/nineime/index.js) | 9ime.live | English | Mature | 1.0.0 |
 | [Anidap](anime/anidap/index.js) | anidap.lol | English | Mature | 1.0.1 |
+| [AniHQ](anime/anihq/index.js) | anihq.cc | English | Mature | 1.0.0 |
 | [Anikoto](anime/anikoto/index.js) | anikototv.bz | English | Mature | 1.0.10 |
 | [AniLight](anime/anilight/index.js) | anilight.live | English | Mature | 1.0.1 |
 | [AnimeAV1](anime/animeav1/index.js) | animeav1.com | Spanish | Mature | 1.0.10 |

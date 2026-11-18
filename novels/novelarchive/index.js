@@ -1,7 +1,9 @@
-const SITE_BASE = 'https://novelarchive.cc';
+const SITE_BASE = 'https://novelarchive.st';
 const API_BASE = `${SITE_BASE}/api`;
 const PAGE_SIZE = 30;
 const FEED_LIMIT = 50;
+
+const ACCEPT_LANGUAGE = 'en-US,en;q=0.9';
 
 const EXPLICIT_GENRES = new Set([
   'adult',
@@ -18,9 +20,24 @@ const EXPLICIT_GENRES = new Set([
   'hentai',
   'nsfw',
   '18+',
+  'futanari',
 ]);
 
-const SUGGESTIVE_GENRES = new Set(['mature', 'ecchi', 'nudity', 'sex work', 'gore']);
+const SUGGESTIVE_GENRES = new Set([
+  'mature',
+  'ecchi',
+  'nudity',
+  'sex work',
+  'gore',
+  'steamy',
+  'urban erotica vibes',
+  'ntr',
+  'prostitution',
+  'prostitui\u00e7\u00e3o',
+]);
+
+const TITLE_EXPLICIT = /(?:^|[^a-z])(?:r-?18|18\s?\+|hentai|incest|erotica?|nsfw|porn[a-z]*|smut)(?![a-z])/i;
+const TITLE_SUGGESTIVE = /(?:^|[^a-z])(?:sex|sexy|sexual|lewd|ntr)(?![a-z])/i;
 
 const BLOCKED_GENRES = ['loli', 'lolicon', 'shota', 'shotacon'];
 
@@ -69,6 +86,9 @@ function ageRatingFor(novel) {
     if (EXPLICIT_GENRES.has(key)) age = 18;
     else if (SUGGESTIVE_GENRES.has(key) && age < 16) age = 16;
   });
+  const title = String((novel && novel.title) || '');
+  if (age < 18 && TITLE_EXPLICIT.test(title)) age = 18;
+  else if (age < 16 && TITLE_SUGGESTIVE.test(title)) age = 16;
   return age;
 }
 
@@ -336,9 +356,12 @@ class Source {
     const request = App.createRequest({
       url: `${API_BASE}${path}`,
       method: 'GET',
-      headers: { Accept: 'application/json' },
+      headers: { Accept: 'application/json', 'Accept-Language': ACCEPT_LANGUAGE },
     });
     const response = await manager.schedule(request);
+    if (response.status === 403 && /you have been blocked/i.test(String(response.data || '').slice(0, 8000))) {
+      throw new Error('NovelArchive HTTP 403 (the site firewall blocked the request, this is not a check the app can clear)');
+    }
     if (response.status < 200 || response.status >= 300) {
       let reason = '';
       try {

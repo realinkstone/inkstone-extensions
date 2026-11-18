@@ -1,4 +1,4 @@
-const SITE_BASE = 'https://www.natomanga.com';
+const SITE_BASE = 'https://www.natumanga.com';
 const IMAGE_REFERER = `${SITE_BASE}/`;
 const UA =
   'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1';
@@ -38,31 +38,112 @@ function mapStatus(raw) {
   return 'UNKNOWN';
 }
 
-function findIn($, scope, selector) {
-  return scope && scope.length ? scope.find(selector) : $(selector);
+
+const NOT_A_GENRE = { all: true };
+
+const AGE_18_GENRES = ['hentai', 'erotica', 'pornographic', 'smut', 'netorare', 'sm-bdsm'];
+const AGE_16_GENRES = ['ecchi', 'adult', 'mature', 'doujinshi'];
+
+const RATING_BATCH = 12;
+
+function genreKey(text) {
+  return normalizeWhitespace(String(text || '')).toLowerCase().replace(/[\s_]+/g, '-');
 }
 
-function findLabeledLi($, scope, label) {
-  const re = new RegExp('^' + label.replace(/[()]/g, '\\$&') + '\\s*:\\s*(.*)$');
+function ageOfGenres(list) {
+  let age = 0;
+  for (const g of list || []) {
+    const key = genreKey(g);
+    if (AGE_18_GENRES.indexOf(key) !== -1) return 18;
+    if (AGE_16_GENRES.indexOf(key) !== -1) age = 16;
+  }
+  return age;
+}
+
+function genreLabel(text) {
+  return normalizeWhitespace((text || '').replace(/_/g, ' '));
+}
+
+function cardOf($, a) {
+  const block = $(a).closest('.group');
+  return block.length ? block : $(a).parent().parent();
+}
+
+function parseMangaListPage($) {
+  const results = [];
+  const seen = {};
+  $('h3 a[href*="/manga/"]').each((_, el) => {
+    const mangaId = extractMangaId($(el).attr('href'));
+    if (!mangaId || seen[mangaId]) return;
+
+    const title = normalizeWhitespace($(el).attr('title') || $(el).text());
+    if (!title) return;
+
+    const image = (cardOf($, el).find('img').first().attr('src') || '').trim();
+    if (!image) return;
+
+    seen[mangaId] = true;
+    results.push({
+      mangaId,
+      title,
+      image,
+      referer: IMAGE_REFERER,
+      webURL: `${SITE_BASE}/manga/${mangaId}`,
+      medium: 'comics',
+    });
+  });
+  return results;
+}
+
+function hasNextPage($, currentPage) {
+  const nav = $('nav[aria-label="Pagination"]');
+  const links = nav.length ? nav.find('a[href]') : $('a[href*="page="]');
+  let next = false;
+  links.each((_, a) => {
+    const m = ($(a).attr('href') || '').match(/[?&]page=(\d+)/);
+    if (m && parseInt(m[1], 10) > currentPage) next = true;
+  });
+  return next;
+}
+
+function readBookLd($) {
+  let book = null;
+  $('script[type="application/ld+json"]').each((_, el) => {
+    if (book) return;
+    try {
+      const data = JSON.parse($(el).contents().text() || $(el).html() || '');
+      if (data && data['@type'] === 'Book') book = data;
+    } catch (e) {
+    }
+  });
+  return book;
+}
+
+function panelValue($, label) {
   let value;
-  findIn($, scope, 'li').each((_, li) => {
+  $('span').each((_, span) => {
     if (value !== undefined) return;
-    const text = normalizeWhitespace($(li).text());
-    const m = text.match(re);
-    if (m) value = m[1].trim();
+    if (normalizeWhitespace($(span).text()) !== label) return;
+    const next = $(span).next();
+    if (next.length) value = normalizeWhitespace(next.text());
   });
   return value;
 }
 
-function extractDesc(box) {
-  if (!box || box.length === 0) return '';
-  const clone = box.clone();
-  clone.find('h2').remove();
-  clone.find('br').replaceWith('\n');
-  return normalizeWhitespace(clone.text());
+function genresOnPage($, book) {
+  const list = Array.isArray(book && book.genre) ? book.genre.slice() : [];
+  $('a[href^="/genre/"]').each((_, a) => {
+    const id = extractGenreId($(a).attr('href'));
+    if (id && !NOT_A_GENRE[id]) list.push(id);
+  });
+  return list;
 }
 
 class Source {
+  constructor() {
+    this.ages = new Map();
+  }
+
   getSourceFeeds() {
     return [
       { id: 'latest', name: 'Latest' },
@@ -74,16 +155,17 @@ class Source {
 
   async getSearchTags() {
     try {
-      const html = await this.requestHTML(`${SITE_BASE}/`);
+      const html = await this.requestHTML(`${SITE_BASE}/genre/action`);
       const $ = cheerio.load(html);
       const seen = new Set();
       const tags = [];
-      $('.panel-category a[title]').each((_, el) => {
+      $('a[href^="/genre/"]').each((_, el) => {
         const id = extractGenreId($(el).attr('href'));
-        if (!id || seen.has(id)) return;
+        if (!id || NOT_A_GENRE[id] || seen.has(id)) return;
+        const label = genreLabel($(el).text());
+        if (!label) return;
         seen.add(id);
-        const label = normalizeWhitespace($(el).attr('title'));
-        if (label) tags.push({ id, label });
+        tags.push({ id, label });
       });
       return tags;
     } catch (e) {
@@ -101,57 +183,100 @@ class Source {
     const page = (metadata && metadata.page) || 1;
 
     let url;
-    let parse;
     if (query) {
-      const base = `${SITE_BASE}/search/story/${encodeURIComponent(query)}`;
-      url = page > 1 ? `${base}?page=${page}` : base;
-      parse = parseSearchResultsPage;
+      const base = `${SITE_BASE}/search?q=${encodeURIComponent(query)}`;
+      url = page > 1 ? `${base}&page=${page}` : base;
     } else if (includedTags.length > 0 && includedTags[0] && includedTags[0].id) {
       const base = `${SITE_BASE}/genre/${encodeURIComponent(includedTags[0].id)}`;
       url = page > 1 ? `${base}?page=${page}` : base;
-      parse = parseMangaListPage;
     } else {
       const base = `${SITE_BASE}/manga-list/${FEED_SLUGS[feed] || FEED_SLUGS.latest}`;
       url = page > 1 ? `${base}?page=${page}` : base;
-      parse = parseMangaListPage;
     }
 
     const html = await this.requestHTML(url);
     const $ = cheerio.load(html);
-    const results = parse($);
+    const results = parseMangaListPage($);
+    const floor = !query && includedTags.length > 0 && includedTags[0] ? ageOfGenres([includedTags[0].id]) : 0;
+    await this.rateCards(results, floor);
     const hasNext = results.length > 0 && hasNextPage($, page);
     return { results, metadata: hasNext ? { page: page + 1 } : undefined };
+  }
+
+  async rateCards(results, floor) {
+    const todo = [];
+    for (const r of results) {
+      const known = this.ages.get(r.mangaId);
+      if (known !== undefined) r.ageRating = Math.max(known, floor);
+      else if (floor >= 18) r.ageRating = 18;
+      else todo.push(r);
+    }
+    for (let i = 0; i < todo.length; i += RATING_BATCH) {
+      let challenge = null;
+      await Promise.all(
+        todo.slice(i, i + RATING_BATCH).map(async (r) => {
+          try {
+            const html = await this.requestHTML(`${SITE_BASE}/manga/${encodeURIComponent(r.mangaId)}`);
+            const $ = cheerio.load(html);
+            const age = ageOfGenres(genresOnPage($, readBookLd($)));
+            this.ages.set(r.mangaId, age);
+            r.ageRating = Math.max(age, floor);
+          } catch (e) {
+            if (e && e.kind === 'challenge') challenge = e;
+            if (floor > 0) r.ageRating = floor;
+          }
+        })
+      );
+      if (challenge) throw challenge;
+    }
   }
 
   async getMangaDetails(mangaId) {
     const url = `${SITE_BASE}/manga/${encodeURIComponent(mangaId)}`;
     const html = await this.requestHTML(url);
     const $ = cheerio.load(html);
-    const infoScope = $('.manga-info-top');
+    const book = readBookLd($) || {};
 
-    const title = normalizeWhitespace(findIn($, infoScope, 'h1').first().text()) || mangaId;
-    const image = (findIn($, infoScope, '.manga-info-pic img').first().attr('src') || '').trim();
+    const title = normalizeWhitespace(book.name || $('h1').first().text()) || mangaId;
+    const image = (book.image || $('h1').first().closest('div').parent().find('img').first().attr('src') || $('img').first().attr('src') || '').trim();
 
-    const author = findLabeledLi($, infoScope, 'Author(s)');
-    const status = mapStatus(findLabeledLi($, infoScope, 'Status') || '');
+    let author = '';
+    if (Array.isArray(book.author)) {
+      author = book.author.map((a) => a && a.name).filter(Boolean).join(', ');
+    } else if (book.author && book.author.name) {
+      author = String(book.author.name);
+    }
+    if (!author) author = panelValue($, 'Authors') || panelValue($, 'Author(s)') || '';
+    const status = mapStatus(panelValue($, 'Status') || '');
 
-    const tags = [];
-    findIn($, infoScope, 'li.genres a').each((_, a) => {
-      const t = normalizeWhitespace($(a).text());
-      if (t) tags.push(t);
-    });
+    let tags = Array.isArray(book.genre) ? book.genre.map((g) => genreLabel(g)).filter(Boolean) : [];
+    if (tags.length === 0) {
+      $('a[href^="/genre/"]').each((_, a) => {
+        const id = extractGenreId($(a).attr('href'));
+        const t = genreLabel($(a).text());
+        if (id && !NOT_A_GENRE[id] && t && tags.indexOf(t) === -1) tags.push(t);
+      });
+    }
 
-    const desc = extractDesc($('#contentBox'));
+    let desc = typeof book.description === 'string' ? book.description.trim() : '';
+    if (!desc) {
+      const first = $('a[href^="/genre/"]').not('[href="/genre/all"]').first();
+      desc = normalizeWhitespace(first.parent().prev().text());
+    }
+
+    const ageRating = ageOfGenres(genresOnPage($, book));
+    this.ages.set(mangaId, ageRating);
 
     return {
       mangaInfo: {
         title,
         image,
         referer: IMAGE_REFERER,
-        author,
+        author: author || undefined,
         desc,
         status,
         tags,
+        ageRating,
         webURL: url,
         medium: 'comics',
       },
@@ -164,15 +289,16 @@ class Source {
     for (let i = 0; i < 200; i++) {
       const url = `${SITE_BASE}/api/manga/${encodeURIComponent(mangaId)}/chapters?offset=${offset}`;
       const json = await this.requestJSON(url);
-      if (!json || !json.data || !Array.isArray(json.data.chapters)) {
+      const data = json && typeof json === 'object' ? json.data : null;
+      const page = data && Array.isArray(data.chapters) ? data.chapters : null;
+      if (!page) {
         throw new Error(
-          `Natomanga: unreadable chapter list response at offset ${offset} for ${mangaId}`
+          `Natomanga: unreadable chapter list response for ${mangaId} at offset ${offset}`
         );
       }
-      const page = json.data.chapters;
       for (const c of page) {
         if (!c.chapter_slug) continue;
-        const time = Date.parse(c.updated_at);
+        const time = Date.parse(String(c.updated_at || '').replace(' ', 'T'));
         const chapter = {
           id: c.chapter_slug,
           chapterId: c.chapter_slug,
@@ -182,7 +308,7 @@ class Source {
         if (!Number.isNaN(time)) chapter.time = time;
         chapters.push(chapter);
       }
-      const hasMore = json.data.pagination
+      const hasMore = json && json.data && json.data.pagination
         ? json.data.pagination.has_more === true
         : page.length >= 50;
       if (!hasMore) break;
@@ -201,9 +327,10 @@ class Source {
   extractPageImages(html) {
     const $ = cheerio.load(html);
     const images = [];
-    $('.container-chapter-reader img').each((_, img) => {
+    $('img').each((_, img) => {
+      const alt = $(img).attr('alt') || '';
       const src = ($(img).attr('src') || '').trim();
-      if (/^https?:\/\//.test(src)) images.push(src);
+      if (/\bpage \d+\b/i.test(alt) && /^https?:\/\//.test(src)) images.push(src);
     });
     return images;
   }
@@ -226,79 +353,6 @@ class Source {
     const text = await this.requestHTML(url);
     return JSON.parse(text);
   }
-}
-
-function parseMangaListPage($) {
-  const results = [];
-  $('.list-comic-item-wrap').each((_, el) => {
-    const card = $(el);
-    const mangaId = extractMangaId(card.find('a[href*="/manga/"]').first().attr('href'));
-    if (!mangaId) return;
-
-    const title = normalizeWhitespace(card.find('h3 a').first().text());
-    if (!title) return;
-
-    const image = (card.find('img').first().attr('src') || '').trim();
-    if (!image) return;
-
-    results.push({
-      mangaId,
-      title,
-      image,
-      referer: IMAGE_REFERER,
-      webURL: `${SITE_BASE}/manga/${mangaId}`,
-      medium: 'comics',
-    });
-  });
-  return results;
-}
-
-function parseSearchResultsPage($) {
-  const results = [];
-  $('.story_item').each((_, el) => {
-    const card = $(el);
-    const mangaId = extractMangaId(card.find('a[href*="/manga/"]').first().attr('href'));
-    if (!mangaId) return;
-
-    const title = normalizeWhitespace(card.find('h3.story_name a').first().text());
-    if (!title) return;
-
-    const image = (card.find('img').first().attr('src') || '').trim();
-    if (!image) return;
-
-    let author = '';
-    card.find('span').each((_, span) => {
-      if (author) return;
-      const text = normalizeWhitespace($(span).text());
-      const m = text.match(/^Author\(s\)\s*:\s*(.*)$/);
-      if (m) author = m[1].trim();
-    });
-
-    results.push({
-      mangaId,
-      title,
-      image,
-      referer: IMAGE_REFERER,
-      author: author || undefined,
-      webURL: `${SITE_BASE}/manga/${mangaId}`,
-      medium: 'comics',
-    });
-  });
-  return results;
-}
-
-function hasNextPage($, currentPage) {
-  const lastEl = $('[class*="page_last"], [id*="page_last"]').first();
-  if (lastEl.length) {
-    const m = lastEl.text().match(/Last\((\d+)\)/);
-    if (m) return currentPage < parseInt(m[1], 10);
-  }
-  let hasNext = false;
-  $('a').each((_, a) => {
-    const $a = $(a);
-    if (!hasNext && $a.attr('href') && $a.text().trim() === 'Next') hasNext = true;
-  });
-  return hasNext;
 }
 
 module.exports = { Source };
