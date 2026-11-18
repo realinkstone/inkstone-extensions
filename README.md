@@ -91,7 +91,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [Danke fürs Lesen](comics/danke/index.js) | danke.moe | English | Mature | 1.0.0 |
 | [Decadence Scans](comics/decadencescans/index.js) | reader.decadencescans.com | English | Adult | 1.0.1 |
 | [Doodmanga](comics/doodmanga/index.js) | doodmanga.com | Thai | Safe | 1.0.0 |
-| [Dragon Translation](comics/dragontranslation/index.js) | dragontranslation.org | Spanish | Adult | 1.0.0 |
+| [Dragon Translation](comics/dragontranslation/index.js) | dragontranslation.org | Spanish | Adult | 1.0.1 |
 | [Dynasty Scans](comics/dynastyscans/index.js) | dynasty-scans.com | English | Mature | 1.0.0 |
 | [Eternal Mangas](comics/eternalmangas/index.js) | eternalmangas.org | Spanish | Adult | 1.0.2 |
 | [Eva Scans](comics/evascans/index.js) | evascans.net | English | Adult | 1.0.1 |
@@ -181,7 +181,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [Mangapill](comics/mangapill/index.js) | mangapill.com | English | Adult | 1.0.0 |
 | [MangaPlaza](comics/mangaplaza/index.js) | mangaplaza.com | English | Adult | 1.1.1 |
 | [MangaRead](comics/mangaread/index.js) | mangaread.org | English | Adult | 1.0.1 |
-| [Mangas.in](comics/mangasin/index.js) | m440.in | Spanish | Adult | 1.0.0 |
+| [Mangas.in](comics/mangasin/index.js) | m440.in | Spanish | Adult | 1.0.1 |
 | [Mangasushi](comics/mangasushi/index.js) | mangasushi.org | English | Adult | 1.0.1 |
 | [MangaToon](comics/mangatoon/index.js) | mangatoon.mobi | English | Mature | 1.3.0 |
 | [MangaTown](comics/mangatown/index.js) | mangatown.com | English | Adult | 1.2.0 |
@@ -395,7 +395,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [TioAnime](anime/tioanime/index.js) | tioanime.com | Spanish | Mature | 1.0.10 |
 | [UniqueStream](anime/uniquestream/index.js) | anime.uniquestream.net | English | Mature | 1.1.5 |
 | [VerAnime](anime/veranime/index.js) | verani.me | Spanish | Mature | 1.0.12 |
-| [VerAnimes](anime/veranimes/index.js) | wwv.veranimes.net | Spanish | Mature | 1.0.11 |
+| [VerAnimes](anime/veranimes/index.js) | wwv.veranimes.net | Spanish | Mature | 1.0.12 |
 | [Watch Anime World](anime/watchanimeworld/index.js) | watchanimeworld.one | Hindi | Mature | 1.0.1 |
 | [Xanime](anime/xanime/index.js) | xanime.me | English | Mature | 1.0.1 |
 | [Zenkai](anime/zenkai/index.js) | zenkai.to | English | Mature | 1.0.1 |

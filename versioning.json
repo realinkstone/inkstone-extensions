@@ -6934,7 +6934,7 @@
     {
       "id": "dragontranslation",
       "name": "Dragon Translation",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://dragontranslation.org",
       "iconUrl": "https://inkstone.web.app/dragontranslation/icon.png",
@@ -6954,7 +6954,7 @@
       "contentRating": "adult",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "d132e7a888a9af00b46deb50fff16b5dad512313d91bfeff5c821e6a973a08c3"
+      "sha256": "a098db9ba2a1bd2432bd1cd916aa255523e0d747eef80fa27966575d42e4477e"
     },
     {
       "id": "eternalmangas",
@@ -7169,7 +7169,7 @@
     {
       "id": "mangasin",
       "name": "Mangas.in",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://m440.in",
       "iconUrl": "https://inkstone.web.app/mangasin/icon.png",
@@ -7188,7 +7188,7 @@
       "contentRating": "adult",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "8ba5f64c73c7742b50873231551651aff08d3d0452064d9ae93623daf05bd174"
+      "sha256": "540bc472d1c184cad4ddf75a5af3032ce49a35877499764e215bd50eff6314f2"
     },
     {
       "id": "mangatv",
@@ -7506,7 +7506,7 @@
     {
       "id": "veranimes",
       "name": "VerAnimes",
-      "version": "1.0.11",
+      "version": "1.0.12",
       "medium": "anime",
       "website": "https://wwv.veranimes.net",
       "iconUrl": "https://inkstone.web.app/veranimes/icon.png",
@@ -7533,7 +7533,8 @@
         "mp4upload.com",
         "www.mp4upload.com",
         "shannoncoldalready.com",
-        "ashleyhardat.com"
+        "ashleyhardat.com",
+        "arianathankspecial.com"
       ],
       "description": "Anime\n\nCatalog・6,000+",
       "capabilities": [

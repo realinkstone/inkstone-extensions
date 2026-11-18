@@ -42,13 +42,13 @@ class Source {
       const results = found
         .map((item) => {
           const slug = (/\/manga\/([^/"\\]+)/.exec(item.label || '') || [])[1];
-          return slug && { mangaId: slug, title: item.value, image: coverOf(slug), medium: 'comics' };
+          return slug && { mangaId: slug, title: item.value, image: coverOf(slug), referer: `${SITE}/`, medium: 'comics' };
         })
         .filter(Boolean);
       return { results };
     }
     const latest = JSON.parse(await this.get(`${SITE}/lasted?p=${page}`, 'application/json'));
-    const results = latest.data.map((item) => ({ mangaId: item.manga_slug, title: item.manga_name, image: coverOf(item.manga_slug), medium: 'comics' }));
+    const results = latest.data.map((item) => ({ mangaId: item.manga_slug, title: item.manga_name, image: coverOf(item.manga_slug), referer: `${SITE}/`, medium: 'comics' }));
     return { results, metadata: page < latest.totalPages ? { page: page + 1 } : undefined };
   }
 
@@ -59,6 +59,7 @@ class Source {
       mangaInfo: {
         title: $('h2.widget-title').first().text().trim() || mangaId,
         image: $('.boxed img.img-responsive').attr('src') || coverOf(mangaId),
+        referer: `${SITE}/`,
         desc: $('.well p').map((i, el) => $(el).text().trim()).get().filter(Boolean).join('\n\n'),
         author: field('Autor(es)').text().trim() || undefined,
         status: STATUS[$('div.manga-name span.label').first().text().trim().toLowerCase()] || 'UNKNOWN',
