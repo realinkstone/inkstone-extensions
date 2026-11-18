@@ -506,7 +506,7 @@
     {
       "id": "inmanga",
       "name": "InManga",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "medium": "comics",
       "website": "https://inmanga.com",
       "iconUrl": "https://inkstone.web.app/inmanga/icon.png",
@@ -520,7 +520,7 @@
       ],
       "language": "es",
       "contentRating": "safe",
-      "sha256": "d06c10056980ec2b01fcfbaaf628f42841b73cf13446b4af2043b155b6a75879"
+      "sha256": "d0db4023740a6e564212d20982afd44bd25cb93e91ac7715937634e22b5a0d37"
     },
     {
       "id": "olympusscans",
@@ -6959,7 +6959,7 @@
     {
       "id": "eternalmangas",
       "name": "Eternal Mangas",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://eternalmangas.org",
       "iconUrl": "https://inkstone.web.app/eternalmangas/icon.png",
@@ -6979,7 +6979,7 @@
       "contentRating": "adult",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "7e6e79cbcd0e0f57d07cadba5351d6562ed7eb16d26b0bf6be1256918a96274e"
+      "sha256": "d3d0101a37a4126dc9b732a63361356ad2615d04d76d383190fa373cbf3cdfc0"
     },
     {
       "id": "gnula",

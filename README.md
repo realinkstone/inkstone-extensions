@@ -93,7 +93,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [Doodmanga](comics/doodmanga/index.js) | doodmanga.com | Thai | Safe | 1.0.0 |
 | [Dragon Translation](comics/dragontranslation/index.js) | dragontranslation.org | Spanish | Adult | 1.0.1 |
 | [Dynasty Scans](comics/dynastyscans/index.js) | dynasty-scans.com | English | Mature | 1.0.0 |
-| [Eternal Mangas](comics/eternalmangas/index.js) | eternalmangas.org | Spanish | Adult | 1.0.2 |
+| [Eternal Mangas](comics/eternalmangas/index.js) | eternalmangas.org | Spanish | Adult | 1.0.3 |
 | [Eva Scans](comics/evascans/index.js) | evascans.net | English | Adult | 1.0.1 |
 | [EzManga](mixed/ezmanga/index.js) | ezmanga.org | English | Safe | 1.0.1 |
 | [Flame Scans](comics/flamescans/index.js) | flamecomics.xyz | English | Safe | 1.0.0 |
@@ -118,7 +118,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [Hunlight Comics](comics/hunlightcomics/index.js) | hunlightcomics.com | English | Safe | 1.0.0 |
 | [Ikigai Mangas](comics/ikigaimangas/index.js) | ikigaimangas.com | Spanish | Adult | 1.0.0 |
 | [InkStory](comics/inkstory/index.js) | inkstory.net | Russian | Mature | 1.1.1 |
-| [InManga](comics/inmanga/index.js) | inmanga.com | Spanish | Safe | 1.1.0 |
+| [InManga](comics/inmanga/index.js) | inmanga.com | Spanish | Safe | 1.1.1 |
 | [Inu Manga](comics/inumanga/index.js) | inu-manga.net | Thai | Mature | 1.0.2 |
 | [Inventario Oculto](comics/inventariooculto/index.js) | inventariooculto.com | Spanish | Adult | 1.0.1 |
 | [Jinmangas](comics/jinmangas/index.js) | mangafree.info | English | Adult | 1.0.0 |

@@ -200,7 +200,31 @@ class Source {
 
     const pages = pageEntries.map((p) => `${IMAGE_BASE}/i/m/${mangaGuid}/c/${chapterGuid}/o/${p.pageId}.jpg`);
 
+    if (pages.length && (await this.filesAreGone(pages))) {
+      throw new Error("This chapter's images are gone from the site (the site no longer has the files)");
+    }
+
     return { id: chapterId, mangaId, pages };
+  }
+
+  async probePage(url) {
+    try {
+      const manager = App.createRequestManager({});
+      const request = App.createRequest({ url, method: 'HEAD', headers: { 'User-Agent': UA, 'X-Check': String(Date.now()) } });
+      const response = await Promise.race([manager.schedule(request), new Promise((resolve) => setTimeout(() => resolve(null), 4000))]);
+      if (!response) return null;
+      if (response.status >= 200 && response.status < 300) return true;
+      return response.status === 404 || response.status === 410 ? false : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async filesAreGone(pages) {
+    const last = pages.length - 1;
+    const sample = Array.from(new Set([0, Math.floor(last / 2), last]));
+    const answers = await Promise.all(sample.map((i) => this.probePage(pages[i])));
+    return answers.every((ok) => ok === false);
   }
 
   async requestHTML(url) {

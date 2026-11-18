@@ -1,5 +1,7 @@
 const SITE = 'https://eternalmangas.org';
 
+const OLD_MEDIA_HOST = /^https?:\/\/media\.eternalmangas\.com(?:[/:?#]|$)/i;
+
 const STATUS = { 'en emisión': 'ONGOING', finalizado: 'COMPLETED', pausado: 'HIATUS', cancelado: 'CANCELLED', abandonado: 'CANCELLED' };
 
 function cardsOf($, selector) {
@@ -130,6 +132,9 @@ class Source {
       .map((i, el) => $(el).attr('data-src') || $(el).attr('src'))
       .get()
       .filter((src) => /^https?:\/\//.test(src));
+    if (pages.length && pages.every((src) => OLD_MEDIA_HOST.test(src))) {
+      throw new Error("This chapter's images are gone from the site (the site no longer has the files)");
+    }
     return { id: chapterId, mangaId, pages };
   }
 
