@@ -331,6 +331,16 @@ function collapseSeasons(page, request) {
   return results === page.results ? page : Object.assign({}, page, { results });
 }
 
+function streamtapeAddress(html) {
+  const pattern = /getElementById\('robotlink'\)\.innerHTML\s*=\s*(['"])([^'"]*)\1\s*\+\s*(?:''\s*\+\s*)?\(\s*(['"])([^'"]+)\3\s*\)((?:\.substring\(\d+\))+)/g;
+  let tape = null;
+  let found;
+  while ((found = pattern.exec(html))) tape = found;
+  if (!tape) return '';
+  const cut = (tape[5].match(/\d+/g) || []).reduce((sum, n) => sum + Number(n), 0);
+  return (tape[2] + tape[4].slice(cut)).replace(/^\/\//, 'https://');
+}
+
 class Source {
   constructor() {
     this.requests = App.createRequestManager({ rateLimit: { requestsPerSecond: 6 } });
@@ -531,8 +541,9 @@ class Source {
       return { url: src[1], quality: 'Mp4Upload', headers: { Referer: origin } };
     }
     if (/(^|\.)streamtape\.com$/.test(host)) {
-      const tape = /getElementById\('robotlink'\)\.innerHTML\s*=\s*'[^']*'\s*\+\s*\('([^']+)'\)\.substring\((\d+)\)(?:\.substring\((\d+)\))?/.exec(html);
-      return { url: `https://streamtape.com/${tape[1].slice(+tape[2] + (+tape[3] || 0))}&stream=1`, quality: 'Streamtape', headers: { Referer: origin } };
+      const address = streamtapeAddress(html);
+      if (!address) throw new Error('Streamtape: no address on its page');
+      return { url: address, type: 'mp4', quality: 'Streamtape', headers: { Referer: origin } };
     }
   }
 

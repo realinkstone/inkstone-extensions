@@ -1,8 +1,6 @@
 const SITE = 'https://doramasflix.in';
 
-const API = 'https://sv1.fluxcedene.net/api/gql';
-
-const ACCESS_PLATFORM = 'RxARncfg1S_MdpSrCvreoLu_SikCGMzE1NzQzODc3NjE2MQ==';
+const API = 'https://user-api.seriesapi.co/graphql';
 
 const BROWSER = { 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0', 'Accept-Language': 'es' };
 
@@ -24,6 +22,16 @@ const LANGUAGES = {
   13114: 'Indonesio (Sub)',
   343422: 'Vietnamita (Sub)',
 };
+
+const BYSE_HOST = /^(?:www\.)?byse[a-z0-9]{4,}\.com$/i;
+const ADULT_LABELS = ['18', 'eroticas'];
+
+const ACTION_DEFAULTS = { getEpisodeLinks: '4002fa7b2d7a06e42d3631bad9d89e4c37c49b6f44', getMovieLinks: '4073f74d727a230f5f3813bd7aa8b734942f5c1563' };
+const ACTION_KEY = 'doramasflix.actions.v1';
+const ACTION_LOOKUP_CHUNKS = 70;
+const EMBED_MAX = 6;
+
+const ITEM_FIELDS = '_id name name_es slug poster_path poster labels { slug } __typename';
 
 function unpack(source) {
   const match = /\}\s*\(\s*'([\s\S]*?)',\s*(\d+),\s*(\d+),\s*'([\s\S]*?)'\.split\('\|'\)/.exec(source);
@@ -59,14 +67,20 @@ function titleOf(item) {
   return es && es.toLowerCase() !== name.toLowerCase() ? `${name} (${es})` : name || es;
 }
 
+function ageOf(item) {
+  const labels = (item && item.labels) || [];
+  return labels.some((label) => label && ADULT_LABELS.indexOf(String(label.slug || '').toLowerCase()) >= 0) ? 18 : 0;
+}
+
 function cardOf(item, fallbackKind = 'dorama') {
   if (!item || !item.slug || !item._id) return null;
-  const kind = String(item.__typename || fallbackKind).toLowerCase() === 'movie' ? 'movie' : 'dorama';
+  const kind = /^movie/i.test(String(item.__typename || fallbackKind)) ? 'movie' : 'dorama';
   return {
     mangaId: `${kind}/${item._id}/${item.slug}`,
     title: titleOf(item) || item.slug,
     image: imageOf(item.poster_path || item.poster, 'w342'),
     medium: 'anime',
+    ageRating: ageOf(item),
   };
 }
 
@@ -76,9 +90,68 @@ function parseMangaId(mangaId) {
   return { kind: 'dorama', id: '', slug: String(mangaId || '') };
 }
 
+function parseFlight(text) {
+  const body = String(text || '');
+  if (!/^0:/.test(body)) return null;
+  const line = /^1:(.*)$/m.exec(body);
+  if (!line) return null;
+  try {
+    const value = JSON.parse(line[1]);
+    return Array.isArray(value) ? value : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+function padBase64(text) {
+  const plain = String(text).replace(/-/g, '+').replace(/_/g, '/');
+  return plain + '==='.slice((plain.length + 3) % 4);
+}
+
+function realUrlOf(link) {
+  const raw = String(link || '').trim();
+  const token = raw.split('?')[0].split('/').pop();
+  const parts = token.split('.');
+  if (parts.length === 3) {
+    try {
+      const payload = JSON.parse(App.base64Decode(padBase64(parts[1])));
+      const real = payload && payload.link ? App.base64Decode(padBase64(payload.link)) : '';
+      if (/^https?:\/\//i.test(real)) return real;
+    } catch (e) {
+    }
+  }
+  return /^https?:\/\//i.test(raw) ? raw : '';
+}
+
+function hostOf(url) {
+  return (/^https?:\/\/([^/:?#]+)/i.exec(String(url)) || [])[1] || '';
+}
+
+const HOST_NAMES = [
+  [/(^|\.)voe\./i, 'VOE'],
+  [/(^|\.)ok\.ru$/i, 'OK.ru'],
+  [/(^|\.)uqload\./i, 'Uqload'],
+  [/lulu/i, 'Lulu'],
+  [/mi?xdrop\./i, 'MixDrop'],
+  [/(^|\.)(callistanise|vidhide\w*)\./i, 'VidHide'],
+  [/(^|\.)yourupload\.com$/i, 'YourUpload'],
+  [/(^|\.)mp4upload\.com$/i, 'Mp4Upload'],
+  [/(^|\.)streamtape\./i, 'Streamtape'],
+  [/(^|\.)(do7go|dood\w*|dsvplay|d-s|ds2play|doodstream)\./i, 'Doodstream'],
+  [BYSE_HOST, 'Byse'],
+];
+function hostLabel(url) {
+  const host = hostOf(url);
+  const hit = HOST_NAMES.find(([test]) => test.test(host));
+  if (hit) return hit[1];
+  const main = host.replace(/^www\./, '').split('.')[0] || 'Server';
+  return main.charAt(0).toUpperCase() + main.slice(1);
+}
+
 class Source {
   constructor() {
-    this.requests = App.createRequestManager({ rateLimit: { requestsPerSecond: 8 } });
+    this.requests = App.createRequestManager({});
+    this.actions = null;
   }
 
   getSourceFeeds() {
@@ -92,9 +165,16 @@ class Source {
 
   async getSearchTags() {
     const data = await this.gql('query { listGenres(filter: {}) { _id name } }');
-    return (data.listGenres || [])
-      .filter((genre) => genre && genre._id && genre.name)
-      .map((genre) => ({ id: genre._id, label: genre.name.trim() }));
+    const seen = new Set();
+    const tags = [];
+    for (const genre of data.listGenres || []) {
+      if (!genre || !genre._id || !genre.name) continue;
+      const label = genre.name.trim();
+      if (seen.has(label.toLowerCase())) continue;
+      seen.add(label.toLowerCase());
+      tags.push({ id: genre._id, label });
+    }
+    return tags;
   }
 
   async getSearchResults(request, metadata) {
@@ -104,7 +184,7 @@ class Source {
     const page = (metadata && metadata.page) || 1;
     if (query) {
       const data = await this.gql(
-        'query ($input: String!) { searchDorama(input: $input, limit: 32) { _id slug name name_es poster_path poster __typename } searchMovie(input: $input, limit: 32) { _id slug name name_es poster_path poster __typename } }',
+        `query ($input: String!) { searchDorama(input: $input, limit: 32) { ${ITEM_FIELDS} } searchMovie(input: $input, limit: 32) { ${ITEM_FIELDS} } }`,
         { input: query }
       );
       const words = query.toLowerCase().split(/\s+/).filter(Boolean);
@@ -117,21 +197,19 @@ class Source {
         .filter(Boolean);
       return { results: list };
     }
-    if (!tags.length && feed === 'movies') {
+    if (feed === 'movies') {
       const data = await this.gql(
-        'query ($page: Int) { paginationMovie(page: $page, perPage: 32, sort: CREATEDAT_DESC, filter: {}) { pageInfo { hasNextPage } items { _id name name_es slug poster_path poster __typename } } }',
-        { page }
+        `query ($page: Int, $filter: FilterMoviesInput) { paginationMovie(page: $page, limit: 32, sort: CREATEDAT_DESC, filter: $filter) { pageInfo { hasNextPage } items { ${ITEM_FIELDS} } } }`,
+        { page, filter: tags.length ? { genreId: tags[0].id } : {} }
       );
       const pageData = data.paginationMovie || {};
       const results = (pageData.items || []).map((item) => cardOf(item, 'movie')).filter(Boolean);
       return { results, metadata: pageData.pageInfo && pageData.pageInfo.hasNextPage ? { page: page + 1 } : undefined };
     }
-    const filter = tags.length
-      ? { isTVShow: false, genreId: tags[0].id }
-      : { isTVShow: feed === 'varieties' };
+    const filter = tags.length ? { isTVShow: false, genreId: tags[0].id } : { isTVShow: feed === 'varieties' };
     const sort = !tags.length && feed === 'popular' ? 'POPULARITY_DESC' : 'CREATEDAT_DESC';
     const data = await this.gql(
-      'query ($page: Int, $sort: SortFindManyDoramaInput, $filter: FilterFindManyDoramaInput) { paginationDorama(page: $page, perPage: 32, sort: $sort, filter: $filter) { pageInfo { hasNextPage } items { _id name name_es slug poster_path poster __typename } } }',
+      `query ($page: Int, $sort: SortDorama, $filter: FilterDoramasInput) { paginationDorama(page: $page, limit: 32, sort: $sort, filter: $filter) { pageInfo { hasNextPage } items { ${ITEM_FIELDS} } } }`,
       { page, sort, filter }
     );
     const pageData = data.paginationDorama || {};
@@ -143,8 +221,8 @@ class Source {
     const { kind, slug } = parseMangaId(mangaId);
     const isMovie = kind === 'movie';
     const query = isMovie
-      ? 'query ($slug: String!) { detailMovie(filter: {slug: $slug}) { _id name name_es slug overview poster_path poster backdrop_path genres { name } networks { name } } }'
-      : 'query ($slug: String!) { detailDorama(filter: {slug: $slug}) { _id name name_es slug overview poster_path poster backdrop_path isFinish genres { name } networks { name } } }';
+      ? 'query ($slug: String!) { detailMovie(filter: {slug: $slug}) { _id name name_es slug overview poster_path poster backdrop_path genres { name } networks { name } labels { slug } } }'
+      : 'query ($slug: String!) { detailDorama(filter: {slug: $slug}) { _id name name_es slug overview poster_path poster backdrop_path isFinish genres { name } networks { name } labels { slug } } }';
     const data = await this.gql(query, { slug });
     const item = (isMovie ? data.detailMovie : data.detailDorama) || {};
     const title = titleOf(item) || slug;
@@ -160,6 +238,7 @@ class Source {
         tags: (item.genres || []).map((genre) => genre && genre.name).filter(Boolean),
         webURL: `${SITE}/${isMovie ? 'peliculas-online' : 'doramas-online'}/${encodeURIComponent(slug)}`,
         medium: 'anime',
+        ageRating: ageOf(item),
       },
     };
   }
@@ -172,8 +251,9 @@ class Source {
       const data = await this.gql('query ($slug: String!) { detailDorama(filter: {slug: $slug}) { _id } }', { slug });
       serieId = data.detailDorama && data.detailDorama._id;
     }
+    if (!serieId) throw new Error('DoramasFlix: that title was not found');
     const data = await this.gql(
-      'query ($id: MongoID!) { listEpisodes(sort: NUMBER_ASC, filter: {serie_id: $id}) { slug name season_number episode_number air_date } }',
+      'query ($id: ID!) { listEpisodes(sort: NUMBER_ASC, filter: {serie_id: $id}) { slug name season_number episode_number air_date } }',
       { id: serieId }
     );
     const items = (data.listEpisodes || []).filter((ep) => ep && ep.slug);
@@ -183,7 +263,7 @@ class Source {
     for (const ep of items) {
       const season = Number(ep.season_number) || 1;
       const number = Number(ep.episode_number) || 1;
-      const time = ep.air_date ? Date.parse(ep.air_date) : NaN;
+      const stamp = /^\d{9,}$/.test(String(ep.air_date || '')) ? Number(ep.air_date) : Date.parse(ep.air_date);
       seen.set(ep.slug, {
         id: ep.slug,
         chapterId: ep.slug,
@@ -191,7 +271,7 @@ class Source {
         number,
         season: multiSeason ? String(season) : undefined,
         seasonName: multiSeason ? `Temporada ${season}` : undefined,
-        time: Number.isNaN(time) ? undefined : time,
+        time: Number.isFinite(stamp) ? stamp : undefined,
         _s: season,
       });
     }
@@ -202,25 +282,112 @@ class Source {
 
   async getVideos(mangaId, chapterId) {
     const isMovie = String(chapterId).startsWith('movie/');
-    const slug = isMovie ? parseMangaId(chapterId).slug : String(chapterId);
-    const query = isMovie
-      ? 'query ($slug: String!) { detailMovie(filter: {slug: $slug}) { links_online } }'
-      : 'query ($slug: String!) { detailEpisode(filter: {slug: $slug}) { links_online } }';
-    const data = await this.gql(query, { slug });
-    const item = (isMovie ? data.detailMovie : data.detailEpisode) || {};
-    const links = (item.links_online || []).filter((entry) => entry && (entry.link || entry.embed));
-    const found = await Promise.all(
-      links.map((entry) => this.extract(entry.link || entry.embed, LANGUAGES[entry.lang] || 'Sub').catch(() => null))
-    );
-    const unique = new Map();
-    for (const video of found) {
-      if (video && /^https?:\/\//.test(video.url) && !unique.has(video.url)) unique.set(video.url, video);
+    let pageUrl;
+    let links;
+    if (isMovie) {
+      let { id, slug } = parseMangaId(chapterId);
+      if (!id) {
+        const data = await this.gql('query ($slug: String!) { detailMovie(filter: {slug: $slug}) { _id } }', { slug });
+        id = data.detailMovie && data.detailMovie._id;
+      }
+      pageUrl = `${SITE}/peliculas-online/${encodeURIComponent(slug)}`;
+      links = await this.links('getMovieLinks', { movie_id: id || '' }, pageUrl);
+    } else {
+      const slug = String(chapterId);
+      const data = await this.gql('query ($slug: String!) { detailEpisode(filter: {slug: $slug}) { _id } }', { slug });
+      const episodeId = data.detailEpisode && data.detailEpisode._id;
+      if (!episodeId) throw new Error('DoramasFlix has no such episode');
+      pageUrl = `${SITE}/episodios/${encodeURIComponent(slug)}`;
+      links = await this.links('getEpisodeLinks', { episode_id: episodeId }, pageUrl);
     }
-    const videos = Array.from(unique.values())
+
+    const unique = new Map();
+    for (const link of links) {
+      const url = realUrlOf(link && link.link);
+      if (url && !unique.has(url)) unique.set(url, { url, lang: LANGUAGES[link.lang] || 'Sub' });
+    }
+    const entries = Array.from(unique.values());
+    const found = await Promise.all(entries.map((entry) => this.extract(entry.url, entry.lang).catch(() => null)));
+    const seenUrl = new Set();
+    const videos = found
+      .filter((video) => video && /^https?:\/\//.test(video.url) && !seenUrl.has(video.url) && seenUrl.add(video.url))
       .sort((a, b) => SERVERS.indexOf(a.server) - SERVERS.indexOf(b.server))
       .map(({ server, ...video }) => ({ ...video, headers: { ...video.headers, ...BROWSER } }));
-    if (!videos.length) throw new Error(`DoramasFlix: none of the ${links.length} servers gave a playable video`);
-    return videos;
+
+    const embeds = entries
+      .filter((entry, i) => !(found[i] && /^https?:\/\//.test(found[i].url)) && /^https?:\/\//.test(entry.url))
+      .slice(0, EMBED_MAX)
+      .map((entry) => {
+        const label = hostLabel(entry.url);
+        const embed = { url: entry.url, type: 'embed', quality: `${label} ${entry.lang}`, server: label };
+        if (BYSE_HOST.test(hostOf(entry.url))) embed.headers = { Referer: pageUrl };
+        return embed;
+      });
+    if (!videos.length && !embeds.length) {
+      throw new Error(links.length ? `DoramasFlix: none of the ${links.length} servers gave a playable video` : 'DoramasFlix lists no servers for this title yet');
+    }
+    return videos.concat(embeds);
+  }
+
+  async links(action, args, pageUrl) {
+    let last = null;
+    for (let attempt = 0; attempt < 2; attempt++) {
+      const ids = await this.actionIds(attempt > 0 ? pageUrl : '');
+      const reply = await this.post(pageUrl, ids[action], JSON.stringify([args]));
+      const parsed = parseFlight(reply);
+      if (parsed) return parsed.filter((link) => link && link.link);
+      last = reply;
+      this.actions = null;
+    }
+    throw new Error(`DoramasFlix: the site did not answer its links call${/^</.test(String(last || '')) ? ' (it sent a page)' : ''}`);
+  }
+
+  async actionIds(lookupPage) {
+    if (!lookupPage) {
+      if (this.actions) return this.actions;
+      let saved = null;
+      try {
+        const state = typeof App.createSourceStateManager === 'function' ? App.createSourceStateManager() : null;
+        saved = state ? await state.retrieve(ACTION_KEY) : null;
+      } catch (e) {
+        saved = null;
+      }
+      this.actions = saved && saved.getEpisodeLinks && saved.getMovieLinks ? { getEpisodeLinks: saved.getEpisodeLinks, getMovieLinks: saved.getMovieLinks } : { ...ACTION_DEFAULTS };
+      return this.actions;
+    }
+    const html = await this.get(lookupPage);
+    const chunks = [];
+    const pattern = /<script[^>]+src="(\/_next\/static\/[^"]+\.js)"/g;
+    let match;
+    while ((match = pattern.exec(html)) && chunks.length < ACTION_LOOKUP_CHUNKS) {
+      if (chunks.indexOf(match[1]) < 0) chunks.push(match[1]);
+    }
+    const idOf = (code, name) => (new RegExp(`"([0-9a-f]{40,})"[^"]{0,160}?"${name}"`).exec(code) || [])[1];
+    let found = null;
+    let next = 0;
+    const worker = async () => {
+      while (!found && next < chunks.length) {
+        const chunk = chunks[next++];
+        let code = '';
+        try {
+          code = await this.get(`${SITE}${chunk}`);
+        } catch (e) {
+          continue;
+        }
+        const episodes = idOf(code, 'getEpisodeLinks');
+        const movies = idOf(code, 'getMovieLinks');
+        if (episodes && movies) found = { getEpisodeLinks: episodes, getMovieLinks: movies };
+      }
+    };
+    await Promise.all([worker(), worker(), worker(), worker()]);
+    if (!found) throw new Error('DoramasFlix: could not find the site\'s links call in its scripts');
+    this.actions = found;
+    try {
+      const state = typeof App.createSourceStateManager === 'function' ? App.createSourceStateManager() : null;
+      if (state) await state.store(ACTION_KEY, found);
+    } catch (e) {
+    }
+    return found;
   }
 
   async extract(rawUrl, langLabel) {
@@ -274,8 +441,14 @@ class Source {
       return { url: src[1], server: 'Mp4Upload', quality: `Mp4Upload ${langLabel}`, headers: { Referer: origin } };
     }
     if (/(^|\.)streamtape\.com$/.test(host)) {
-      const tape = /getElementById\('robotlink'\)\.innerHTML\s*=\s*'[^']*'\s*\+\s*\('([^']+)'\)\.substring\((\d+)\)(?:\.substring\((\d+)\))?/.exec(html);
-      return { url: `https://streamtape.com/${tape[1].slice(+tape[2] + (+tape[3] || 0))}&stream=1`, server: 'Streamtape', quality: `Streamtape ${langLabel}`, headers: { Referer: origin } };
+      const pattern = /getElementById\('robotlink'\)\.innerHTML\s*=\s*(['"])([^'"]*)\1\s*\+\s*(?:''\s*\+\s*)?\(\s*(['"])([^'"]+)\3\s*\)((?:\.substring\(\d+\))+)/g;
+      let tape = null;
+      let found;
+      while ((found = pattern.exec(html))) tape = found;
+      if (!tape) throw new Error('Streamtape: no address on its page');
+      const cut = (tape[5].match(/\d+/g) || []).reduce((sum, n) => sum + Number(n), 0);
+      const address = (tape[2] + tape[4].slice(cut)).replace(/^\/\//, 'https://');
+      return { url: address, type: 'mp4', server: 'Streamtape', quality: `Streamtape ${langLabel}`, headers: { Referer: origin } };
     }
   }
 
@@ -287,23 +460,33 @@ class Source {
     return this.send({ url, method: 'GET', headers: { Accept: 'text/html', Referer: `${SITE}/` } });
   }
 
+  async post(pageUrl, actionId, body) {
+    const response = await this.requests.schedule(
+      App.createRequest({
+        url: pageUrl,
+        method: 'POST',
+        headers: { ...BROWSER, Accept: 'text/x-component', 'Content-Type': 'text/plain;charset=UTF-8', 'Next-Action': actionId, Origin: SITE, Referer: pageUrl },
+        body,
+      })
+    );
+    return String(response.data || '');
+  }
+
   async gql(query, variables = {}) {
     const text = await this.send({
       url: API,
       method: 'POST',
-      headers: {
-        Accept: 'application/json, text/plain, */*',
-        'Content-Type': 'application/json;charset=UTF-8',
-        Origin: SITE,
-        Referer: `${SITE}/`,
-        platform: 'doramasflix',
-        authorization: 'Bear',
-        'x-access-jwt-token': '',
-        'x-access-platform': ACCESS_PLATFORM,
-      },
+      headers: { Accept: 'application/json', 'Content-Type': 'application/json', Origin: SITE, Referer: `${SITE}/` },
       body: JSON.stringify({ query, variables }),
     });
-    return JSON.parse(text).data || {};
+    let reply;
+    try {
+      reply = JSON.parse(text);
+    } catch (e) {
+      throw new Error('DoramasFlix: its API did not answer JSON');
+    }
+    if (reply.errors && !reply.data) throw new Error(`DoramasFlix: its API refused the query (${String((reply.errors[0] && reply.errors[0].message) || '').slice(0, 120)})`);
+    return reply.data || {};
   }
 
   async send(request) {

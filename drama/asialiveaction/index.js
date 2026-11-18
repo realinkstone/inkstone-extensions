@@ -300,6 +300,16 @@ function serverNameOf(url, fallback) {
   return hit ? hit[1] : String(fallback || '').trim() || host || 'Server';
 }
 
+function streamtapeAddress(html) {
+  const pattern = /getElementById\('robotlink'\)\.innerHTML\s*=\s*(['"])([^'"]*)\1\s*\+\s*(?:''\s*\+\s*)?\(\s*(['"])([^'"]+)\3\s*\)((?:\.substring\(\d+\))+)/g;
+  let tape = null;
+  let found;
+  while ((found = pattern.exec(html))) tape = found;
+  if (!tape) return '';
+  const cut = (tape[5].match(/\d+/g) || []).reduce((sum, n) => sum + Number(n), 0);
+  return (tape[2] + tape[4].slice(cut)).replace(/^\/\//, 'https://');
+}
+
 class Source {
   constructor() {
     this.requests = App.createRequestManager({
@@ -572,12 +582,12 @@ class Source {
 
     if (/streamtape\.com/.test(url)) {
       const html = await this.get(url, { Referer: `${SITE}/` });
-      const tape = /getElementById\('robotlink'\)\.innerHTML\s*=\s*'[^']*'\s*\+\s*\('([^']+)'\)\.substring\((\d+)\)(?:\.substring\((\d+)\))?/.exec(html);
-      if (tape) {
-        const finalUrl = `https://streamtape.com/${tape[1].slice(+tape[2] + (+tape[3] || 0))}&stream=1`;
+      const finalUrl = streamtapeAddress(html);
+      if (finalUrl) {
         return {
           url: finalUrl,
           originalUrl: finalUrl,
+          type: 'mp4',
           quality: 'Streamtape',
           headers: { ...BROWSER, Referer: 'https://streamtape.com/' },
         };

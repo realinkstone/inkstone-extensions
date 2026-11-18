@@ -55,7 +55,7 @@ Prefer to review a written plan before any code is written? This repo works with
 
 ## Extensions
 
-352 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
+351 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
 
 Each extension lives in the folder for what it offers: `comics`, `novels`, `mixed` for those that do both, or `anime`. The site still serves every one at `inkstone.web.app/<id>/index.js`, so the folders change nothing in the apps.
 
@@ -382,12 +382,11 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [JKAnime](anime/jkanime/index.js) | jkanime.net | Spanish | Mature | 1.0.7 |
 | [Just4Anime](anime/just4anime/index.js) | just4anime.online | English | Mature | 1.0.2 |
 | [JustAnime](anime/justanime/index.js) | justanime.to | English | Mature | 1.0.0 |
-| [Katanime](anime/katanime/index.js) | katanime.net | Spanish | Mature | 1.0.9 |
+| [Katanime](anime/katanime/index.js) | katanime.net | Spanish | Mature | 1.0.10 |
 | [Kawaii Anime](anime/kawaiianime/index.js) | kawaiianime.cc | English | Mature | 1.0.1 |
 | [KickAssAnime](anime/kickassanime/index.js) | kaa.lt | English | Mature | 1.0.9 |
 | [Kuroko](anime/kuroko/index.js) | kuroko.cc | English | Mature | 1.0.0 |
 | [Latanime](anime/latanime/index.js) | latanime.org | Spanish | Mature | 1.0.10 |
-| [LegionAnime](anime/legionanime/index.js) | legionanime.xyz | Spanish | Mature | 1.0.2 |
 | [Miruro](anime/miruro/index.js) | miruro.cx | English | Mature | 1.0.9 |
 | [MMani](anime/mmani/index.js) | mmani.com | English | Mature | 1.0.1 |
 | [MonosChinos](anime/monoschinos/index.js) | monoschinos.st | Spanish | Mature | 1.0.9 |
@@ -427,9 +426,9 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | Extension | Site | Language | Rating | Version |
 | --- | --- | --- | --- | --- |
 | [ARY Plus](drama/aryplus/index.js) | aryplus.tv | Urdu | Safe | 1.1.0 |
-| [AsiaLiveAction](drama/asialiveaction/index.js) | asialiveaction.com | Spanish | Mature | 1.0.10 |
-| [DoramasFlix](drama/doramasflix/index.js) | doramasflix.in | Spanish | Mature | 1.0.1 |
-| [DoramasYT](drama/doramasyt/index.js) | doramasyt.com | Spanish | Mature | 1.0.9 |
+| [AsiaLiveAction](drama/asialiveaction/index.js) | asialiveaction.com | Spanish | Mature | 1.0.11 |
+| [DoramasFlix](drama/doramasflix/index.js) | doramasflix.in | Spanish | Mature | 1.1.0 |
+| [DoramasYT](drama/doramasyt/index.js) | doramasyt.com | Spanish | Mature | 1.0.10 |
 | [Dramahood](drama/dramahood/index.js) | dramahood.mom | English | Mature | 1.0.0 |
 | [Kat Drama](drama/katdrama/index.js) | k-drama.in | English | Mature | 1.0.1 |
 | [KissAsian](drama/kissasian/index.js) | kissasian.com.gr | English | Mature | 1.0.7 |
@@ -467,7 +466,7 @@ These extensions are known to be broken right now:
 
 Thanks to the people who built extensions for Inkstone.
 
-- [matsukiender-star](https://github.com/matsukiender-star): AnimeAV1, AnimeJL, AnimeLatinoHD, AnimeMovil, AnimeOnline.Ninja, AsiaLiveAction, Beatz Anime, CineCalidad, CinePlus123, Cuevana, DoramasFlix, DoramasYT, Dragon Translation, Elejandría, Eternal Mangas, Gnula, HentaiLA, Ikigai Mangas, JKAnime, Katanime, KuManga, Latanime, Lectulandia, Leer Manhwas, LeerCapitulo, LegionAnime, Mangas.in, MangaTV, MangoLibreria, Manhwa Latino, ManhwaWeb, Marmota, MonosChinos, MundoDonghua, Novela en Español, NovelasLigeras, PelisForte, PoseidonHD, Shadow Manga, TioAnime, Traducciones Isekai, VerAnime, VerAnimes, Wikisource (Español), ZonaTMO.org
+- [matsukiender-star](https://github.com/matsukiender-star): AnimeAV1, AnimeJL, AnimeLatinoHD, AnimeMovil, AnimeOnline.Ninja, AsiaLiveAction, Beatz Anime, CineCalidad, CinePlus123, Cuevana, DoramasFlix, DoramasYT, Dragon Translation, Elejandría, Eternal Mangas, Gnula, HentaiLA, Ikigai Mangas, JKAnime, Katanime, KuManga, Latanime, Lectulandia, Leer Manhwas, LeerCapitulo, Mangas.in, MangaTV, MangoLibreria, Manhwa Latino, ManhwaWeb, Marmota, MonosChinos, MundoDonghua, Novela en Español, NovelasLigeras, PelisForte, PoseidonHD, Shadow Manga, TioAnime, Traducciones Isekai, VerAnime, VerAnimes, Wikisource (Español), ZonaTMO.org
 - [omfgitsjesus](https://discord.com/users/177424485526274048): HiperDEX
 
 ## Contributing

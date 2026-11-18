@@ -6776,7 +6776,7 @@
     {
       "id": "asialiveaction",
       "name": "AsiaLiveAction",
-      "version": "1.0.10",
+      "version": "1.0.11",
       "medium": "anime",
       "website": "https://asialiveaction.com",
       "iconUrl": "https://inkstone.web.app/asialiveaction/icon.png",
@@ -6793,7 +6793,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "06d0ba01531f7037a80a2bbc3da1f996bbceac73ac5f0dbbdf974dc026e421af"
+      "sha256": "cb0a02204c9803d2d43e95da81f4006a7e92a852c90012ba3baa4b41840760c8"
     },
     {
       "id": "beatzanime",
@@ -6890,11 +6890,11 @@
     {
       "id": "doramasflix",
       "name": "DoramasFlix",
-      "version": "1.0.1",
+      "version": "1.1.0",
       "medium": "anime",
       "website": "https://doramasflix.in",
       "iconUrl": "https://inkstone.web.app/doramasflix/icon.png",
-      "description": "Drama\n\nCatalog・3,000+\n\nRestrictions:\n・Rate Limit",
+      "description": "Drama・Movies\n\nCatalog・4,000+",
       "capabilities": [
         "browse",
         "search",
@@ -6907,12 +6907,12 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "25fe7f26cce96ccf404e248a422bc4a97f9c047365fa9fd95c18000514464f9f"
+      "sha256": "b14f91d2e29263320c53545ae45445c0f39ccf2856d36d1d60e818f46340bb37"
     },
     {
       "id": "doramasyt",
       "name": "DoramasYT",
-      "version": "1.0.9",
+      "version": "1.0.10",
       "medium": "anime",
       "website": "https://www.doramasyt.com",
       "iconUrl": "https://inkstone.web.app/doramasyt/icon.png",
@@ -6929,7 +6929,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "4907ffbc56e86918580f8e9374e36bdd53e1e4843988613c6b5d1946725841f7"
+      "sha256": "854a119b7151f525df1d3af97d820fb0e34f3fc7218481620ae7fc7f71a6fa54"
     },
     {
       "id": "dragontranslation",
@@ -7027,7 +7027,7 @@
     {
       "id": "katanime",
       "name": "Katanime",
-      "version": "1.0.9",
+      "version": "1.0.10",
       "medium": "anime",
       "website": "https://katanime.net",
       "iconUrl": "https://inkstone.web.app/katanime/icon.png",
@@ -7071,7 +7071,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "961cbb87e04a631f462cd9a5546242d55fb71df2aedc5eb9ccd602fbe0b439f2"
+      "sha256": "6398633d8c053559db839898fcc542b6eb66e4d7ae76acf399ba38842df8068a"
     },
     {
       "id": "latanime",
@@ -7143,28 +7143,6 @@
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
       "sha256": "a823a3259d79003c3950060c34490335c5e582e05b6a0cef687026f0d9aeafe1"
-    },
-    {
-      "id": "legionanime",
-      "name": "LegionAnime",
-      "version": "1.0.2",
-      "medium": "anime",
-      "website": "https://legionanime.xyz",
-      "iconUrl": "https://inkstone.web.app/legionanime/icon.png",
-      "description": "Anime\n\nCatalog・3,000+",
-      "capabilities": [
-        "browse",
-        "search",
-        "genres",
-        "details",
-        "chapters",
-        "videos"
-      ],
-      "language": "es",
-      "contentRating": "mature",
-      "author": "matsukiender-star",
-      "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "47dd6dda66822bbff8c4be36b23b011c9f580e63d499bde874b4b6f4e3de4708"
     },
     {
       "id": "mangasin",
