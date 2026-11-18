@@ -361,7 +361,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [Anidap](anime/anidap/index.js) | anidap.lol | English | Mature | 1.0.1 |
 | [Anikoto](anime/anikoto/index.js) | anikototv.bz | English | Mature | 1.0.10 |
 | [AniLight](anime/anilight/index.js) | anilight.live | English | Mature | 1.0.1 |
-| [AnimeAV1](anime/animeav1/index.js) | animeav1.com | Spanish | Mature | 1.0.9 |
+| [AnimeAV1](anime/animeav1/index.js) | animeav1.com | Spanish | Mature | 1.0.10 |
 | [AnimeDUB](anime/animedub/index.js) | animedub.app | English | Mature | 1.0.0 |
 | [AnimeGG](anime/animegg/index.js) | animegg.org | English | Mature | 1.0.8 |
 | [AnimeHeaven](anime/animeheaven/index.js) | animeheaven.me | English | Mature | 1.0.8 |
@@ -394,7 +394,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [SerienStream](anime/serienstream/index.js) | serienstream.to | German | Mature | 1.0.3 |
 | [TioAnime](anime/tioanime/index.js) | tioanime.com | Spanish | Mature | 1.0.10 |
 | [UniqueStream](anime/uniquestream/index.js) | anime.uniquestream.net | English | Mature | 1.1.5 |
-| [VerAnime](anime/veranime/index.js) | verani.me | Spanish | Mature | 1.0.11 |
+| [VerAnime](anime/veranime/index.js) | verani.me | Spanish | Mature | 1.0.12 |
 | [VerAnimes](anime/veranimes/index.js) | wwv.veranimes.net | Spanish | Mature | 1.0.11 |
 | [Watch Anime World](anime/watchanimeworld/index.js) | watchanimeworld.one | Hindi | Mature | 1.0.1 |
 | [Xanime](anime/xanime/index.js) | xanime.me | English | Mature | 1.0.1 |

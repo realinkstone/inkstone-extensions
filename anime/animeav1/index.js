@@ -2,7 +2,7 @@ const SITE = 'https://animeav1.com';
 
 const BROWSER = { 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0', 'Accept-Language': 'es' };
 
-const SERVERS = ['VOE', 'HLS', 'MP4Upload'];
+const SERVERS = ['VOE', 'HLS', 'MP4Upload', 'Turbo'];
 
 const VOE_MARKERS = ['@$', '^^', '~@', '%?', '*~', '!!', '#&'];
 
@@ -287,6 +287,19 @@ function collapseSeasons(page, request) {
   return results === page.results ? page : Object.assign({}, page, { results });
 }
 
+const TURBO_HOST = 'turboembed.com';
+const TURBO_KEY = '1d54a1d53c1d56e1d6811d53c1d6831d';
+const TURBO_IV = '1f5101f5dd1f5111f6aa1f6e126a1747';
+const turboKey = () => CryptoJS.enc.Hex.parse(TURBO_KEY);
+const turboOptions = () => ({ iv: CryptoJS.enc.Hex.parse(TURBO_IV), mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 });
+const turboEncrypt = (text) => CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(text), turboKey(), turboOptions()).ciphertext.toString(CryptoJS.enc.Hex);
+const turboDecrypt = (hex) => CryptoJS.AES.decrypt({ ciphertext: CryptoJS.enc.Hex.parse(hex) }, turboKey(), turboOptions()).toString(CryptoJS.enc.Utf8);
+const headerOf = (response, name) => {
+  const all = (response && response.headers) || {};
+  for (const key of Object.keys(all)) if (key.toLowerCase() === name) return String(all[key] || '');
+  return '';
+};
+
 class Source {
   constructor() {
     this.requests = App.createRequestManager({ rateLimit: { requestsPerSecond: 4 } });
@@ -395,6 +408,24 @@ class Source {
       const src = /src:\s*"([^"]+\.mp4)"/.exec(await this.get(url));
       return { url: src[1], server: 'MP4Upload', language, headers: { Referer: 'https://www.mp4upload.com/' } };
     }
+    if (/(^|\.)uns\.bio$/.test(host)) return this.turbo(url, language);
+    return null;
+  }
+
+  async turbo(url, language) {
+    const id = (/#([A-Za-z0-9_-]+)/.exec(url) || [])[1];
+    if (!id) return null;
+    const resolved = JSON.parse(await this.get(`https://animeav1.uns.bio/api/public/resolve?file1=${encodeURIComponent(id)}`, 'application/json'));
+    const slug = (/^https?:\/\/[^/]+\/([A-Za-z0-9_-]+)/.exec(String((resolved && resolved.url) || '')) || [])[1];
+    if (!slug) return null;
+    const response = await this.requests.schedule(
+      App.createRequest({ url: `https://${TURBO_HOST}/api/stream/tracking?c=${turboEncrypt(slug)}`, method: 'GET', headers: { ...BROWSER, Accept: '*/*', Referer: `https://${TURBO_HOST}/${slug}` } })
+    );
+    const packed = headerOf(response, 'x-tracking');
+    if (!packed) return null;
+    const stream = JSON.parse(turboDecrypt(packed)).stream || {};
+    if (/^https?:\/\//.test(stream.hls || '')) return { url: stream.hls, server: 'Turbo', language, headers: { Referer: `https://${TURBO_HOST}/` } };
+    if (/^https?:\/\//.test(stream.tiktok || '')) return { url: stream.tiktok, server: 'Turbo', language };
     return null;
   }
 
@@ -402,8 +433,8 @@ class Source {
     return { id: chapterId, mangaId, pages: [] };
   }
 
-  async get(url) {
-    const response = await this.requests.schedule(App.createRequest({ url, method: 'GET', headers: { Accept: 'text/html', ...BROWSER } }));
+  async get(url, accept) {
+    const response = await this.requests.schedule(App.createRequest({ url, method: 'GET', headers: { Accept: accept || 'text/html', ...BROWSER } }));
     if (response.status < 200 || response.status >= 300) throw new Error(`AnimeAV1: HTTP ${response.status} from ${url}`);
     return String(response.data);
   }

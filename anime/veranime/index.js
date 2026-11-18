@@ -2,7 +2,7 @@ const SITE = 'https://verani.me';
 
 const BROWSER = { 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0', 'Accept-Language': 'es' };
 
-const SERVERS = ['VOE', 'HLS', 'Lulu', 'FileLions', 'Uqload', 'OK.ru', 'MixDrop', 'YourUpload', 'Mp4Upload'];
+const SERVERS = ['VOE', 'HLS', 'Lulu', 'FileLions', 'Uqload', 'OK.ru', 'MixDrop', 'YourUpload', 'Mp4Upload', 'Turbo'];
 
 const VOE_MARKERS = ['@$', '^^', '~@', '%?', '*~', '!!', '#&'];
 
@@ -320,6 +320,20 @@ function collapseSeasons(page, request) {
   return results === page.results ? page : Object.assign({}, page, { results });
 }
 
+const TURBO_HOST = 'turboembed.com';
+const TURBO_KEY = '1d54a1d53c1d56e1d6811d53c1d6831d';
+const TURBO_IV = '1f5101f5dd1f5111f6aa1f6e126a1747';
+const turboKey = () => CryptoJS.enc.Hex.parse(TURBO_KEY);
+const turboOptions = () => ({ iv: CryptoJS.enc.Hex.parse(TURBO_IV), mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 });
+const turboEncrypt = (text) => CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(text), turboKey(), turboOptions()).ciphertext.toString(CryptoJS.enc.Hex);
+const turboDecrypt = (hex) => CryptoJS.AES.decrypt({ ciphertext: CryptoJS.enc.Hex.parse(hex) }, turboKey(), turboOptions()).toString(CryptoJS.enc.Utf8);
+const isUns = (url) => /(^|\.)uns\.bio$/.test((/^https?:\/\/([^/]+)/.exec(url) || [])[1] || '');
+const headerOf = (response, name) => {
+  const all = (response && response.headers) || {};
+  for (const key of Object.keys(all)) if (key.toLowerCase() === name) return String(all[key] || '');
+  return '';
+};
+
 class Source {
   constructor() {
     this.requests = App.createRequestManager({ rateLimit: { requestsPerSecond: 6 } });
@@ -479,7 +493,7 @@ class Source {
       }));
     const seen = new Set();
     const embeds = entries
-      .filter((entry, i) => !(found[i] && /^https?:\/\//.test(found[i].url)) && !seen.has(entry.url) && seen.add(entry.url))
+      .filter((entry, i) => !isUns(entry.url) && !(found[i] && /^https?:\/\//.test(found[i].url)) && !seen.has(entry.url) && seen.add(entry.url))
       .map((entry) => ({ url: entry.url, type: 'embed', quality: entry.lang ? `${hostLabel(entry.url)} (${entry.lang})` : hostLabel(entry.url), server: hostLabel(entry.url) }));
     if (!videos.length && !embeds.length) throw new Error(`VerAnime: none of the ${entries.length} servers gave a playable video`);
     return videos.concat(embeds);
@@ -488,6 +502,7 @@ class Source {
   async extract({ url, lang }) {
     const host = (/^https?:\/\/([^/]+)/.exec(url) || [])[1] || '';
     const origin = `https://${host}/`;
+    if (isUns(url)) return this.turbo(url, lang);
     if (/(^|\.)zilla-networks\.com$/.test(host)) {
       return { url: url.replace('/play/', '/m3u8/'), server: 'HLS', lang, headers: { Referer: `${SITE}/`, 'Sec-Fetch-Site': 'same-origin' } };
     }
@@ -532,6 +547,23 @@ class Source {
       const src = /src:\s*"([^"]+\.mp4)"/.exec(html);
       return { url: src[1], server: 'Mp4Upload', lang, headers: { Referer: origin } };
     }
+  }
+
+  async turbo(url, lang) {
+    const id = (/#([A-Za-z0-9_-]+)/.exec(url) || [])[1];
+    if (!id) return null;
+    const resolved = JSON.parse(await this.send({ url: `https://animeav1.uns.bio/api/public/resolve?file1=${encodeURIComponent(id)}`, method: 'GET', headers: { Accept: 'application/json', Referer: `${SITE}/` } }));
+    const slug = (/^https?:\/\/[^/]+\/([A-Za-z0-9_-]+)/.exec(String((resolved && resolved.url) || '')) || [])[1];
+    if (!slug) return null;
+    const response = await this.requests.schedule(
+      App.createRequest({ url: `https://${TURBO_HOST}/api/stream/tracking?c=${turboEncrypt(slug)}`, method: 'GET', headers: { ...BROWSER, Accept: '*/*', Referer: `https://${TURBO_HOST}/${slug}` } })
+    );
+    const packed = headerOf(response, 'x-tracking');
+    if (!packed) return null;
+    const stream = JSON.parse(turboDecrypt(packed)).stream || {};
+    if (/^https?:\/\//.test(stream.hls || '')) return { url: stream.hls, server: 'Turbo', lang, headers: { Referer: `https://${TURBO_HOST}/` } };
+    if (/^https?:\/\//.test(stream.tiktok || '')) return { url: stream.tiktok, server: 'Turbo', lang };
+    return null;
   }
 
   async getChapterDetails(mangaId, chapterId) {

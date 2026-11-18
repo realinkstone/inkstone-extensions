@@ -6454,7 +6454,7 @@
     {
       "id": "animeav1",
       "name": "AnimeAV1",
-      "version": "1.0.9",
+      "version": "1.0.10",
       "medium": "anime",
       "website": "https://animeav1.com",
       "iconUrl": "https://inkstone.web.app/animeav1/icon.png",
@@ -6470,7 +6470,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "991940107c2ebb08e0988bd515972ab13c897012f58a50c2c88053a2a7296be2"
+      "sha256": "3077a5d9ea4b0e0362556246ddc529522e3c588795f3ccf62e56a7c8b3ac7faa"
     },
     {
       "id": "animejl",
@@ -7480,7 +7480,7 @@
     {
       "id": "veranime",
       "name": "VerAnime",
-      "version": "1.0.11",
+      "version": "1.0.12",
       "medium": "anime",
       "website": "https://verani.me",
       "iconUrl": "https://inkstone.web.app/veranime/icon.png",
@@ -7497,7 +7497,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "1a90696ec675a75d07d1846c9699fa5546227b0dec22939340a7e6d2656777b4"
+      "sha256": "61bc940c8bdc63eb218950ff9b97881eaaba5edfcb6e7aef995b533bfc3e3959"
     },
     {
       "id": "veranimes",
