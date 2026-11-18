@@ -51,12 +51,8 @@ class Source {
 
   async getSearchTags() {
     try {
-      const [novelGenres, comicGenres] = await Promise.all([
-        this.requestJSON(`${API_BASE}/novels/genres`).catch(() => []),
-        this.requestJSON(`${API_BASE}/genres`).catch(() => []),
-      ]);
       const merged = new Map();
-      for (const g of [...novelGenres, ...comicGenres]) {
+      for (const g of await this.requestJSON(`${API_BASE}/genres`).catch(() => [])) {
         if (g && g.slug) merged.set(g.slug, g.name || g.slug);
       }
       return Array.from(merged, ([id, label]) => ({ id, label }))
@@ -91,12 +87,11 @@ class Source {
       };
     }
 
-    const base = medium === 'novel' ? `${API_BASE}/novels` : `${API_BASE}/series`;
     const json = await this.requestJSON(
-      `${base}?${qs({
+      `${API_BASE}/series?${qs({
         sort: sort === 'trending-week' ? 'trending-week' : sort,
         period: sort === 'trending-week' ? 'week' : undefined,
-        type: medium === 'comics' ? ['manga', 'manhwa', 'manhua'] : undefined,
+        type: medium === 'comics' ? ['manga', 'manhwa', 'manhua'] : 'novel',
         genre: tagIds.length ? tagIds[0] : undefined,
         q: medium === 'novel' && query ? query : undefined,
         limit: PAGE_SIZE,
@@ -192,6 +187,18 @@ class Source {
       const json = await this.requestJSON(
         `${API_BASE}/novels/${encodeURIComponent(slug)}/chapters/${encodeURIComponent(chapterId)}/read`
       );
+      if (json.locked) {
+        const why = json.lock_reason ? String(json.lock_reason).replace(/_/g, ' ') : 'locked';
+        return {
+          id: chapterId,
+          mangaId,
+          pages: [],
+          text:
+            `This chapter is locked on Chikari (${why}), so the site does not serve its text yet.\n\n` +
+            `It opens on the site's own schedule. You can check it at ` +
+            `${SITE_BASE}/novels/${encodeURIComponent(slug)}/${encodeURIComponent(chapterId)}`,
+        };
+      }
       return { id: chapterId, mangaId, pages: [], text: json.body };
     }
     const json = await this.requestJSON(

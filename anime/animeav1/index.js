@@ -367,7 +367,9 @@ class Source {
 
   async extract({ language, url }) {
     const host = (/^https?:\/\/([^/]+)/.exec(url) || [])[1] || '';
-    if (/(^|\.)zilla-networks\.com$/.test(host)) return { url: url.replace('/play/', '/m3u8/'), server: 'HLS', language };
+    if (/(^|\.)zilla-networks\.com$/.test(host)) {
+      return { url: url.replace('/play/', '/m3u8/'), server: 'HLS', language, headers: { 'Sec-Fetch-Site': 'same-origin' } };
+    }
     if (/(^|\.)voe\.sx$/.test(host)) {
       let html = await this.get(url);
       const redirect = /window\.location\.href\s*=\s*'([^']+)'/.exec(html);

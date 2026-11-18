@@ -6,7 +6,7 @@ const UA =
 const BROWSER_TIMEOUT_MS = 60000;
 
 const LOCKED_CHAPTER_TEXT =
-  '本章为17K付费（VIP）章节，暂无法在此阅读完整内容，请前往17K小说网或官方App订阅解锁。\n\nThis chapter is a 17K members-only (VIP) chapter and cannot be unlocked here. Read it on 17k.com or in the official 17K app.';
+  '本章为17K付费（VIP）章节，暂无法在此阅读完整内容，请前往17K小说网或官方App订阅解锁。\n\n17K VIP chapter: not readable here, open it on 17k.com or in the 17K app.';
 
 const UNSBOX_MAP = [
   15, 35, 29, 24, 33, 16, 1, 38, 10, 9, 19, 31, 40, 27, 22, 23, 25, 13, 6, 11,
@@ -95,6 +95,15 @@ function qs(params) {
 
 function cleanText(text) {
   return (text || '').replace(/\s+/g, ' ').trim();
+}
+
+function fixMojibake(text) {
+  if (typeof text !== 'string' || !/[Â-ô][\u0080-¿]/.test(text)) return text;
+  try {
+    return decodeURIComponent(escape(text));
+  } catch (e) {
+    return text;
+  }
 }
 
 function hasNextPage(html) {
@@ -412,7 +421,7 @@ class Source {
     if (response.status < 200 || response.status >= 300) {
       throw new Error(`17K HTTP ${response.status}`);
     }
-    return response.data;
+    return fixMojibake(response.data);
   }
 
   async requestBypassed(url) {

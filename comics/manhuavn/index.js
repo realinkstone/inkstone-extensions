@@ -267,6 +267,7 @@ class Source {
         chapterId,
         name: appOnly ? `${baseName}${APP_ONLY_SUFFIX}` : baseName,
         number: chapterNumberFromName(baseName),
+        appOnly,
       });
     });
 
@@ -278,9 +279,22 @@ class Source {
       );
     }
 
-    raw.reverse();
+    if (selector === 'li.chap-item') {
+      const firstShown = extractChapterId($detail('#lst-chapter li.chap-item a').first().attr('href'));
+      const at = firstShown ? raw.findIndex((r) => r.chapterId === firstShown) : -1;
+      if (at > 0) raw.splice(0, at);
+    }
 
-    return raw.map((r) => ({ id: r.chapterId, chapterId: r.chapterId, name: r.name, number: r.number }));
+    const keep = new Map();
+    raw.forEach((r) => {
+      const have = keep.get(r.chapterId);
+      if (!have || (have.appOnly && !r.appOnly) || (have.appOnly === r.appOnly && r.number < have.number)) keep.set(r.chapterId, r);
+    });
+    const rows = raw.filter((r) => keep.get(r.chapterId) === r);
+
+    rows.reverse();
+
+    return rows.map((r) => ({ id: r.chapterId, chapterId: r.chapterId, name: r.name, number: r.number }));
   }
 
   async getChapterDetails(mangaId, chapterId) {
@@ -295,6 +309,9 @@ class Source {
     });
 
     if (pages.length === 0 && $('.wrap_taiapp').length === 0) {
+      if ($('#lst-chapter').length > 0) {
+        throw new Error(`ManhuaVN: chapter ${chapterId} is not on the site (it answers with the title page)`);
+      }
       throw new Error(
         `ManhuaVN: chapter ${chapterId} has no page images and no app-only notice, ` +
           'so the reader markup may have changed'

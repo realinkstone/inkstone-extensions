@@ -1,4 +1,4 @@
-const API_BASE = 'https://api.remanga.org/api';
+const API_BASE = 'https://api.remanga.org/api/v2';
 const SITE_BASE = 'https://remanga.org';
 const MEDIA_BASE = 'https://api.remanga.org';
 const PAGE_SIZE = 30;
@@ -60,7 +60,7 @@ const GENRES = [
 class Source {
   getSourceFeeds() {
     return [
-      { id: 'latest', name: 'Recently Added' },
+      { id: 'latest', name: 'Latest Updates' },
       { id: 'popular', name: 'Popular' },
       { id: 'views', name: 'Most Viewed' },
     ];
@@ -81,40 +81,59 @@ class Source {
       url = `${API_BASE}/search/?${qs({ query, count: PAGE_SIZE, page })}`;
     } else {
       const params = { count: PAGE_SIZE, page };
-      if (tagIds.length) params.genres = tagIds.join(',');
-      if (feed === 'popular') params.ordering = '-total_votes';
-      else if (feed === 'views') params.ordering = '-total_views';
-      url = `${API_BASE}/titles/?${qs(params)}`;
+      if (feed === 'popular') params.ordering = '-votes';
+      else if (feed === 'views') params.ordering = '-views';
+      else params.ordering = '-chapter_date';
+      const genres = tagIds.map((id) => `genres=${encodeURIComponent(String(id))}`).join('&');
+      url = `${API_BASE}/search/catalog/?${qs(params)}${genres ? `&${genres}` : ''}`;
     }
 
     const json = await this.requestJSON(url);
-    const items = json.content || [];
+    const items = json.results || [];
     const results = sortHasChaptersFirst(items.map(toPartialManga));
-    return { results, metadata: items.length > 0 ? { page: page + 1 } : undefined };
+    let more = items.length > 0;
+    if (json.meta && typeof json.meta.total_pages === 'number') more = more && page < json.meta.total_pages;
+    else if (!query) more = more && !!json.next;
+    return { results, metadata: more ? { page: page + 1 } : undefined };
   }
 
   async getMangaDetails(mangaId) {
-    const json = await this.requestJSON(`${API_BASE}/titles/${encodeURIComponent(mangaId)}/`);
-    const s = json.content;
-    if (!s) throw new Error('ReManga: title not found');
+    const s = await this.requestJSON(`${API_BASE}/titles/${encodeURIComponent(mangaId)}/`);
+    if (!s || !s.dir) throw new Error('ReManga: title not found');
     return { mangaInfo: toMangaInfo(s) };
   }
 
   async getChapters(mangaId) {
     try {
       const detail = await this.requestJSON(`${API_BASE}/titles/${encodeURIComponent(mangaId)}/`);
-      const branch = detail.content && detail.content.branches && detail.content.branches[0];
+      const branch = detail && detail.branches && detail.branches[0];
       if (!branch) return [];
       const branchId = branch.id;
 
+      const WAVE = 6;
       const all = [];
-      for (let page = 1; page <= 200; page++) {
-        const json = await this.requestJSON(
-          `${API_BASE}/titles/chapters/?${qs({ branch_id: branchId, count: 100, page })}`
+      const seen = new Set();
+      let done = false;
+      for (let first = 1; first <= 400 && !done; first += WAVE) {
+        const pages = [];
+        for (let page = first; page < first + WAVE; page++) pages.push(page);
+        const waves = await Promise.all(
+          pages.map((page) =>
+            this.requestJSON(`${API_BASE}/titles/chapters/?${qs({ branch_id: branchId, count: 50, page })}`)
+          )
         );
-        const rows = json.content || [];
-        if (!rows.length) break;
-        for (const c of rows) all.push(toChapter(c));
+        for (const json of waves) {
+          const rows = (json && json.results) || [];
+          for (const c of rows) {
+            if (seen.has(c.id)) continue;
+            seen.add(c.id);
+            all.push(toChapter(c));
+          }
+          if (!rows.length || !json.next) {
+            done = true;
+            break;
+          }
+        }
       }
       return all;
     } catch (e) {
@@ -125,8 +144,7 @@ class Source {
 
   async getChapterDetails(mangaId, chapterId) {
     try {
-      const json = await this.requestJSON(`${API_BASE}/titles/chapters/${encodeURIComponent(chapterId)}/`);
-      const c = json.content;
+      const c = await this.requestJSON(`${API_BASE}/titles/chapters/${encodeURIComponent(chapterId)}/`);
       const groups = (c && c.pages) || [];
       const pages = [];
       for (const group of groups) {
@@ -179,7 +197,8 @@ function mapStatus(status) {
 }
 
 function mapAgeLimit(ageLimit) {
-  switch (ageLimit) {
+  const id = ageLimit && typeof ageLimit === 'object' ? ageLimit.id : ageLimit;
+  switch (id) {
     case 0:
       return 0;
     case 1:
@@ -189,6 +208,16 @@ function mapAgeLimit(ageLimit) {
     default:
       return undefined;
   }
+}
+
+function ageFromGenres(genres) {
+  let age;
+  for (const g of genres || []) {
+    if (!g) continue;
+    if (g.id === 42) return 18;
+    if (g.id === 40) age = 16;
+  }
+  return age;
 }
 
 function sortHasChaptersFirst(results) {
@@ -205,7 +234,7 @@ function toPartialManga(s) {
   return {
     mangaId: s.dir,
     title: s.main_name || s.rus_name || s.en_name,
-    image: coverUrl(s.img),
+    image: coverUrl(s.cover || s.img),
     tags: undefined,
     webURL: s.dir ? `${SITE_BASE}/manga/${encodeURIComponent(s.dir)}` : undefined,
     medium: 'comics',
@@ -213,12 +242,20 @@ function toPartialManga(s) {
     chapters: typeof s.count_chapters === 'number' ? s.count_chapters : undefined,
     completed: s.status ? mapStatus(s.status) === 'COMPLETED' : undefined,
     releaseDate: s.issue_year ? String(s.issue_year) : undefined,
-    ageRating: s.is_erotic ? 18 : undefined,
+    ageRating: s.is_erotic ? 18 : ageFromGenres(s.genres),
   };
 }
 
 function toMangaInfo(s) {
-  const creators = s.creators || {};
+  let creators = s.creators || {};
+  if (Array.isArray(creators)) {
+    const byType = {};
+    for (const c of creators) {
+      if (!c || c.type === undefined || c.type === null) continue;
+      (byType[String(c.type)] = byType[String(c.type)] || []).push(c);
+    }
+    creators = byType;
+  }
   const authors = (creators['1'] || []).map((c) => c.name).filter(Boolean);
   const artists = (creators['2'] || []).map((c) => c.name).filter(Boolean);
   const publishers = (creators['3'] || []).map((c) => c.name).filter(Boolean);
@@ -226,7 +263,7 @@ function toMangaInfo(s) {
 
   return {
     title: s.main_name || s.rus_name || s.en_name,
-    image: coverUrl(s.img),
+    image: coverUrl(s.cover || s.img),
     author: [authors.join(', '), artists.join(', ')].filter(Boolean).join(' / ') || undefined,
     desc: htmlToText(s.description),
     status: mapStatus(s.status),
@@ -249,10 +286,11 @@ function toMangaInfo(s) {
 
 function toChapter(c) {
   const parsedNumber = parseFloat(c.chapter);
+  const base = c.name && String(c.name).trim() ? c.name : `Глава ${c.chapter}`;
   return {
     id: String(c.id),
     chapterId: String(c.id),
-    name: c.name && String(c.name).trim() ? c.name : `Глава ${c.chapter}`,
+    name: c.is_paid && !c.is_bought ? `${base} (Locked, Paid)` : base,
     number: Number.isFinite(parsedNumber) ? parsedNumber : c.index,
     volume: c.tome !== undefined && c.tome !== null ? String(c.tome) : undefined,
     group: (c.publishers && c.publishers[0] && c.publishers[0].name) || undefined,

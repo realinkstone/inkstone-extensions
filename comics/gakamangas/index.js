@@ -223,6 +223,11 @@ function parseSearch($) {
   return results.length > 0 ? results : parseGrid($);
 }
 
+function isOffSite($) {
+  const canonical = ($('link[rel="canonical"]').attr('href') || $('meta[property="og:url"]').attr('content') || '').trim();
+  return canonical !== '' && canonical.indexOf(SITE_BASE) !== 0;
+}
+
 function hasNextLink($) {
   return $('a.nextpostslink, a.next.page-numbers, .pagination a[rel="next"], link[rel="next"], .nav-previous a').length > 0;
 }
@@ -421,7 +426,7 @@ class Source {
 
     rows.reverse();
     let last = -Infinity;
-    return rows.map((r) => {
+    const list = rows.map((r) => {
       let number = chapterNumberOf(r.slug, r.name);
       if (number <= last) number = Math.round((last + 0.0001) * 10000) / 10000;
       last = number;
@@ -429,6 +434,18 @@ class Source {
       if (r.time !== undefined) chapter.time = r.time;
       return chapter;
     });
+    if (list.length > 0) {
+      const newest = list[list.length - 1];
+      try {
+        if (isOffSite(cheerio.load(await this.requestHTML(this.chapterUrl(mangaId, newest.id))))) newest.name += ' (Locked, Patreon)';
+      } catch (e) {
+      }
+    }
+    return list;
+  }
+
+  chapterUrl(mangaId, chapterId) {
+    return `${detailUrlOf(mangaId)}${String(chapterId).split('~').map(encodeURIComponent).join('/')}/`;
   }
 
   chapterRows($, detailUrl) {
@@ -453,8 +470,7 @@ class Source {
   }
 
   async getChapterDetails(mangaId, chapterId) {
-    const url = `${detailUrlOf(mangaId)}${String(chapterId).split('~').map(encodeURIComponent).join('/')}/`;
-    const html = await this.requestHTML(url);
+    const html = await this.requestHTML(this.chapterUrl(mangaId, chapterId));
     const $ = cheerio.load(html);
     const pages = [];
     const seen = new Set();
@@ -465,7 +481,10 @@ class Source {
       seen.add(src);
       pages.push(absolute(src));
     });
-    if (pages.length === 0) throw new Error(CONFIG.name + ' returned no pages for this chapter');
+    if (pages.length === 0) {
+      if (isOffSite($)) return { id: chapterId, mangaId, pages: [] };
+      throw new Error(CONFIG.name + ' returned no pages for this chapter');
+    }
     const details = { id: chapterId, mangaId, pages };
     withImageAuth(details);
     return details;

@@ -39,10 +39,55 @@ const LANGUAGE_NAMES = {
   pt: 'Portuguese', fr: 'French', de: 'German', it: 'Italian', ru: 'Russian', id: 'Indonesian',
   vi: 'Vietnamese', tr: 'Turkish', ar: 'Arabic', pl: 'Polish', th: 'Thai', ja: 'Japanese',
   ko: 'Korean', zh: 'Chinese (Simplified)', 'zh-hk': 'Chinese (Traditional)', hi: 'Hindi',
-  uk: 'Ukrainian', nl: 'Dutch', ro: 'Romanian', hu: 'Hungarian', cs: 'Czech', fil: 'Filipino',
+  uk: 'Ukrainian', nl: 'Dutch', ro: 'Romanian', hu: 'Hungarian', cs: 'Czech', tl: 'Filipino',
   ms: 'Malay', bn: 'Bengali', my: 'Burmese', he: 'Hebrew', fa: 'Persian', el: 'Greek',
   bg: 'Bulgarian', ca: 'Catalan', sv: 'Swedish', fi: 'Finnish', da: 'Danish', no: 'Norwegian',
 };
+
+function wantedLanguages() {
+  const raw = App.getSourceSetting('language');
+  const text = raw === undefined || raw === null ? '' : String(raw).trim();
+  let list = [];
+  if (text.charAt(0) === '[') {
+    try {
+      const parsed = JSON.parse(text);
+      if (Array.isArray(parsed)) list = parsed;
+    } catch (e) {
+      list = [];
+    }
+  } else {
+    list = text.split(',');
+  }
+  const codes = [];
+  list.forEach((value) => {
+    if (typeof value !== 'string') return;
+    const code = value.trim().toLowerCase();
+    if (code && codes.indexOf(code) === -1) codes.push(code);
+  });
+  if (codes.indexOf('all') !== -1) return ['all'];
+  return codes.length ? codes : ['en'];
+}
+
+function orderTies(items, languages) {
+  const rank = (c) => {
+    const i = languages.indexOf(c.attributes && c.attributes.translatedLanguage);
+    return i < 0 ? languages.length : i;
+  };
+  const numberOf = (c) => (c.attributes ? c.attributes.chapter : undefined);
+  const ordered = [];
+  let start = 0;
+  while (start < items.length) {
+    let end = start + 1;
+    while (end < items.length && numberOf(items[end]) === numberOf(items[start])) end++;
+    items
+      .slice(start, end)
+      .map((c, k) => ({ c, k }))
+      .sort((a, b) => rank(a.c) - rank(b.c) || a.k - b.k)
+      .forEach((x) => ordered.push(x.c));
+    start = end;
+  }
+  return ordered;
+}
 
 function qs(params) {
   return Object.keys(params)
@@ -198,16 +243,18 @@ class Source {
 
   async getChapters(mangaId, sinceDate) {
     try {
-      const wanted = App.getSourceSetting('language') || 'en';
+      const wanted = wantedLanguages();
       this._languages = this._languages || new Map();
-      const key = `${wanted}|${mangaId}`;
+      const key = `${wanted.join(',')}|${mangaId}`;
       const known = this._languages.has(key);
-      const language = known ? this._languages.get(key) : wanted;
-      let chapters = await this._chapterFeed(mangaId, sinceDate, language, language !== wanted || wanted === 'all');
-      if (!chapters.length && !known && wanted !== 'all') {
+      const languages = known ? this._languages.get(key) : wanted;
+      const everything = languages[0] === 'all';
+      const showLanguage = everything || languages.length > 1 || languages.join(',') !== wanted.join(',');
+      let chapters = await this._chapterFeed(mangaId, sinceDate, languages, showLanguage);
+      if (!chapters.length && !known && !everything) {
         const other = await this._otherLanguage(mangaId, wanted);
-        this._languages.set(key, other || wanted);
-        if (other) chapters = await this._chapterFeed(mangaId, sinceDate, other, true);
+        this._languages.set(key, other ? [other] : wanted);
+        if (other) chapters = await this._chapterFeed(mangaId, sinceDate, [other], true);
       }
       return chapters;
     } catch (e) {
@@ -216,8 +263,8 @@ class Source {
     }
   }
 
-  async _chapterFeed(mangaId, sinceDate, language, showLanguage) {
-    const chapters = [];
+  async _chapterFeed(mangaId, sinceDate, languages, showLanguage) {
+    const items = [];
     let offset = 0;
     const limit = 500;
     for (let i = 0; i < 20; i++) {
@@ -228,7 +275,7 @@ class Source {
           'order[chapter]': 'asc',
           createdAtSince: sinceDate ? sinceDate.slice(0, 19) : undefined,
         }),
-        language === 'all' ? '' : qsRepeat('translatedLanguage[]', [language]),
+        languages[0] === 'all' ? '' : qsRepeat('translatedLanguage[]', languages),
         qsRepeat('contentRating[]', CONTENT_RATINGS),
         qsRepeat('includes[]', ['scanlation_group']),
       ];
@@ -236,21 +283,20 @@ class Source {
         `${API_BASE}/manga/${encodeURIComponent(mangaId)}/feed?${joinQuery(queryParts)}`
       );
       const data = json.data || [];
-      data
-        .filter((c) => !c.attributes || !c.attributes.externalUrl)
-        .forEach((c) => chapters.push(this.toChapter(c, showLanguage)));
+      data.filter((c) => !c.attributes || !c.attributes.externalUrl).forEach((c) => items.push(c));
       const total = typeof json.total === 'number' ? json.total : data.length;
       offset += limit;
       if (data.length === 0 || offset >= total || offset + limit > MAX_OFFSET_PLUS_LIMIT) break;
     }
-    return chapters;
+    const several = languages.length > 1 && languages[0] !== 'all';
+    return (several ? orderTies(items, languages) : items).map((c) => this.toChapter(c, showLanguage));
   }
 
   async _otherLanguage(mangaId, wanted) {
     const json = await this.requestJSON(`${API_BASE}/manga/${encodeURIComponent(mangaId)}`);
     const attrs = (json.data && json.data.attributes) || {};
     const available = Array.isArray(attrs.availableTranslatedLanguages) ? attrs.availableTranslatedLanguages : [];
-    if (!available.length || available.indexOf(wanted) !== -1) return null;
+    if (!available.length || available.some((lang) => wanted.indexOf(lang) !== -1)) return null;
     const counts = await Promise.all(
       available.slice(0, 12).map(async (lang) => {
         try {

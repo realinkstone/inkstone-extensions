@@ -280,7 +280,10 @@ class Source {
     });
     found.sort((a, b) => a.idx - b.idx);
     const pages = found.map((p) => p.src);
-    if (pages.length === 0) throw new Error(`${CONFIG.name}: no pages for this chapter (locked, or not published yet)`);
+    if (pages.length === 0) {
+      if (/Locked Chapter|Cost to Unlock/.test(html)) return { id: chapterId, mangaId, pages: [] };
+      throw new Error(`${CONFIG.name}: no pages for this chapter (not published yet, or the reader markup changed)`);
+    }
     const details = { id: chapterId, mangaId, pages };
     if (CONFIG.referer) details.referer = SITE_BASE + '/';
     return details;

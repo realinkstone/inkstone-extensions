@@ -25,8 +25,10 @@ function masterSlugFromHref(href) {
 function hasNextPage(html, currentPage) {
   const start = html.indexOf('id="list_pagination"');
   if (start === -1) return false;
-  const end = html.indexOf('</div>', start);
+  const navEnd = html.indexOf('</nav>', start);
+  const end = navEnd === -1 ? html.indexOf('</div>', start) : navEnd;
   const section = html.slice(start, end === -1 ? html.length : end);
+  if (/rel="next"/.test(section)) return true;
   let max = 0;
   const re = /page=(\d+)/g;
   let m;
@@ -37,50 +39,50 @@ function hasNextPage(html, currentPage) {
   return max > currentPage;
 }
 
-function fieldValue($, label) {
+function fieldValue($, labels) {
+  const wanted = Array.isArray(labels) ? labels : [labels];
   let found = '';
-  $('.info-card .info-lbl').each((_, el) => {
+  $('dl.oe-infos').each((_, dl) => {
     if (found) return;
-    if (cleanText($(el).text()) === label) {
-      const val = $(el).next('.info-val');
-      if (val.length) found = cleanText(val.text());
-    }
+    const heading = cleanText($(dl).prev('.oe-sous-titre').text());
+    if (/^anime/i.test(heading)) return;
+    $(dl)
+      .find('dt')
+      .each((__, dt) => {
+        if (found) return;
+        if (wanted.includes(cleanText($(dt).text()))) {
+          found = cleanText($(dt).next('dd').text());
+        }
+      });
   });
   return found;
 }
 
 function parseCatalogCards($) {
   const results = [];
-  $('.catalog-card').each((_, el) => {
+  const seen = new Set();
+  $('.as-carte').each((_, el) => {
     const card = $(el);
-    const link = card.find('a').first();
-    const mangaId = masterSlugFromHref(link.attr('href'));
-    if (!mangaId) return;
+    const mangaId = masterSlugFromHref(card.attr('data-url') || card.find('a').first().attr('href'));
+    if (!mangaId || seen.has(mangaId)) return;
 
-    const title = cleanText(card.find('.card-title').first().text());
+    const title = cleanText(card.find('.as-carte-titre').first().text()) || cleanText(card.attr('data-nom'));
     if (!title) return;
 
-    const image = (card.find('.card-image').first().attr('src') || '').trim();
+    const image = (card.find('.as-carte-image img').first().attr('src') || card.attr('data-img') || '').trim();
     if (!image) return;
 
-    const typesText = cleanText(card.find('.type-row .info-value').first().text());
-    if (typesText && !typesText.includes('Scans')) return;
+    const badges = cleanText(card.find('.as-badge').text());
+    if (badges && !/Scans|Webtoon|Manga/.test(badges)) return;
 
-    const tags = [];
-    card.find('.genre-tags .genre-tag').each((_, tagEl) => {
-      const t = cleanText($(tagEl).text());
-      if (t && t !== '…' && t !== '...') tags.push(t);
-    });
-
-    const manga = {
+    seen.add(mangaId);
+    results.push({
       mangaId,
       title,
       image,
       webURL: `${SITE_BASE}/catalogue/${mangaId}/`,
       medium: 'comics',
-    };
-    if (tags.length > 0) manga.tags = tags;
-    results.push(manga);
+    });
   });
   return results;
 }
@@ -88,16 +90,15 @@ function parseCatalogCards($) {
 function parseLatestScanCards($) {
   const results = [];
   const seen = new Set();
-  $('.scan-card-premium').each((_, el) => {
+  $('#containerAjoutsScans .as-carte').each((_, el) => {
     const card = $(el);
-    const link = card.find('a').first();
-    const mangaId = masterSlugFromHref(link.attr('href'));
+    const mangaId = masterSlugFromHref(card.attr('data-url') || card.find('a').first().attr('href'));
     if (!mangaId || seen.has(mangaId)) return;
 
-    const title = cleanText(card.find('.card-title').first().text());
+    const title = cleanText(card.find('.as-carte-titre').first().text()) || cleanText(card.attr('data-nom'));
     if (!title) return;
 
-    const image = (card.find('.card-image').first().attr('src') || '').trim();
+    const image = (card.find('.as-carte-image img').first().attr('src') || card.attr('data-img') || '').trim();
     if (!image) return;
 
     seen.add(mangaId);
@@ -110,9 +111,9 @@ function parseLatestScanCards($) {
       medium: 'comics',
     };
 
-    const chapterText = cleanText(card.find('.info-item.chapter .info-text').first().text());
-    const chapterMatch = chapterText.match(/(\d+(?:\.\d+)?)/);
-    if (chapterMatch) manga.chapters = parseFloat(chapterMatch[1]);
+    const chapterText = cleanText(card.find('.as-carte-info > span:not(.as-carte-temps)').first().text());
+    const numbers = chapterText.match(/\d+(?:\.\d+)?/g);
+    if (numbers) manga.chapters = parseFloat(numbers[numbers.length - 1]);
 
     results.push(manga);
   });
@@ -185,16 +186,16 @@ class Source {
     const html = await this.requestHTML(url);
     const $ = cheerio.load(html);
 
-    const title = cleanText($('.oeuvre-right h1').first().text()) || mangaId;
+    const title = cleanText($('h1#titreOeuvre, h1.oe-titre').first().text()) || mangaId;
     const image = ($('meta[property="og:image"]').first().attr('content') || '').trim();
 
-    const status = mapStatus(fieldValue($, 'État'));
-    const author = fieldValue($, 'Créateur');
+    const status = mapStatus(fieldValue($, 'Statut'));
+    const author = fieldValue($, ['Auteur', 'Auteurs']);
 
     const desc = cleanText($('#synopsisText').text());
 
     const tags = [];
-    $('.genres-wrap .genre-pill').each((_, el) => {
+    $('.oe-genres .genre-pill').each((_, el) => {
       const t = cleanText($(el).text());
       if (t) tags.push(t);
     });
@@ -225,8 +226,8 @@ class Source {
 
     const scanUrl = `${SITE_BASE}/catalogue/${encodeURIComponent(mangaId)}/${scanPath}/`;
     const scanHtml = await this.requestHTML(scanUrl);
-    const titleMatch = scanHtml.match(/<h3 id="titreOeuvre"[^>]*>([\s\S]*?)<\/h3>/);
-    const nomOeuvre = titleMatch ? titleMatch[1] : '';
+    const titleMatch = scanHtml.match(/<h([1-6]) id="titreOeuvre"[^>]*>([\s\S]*?)<\/h\1>/);
+    const nomOeuvre = titleMatch ? titleMatch[2] : '';
     if (!nomOeuvre) {
       throw new Error(`Anime-Sama: could not read titreOeuvre for "${mangaId}"`);
     }

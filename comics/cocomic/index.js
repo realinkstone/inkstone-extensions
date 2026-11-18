@@ -1,7 +1,7 @@
 const CONFIG = {
   "name": "Cocomic",
   "origin": "https://cocomic.co",
-  "archivePath": "/manga/",
+  "archivePath": "/comics/",
   "detailPrefix": "manga",
   "pageSize": 12,
   "referer": true,
@@ -31,10 +31,6 @@ const CONFIG = {
     {
       "id": "views",
       "name": "Most Views"
-    },
-    {
-      "id": "trending",
-      "name": "Trending"
     }
   ]
 };
@@ -182,7 +178,46 @@ function fieldText($, label) {
   return cleanText(el.text());
 }
 
+function chipValue($, label) {
+  let found = '';
+  $('.asura-chip').each((_, el) => {
+    if (found) return;
+    const chip = $(el);
+    const name = cleanText(chip.find('.chip-label').first().text()).replace(/[:：]$/, '');
+    if (name.toLowerCase() !== label.toLowerCase()) return;
+    const inner = chip.find('.author-name-text').first();
+    found = cleanText((inner.length ? inner : chip.find('.chip-val').first()).text());
+  });
+  return found;
+}
+
+function fixPageUrl(url) {
+  return String(url).replace(/^(https?:\/\/cdn2\.cocomic\.co)\/+(?:www\/+wwwroot\/+)*/i, '$1/www/wwwroot/');
+}
+
+function parseAsuraGrid($) {
+  const results = [];
+  const seen = new Set();
+  $('.asura-card').each((_, el) => {
+    const card = $(el);
+    const link = card.find('a.asura-card-title, .asura-card-poster a').first();
+    const mangaId = idFromHref(link.attr('href'));
+    if (!mangaId || seen.has(mangaId)) return;
+    const title = cleanText(card.find('a.asura-card-title').first().text()) || cleanText(link.attr('title')) || cleanText(link.attr('aria-label'));
+    if (!title) return;
+    seen.add(mangaId);
+    const img = card.find('.asura-card-poster img').first();
+    const manga = { mangaId, title, image: absolute(img.attr('data-src') || img.attr('src') || ''), medium: 'comics' };
+    withImageAuth(manga);
+    manga.webURL = detailUrlOf(mangaId);
+    results.push(manga);
+  });
+  return results;
+}
+
 function parseGrid($) {
+  const asura = parseAsuraGrid($);
+  if (asura.length > 0) return asura;
   const results = [];
   const seen = new Set();
   $('.page-item-detail').each((_, el) => {
@@ -300,7 +335,7 @@ class Source {
     }
     const $ = cheerio.load(html);
     const results = parse($);
-    const more = results.length > 0 && (hasNextLink($) || results.length >= CONFIG.pageSize);
+    const more = results.length > 0 && (hasNextLink($) || ($('.asura-card').length === 0 && results.length >= CONFIG.pageSize));
     return { results, metadata: more ? { page: page + 1 } : undefined };
   }
 
@@ -311,29 +346,42 @@ class Source {
 
     const titleBlock = $('.post-title').first().clone();
     titleBlock.find('.manga-title-badges, span').remove();
-    const title = cleanText(titleBlock.find('h1').first().text()) || cleanText($('h1').first().text()) || mangaId;
+    const title =
+      cleanText($('h1.asura-series-title').first().text()) ||
+      cleanText(titleBlock.find('h1').first().text()) ||
+      cleanText($('h1').first().text()) ||
+      mangaId;
 
     const image = absolute(
-      $('meta[property="og:image"]').attr('content') || coverFrom($('.summary_image img').first()),
+      $('meta[property="og:image"]').attr('content') ||
+        $('.asura-poster-img').first().attr('src') ||
+        coverFrom($('.summary_image img').first()),
     );
 
-    const author = fieldText($, 'Author(s)') || fieldText($, 'Author');
-    const artist = fieldText($, 'Artist(s)') || fieldText($, 'Artist');
+    const author = chipValue($, 'Author') || fieldText($, 'Author(s)') || fieldText($, 'Author');
+    const artist = chipValue($, 'Artist') || fieldText($, 'Artist(s)') || fieldText($, 'Artist');
     const people = [];
     [author, artist].forEach((s) => s.split(',').forEach((n) => {
       const t = cleanText(n);
-      if (t && !/^(updating|n\/a|unknown|none|-|\?)$/i.test(t) && people.indexOf(t) < 0) people.push(t);
+      if (t && !/^(updating|n\/a|unknown|none|tba|-|\?)$/i.test(t) && people.indexOf(t) < 0) people.push(t);
     }));
 
     const descParts = [];
-    $('.summary__content p, .description-summary .summary__content p').each((_, el) => {
+    $('#synopsisContent p, .summary__content p, .description-summary .summary__content p').each((_, el) => {
       const t = cleanText($(el).text());
-      if (t) descParts.push(t);
+      if (t && descParts.indexOf(t) < 0) descParts.push(t);
     });
-    const desc = descParts.length > 0 ? descParts.join('\n\n') : cleanText($('.summary__content').first().text());
+    const desc =
+      descParts.length > 0
+        ? descParts.join('\n\n')
+        : cleanText($('#synopsisContent').first().text()) || cleanText($('.summary__content').first().text());
 
     const tags = [];
-    const genreContent = findFieldContent($, 'Genre(s)') || findFieldContent($, 'Genres');
+    $('.asura-genres-row .asura-genre-tag').each((_, el) => {
+      const t = cleanText($(el).text());
+      if (t && tags.indexOf(t) < 0) tags.push(t);
+    });
+    const genreContent = tags.length > 0 ? null : findFieldContent($, 'Genre(s)') || findFieldContent($, 'Genres');
     if (genreContent) {
       genreContent.find('a').each((_, el) => {
         const t = cleanText($(el).text());
@@ -341,7 +389,7 @@ class Source {
       });
     }
 
-    const status = mapStatus(fieldText($, 'Status'));
+    const status = mapStatus(cleanText($('.asura-badge-status').first().text()) || fieldText($, 'Status'));
     const info = {
       title,
       image,
@@ -420,9 +468,14 @@ class Source {
     }
 
     rows.reverse();
+    const items = rows.map((r, i) => ({ r, i, number: chapterNumberOf(r.slug, r.name) }));
+    if (items.some((it, k) => k > 0 && it.number < items[k - 1].number)) {
+      items.sort((a, b) => a.number - b.number || a.i - b.i);
+    }
     let last = -Infinity;
-    return rows.map((r) => {
-      let number = chapterNumberOf(r.slug, r.name);
+    return items.map((it) => {
+      const r = it.r;
+      let number = it.number;
       if (number <= last) number = Math.round((last + 0.0001) * 10000) / 10000;
       last = number;
       const chapter = { id: r.id, chapterId: r.id, name: r.name, number };
@@ -435,6 +488,23 @@ class Source {
     const prefix = detailUrl.replace(/^https?:\/\/[^/]+/i, '');
     const rows = [];
     const seen = new Set();
+    let cards = $('.asura-chap-card').toArray();
+    const own = parseInt($('.chapters-count-badge').first().text(), 10);
+    if (own > 0 && own < cards.length) cards = cards.slice(0, own);
+    cards.forEach((el) => {
+      const $el = $(el);
+      const href = ($el.attr('data-href') || $el.find('a').first().attr('href') || '').trim();
+      if (!href || href === '#') return;
+      const path = href.replace(/^https?:\/\/[^/]+/i, '').split(/[?#]/)[0];
+      if (path.indexOf(prefix) !== 0) return;
+      const rest = path.slice(prefix.length).replace(/\/+$/, '');
+      if (!rest || seen.has(rest)) return;
+      seen.add(rest);
+      const name = cleanText($el.find('.chap-name').first().text()) || rest;
+      const seconds = parseInt($el.attr('data-time') || '', 10);
+      rows.push({ id: rest.replace(/\//g, '~'), slug: rest, name, time: seconds > 0 ? seconds * 1000 : parseReleaseDate($el.find('.chap-time').first().text()) });
+    });
+    if (rows.length > 0) return rows;
     $('li.wp-manga-chapter').each((_, el) => {
       const $el = $(el);
       const link = $el.find('a').first();
@@ -458,12 +528,14 @@ class Source {
     const $ = cheerio.load(html);
     const pages = [];
     const seen = new Set();
-    $('img.wp-manga-chapter-img, .reading-content img, .page-break img').each((_, el) => {
+    $('img.asura-webtoon-slice, img.wp-manga-chapter-img, .reading-content img, .page-break img').each((_, el) => {
       const e = $(el);
       const src = (e.attr('data-src') || e.attr('data-lazy-src') || e.attr('data-cfsrc') || e.attr('src') || '').trim();
-      if (!src || /^data:/.test(src) || seen.has(src)) return;
-      seen.add(src);
-      pages.push(absolute(src));
+      if (!src || /^data:/.test(src)) return;
+      const page = fixPageUrl(absolute(src));
+      if (seen.has(page)) return;
+      seen.add(page);
+      pages.push(page);
     });
     if (pages.length === 0) throw new Error(CONFIG.name + ' returned no pages for this chapter');
     const details = { id: chapterId, mangaId, pages };
@@ -484,7 +556,12 @@ class Source {
       if (body !== undefined) headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
     }
     const request = App.createRequest({ url, method: method || 'GET', headers, body });
-    const response = await manager.schedule(request);
+    let response = await manager.schedule(request);
+    const again = ['no-cache', 'max-age=0'];
+    for (let i = 0; i < again.length && (!method || method === 'GET') && (response.status === 502 || response.status === 503 || response.status === 504); i++) {
+      const retryHeaders = Object.assign({}, headers, { 'Cache-Control': again[i] });
+      response = await manager.schedule(App.createRequest({ url, method: 'GET', headers: retryHeaders }));
+    }
     if (response.status === 401 || response.status === 403) {
       throw new Error(`${CONFIG.name} HTTP ${response.status}: the site refused the request (a locked chapter, or a block on plain requests)`);
     }

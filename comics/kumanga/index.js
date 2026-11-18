@@ -50,20 +50,19 @@ class Source {
 
   getSourceFeeds() {
     return [
-      { id: 'directory', name: 'Directory' },
       { id: 'latest', name: 'Latest Updates' },
     ];
   }
 
   async getSearchTags() {
-    return GENRES.map(([id, label]) => ({ id, label }));
+    return [];
   }
 
   async getSearchResults(request, metadata) {
     const query = ((request && request.title) || '').trim();
     const tags = (request && request.includedTags) || [];
     const page = (metadata && metadata.page) || 1;
-    if (!query && !tags.length && request && request.feed === 'latest') {
+    if (!query && !tags.length) {
       const $ = cheerio.load(await this.get(SITE));
       const titles = $('.update_item .update_left a')
         .map((i, el) => {
@@ -79,12 +78,14 @@ class Source {
     const body = [`contentType=manga`, `page=${page}`, `perPage=24`];
     if (query) body.push(`keywords=${encodeURIComponent(query)}`);
     for (const tag of tags) body.push(`category_filter[${encodeURIComponent(tag.id)}]=${encodeURIComponent(tag.id)}`);
-    const result = JSON.parse(await this.send({
+    const answer = await this.send({
       url: `${SITE}/backend/ajax/searchengine2.php`,
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest', Accept: 'application/json' },
       body: body.join('&'),
-    }));
+    });
+    if (!answer.trim()) throw new Error('KuManga: the site search answered nothing (it needs a token the site script makes, so search and genre filters are off for now)');
+    const result = JSON.parse(answer);
     if (!result || !Array.isArray(result.contents)) throw new Error('KuManga: the search answer has no list of titles');
     const results = result.contents.map((manga) => ({ mangaId: String(manga.id), title: manga.name, image: coverOf(manga.id), medium: 'comics' }));
     return { results, metadata: page * 24 < result.totalContents ? { page: page + 1 } : undefined };
@@ -145,6 +146,7 @@ class Source {
     const html = await this.get(`${SITE}/manga/leer/${redirect[1]}`);
     const name = /const\s+rpics\s*=\s*(\w+)/.exec(html);
     const encoded = name && new RegExp(`const\\s+${name[1]}\\s*=\\s*"([^"]+)"`).exec(html);
+    if (!encoded && html.includes('its_a_joke')) throw new Error('KuManga: the reader page list uses a new encoding this source cannot read yet');
     if (!encoded) throw new Error('KuManga: the reader has no page list');
     return { id: chapterId, mangaId, pages: decrypt(encoded[1]).map(imageOf) };
   }

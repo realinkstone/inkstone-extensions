@@ -430,7 +430,16 @@ field has a `type` (`text`, `toggle`, `select`, `multiSelect` or `section`), a
 `key`, a `label`, and optionally `default`, `placeholder`, `secure` (hides
 passwords) and `options: [{ value, label }]`. Read the value back with
 `App.getSourceSetting('key')`, which returns a string, so a toggle is `'true'`
-or `'false'`.
+or `'false'`, or `undefined` when the reader never set it.
+
+A `multiSelect` lets the reader pick several `options` (chapter languages, for
+example) and its `default` is a list: `"default": ["en"]`. Its value reaches
+your code as text, and the shape depends on the app: Boundless Reader gives a
+JSON array (`["en","pl"]`), Sumizuri a comma separated list (`en,pl`), and a
+setting that used to be a `select` still holds the one plain code it had
+(`pt-br`). Parse all of them, trim and lower case the codes, and apply your own
+default for `undefined` or an empty list. `mangadex` does this in
+`wantedLanguages` and sends every chosen language to the site in one request.
 
 When the site has its own preferences (a content rating, a language), offer them
 as settings and send what the site sends. `kagane` does: its content rating

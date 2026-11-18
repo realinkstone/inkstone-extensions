@@ -5,7 +5,7 @@ const CONFIG = {
   "detailPrefix": "manga",
   "pageSize": 10,
   "referer": true,
-  "imageHeaders": false,
+  "imageHeaders": true,
   "genres": "checkbox",
   "coverUpgrade": [
     "110x150",

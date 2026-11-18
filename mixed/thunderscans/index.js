@@ -127,6 +127,26 @@ function detailUrlOf(mangaId) {
   return `${SITE_BASE}${CONFIG.archivePath}${encodeURIComponent(mangaId)}/`;
 }
 
+function isNovelTitle(title) {
+  return /\[novel\]\s*$/i.test(title || '');
+}
+
+function novelText($) {
+  const area = $('#readerarea').first();
+  area.find('br').each((_, el) => {
+    $(el).replaceWith('\n\n');
+  });
+  const blocks = area.find('p').length > 0 ? area.find('p').map((_, el) => $(el).text()).get() : [area.text()];
+  const paragraphs = [];
+  blocks.forEach((block) => {
+    block.split(/\n\s*\n+/).forEach((part) => {
+      const t = cleanText(part);
+      if (t) paragraphs.push(t);
+    });
+  });
+  return paragraphs.join('\n\n');
+}
+
 function parseGrid($) {
   const results = [];
   const seen = new Set();
@@ -138,7 +158,7 @@ function parseGrid($) {
     const title = cleanText(card.find('.tt').first().text()) || cleanText(link.attr('title'));
     if (!title) return;
     seen.add(mangaId);
-    const manga = { mangaId, title, image: coverFrom(card.find('img').first()), medium: 'comics', webURL: detailUrlOf(mangaId) };
+    const manga = { mangaId, title, image: coverFrom(card.find('img').first()), medium: isNovelTitle(title) ? 'novel' : 'comics', webURL: detailUrlOf(mangaId) };
     withImageAuth(manga);
     results.push(manga);
   });
@@ -196,14 +216,20 @@ class Source {
   }
 
   async getSearchResults(request, metadata) {
-    if (request && request.medium && request.medium !== 'comics') return { results: [] };
+    const medium = (request && request.medium) || '';
+    if (medium && medium !== 'comics' && medium !== 'novel') return { results: [] };
     const query = ((request && request.title) || '').trim();
     const tags = ((request && request.includedTags) || []).filter((t) => t && t.id);
     const feed = (request && request.feed) || CONFIG.feeds[0].id;
     const page = (metadata && metadata.page) || 1;
 
     let url;
-    if (query) {
+    if (medium === 'novel') {
+      let qs = `page=${page}&order=${encodeURIComponent(feed)}&type=novel`;
+      if (query) qs += `&title=${encodeURIComponent(query)}`;
+      tags.forEach((t) => String(t.id).split(',').forEach((id) => (qs += `&genre[]=${encodeURIComponent(id)}`)));
+      url = `${SITE_BASE}${CONFIG.archivePath}?${qs}`;
+    } else if (query) {
       url = `${SITE_BASE}${page > 1 ? `/page/${page}/` : '/'}?s=${encodeURIComponent(query)}`;
     } else {
       let qs = `page=${page}&order=${encodeURIComponent(feed)}`;
@@ -219,8 +245,10 @@ class Source {
       throw e;
     }
     const $ = cheerio.load(html);
-    const results = parseGrid($);
-    return { results, metadata: results.length > 0 && hasNext($) ? { page: page + 1 } : undefined };
+    let results = parseGrid($);
+    const more = results.length > 0 && hasNext($);
+    if (medium === 'comics') results = results.filter((r) => r.medium !== 'novel');
+    return { results, metadata: more ? { page: page + 1 } : undefined };
   }
 
   async getMangaDetails(mangaId) {
@@ -258,7 +286,7 @@ class Source {
       completed: status === 'COMPLETED',
       tags,
       webURL: url,
-      medium: 'comics',
+      medium: /^novel$/i.test(infoField($, 'Type')) || isNovelTitle(title) ? 'novel' : 'comics',
     };
     if (/^\d{4}$/.test(released)) info.releaseDate = released;
     withImageAuth(info);
@@ -325,7 +353,14 @@ class Source {
         pages.push(absolute(src));
       });
     }
-    if (pages.length === 0) throw new Error(CONFIG.name + ' returned no pages for this chapter');
+    if (pages.length === 0) {
+      const $ = cheerio.load(html);
+      if ($('#readerarea.novel-reader').length > 0) {
+        const text = novelText($);
+        if (text) return { id: chapterId, mangaId, pages: [], text };
+      }
+      throw new Error(CONFIG.name + ' returned no pages for this chapter');
+    }
     const details = { id: chapterId, mangaId, pages };
     withImageAuth(details);
     return details;

@@ -480,6 +480,24 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
     'chapter fields have the types Boundless casts to',
     'name, group and volume are strings; number and time are numbers, not "12"',
   );
+  // A stream can be a whole movie file (a direct mp4 is hundreds of megabytes): read only its start, then let go of the rest.
+  const readStart = async (res, limit) => {
+    const reader = res.body?.getReader();
+    if (!reader) return '';
+    const chunks = [];
+    let size = 0;
+    try {
+      while (size < limit) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        chunks.push(Buffer.from(value));
+        size += value.length;
+      }
+    } finally {
+      try { await reader.cancel(); } catch { /* the stream may already be closed */ }
+    }
+    return Buffer.concat(chunks).toString('utf8', 0, limit);
+  };
   const tryPlay = async (chapter, label, started) => {
     const videos = await withTimeout(source.getVideos(item.mangaId, chapter.id));
     if (!Array.isArray(videos) || videos.length === 0 || !videos.every((v) => isUrl(v.url))) return { ok: false, label, detail: 'getVideos gave no video with a full URL' };
@@ -491,7 +509,7 @@ for (const item of (found?.value.results ?? []).slice(0, 2)) {
     let plays = true;
     if (streams.length) {
       answer = await withTimeout(fetch(first.url, { headers: first.headers ?? {} }), 30000);
-      const body = answer.ok ? await answer.text() : '';
+      const body = answer.ok ? await readStart(answer, 65536) : '';
       // A DASH manifest (type 'dash', an .mpd) is XML that opens with an MPD element; HLS opens with #EXTM3U; a plain file answers a video content type.
       plays = answer.ok && (body.startsWith('#EXTM3U') || (answer.headers.get('content-type') ?? '').startsWith('video/') || /<MPD[\s>]/.test(body.slice(0, 4000)));
     }

@@ -4,7 +4,7 @@ const CONFIG = {
   "archivePath": "/manga/",
   "detailPrefix": "manga",
   "pageSize": 20,
-  "referer": true,
+  "referer": false,
   "imageHeaders": false,
   "genres": "checkbox",
   "coverUpgrade": [

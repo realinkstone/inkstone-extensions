@@ -424,6 +424,7 @@ class Source {
     if (pages.length === 0) throw new Error(CONFIG.name + ' returned no pages for this chapter');
     const details = { id: chapterId, mangaId, pages };
     withImageAuth(details);
+    details.headers = { 'Sec-Fetch-Dest': 'image' };
     return details;
   }
 

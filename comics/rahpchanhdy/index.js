@@ -553,7 +553,13 @@ class Source {
       if (body !== undefined) headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
     }
     const request = App.createRequest({ url, method: method || 'GET', headers, body });
-    const response = await manager.schedule(request);
+    let response;
+    try {
+      response = await manager.schedule(request);
+    } catch (e) {
+      if (method === 'POST') throw e;
+      response = await manager.schedule(request);
+    }
     if (response.status === 401 || response.status === 403) {
       throw new Error(`${CONFIG.name} HTTP ${response.status}: the site refused the request (a locked chapter, or a block on plain requests)`);
     }

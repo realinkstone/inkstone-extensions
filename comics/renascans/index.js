@@ -1,58 +1,25 @@
-const CONFIG = {
-  "name": "Renascans",
-  "origin": "https://renascans.net",
-  "apiBase": "https://api.renascans.net/api",
-  "comicTypes": "MANHWA,MANHUA,MANGA",
-  "referer": true,
-  "imageHeaders": false,
-  "feeds": [
-    {
-      "id": "latest_chapters",
-      "name": "Latest Chapters"
-    },
-    {
-      "id": "recently_updated",
-      "name": "Recently Updated"
-    },
-    {
-      "id": "popular",
-      "name": "Most Popular"
-    },
-    {
-      "id": "newest",
-      "name": "Newest Added"
-    },
-    {
-      "id": "oldest",
-      "name": "Oldest First"
-    },
-    {
-      "id": "alphabetical",
-      "name": "A-Z"
-    }
-  ]
-};
-const SITE_BASE = CONFIG.origin;
-const API_BASE = CONFIG.apiBase;
+const SITE_BASE = 'https://renascans.net';
+const API_BASE = `${SITE_BASE}/api/v1`;
 const UA =
   'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1';
 
-const PER_PAGE = 50;
+const PER_PAGE = 30;
+const COVER_WIDTH = 300;
+const DETAIL_COVER_WIDTH = 480;
+
+const FEEDS = [
+  { id: 'newest', name: 'Latest Update' },
+  { id: 'popular', name: 'Most Popular' },
+  { id: 'rating', name: 'Top Rated' },
+  { id: 'chapters', name: 'Most Chapters' },
+  { id: 'title', name: 'A-Z' },
+];
 
 const BLOCKED_GENRES = new Set(['shotacon', 'shota', 'lolicon', 'loli']);
-const BLOCKED_IDS_TTL_MS = 10 * 60 * 1000;
+const BLOCKED_PARAM = 'loli,lolicon,shota,shotacon';
 
 const ADULT_GENRE = /^(adult|hentai|smut|erotica|nsfw|18\+|mature romance|sexual content)$/i;
 const SUGGESTIVE_GENRE = /^(mature|ecchi|borderline h)$/i;
-
-const FEED_SORTS = {
-  latest_chapters: { orderBy: 'lastChapterAddedAt', orderDirection: 'desc' },
-  recently_updated: { orderBy: 'updatedAt', orderDirection: 'desc' },
-  popular: { orderBy: 'totalViews', orderDirection: 'desc' },
-  newest: { orderBy: 'createdAt', orderDirection: 'desc' },
-  oldest: { orderBy: 'createdAt', orderDirection: 'asc' },
-  alphabetical: { orderBy: 'postTitle', orderDirection: 'asc' },
-};
 
 function blockedKey(value) {
   return String(value === undefined || value === null ? '' : value)
@@ -61,26 +28,15 @@ function blockedKey(value) {
 }
 
 function isBlockedGenre(genre) {
-  if (typeof genre === 'string') return BLOCKED_GENRES.has(blockedKey(genre));
-  return !!genre && (BLOCKED_GENRES.has(blockedKey(genre.name)) || BLOCKED_GENRES.has(blockedKey(genre.slug)));
+  return BLOCKED_GENRES.has(blockedKey(genre));
 }
 
 function hasBlockedGenre(list) {
   return Array.isArray(list) && list.some(isBlockedGenre);
 }
 
-function isBlockedTag(tag, blockedIds) {
-  if (!tag) return false;
-  return (
-    blockedIds.has(String(tag.id)) ||
-    isBlockedGenre(String(tag.id)) ||
-    isBlockedGenre(tag.label) ||
-    isBlockedGenre(tag.name)
-  );
-}
-
 function cleanText(text) {
-  return (text || '').replace(/\s+/g, ' ').trim();
+  return (text === undefined || text === null ? '' : String(text)).replace(/\s+/g, ' ').trim();
 }
 
 function creditName(value) {
@@ -108,8 +64,8 @@ function descriptionText(raw) {
   return text.replace(/[ \t]+/g, ' ').replace(/\n{3,}/g, '\n\n').trim();
 }
 
-function mapStatus(seriesStatus) {
-  const s = (seriesStatus || '').toUpperCase();
+function mapStatus(status) {
+  const s = (status || '').toUpperCase();
   if (s === 'ONGOING') return 'ONGOING';
   if (s === 'COMPLETED') return 'COMPLETED';
   if (s === 'HIATUS') return 'HIATUS';
@@ -123,46 +79,59 @@ function ageRatingOf(tags) {
   return undefined;
 }
 
-function parsePost(p) {
-  const tags = (p.genres || []).map((g) => cleanText(g && g.name)).filter(Boolean);
-  const manga = {
-    mangaId: p.slug,
-    title: p.postTitle || p.slug,
-    image: p.featuredImage || '',
-    tags,
-    webURL: `${SITE_BASE}/series/${p.slug}`,
-    medium: 'comics',
-  };
-  if (typeof p.averageRating === 'number' && p.averageRating > 0) manga.rating = p.averageRating;
-  if (mapStatus(p.seriesStatus) === 'COMPLETED') manga.completed = true;
-  const age = ageRatingOf(tags);
-  if (age) manga.ageRating = age;
-  if (CONFIG.referer) manga.referer = SITE_BASE + '/';
-  return manga;
+function coverOf(raw, width) {
+  const value = cleanText(raw);
+  if (!value) return '';
+  let path = '';
+  const wrapped = /^https?:\/\/images\.weserv\.nl\/\?(?:[^#]*&)?url=([^&#]+)/.exec(value);
+  const source = wrapped ? decodeURIComponent(wrapped[1]) : value;
+  const sized = /\/uploads\/_img\/\d+\/(.+)$/.exec(source);
+  if (sized) path = sized[1];
+  else {
+    const plain = /\/uploads\/(.+)$/.exec(source);
+    if (plain) path = plain[1];
+  }
+  if (!path) return /^https?:\/\//.test(value) ? value : '';
+  return `${SITE_BASE}/uploads/_img/${width}/${path}`;
 }
 
-function countdown(ms) {
-  if (ms <= 60000) return 'moments';
-  const minutes = Math.floor(ms / 60000);
-  const h = Math.floor(minutes / 60);
-  const m = minutes % 60;
-  if (h > 0 && m > 0) return `${h}h ${m}m`;
-  return h > 0 ? `${h}h` : `${m}m`;
+function parseItem(p) {
+  const tags = (p.genres || []).map(cleanText).filter(Boolean);
+  const manga = {
+    mangaId: p.slug,
+    title: cleanText(p.title) || p.slug,
+    image: coverOf(p.cover, COVER_WIDTH),
+    tags,
+    webURL: `${SITE_BASE}/manga/${p.slug}`,
+    medium: 'comics',
+  };
+  if (mapStatus(p.status) === 'COMPLETED') manga.completed = true;
+  const age = ageRatingOf(tags);
+  if (age) manga.ageRating = age;
+  return manga;
 }
 
 function chapterDisplayName(ch) {
   const title = cleanText(ch.title);
-  const base = title || `Chapter ${ch.number}`;
-  if (!ch.isLocked) return base;
-  const unlock = ch.unlockAt ? Date.parse(ch.unlockAt) : NaN;
-  if (!Number.isNaN(unlock) && unlock > Date.now()) return `${base} (Locked, unlocks in ${countdown(unlock - Date.now())})`;
-  if (typeof ch.price === 'number' && ch.price > 0) return `${base} (Locked, ${ch.price} coins)`;
+  const base = title || `Chapter ${ch.chapter_number}`;
+  if (!ch.is_locked) return base;
+  if (typeof ch.coins === 'number' && ch.coins > 0) return `${base} (Locked, ${ch.coins} coins)`;
   return `${base} (Locked)`;
+}
+
+function headerValue(headers, name) {
+  if (!headers) return undefined;
+  const wanted = name.toLowerCase();
+  const keys = Object.keys(headers);
+  for (let i = 0; i < keys.length; i++) {
+    if (keys[i].toLowerCase() === wanted) return headers[keys[i]];
+  }
+  return undefined;
 }
 
 class Source {
   getSourceFeeds() {
-    return CONFIG.feeds.map((f) => ({ id: f.id, name: f.name }));
+    return FEEDS.map((f) => ({ id: f.id, name: f.name }));
   }
 
   async getSearchTags() {
@@ -171,157 +140,140 @@ class Source {
       const seen = new Set();
       const tags = [];
       (Array.isArray(genres) ? genres : []).forEach((g) => {
-        if (!g || g.id === undefined || g.id === null) return;
-        if (isBlockedGenre(g)) return;
-        const id = String(g.id);
-        const label = cleanText(g.name);
-        if (!label || seen.has(id)) return;
+        const label = cleanText(g && g.title);
+        if (!label || isBlockedGenre(label)) return;
+        const id = label.toLowerCase();
+        if (seen.has(id)) return;
         seen.add(id);
         tags.push({ id, label });
       });
       return tags;
     } catch (e) {
-      console.error(CONFIG.name + ' getSearchTags failed: ' + (e && e.message));
+      console.error('Renascans getSearchTags failed: ' + (e && e.message));
       return [];
     }
   }
 
   async getSearchResults(request, metadata) {
     if (request && request.medium === 'novel') return { results: [] };
-    const blockedIds = await this.blockedGenreIds();
-    const page = (metadata && metadata.page) || 1;
-    const params = [`page=${page}`, `perPage=${PER_PAGE}`, 'view=archive', `seriesType=${CONFIG.comicTypes}`];
+    const page = Math.max(1, (metadata && metadata.page) || 1);
+    const params = [`limit=${PER_PAGE}`, `offset=${(page - 1) * PER_PAGE}`];
+
+    const feed = FEEDS.find((f) => f.id === (request && request.feed)) || FEEDS[0];
+    params.push(`sort=${feed.id}`);
 
     const query = ((request && request.title) || '').trim();
-    if (query) params.push(`searchTerm=${encodeURIComponent(query)}`);
+    if (query) params.push(`q=${encodeURIComponent(query)}`);
 
-    const included = (request && request.includedTags) || [];
-    if (included.some((t) => isBlockedTag(t, blockedIds))) return { results: [], metadata: undefined };
-    const genreIds = included.map((t) => t && t.id).filter(Boolean);
-    if (genreIds.length > 0) params.push(`genreIds=${encodeURIComponent(genreIds.join(','))}`);
+    const included = ((request && request.includedTags) || []).map((t) => t && t.id).filter(Boolean).map((id) => String(id).toLowerCase());
+    if (included.some(isBlockedGenre)) return { results: [], metadata: undefined };
+    if (included.length > 0) params.push(`genres=${encodeURIComponent(included.join(','))}`);
 
-    const excluded = ((request && request.excludedTags) || []).map((t) => t && t.id).filter(Boolean).map(String);
-    blockedIds.forEach((id) => {
-      if (excluded.indexOf(id) === -1) excluded.push(id);
+    const excluded = ((request && request.excludedTags) || []).map((t) => t && t.id).filter(Boolean).map((id) => String(id).toLowerCase());
+    BLOCKED_PARAM.split(',').forEach((g) => {
+      if (excluded.indexOf(g) === -1) excluded.push(g);
     });
-    if (excluded.length > 0) params.push(`excludedGenreIds=${encodeURIComponent(excluded.join(','))}`);
+    params.push(`exclude_genres=${encodeURIComponent(excluded.join(','))}`);
 
-    const feedId = (request && request.feed) || CONFIG.feeds[0].id;
-    const sort = FEED_SORTS[feedId] || FEED_SORTS[CONFIG.feeds[0].id];
-    params.push(`orderBy=${sort.orderBy}`, `orderDirection=${sort.orderDirection}`);
-
-    const json = await this.requestJSON(`${API_BASE}/query?${params.join('&')}`);
-    const posts = (json && json.posts) || [];
-    const totalCount = (json && json.totalCount) || 0;
-    const results = posts.filter((p) => p && p.slug && !hasBlockedGenre(p.genres)).map(parsePost);
-    return { results, metadata: page * PER_PAGE < totalCount ? { page: page + 1 } : undefined };
+    const response = await this.requestRaw(`${API_BASE}/manga?${params.join('&')}`);
+    const list = JSON.parse(response.data);
+    const items = Array.isArray(list) ? list : [];
+    const results = items
+      .filter((p) => p && p.slug && !hasBlockedGenre(p.genres) && !/novel/i.test(p.type || ''))
+      .map(parseItem);
+    const total = parseInt(headerValue(response.headers, 'x-total-count'), 10);
+    const more = Number.isNaN(total) ? items.length >= PER_PAGE : (page - 1) * PER_PAGE + items.length < total;
+    return { results, metadata: more && items.length > 0 ? { page: page + 1 } : undefined };
   }
 
   async getMangaDetails(mangaId) {
-    const post = await this.requestPost(mangaId);
-    const tags = (post.genres || []).map((g) => cleanText(g && g.name)).filter(Boolean);
+    const post = await this.requestManga(mangaId);
+    const tags = (post.genres || []).map(cleanText).filter(Boolean);
     const credits = [];
     [post.author, post.artist].forEach((value) => {
       const name = creditName(value);
       if (name && credits.indexOf(name) === -1) credits.push(name);
     });
-    const status = mapStatus(post.seriesStatus);
+    const status = mapStatus(post.status);
     const info = {
-      title: post.postTitle || mangaId,
-      image: post.featuredImage || '',
-      desc: descriptionText(post.postContent),
+      title: cleanText(post.title) || mangaId,
+      image: coverOf(post.cover, DETAIL_COVER_WIDTH),
+      desc: descriptionText(post.description),
       status,
       tags,
-      webURL: `${SITE_BASE}/series/${encodeURIComponent(mangaId)}`,
+      webURL: `${SITE_BASE}/manga/${encodeURIComponent(mangaId)}`,
       medium: 'comics',
     };
     if (credits.length > 0) info.author = credits.join(' / ');
     if (status === 'COMPLETED') info.completed = true;
     const age = ageRatingOf(tags);
     if (age) info.ageRating = age;
-    if (CONFIG.referer) info.referer = SITE_BASE + '/';
     return { mangaInfo: info };
   }
 
   async getChapters(mangaId) {
-    const post = await this.requestPost(mangaId);
-    const data = await this.requestJSON(`${API_BASE}/chapters?postId=${encodeURIComponent(post.id)}&take=all`);
-    const raw = data && data.post && data.post.chapters;
+    const post = await this.requestManga(mangaId);
+    const raw = post.chapters;
     if (!Array.isArray(raw)) throw new Error(`No chapter list in the response for ${mangaId}`);
-    const chapters = raw
-      .filter((ch) => ch && ch.slug)
-      .map((ch) => {
-        const chapter = {
-          id: ch.slug,
-          chapterId: ch.slug,
-          name: chapterDisplayName(ch),
-          number: typeof ch.number === 'number' ? ch.number : parseFloat(ch.number) || 0,
-        };
-        const time = Date.parse(ch.createdAt);
-        if (!Number.isNaN(time)) chapter.time = time;
-        return chapter;
-      });
+    const seen = new Set();
+    const chapters = [];
+    raw.forEach((ch) => {
+      if (!ch || ch.id === undefined || ch.id === null) return;
+      const id = String(ch.id);
+      if (seen.has(id)) return;
+      seen.add(id);
+      const chapter = {
+        id,
+        chapterId: id,
+        name: chapterDisplayName(ch),
+        number: typeof ch.chapter_number === 'number' ? ch.chapter_number : parseFloat(ch.chapter_number) || 0,
+      };
+      const time = Date.parse(ch.created_at);
+      if (!Number.isNaN(time)) chapter.time = time;
+      chapters.push(chapter);
+    });
     chapters.sort((a, b) => a.number - b.number);
     return chapters;
   }
 
   async getChapterDetails(mangaId, chapterId) {
-    await this.requestPost(mangaId);
-    const html = await this.requestHTML(`${SITE_BASE}/series/${encodeURIComponent(mangaId)}/${encodeURIComponent(chapterId)}`);
-    const $ = cheerio.load(html);
-    const found = [];
-    $('img[data-reader-page-image]').each((_, el) => {
-      const $el = $(el);
-      const src = ($el.attr('src') || '').trim();
-      if (!/^https?:\/\//.test(src)) return;
-      const idxAttr = $el.attr('data-reader-index');
-      const idx = idxAttr !== undefined ? parseInt(idxAttr, 10) : found.length;
-      found.push({ idx: Number.isNaN(idx) ? found.length : idx, src });
-    });
-    found.sort((a, b) => a.idx - b.idx);
-    const pages = found.map((p) => p.src);
-    if (pages.length === 0) throw new Error(`${CONFIG.name}: no pages for this chapter (locked, or not published yet)`);
-    const details = { id: chapterId, mangaId, pages };
-    if (CONFIG.referer) details.referer = SITE_BASE + '/';
-    return details;
+    const [, data] = await Promise.all([
+      this.requestManga(mangaId),
+      this.requestJSON(`${API_BASE}/chapters/${encodeURIComponent(chapterId)}`),
+    ]);
+    const content = data && Array.isArray(data.content) ? data.content : [];
+    if (content.length === 0) {
+      if (data && (data.is_locked || data.unlocked === false)) {
+        const price = typeof data.coins === 'number' && data.coins > 0 ? ` (${data.coins} coins)` : '';
+        throw new Error(`Renascans: this chapter is locked${price}, it cannot be read without buying it on the site`);
+      }
+      throw new Error('Renascans: no pages for this chapter (not published yet)');
+    }
+    const pages = content.map((p) => (/^https?:\/\//.test(p) ? p : `${SITE_BASE}/uploads/${String(p).replace(/^\/+/, '')}`));
+    return { id: chapterId, mangaId, pages };
   }
 
-  async requestPost(mangaId) {
-    const data = await this.requestJSON(`${API_BASE}/post?postSlug=${encodeURIComponent(mangaId)}`);
-    const post = data && data.post;
+  async requestManga(mangaId) {
+    const post = await this.requestJSON(`${API_BASE}/manga/${encodeURIComponent(mangaId)}`);
     if (!post || post.id === undefined || post.id === null) throw new Error(`Could not find series data for ${mangaId}`);
-    if (hasBlockedGenre(post.genres) || hasBlockedGenre(post.tags)) throw new Error('title not available');
+    if (hasBlockedGenre(post.genres)) throw new Error('title not available');
     return post;
   }
 
-  async blockedGenreIds() {
-    const now = Date.now();
-    if (this.blockedIds && now - this.blockedIdsAt < BLOCKED_IDS_TTL_MS) return this.blockedIds;
-    const genres = await this.requestJSON(`${API_BASE}/genres`);
-    if (!Array.isArray(genres)) throw new Error('Could not load the genre list');
-    const ids = new Set();
-    genres.forEach((g) => {
-      if (g && g.id !== undefined && g.id !== null && isBlockedGenre(g)) ids.add(String(g.id));
-    });
-    this.blockedIds = ids;
-    this.blockedIdsAt = now;
-    return ids;
-  }
-
-  async requestHTML(url) {
-    const manager = App.createRequestManager(CONFIG.rateLimit ? { rateLimit: CONFIG.rateLimit } : {});
+  async requestRaw(url) {
+    const manager = App.createRequestManager({});
     const request = App.createRequest({
       url,
       method: 'GET',
-      headers: { 'User-Agent': UA, Origin: SITE_BASE, Referer: SITE_BASE + '/' },
+      headers: { 'User-Agent': UA, Accept: 'application/json' },
     });
     const response = await manager.schedule(request);
-    if (response.status < 200 || response.status >= 300) throw new Error(`${CONFIG.name} HTTP ${response.status} for ${url}`);
-    return response.data;
+    if (response.status < 200 || response.status >= 300) throw new Error(`Renascans HTTP ${response.status} for ${url}`);
+    return response;
   }
 
   async requestJSON(url) {
-    return JSON.parse(await this.requestHTML(url));
+    return JSON.parse((await this.requestRaw(url)).data);
   }
 }
 

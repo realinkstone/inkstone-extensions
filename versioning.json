@@ -47,7 +47,7 @@
     {
       "id": "chikari",
       "name": "Chikari",
-      "version": "4.4.0",
+      "version": "4.4.1",
       "medium": "both",
       "website": "https://chikari.moe",
       "iconUrl": "https://inkstone.web.app/chikari/icon.png",
@@ -62,7 +62,7 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "sha256": "067f2c9365c98fe888b74061a92a9afd8a2608f88a5c39609952ed7cc9b89f33"
+      "sha256": "2e7157f1079dec5e4286364d14d571eeedd3418beacbd8682e7628c16f7253eb"
     },
     {
       "id": "novelfire",
@@ -146,9 +146,9 @@
     {
       "id": "mangakakalot",
       "name": "Mangakakalot",
-      "version": "1.2.1",
+      "version": "1.3.0",
       "medium": "comics",
-      "website": "https://www.mangakakalot.gg",
+      "website": "https://www.katamanga.com",
       "iconUrl": "https://inkstone.web.app/mangakakalot/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nCatalog・90,000+\n\nRestrictions:\n・Cloudflare Checks",
       "capabilities": [
@@ -161,7 +161,7 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "sha256": "810b301a3914b8347861cf8b6084584c989a53bcf42c54d500175a0b4bcd3f30"
+      "sha256": "a0be97d08cb8d623d1e29b121c88225b91037e2ba2412f64acec9056c7a18ac2"
     },
     {
       "id": "natomanga",
@@ -1074,9 +1074,9 @@
     {
       "id": "lelscans",
       "name": "Lelscans",
-      "version": "1.1.1",
+      "version": "1.1.2",
       "medium": "comics",
-      "website": "https://lelscans.net",
+      "website": "https://lelscan.net",
       "iconUrl": "https://inkstone.web.app/lelscans/icon.png",
       "description": "Manga\n\nCatalog・30+",
       "capabilities": [
@@ -1088,7 +1088,7 @@
       ],
       "language": "fr",
       "contentRating": "safe",
-      "sha256": "1cd8d66457d100e39ee4c0d0b0d0cf7fc98348b34d462c768e22b877bc06fbac"
+      "sha256": "1c760cd6011fe4e6c1a3bc5c5c32d0ea2a4a988ff30986eea7710d1aacf217ff"
     },
     {
       "id": "globalcomix",
@@ -1113,7 +1113,7 @@
     {
       "id": "animesama",
       "name": "Anime-Sama",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://anime-sama.to",
       "iconUrl": "https://inkstone.web.app/animesama/icon.png",
@@ -1128,7 +1128,7 @@
       ],
       "language": "fr",
       "contentRating": "mature",
-      "sha256": "ee866ad55997d4ac854f6b1554514687780c131dfd94abdd8dc855d714faa0a3"
+      "sha256": "d6fd7cf83b4540d775a1ee892180baa8064d08aee8584e888a9cefaa36231bfa"
     },
     {
       "id": "cmanga",
@@ -1173,9 +1173,9 @@
     {
       "id": "lectormanga",
       "name": "Lectormanga",
-      "version": "1.2.2",
+      "version": "1.2.3",
       "medium": "comics",
-      "website": "https://lectormangass.net",
+      "website": "https://lector-mangas.lat",
       "iconUrl": "https://inkstone.web.app/lectormanga/icon.png",
       "description": "Manhwa・Manhua・Comics\n\nCatalog・10,000+",
       "capabilities": [
@@ -1188,7 +1188,7 @@
       ],
       "language": "es",
       "contentRating": "adult",
-      "sha256": "e7797f92491443db0b16b00b6e46189795dd5d17d8643636bd639a052d6f68ad"
+      "sha256": "e673bee7d37ad0ffbedf6ab14bf5c5b312d5978f56d038ddbac26495fa008db1"
     },
     {
       "id": "komikindo",
@@ -1211,28 +1211,9 @@
       "sha256": "e1930e5f652858239b82b69edf08bb9b4cab5967815934cbc72db20b240a22b4"
     },
     {
-      "id": "indomanhwa",
-      "name": "Indomanhwa",
-      "version": "1.0.1",
-      "medium": "comics",
-      "website": "https://indomanhwa.com",
-      "iconUrl": "https://inkstone.web.app/indomanhwa/icon.png",
-      "description": "Manga・Manhwa・Manhua\n\nRestrictions:\n・Cloudflare Checks",
-      "capabilities": [
-        "browse",
-        "search",
-        "details",
-        "chapters",
-        "reader"
-      ],
-      "language": "id",
-      "contentRating": "mature",
-      "sha256": "4c2f11daad8bddefbd9ffd06242721c5a695790664a04462c513df46d5385ce3"
-    },
-    {
       "id": "manhuavn",
       "name": "ManhuaVN",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "medium": "comics",
       "website": "https://manhuavn.top",
       "iconUrl": "https://inkstone.web.app/manhuavn/icon.png",
@@ -1247,7 +1228,7 @@
       ],
       "language": "vi",
       "contentRating": "adult",
-      "sha256": "9abf0af080028c1ae03cd5fa7c2594b87779470fd5ade1c93b5808263673ab94"
+      "sha256": "4cc56149f35bb708aee8d360f28a8adeaa58b234677315039cb54cbb6c84f898"
     },
     {
       "id": "wamanga",
@@ -1291,22 +1272,23 @@
     {
       "id": "remanga",
       "name": "ReManga",
-      "version": "1.2.1",
+      "version": "1.2.2",
       "medium": "comics",
       "website": "https://remanga.org",
       "iconUrl": "https://inkstone.web.app/remanga/icon.png",
-      "description": "Manga・Manhwa・Manhua\n\nCatalog・50,000+",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・50,000+\n\nRestrictions:\n・Locked Chapters",
       "capabilities": [
         "browse",
         "search",
         "genres",
         "details",
         "chapters",
-        "reader"
+        "reader",
+        "locked"
       ],
       "language": "ru",
       "contentRating": "adult",
-      "sha256": "c501b3daf0e8d5d5ec14cf767d7c2252ba32bded456f6b5d153288e26020dbbe"
+      "sha256": "aa767bbfb589690a011236ed3ba09b18a66f54f744010056d41c05e192f1177a"
     },
     {
       "id": "turkmanga",
@@ -1351,7 +1333,7 @@
     {
       "id": "inkstory",
       "name": "InkStory",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "medium": "comics",
       "website": "https://inkstory.net",
       "iconUrl": "https://inkstone.web.app/inkstory/icon.png",
@@ -1366,7 +1348,7 @@
       ],
       "language": "ru",
       "contentRating": "mature",
-      "sha256": "fd06f3769c3c191fea1b557ee4f1473bdc2a0fadfa40d7cfedbf8d6fccd4e10a"
+      "sha256": "5ecb0548536044dc2f4333f50e472636a83837cc3282b0a09c85f298fe65dbd0"
     },
     {
       "id": "yurimanga",
@@ -1510,11 +1492,11 @@
     {
       "id": "manhwahq",
       "name": "ManhwaHQ",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://manhwahq.com",
       "iconUrl": "https://inkstone.web.app/manhwahq/icon.png",
-      "description": "Manga・Manhwa・Manhua\n\nCatalog・9,000+",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・10,000+",
       "capabilities": [
         "browse",
         "search",
@@ -1525,7 +1507,7 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "sha256": "de5c2dda1095fc9b6046760cc0bd7596c8cfbba11842bd9c62b8aa3339b66a95"
+      "sha256": "8e20e253110fd122f6b122cb0e34a0e8e0478ed29a7d827607979ded2c7a6ada"
     },
     {
       "id": "libread",
@@ -1630,7 +1612,7 @@
     {
       "id": "17k",
       "name": "17K Novel Network",
-      "version": "1.3.0",
+      "version": "1.3.1",
       "medium": "novel",
       "website": "https://www.17k.com",
       "iconUrl": "https://inkstone.web.app/17k/icon.png",
@@ -1645,7 +1627,7 @@
       ],
       "language": "zh",
       "contentRating": "mature",
-      "sha256": "a83a418bbfbb78f41495440af74f48148aa95303a9b4c76ed13ec0b507286765"
+      "sha256": "3a57086f882481ef75ab7d98539d559546dcceb8a75372b8807f76bd600f7d25"
     },
     {
       "id": "mangaowl",
@@ -1849,7 +1831,7 @@
     {
       "id": "mangadex",
       "name": "MangaDex",
-      "version": "1.2.3",
+      "version": "1.3.0",
       "medium": "comics",
       "website": "https://mangadex.org",
       "iconUrl": "https://inkstone.web.app/mangadex/icon.png",
@@ -1864,10 +1846,12 @@
       ],
       "settingsSchema": [
         {
-          "type": "select",
+          "type": "multiSelect",
           "key": "language",
-          "label": "Chapter language",
-          "default": "en",
+          "label": "Chapter languages",
+          "default": [
+            "en"
+          ],
           "options": [
             {
               "value": "en",
@@ -1948,6 +1932,62 @@
             {
               "value": "zh-hk",
               "label": "Chinese (Traditional)"
+            },
+            {
+              "value": "uk",
+              "label": "Ukrainian"
+            },
+            {
+              "value": "nl",
+              "label": "Dutch"
+            },
+            {
+              "value": "ro",
+              "label": "Romanian"
+            },
+            {
+              "value": "hu",
+              "label": "Hungarian"
+            },
+            {
+              "value": "cs",
+              "label": "Czech"
+            },
+            {
+              "value": "hi",
+              "label": "Hindi"
+            },
+            {
+              "value": "he",
+              "label": "Hebrew"
+            },
+            {
+              "value": "el",
+              "label": "Greek"
+            },
+            {
+              "value": "fa",
+              "label": "Persian"
+            },
+            {
+              "value": "ms",
+              "label": "Malay"
+            },
+            {
+              "value": "bg",
+              "label": "Bulgarian"
+            },
+            {
+              "value": "ca",
+              "label": "Catalan"
+            },
+            {
+              "value": "tl",
+              "label": "Filipino"
+            },
+            {
+              "value": "fi",
+              "label": "Finnish"
             }
           ]
         },
@@ -1960,7 +2000,7 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "974dc0e25781146899a4218ff44d5a38a49d7cbc7e8243c3bd6824cdc7839af6"
+      "sha256": "e7be5b0f733d763ef9f1b734b840e10de1aac87a6f16bfdd5bf0dfe5aa1f5cc4"
     },
     {
       "id": "kagane",
@@ -2447,7 +2487,7 @@
     {
       "id": "cocomic",
       "name": "Cocomic",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://cocomic.co",
       "iconUrl": "https://inkstone.web.app/cocomic/icon.png",
@@ -2455,7 +2495,7 @@
         "cocomic.co",
         "*.cocomic.co"
       ],
-      "description": "Manga・Manhwa・Manhua\n\nCatalog・1,000+",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・20,000+",
       "capabilities": [
         "browse",
         "search",
@@ -2466,7 +2506,7 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "sha256": "075e8a10d3779666bca6d7133461e797e2cbb99a2d40bb993c47d5f2d2dab4a8"
+      "sha256": "fa770042acef5d4ca5ffa9209f17128a47eab4417bd7b3c51b5d0682a7f8b3ed"
     },
     {
       "id": "evascans",
@@ -2495,7 +2535,7 @@
     {
       "id": "gakamangas",
       "name": "GakaMangas",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://gakamangas.com",
       "iconUrl": "https://inkstone.web.app/gakamangas/icon.png",
@@ -2514,7 +2554,7 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "aa0d877cf78c50ef1a6006a447865ef87da554651db43b4a7669836d8d15438f"
+      "sha256": "8fb84be31558c5207f4e12af23810ffdda3ecd24d1769b1c1426d0a38a02f615"
     },
     {
       "id": "hunlightcomics",
@@ -2876,15 +2916,15 @@
     {
       "id": "thunderscans",
       "name": "Thunder Scans",
-      "version": "1.0.0",
-      "medium": "comics",
+      "version": "1.1.0",
+      "medium": "both",
       "website": "https://en-thunderscans.com",
       "iconUrl": "https://inkstone.web.app/thunderscans/icon.png",
       "hosts": [
         "en-thunderscans.com",
         "*.en-thunderscans.com"
       ],
-      "description": "Manga・Manhwa・Manhua\n\nCatalog・1,000+",
+      "description": "Manga・Manhwa・Manhua・Web Novels\n\nCatalog・1,000+",
       "capabilities": [
         "browse",
         "search",
@@ -2895,7 +2935,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "b6698fd04553f6bd62c92176bf178b9104933c4ee9128a08b8c18d925bc01ef7"
+      "sha256": "9c78638170af7233395a8464edca8f8d16561cb468771a4afea425a60f333c84"
     },
     {
       "id": "violetscans",
@@ -3019,7 +3059,7 @@
     {
       "id": "nyxscans",
       "name": "Nyx Scans",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://nyxscans.com",
       "iconUrl": "https://inkstone.web.app/nyxscans/icon.png",
@@ -3038,7 +3078,7 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "e22b0396beb42433001b6cd2d3e781101a93de8e3ad0625ac264cbd5fbd0ab49"
+      "sha256": "67296994ca94abf172729866a36443a8e8f607299caad018566fdff0fdbcfcd0"
     },
     {
       "id": "sanascans",
@@ -3115,7 +3155,7 @@
     {
       "id": "renascans",
       "name": "Renascans",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "medium": "comics",
       "website": "https://renascans.net",
       "iconUrl": "https://inkstone.web.app/renascans/icon.png",
@@ -3123,7 +3163,7 @@
         "renascans.net",
         "*.renascans.net"
       ],
-      "description": "Manhwa\n\nRestrictions:\n・Locked Chapters",
+      "description": "Manhwa・Manhua・Manga\n\nCatalog〃80+\n\nRestrictions:\n・Locked Chapters",
       "capabilities": [
         "browse",
         "search",
@@ -3134,7 +3174,7 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "32fd53fb4b4b5a1c41f81489ef10d0e0f5007d9b25a9896d9c9148f219599eac",
+      "sha256": "5ecae3a47dc2d4a04cda3faa7edf7a2fb39eb287f2db4cddc80efe8407edfe5b",
       "status": "broken",
       "statusNote": "The site's API address (api.renascans.net) no longer exists."
     },
@@ -3400,11 +3440,13 @@
     {
       "id": "anikoto",
       "name": "Anikoto",
-      "version": "1.0.8",
+      "version": "1.0.9",
       "medium": "anime",
-      "website": "https://anikototv.to",
+      "website": "https://anikototv.bz",
       "iconUrl": "https://anikototv.to/AnikotoTheme/assets/images/favicon.png",
       "hosts": [
+        "anikototv.bz",
+        "*.anikototv.bz",
         "anikototv.to",
         "*.anikototv.to",
         "megaplay.buzz",
@@ -3431,7 +3473,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "5caa9ce37d02648122b40f65db1bb0f468e77258a82cf88dc14bee26d6fac697"
+      "sha256": "55366419009dd630d027b2d836e1a3be47a95d7f2e33125fe440b2296f900922"
     },
     {
       "id": "aniworld",
@@ -4238,7 +4280,9 @@
       ],
       "language": "pt-BR",
       "contentRating": "safe",
-      "sha256": "6ee6dc8ac03a0ae16cf760490c3ad53b10e0966ad0107064914f7f29242f70b4"
+      "sha256": "6ee6dc8ac03a0ae16cf760490c3ad53b10e0966ad0107064914f7f29242f70b4",
+      "status": "broken",
+      "statusNote": "The reader site shows a \"Coming Soon\" page on every address."
     },
     {
       "id": "nebulosascan",
@@ -4527,30 +4571,6 @@
       "sha256": "cddb13dabe7f79c64069e150282e68e39e915fa81c3c6669686150e8643b0c55"
     },
     {
-      "id": "truyentini",
-      "name": "TruyenTini",
-      "version": "1.0.1",
-      "medium": "comics",
-      "website": "https://truyentini.net",
-      "iconUrl": "https://inkstone.web.app/truyentini/icon.png",
-      "hosts": [
-        "truyentini.net",
-        "*.truyentini.net"
-      ],
-      "description": "Manhwa\n\nCatalog・200+",
-      "capabilities": [
-        "browse",
-        "search",
-        "genres",
-        "details",
-        "chapters",
-        "reader"
-      ],
-      "language": "vi",
-      "contentRating": "adult",
-      "sha256": "15a32a64630534b08bca0f4ffbf40f113379b1427c3ca028852e8c943e73b539"
-    },
-    {
       "id": "truyentuoitho",
       "name": "TruyenTuoiTho",
       "version": "1.0.2",
@@ -4624,7 +4644,7 @@
     {
       "id": "mangalik",
       "name": "مانجا ليك",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://mangalik.net",
       "iconUrl": "https://inkstone.web.app/mangalik/icon.png",
@@ -4643,7 +4663,7 @@
       ],
       "language": "ar",
       "contentRating": "safe",
-      "sha256": "0e7f9a0ca7c1113266fb04b88f50f701e8e682be7dfdb87c0d70d4cc203a991f"
+      "sha256": "71e9d9242ea914df16bd044b284895ff0ef835b0be82d52a9e786a4a4aade8f2"
     },
     {
       "id": "phoenixscans",
@@ -4888,7 +4908,7 @@
     {
       "id": "kumanga",
       "name": "KuManga",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://www.kumanga.com",
       "iconUrl": "https://inkstone.web.app/kumanga/icon.png",
@@ -4908,7 +4928,9 @@
       "contentRating": "adult",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "77594342b36c22316c9e8cc81e8d0d6f30be21f26b00aff26d1ad47392b1b067"
+      "sha256": "005bc4dc3c16ebe5f503a19d7cf116824231887e8cbb98741ec0178a9699b496",
+      "status": "broken",
+      "statusNote": "Chapters cannot be opened: the site now needs a token its own script builds. Latest, details and chapter lists still load."
     },
     {
       "id": "zonatmoorg",
@@ -5083,7 +5105,7 @@
     {
       "id": "kaliscanorg",
       "name": "KaliScan.org",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://kaliscan.org",
       "iconUrl": "https://inkstone.web.app/kaliscanorg/icon.png",
@@ -5102,7 +5124,7 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "sha256": "882629c880c76abd81d69be064820a0edf870ff76aca46c24dc63b5e9f0dbd52"
+      "sha256": "90b2674fa5a6657d9047a6e4319de17a40c3d94dd4961ec7e64822e1f191d027"
     },
     {
       "id": "kuromanga",
@@ -5251,7 +5273,7 @@
     {
       "id": "rahpchanhdy",
       "name": "Rùa Hấp Chanh Dây",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://ruahapchanhday2.com",
       "iconUrl": "https://inkstone.web.app/rahpchanhdy/icon.png",
@@ -5270,7 +5292,7 @@
       ],
       "language": "vi",
       "contentRating": "adult",
-      "sha256": "139388e3f782f7142c79d0f2a6e9e1d68bb07ec5505852d63641dc6bd04e02fe"
+      "sha256": "0fddf58bd1d47db58d185ab185c425dd48112e3240da4a375ed850e694a3d9a3"
     },
     {
       "id": "richtoscan",
@@ -5323,7 +5345,7 @@
     {
       "id": "speedmanga",
       "name": "Speed Manga",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://speed-manga.com",
       "iconUrl": "https://inkstone.web.app/speedmanga/icon.png",
@@ -5342,7 +5364,7 @@
       ],
       "language": "th",
       "contentRating": "mature",
-      "sha256": "567cc68a0a88f05e3172ed4dd0abd1a795d381ef49c065063ace2803dc29347c"
+      "sha256": "e22b597155344ca72816043db8fc0be58e6d8a900605227bcc7924b6c9b216d7"
     },
     {
       "id": "tanukimanga",
@@ -5505,30 +5527,6 @@
       "language": "th",
       "contentRating": "safe",
       "sha256": "6cedd44cf986cdb6a00918f525d1aa8ba9a3616baf21e8f7bd844810bb82a333"
-    },
-    {
-      "id": "harmonyscan",
-      "name": "Harmony-Scan",
-      "version": "1.0.0",
-      "medium": "comics",
-      "website": "https://harmony-scan.fr",
-      "iconUrl": "https://inkstone.web.app/harmonyscan/icon.png",
-      "hosts": [
-        "harmony-scan.fr",
-        "*.harmony-scan.fr"
-      ],
-      "description": "Manga・Manhwa・Manhua",
-      "capabilities": [
-        "browse",
-        "search",
-        "genres",
-        "details",
-        "chapters",
-        "reader"
-      ],
-      "language": "fr",
-      "contentRating": "safe",
-      "sha256": "64e56cd797299f628223964ed5d5c3ca7e132bb8db5ff23735e0bd4f093072d1"
     },
     {
       "id": "hizomanga",
@@ -6456,7 +6454,7 @@
     {
       "id": "animeav1",
       "name": "AnimeAV1",
-      "version": "1.0.7",
+      "version": "1.0.8",
       "medium": "anime",
       "website": "https://animeav1.com",
       "iconUrl": "https://inkstone.web.app/animeav1/icon.png",
@@ -6472,7 +6470,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "03ac223c3f5ebf005827c1f661de15383da9facc1ea61a059df111d30396c770"
+      "sha256": "45dcb1314558338c8205de6887af3dafff1a1a0bcdb6c5624062dd5f17c499d1"
     },
     {
       "id": "animejl",
@@ -6822,17 +6820,10 @@
     {
       "id": "cinecalidad",
       "name": "CineCalidad",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "anime",
       "website": "https://cinecalidad.org",
       "iconUrl": "https://inkstone.web.app/cinecalidad/icon.png",
-      "hosts": [
-        "cinecalidad.org",
-        "vimeos.net",
-        "*.vimeos.net",
-        "vimeos.zip",
-        "*.vimeos.zip"
-      ],
       "description": "Western\n\nCatalog・9,000+",
       "capabilities": [
         "browse",
@@ -6846,7 +6837,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "87169cfd3fcd2b172039038dd174ba54f3c5b733aada23bf9768e7970f9fe46c"
+      "sha256": "2202be928db92dd9834e9c7390ecb2a757e04ac41dfdccffd8a99c79bb7bdce4"
     },
     {
       "id": "cineplus123",
@@ -7558,7 +7549,7 @@
     {
       "id": "wikisourcees",
       "name": "Wikisource (Español)",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "novel",
       "website": "https://es.wikisource.org",
       "iconUrl": "https://inkstone.web.app/wikisourcees/icon.png",
@@ -7579,7 +7570,7 @@
       "contentRating": "safe",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "4c82830f27a9ec183a96b6198f65fad5923a66a0330dd0cfa1ad698eee629f52"
+      "sha256": "1350f9bf5ebb18e9ff525aaf106ea23dbe608478b2ac19717dd3e42b6d5e0059"
     },
     {
       "id": "hentaila",
@@ -7937,7 +7928,7 @@
     {
       "id": "katdrama",
       "name": "Kat Drama",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://k-drama.in",
       "iconUrl": "https://inkstone.web.app/katdrama/icon.png",
@@ -7953,7 +7944,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "3e3304c64fcbd83c95f0227d888fa1fd802e4445e034a5b24f875c72acfb4d1e"
+      "sha256": "02f0ba6b2881fa3299203596ba7a6a32ab8e16727184d32e51580b1aeedf8f18"
     },
     {
       "id": "cno",
@@ -8021,6 +8012,1261 @@
       "language": "en",
       "contentRating": "mature",
       "sha256": "a116aa159ead5a8399d2b6af0bd504cda5bf31953e6bc9deb576d6e37d195c5f"
+    },
+    {
+      "id": "lnmtl",
+      "name": "LNMTL",
+      "version": "1.0.0",
+      "medium": "novel",
+      "website": "https://lnmtl.com",
+      "iconUrl": "https://inkstone.web.app/lnmtl/icon.png",
+      "description": "Web Novels\n\nCatalog・800+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "a730dcbd326e34812eb4fc52fae9e341f9271a2c714c68748bf7e9653c31d55e"
+    },
+    {
+      "id": "mangadot",
+      "name": "MangaDot",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://mangadot.net",
+      "iconUrl": "https://inkstone.web.app/mangadot/icon.png",
+      "hosts": [
+        "mangadot.net"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・70,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "d9d778f399a6f70302a8bfa1aab3bb9380d3317b880650363021e72583ad5f89"
+    },
+    {
+      "id": "mangack",
+      "name": "MangaCK",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://mangack.com",
+      "iconUrl": "https://inkstone.web.app/mangack/icon.png",
+      "description": "Manhwa・Manga・Manhua\n\nCatalog・700+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "f415b38b75386abe5c5a07b6ac4bb41ad7a94257b3380e99dc7a875fece1d0b4"
+    },
+    {
+      "id": "justmanga",
+      "name": "JustManga",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://justmanga.cc",
+      "iconUrl": "https://inkstone.web.app/justmanga/icon.png",
+      "hosts": [
+        "justmanga.cc",
+        "core.justmanga.cc",
+        "s4.anilist.co"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・4,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "settingsSchema": [
+        {
+          "type": "select",
+          "key": "language",
+          "label": "Chapter language",
+          "default": "en",
+          "options": [
+            {
+              "value": "en",
+              "label": "English"
+            },
+            {
+              "value": "es",
+              "label": "Spanish"
+            },
+            {
+              "value": "es-419",
+              "label": "Spanish (Latin America)"
+            },
+            {
+              "value": "pt-br",
+              "label": "Portuguese (Brazil)"
+            },
+            {
+              "value": "pt",
+              "label": "Portuguese"
+            },
+            {
+              "value": "fr",
+              "label": "French"
+            },
+            {
+              "value": "de",
+              "label": "German"
+            },
+            {
+              "value": "it",
+              "label": "Italian"
+            },
+            {
+              "value": "ru",
+              "label": "Russian"
+            },
+            {
+              "value": "pl",
+              "label": "Polish"
+            },
+            {
+              "value": "tr",
+              "label": "Turkish"
+            },
+            {
+              "value": "ar",
+              "label": "Arabic"
+            },
+            {
+              "value": "id",
+              "label": "Indonesian"
+            },
+            {
+              "value": "vi",
+              "label": "Vietnamese"
+            },
+            {
+              "value": "th",
+              "label": "Thai"
+            },
+            {
+              "value": "zh",
+              "label": "Chinese"
+            },
+            {
+              "value": "ko",
+              "label": "Korean"
+            },
+            {
+              "value": "cs",
+              "label": "Czech"
+            },
+            {
+              "value": "el",
+              "label": "Greek"
+            },
+            {
+              "value": "hi",
+              "label": "Hindi"
+            },
+            {
+              "value": "sv",
+              "label": "Swedish"
+            },
+            {
+              "value": "tl",
+              "label": "Filipino"
+            },
+            {
+              "value": "ro",
+              "label": "Romanian"
+            },
+            {
+              "value": "fa",
+              "label": "Persian"
+            }
+          ]
+        }
+      ],
+      "sha256": "57dea14c8003d0c128d3145ac041b3a0bf1c0f5ae98277c7c345cb29b4ef9ae7"
+    },
+    {
+      "id": "xnovel",
+      "name": "Xnovel",
+      "version": "1.0.0",
+      "medium": "novel",
+      "website": "https://xnovel.me",
+      "iconUrl": "https://inkstone.web.app/xnovel/icon.png",
+      "hosts": [
+        "xnovel.me"
+      ],
+      "description": "Web Novels\n\nCatalog・20,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "a06bbe7b039e696d2a5c08e449dfa0c664936d80946649e7c8483bdfa9c8290c"
+    },
+    {
+      "id": "mangamikan",
+      "name": "MangaMikan",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://mangamikan.com",
+      "iconUrl": "https://inkstone.web.app/mangamikan/icon.png",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・1,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "05edec6803308406aff18e1d645737084f3b6e9cfb5b558361c66072f5928ba0"
+    },
+    {
+      "id": "aquamanga",
+      "name": "Aqua Manga",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://aquareader.org",
+      "iconUrl": "https://inkstone.web.app/aquamanga/icon.png",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・2,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "86e32e1c17e49b3d7ee6433f5561631ec3c8e921c03849015f4a3786fc6c4e19"
+    },
+    {
+      "id": "knoxt",
+      "name": "KnoxT",
+      "version": "1.0.0",
+      "medium": "novel",
+      "website": "https://knoxt.space",
+      "iconUrl": "https://inkstone.web.app/knoxt/icon.png",
+      "description": "Web Novels\n\nCatalog・600+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "cb844ec2799bda1f54562acbaa36f40989ac3a9f437aa2028df3f41323f4984c"
+    },
+    {
+      "id": "vymanga",
+      "name": "VyManga",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://mangavyvy.com",
+      "iconUrl": "https://inkstone.web.app/vymanga/icon.png",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・90,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "de1c8391b571407c0b94b9e048d48c5f09c137829c863714337f718666ca3db7"
+    },
+    {
+      "id": "fropi",
+      "name": "Fropi",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://fropi.net",
+      "iconUrl": "https://inkstone.web.app/fropi/icon.png",
+      "hosts": [
+        "fropi.net",
+        "media.fropi.net",
+        "*.relay-core.com"
+      ],
+      "description": "Manhwa\n\nCatalog・100+\n\nRestrictions:\n・Locked Chapters",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader",
+        "locked"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "b25c951d2c2438a5baab4d74ba3c22202b83047b29255e0f15ba99ed7ede3bbb"
+    },
+    {
+      "id": "danke",
+      "name": "Danke fürs Lesen",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://danke.moe",
+      "iconUrl": "https://inkstone.web.app/danke/icon.png",
+      "description": "Manga\n\nCatalog・600+",
+      "capabilities": [
+        "browse",
+        "search",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "452bed78ff436635350897433c46cf7fe2a57dfff4cf572de397c0680f421944"
+    },
+    {
+      "id": "hachirumi",
+      "name": "Hachirumi Scans",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://hachirumi.com",
+      "iconUrl": "https://inkstone.web.app/hachirumi/icon.png",
+      "description": "Manga\n\nCatalog・100+",
+      "capabilities": [
+        "browse",
+        "search",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "e729a815e25edc09032400799e6aba587fb1bf16c9f7b1f172813aa089e8538f"
+    },
+    {
+      "id": "manhuabuddy",
+      "name": "ManhuaBuddy",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://manhuabuddy.com",
+      "iconUrl": "https://inkstone.web.app/manhuabuddy/icon.png",
+      "hosts": [
+        "manhuabuddy.com",
+        "*.manhuabuddy.com"
+      ],
+      "description": "Manga・Manhwa・Manhua・Comics\n\nCatalog・5,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "69ca3aeecd260515fb55a79138e722acdd0524654d1d001eb837253855898b49"
+    },
+    {
+      "id": "readmangacc",
+      "name": "ReadManga.cc",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://readmanga.cc",
+      "iconUrl": "https://inkstone.web.app/readmangacc/icon.png",
+      "hosts": [
+        "readmanga.cc",
+        "bcdn.readmanga.cc"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・4,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "317b1b013ea47ae0c1931688fe77f9f3228715e8a8582c3b5ceda17015da6c73"
+    },
+    {
+      "id": "lightnovelto",
+      "name": "LightNovel.to",
+      "version": "1.0.0",
+      "medium": "novel",
+      "website": "https://lightnovel.to",
+      "iconUrl": "https://inkstone.web.app/lightnovelto/icon.png",
+      "description": "Web Novels・Light Novels\n\nCatalog・10,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "5c126690ffa94891f89a9ba5acead4381d45a46376e5816b4a1151dfb7152deb"
+    },
+    {
+      "id": "bakatsuki",
+      "name": "Baka-Tsuki",
+      "version": "1.0.0",
+      "medium": "novel",
+      "website": "https://www.baka-tsuki.org",
+      "iconUrl": "https://inkstone.web.app/bakatsuki/icon.png",
+      "description": "Light Novels\n\nCatalog・100+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "d56a3ca238a462aa5f012c4e86475989b2f126972d4512413050ec95cc445745"
+    },
+    {
+      "id": "woopread",
+      "name": "WoopRead",
+      "version": "1.0.0",
+      "medium": "novel",
+      "website": "https://woopread.com/",
+      "iconUrl": "https://inkstone.web.app/woopread/icon.png",
+      "hosts": [
+        "woopread.com"
+      ],
+      "description": "Web Novels\n\nCatalog・80+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "47dae5079bae630bbf839864294d4d28ebba27e208328abad70f1274ee4b1e42"
+    },
+    {
+      "id": "novelstime",
+      "name": "NovelsTime",
+      "version": "1.0.0",
+      "medium": "novel",
+      "website": "https://www.novelstime.com/",
+      "iconUrl": "https://inkstone.web.app/novelstime/icon.png",
+      "hosts": [
+        "www.novelstime.com"
+      ],
+      "description": "Web Novels\n\nCatalog・20,000+\n\nRestrictions:\n・Locked Chapters",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader",
+        "locked"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "da30b981671b206ada0cc0ed5b6e9dd9d8f629dbec2577258efbef07533ebaaf"
+    },
+    {
+      "id": "mmani",
+      "name": "MMani",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://mmani.com",
+      "iconUrl": "https://inkstone.web.app/mmani/icon.png",
+      "hosts": [
+        "mmani.com",
+        "*.anien.top",
+        "*.animeapps.top",
+        "*.23t3k20.top",
+        "*.anilist.co",
+        "*.1imgdarr.top",
+        "*.ims2.top"
+      ],
+      "description": "Anime・Movies\n\nCatalog・1,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "19fe3e692446a0e8602f11aebf3c2b74d043e3fb9e94e729806341a83c763cca"
+    },
+    {
+      "id": "zenkai",
+      "name": "Zenkai",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://zenkai.to",
+      "iconUrl": "https://inkstone.web.app/zenkai/icon.png",
+      "hosts": [
+        "zenkai.to",
+        "player.kototv.to",
+        "kototv.to",
+        "*.kototv.to",
+        "gogoanime.pm",
+        "*.gogoanime.pm",
+        "s4.anilist.co",
+        "cdn.anipixcdn.co",
+        "cdn.myanimelist.net"
+      ],
+      "description": "Anime・Movies\n\nCatalog・8,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "cf7882fead0e1271778e1f34995b747ebc40bf71fbee22e8ce4a32119dce4648"
+    },
+    {
+      "id": "wowtopix",
+      "name": "WowTopix",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://wowtopix.com",
+      "iconUrl": "https://inkstone.web.app/wowtopix/icon.png",
+      "hosts": [
+        "wowtopix.com",
+        "*.wowtopix.com",
+        "dailymotion.com",
+        "*.dailymotion.com",
+        "dmcdn.net",
+        "*.dmcdn.net",
+        "ok.ru",
+        "*.mycdn.me",
+        "*.okcdn.ru"
+      ],
+      "description": "Donghua\n\nCatalog・200+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "safe",
+      "sha256": "a162acfa12a7e904dd5ed96351a66b667fafca039b5d602cb1d08294cd87fedc"
+    },
+    {
+      "id": "mydonghua",
+      "name": "MyDonghua",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://mydonghua.com",
+      "iconUrl": "https://inkstone.web.app/mydonghua/icon.png",
+      "hosts": [
+        "mydonghua.com",
+        "*.mydonghua.com",
+        "dailymotion.com",
+        "*.dailymotion.com",
+        "dmcdn.net",
+        "*.dmcdn.net",
+        "ok.ru",
+        "*.mycdn.me",
+        "*.okcdn.ru"
+      ],
+      "description": "Donghua\n\nCatalog・100+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "safe",
+      "sha256": "8f9cdceed56b984e62707be31a09f88bbfd6e2b9fc29ebb72da8c3268ab9b990"
+    },
+    {
+      "id": "kissasiacam",
+      "name": "KissAsian (kissasia.cam)",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://kissasia.cam",
+      "iconUrl": "https://inkstone.web.app/kissasiacam/icon.png",
+      "hosts": [
+        "kissasia.cam"
+      ],
+      "description": "Drama・Movies\n\nCatalog・1,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "66620c9539274fe4f3d387be0b0a0e7eb0ef08264fdca360d1cb9e5348b54c30"
+    },
+    {
+      "id": "anilight",
+      "name": "AniLight",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://anilight.live",
+      "iconUrl": "https://inkstone.web.app/anilight/icon.png",
+      "hosts": [
+        "anilight.live",
+        "api.anilight.live",
+        "media.satella.buzz",
+        "s4.anilist.co",
+        "image.tmdb.org",
+        "artworks.thetvdb.com"
+      ],
+      "description": "Anime\n\nCatalog・9,000+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "93d17bec5068c658ae91dd712de80e0ccaa45e00042950e77817e9386c6d17f2"
+    },
+    {
+      "id": "novelhi",
+      "name": "NovelHi",
+      "version": "1.0.0",
+      "medium": "novel",
+      "website": "https://novelhi.com",
+      "iconUrl": "https://inkstone.web.app/novelhi/icon.png",
+      "hosts": [
+        "novelhi.com",
+        "img.novelhi.com"
+      ],
+      "description": "Web Novels\n\nCatalog・2,000+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "4bf1c1e6298b2bc95ce2fb83b3ba0d4b1d1f1bc3ba07f48e4288804c6cd4806d"
+    },
+    {
+      "id": "wuxiaclick",
+      "name": "WuxiaClick",
+      "version": "1.0.0",
+      "medium": "novel",
+      "website": "https://wuxia.click",
+      "iconUrl": "https://inkstone.web.app/wuxiaclick/icon.png",
+      "hosts": [
+        "wuxia.click",
+        "cdn.wuxiaworld.eu"
+      ],
+      "description": "Web Novels・Light Novels\n\nCatalog・10,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "9720c211f1159ffb426bc68b73f9e180f79916a0a72195eb856914edc7e3d8eb"
+    },
+    {
+      "id": "komix",
+      "name": "Komix",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://komix.to",
+      "iconUrl": "https://inkstone.web.app/komix/icon.png",
+      "hosts": [
+        "komix.to"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・7,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "1f7e99bf5f2600216d5742f7666dc459aae2447f09ad9468b13de9a5d1c74726"
+    },
+    {
+      "id": "novelcool",
+      "name": "NovelCool",
+      "version": "1.0.0",
+      "medium": "novel",
+      "website": "https://www.novelcool.com",
+      "iconUrl": "https://inkstone.web.app/novelcool/icon.png",
+      "hosts": [
+        "www.novelcool.com",
+        "img.novelcool.com"
+      ],
+      "description": "Web Novels・Light Novels\n\nCatalog・2,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "2fc2002f30d50e3ccee1d630c049c2fb2b084f0497a614885166735fd28a1515"
+    },
+    {
+      "id": "projectsuki",
+      "name": "Project Suki",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://projectsuki.com",
+      "iconUrl": "https://inkstone.web.app/projectsuki/icon.png",
+      "hosts": [
+        "projectsuki.com"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・300+\n\nRestrictions:\n・Cloudflare Checks",
+      "capabilities": [
+        "browse",
+        "search",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "911d5ba8a2c4e460c72eac3b0f61d0678f7e3e8e9db973569b682da15738ddd4"
+    },
+    {
+      "id": "webnex",
+      "name": "Webnex",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://webnex.cc",
+      "iconUrl": "https://inkstone.web.app/webnex/icon.png",
+      "hosts": [
+        "webnex.cc",
+        "images.webnex.cc"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・70,000+\n\nRestrictions:\n・Web View",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "ca10de5892d8388325b5a656709d209de6c92497a2897f11a676ea5e6a306731"
+    },
+    {
+      "id": "anidap",
+      "name": "Anidap",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://anidap.lol",
+      "iconUrl": "https://inkstone.web.app/anidap/icon.png",
+      "description": "Anime\n\nCatalog・8,000+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "27dce7fdd6a5fa4a8154ede2ab79990625d0ddd05795b849ff803f398f6ac4d9"
+    },
+    {
+      "id": "kissbae",
+      "name": "KissBae",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://kissbae.com",
+      "iconUrl": "https://inkstone.web.app/kissbae/icon.png",
+      "description": "Drama・Movies・Variety Shows\n\nCatalog・8,000+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "hostsNote": "hosts left OUT on purpose (empty means no limit): the stream hosts rotate and differ per server (gzip.rousav.tech, stream.vidbolt.xyz, proxy.vidbolt.xyz, dash-hls-bridge.johndoesdmc.workers.dev, v.vidozen.xyz, sandyowl17.boats). The code itself requests only kissbae.com, vidozen.xyz and vidbolt.pro. The test script warns 'no hosts list'.",
+      "sha256": "94a88601d741c446ee2203bf372b4463e02be3d0694abbbe8255b90b028cf9f0"
+    },
+    {
+      "id": "justanime",
+      "name": "JustAnime",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://justanime.to",
+      "iconUrl": "https://inkstone.web.app/justanime/icon.png",
+      "description": "Anime・Movies\n\nCatalog・4,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "e071522b2cccc4f9c11309de6e8defc1679acc6a11fb91a72ed1ed7e98465ed8"
+    },
+    {
+      "id": "kawaiianime",
+      "name": "Kawaii Anime",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://kawaiianime.cc",
+      "iconUrl": "https://inkstone.web.app/kawaiianime/icon.png",
+      "hosts": [
+        "kawaiianime.cc",
+        "video.kawaii-anime.com",
+        "s4.anilist.co"
+      ],
+      "description": "Anime\n\nCatalog・4,000+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "f87d2a3d35073ef2debf98896975b5109e6e84717e9bace0f078cbb7c0d478b9"
+    },
+    {
+      "id": "animetvplus",
+      "name": "animeTVplus",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://animetvplus.xyz",
+      "iconUrl": "https://inkstone.web.app/animetvplus/icon.png",
+      "hosts": [
+        "animetvplus.xyz",
+        "*.animetvplus.xyz",
+        "*.animetvplus.site",
+        "*.animetvplus.com",
+        "s4.anilist.co",
+        "www.crunchyroll.com",
+        "imgsrv.crunchyroll.com",
+        "ik.imagekit.io",
+        "artworks.thetvdb.com"
+      ],
+      "description": "Anime・Movies\n\nCatalog・6,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "90305095c94b464bce3073896d5614eefd96aece4def53e34e0ba4f31c6f929f"
+    },
+    {
+      "id": "kuroko",
+      "name": "Kuroko",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://kuroko.cc",
+      "iconUrl": "https://inkstone.web.app/kuroko/icon.png",
+      "hosts": [
+        "kuroko.cc",
+        "cdn.kuroko.cc",
+        "graphql.anilist.co",
+        "s4.anilist.co"
+      ],
+      "description": "Anime・Movies\n\nCatalog・3,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "ef909dba99aaf5b32372a0570d0435647a115c93f39af7249c6a3f06756eb002"
+    },
+    {
+      "id": "nineime",
+      "name": "9ime",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://9ime.live",
+      "iconUrl": "https://inkstone.web.app/nineime/icon.png",
+      "hosts": [
+        "9ime.live",
+        "9ime-stream-a.gojo47.workers.dev",
+        "9ime-stream-b.goku47.workers.dev",
+        "s4.anilist.co",
+        "image.tmdb.org"
+      ],
+      "description": "Anime・Movies\n\nCatalog・3,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "details",
+        "chapters",
+        "genres",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "58be8c9eb3538c63baa460e054ee74d2a59ee9a16d3168a12c7de174356322f3"
+    },
+    {
+      "id": "animedub",
+      "name": "AnimeDUB",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://animedub.app",
+      "iconUrl": "https://inkstone.web.app/animedub/icon.png",
+      "description": "Anime・Movies\n\nCatalog・90+",
+      "capabilities": [
+        "browse",
+        "search",
+        "details",
+        "chapters",
+        "genres",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "1a850bbcca63cc6f4d835a3b755c76195ed7bbcd64a227784f4ca50fa46c6dee"
+    },
+    {
+      "id": "anistream",
+      "name": "Anistream",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://anistream.one/",
+      "iconUrl": "https://inkstone.web.app/anistream/icon.png",
+      "description": "Anime・Movies\n\nCatalog・8,000+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "details",
+        "chapters",
+        "videos",
+        "genres"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "hostsNote": "no hosts list on purpose. The extension itself requests only graphql.animex.one and api.anistream.one, but the stream and subtitle hosts it hands to the player belong to several providers and change (fetch.nexabloom.top, *.mysubsplay.com, s-NN.megavid.se, hls.dramahot.top, hls.krussdomi.com, subst.krussdomi.com, spr-cdn.echovideo.to); if the orchestrator knows the apps only check hosts on the extension's own requests, [\"graphql.animex.one\", \"api.anistream.one\"] is the complete list. The guide test only warns when it is empty.",
+      "sha256": "405aff1745278333a241c743d24940aae9dc07c976661aadcfadb21c7f2694eb"
+    },
+    {
+      "id": "wuxiadreams",
+      "name": "Wuxia Dreams",
+      "version": "1.0.0",
+      "medium": "novel",
+      "website": "https://wuxiadreams.com",
+      "iconUrl": "https://inkstone.web.app/wuxiadreams/icon.png",
+      "hosts": [
+        "wuxiadreams.com",
+        "*.wuxiadreams.com"
+      ],
+      "description": "Web Novels\n\nCatalog・300+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "327ea626c7d1cd8b43dc9969f5f7537b717fdce6899063d47e91f35dae7d4501"
+    },
+    {
+      "id": "novelping",
+      "name": "NovelPing",
+      "version": "1.0.0",
+      "medium": "novel",
+      "website": "https://novelping.com",
+      "iconUrl": "https://inkstone.web.app/novelping/icon.png",
+      "hosts": [
+        "novelping.com",
+        "images.novelping.com"
+      ],
+      "description": "Web Novels\n\nCatalog・20,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "3a8b629c55576786698052321cae17efc95267f149a5525e994d3c6ff3fe7dc7"
+    },
+    {
+      "id": "novgo",
+      "name": "Novgo",
+      "version": "1.0.0",
+      "medium": "novel",
+      "website": "https://novgo.net",
+      "iconUrl": "https://inkstone.web.app/novgo/icon.png",
+      "hosts": [
+        "novgo.net",
+        "*.novgo.net"
+      ],
+      "description": "Web Novels・Light Novels\n\nCatalog・7,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "ec28fba659f1f8deb409dd10b313e4707cb578989094ea62862058ac45f346fc"
+    },
+    {
+      "id": "hianimesse",
+      "name": "HiAnimes",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://hianimes.se",
+      "iconUrl": "https://inkstone.web.app/hianimesse/icon.png",
+      "hosts": [
+        "hianimes.se",
+        "animehot.cc",
+        "zokoanime.video",
+        "*.dramahot.top",
+        "*.drama1.cfd"
+      ],
+      "description": "Anime・Movies\n\nCatalog・3,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "df39edf166bdc4b7d2e46801369133d3055d6a3ba511e01320fdcf53dace4875"
+    },
+    {
+      "id": "dramahood",
+      "name": "Dramahood",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://dramahood.mom",
+      "iconUrl": "https://inkstone.web.app/dramahood/icon.png",
+      "hosts": [
+        "dramahood.mom",
+        "*.dramahood.mom",
+        "vidnest.fun",
+        "*.vidnest.fun",
+        "*.workers.dev",
+        "zumivids.com",
+        "*.zumivids.com",
+        "vidmoly.org",
+        "vidmoly.biz",
+        "vidmoly.net",
+        "*.vmget.online",
+        "*.vmpx.online",
+        "streamtape.com",
+        "streamtape.to",
+        "streamtape.net",
+        "*.tapecontent.net",
+        "mixdrop.top",
+        "mixdrop.ag",
+        "mixdrop.to",
+        "mxdrop.click",
+        "*.mxcontent.net"
+      ],
+      "description": "Drama\n\nCatalog・80+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "a3bdbe8653731be82eaf1680f58d63e0b0940f8751571eca6eeec4ecf219c8f1"
+    },
+    {
+      "id": "itasha",
+      "name": "Itasha",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://itasha.live",
+      "iconUrl": "https://inkstone.web.app/itasha/icon.png",
+      "description": "Anime・Movies\n\nCatalog・8,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "8b8a235b3f32c630c53ef44ab5a3534ae1442a1b82220349f3ea32765c6c0e4d"
+    },
+    {
+      "id": "oriyami",
+      "name": "OriYami",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://oriyami.com",
+      "iconUrl": "https://inkstone.web.app/oriyami/icon.png",
+      "hosts": [
+        "oriyami.com",
+        "api.oriyami.com",
+        "cdn.oriyami.com"
+      ],
+      "description": "Manga・Manhwa・Manhua・Comics\n\nCatalog・1,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "f4f8c0bd318b565763de31ad1e0f17302f655e8bc1d39f73b45fa0dd283b8ee1"
+    },
+    {
+      "id": "mangalink",
+      "name": "Mangalink",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://linkmanga.com",
+      "iconUrl": "https://inkstone.web.app/mangalink/icon.png",
+      "hosts": [
+        "linkmanga.com",
+        "*.linkmanga.com"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・4,000+\n\nRestrictions:\n・Cloudflare Checks",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "94f3275169f2d2df6b8250895e5d1d26891f5aff106fd54aaf552551cb1cac5a"
+    },
+    {
+      "id": "scrollerspub",
+      "name": "ScrollersPub",
+      "version": "1.0.0",
+      "medium": "novel",
+      "website": "https://www.scrollerspub.com",
+      "iconUrl": "https://inkstone.web.app/scrollerspub/icon.png",
+      "description": "Web Novels\n\nCatalog・10,000+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "hosts": [
+        "www.scrollerspub.com"
+      ],
+      "sha256": "13cd4c0eb66c1df0ee9656909ca3042f17b2a68e8f10cac48c83621971fab1e4"
     }
   ]
 }

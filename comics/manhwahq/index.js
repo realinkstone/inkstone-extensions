@@ -1,11 +1,10 @@
 const SITE_BASE = 'https://manhwahq.com';
-const API_BASE = 'https://b.toonking.xyz';
 const UA =
   'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1';
 
 const FEED_SORT = {
   latest: undefined,
-  popular: 'views',
+  popular: 'popular',
   rating: 'rating',
   az: 'alphabetical',
 };
@@ -47,17 +46,22 @@ function parseReleaseDate(text) {
 }
 
 function chapterIdToNumber(chapterId) {
-  const base = (chapterId || '').replace(/^chapter-/, '');
-  const parts = base.split('-');
-  if (parts.length >= 2 && /^\d+$/.test(parts[0]) && /^\d+$/.test(parts[1])) {
-    return parseFloat(parts[0] + '.' + parts[1]);
-  }
-  return parseFloat(parts[0]) || 0;
+  const m = (chapterId || '').match(/chapter-(\d+(?:\.\d+)?)/);
+  return m ? parseFloat(m[1]) : 0;
 }
 
 function mangaIdFromHref(href) {
-  const m = (href || '').match(/^\/manga\/([^/?#]+)/);
+  const m = (href || '').match(/^\/title\/([^/?#]+)\/?(?:[?#]|$)/);
   return m ? m[1] : '';
+}
+
+function encodePiece(piece) {
+  let raw = piece || '';
+  try {
+    raw = decodeURIComponent(raw);
+  } catch (e) {
+  }
+  return encodeURIComponent(raw);
 }
 
 function isPlainNumberBasename(url) {
@@ -78,7 +82,7 @@ function parseCards($) {
   const results = [];
   const seen = new Set();
 
-  $('a[href^="/manga/"]').each((_, el) => {
+  $('a[href^="/title/"]').each((_, el) => {
     const $el = $(el);
     const mangaId = mangaIdFromHref($el.attr('href'));
     if (!mangaId || seen.has(mangaId)) return;
@@ -97,22 +101,23 @@ function parseCards($) {
       mangaId,
       title,
       image,
-      webURL: `${SITE_BASE}/manga/${mangaId}`,
+      webURL: `${SITE_BASE}/title/${mangaId}`,
       medium: 'comics',
     };
+
+    if ($el.text().indexOf('18+ Adult') !== -1) manga.ageRating = 18;
 
     const typeText = cleanText(
       $el.find('span.font-medium.tracking-wide.leading-none').first().text()
     );
     if (typeText) manga.tags = [typeText];
 
-    const metaWrap = $el.find('.flex.flex-col.gap-1.px-1.mt-1').first();
-    const metaSpans = metaWrap.find('span');
-    if (metaSpans.length > 0) {
-      const chapText = cleanText(metaSpans.eq(0).text());
-      const chapMatch = chapText.match(/\d+(?:\.\d+)?/);
-      if (chapMatch) manga.chapters = parseFloat(chapMatch[0]);
-    }
+    $el.find('span').each((__, span) => {
+      const chapMatch = cleanText($(span).text()).match(/^Ch\.?\s*(\d+(?:\.\d+)?)$/);
+      if (!chapMatch) return;
+      manga.chapters = parseFloat(chapMatch[1]);
+      return false;
+    });
 
     results.push(manga);
   });
@@ -180,7 +185,7 @@ class Source {
   }
 
   async getMangaDetails(mangaId) {
-    const url = `${SITE_BASE}/manga/${encodeURIComponent(mangaId)}`;
+    const url = `${SITE_BASE}/title/${encodePiece(mangaId)}`;
     const html = await this.requestHTML(url);
     const $ = cheerio.load(html);
 
@@ -211,6 +216,9 @@ class Source {
       medium: 'comics',
     };
     if (author) mangaInfo.author = author;
+
+    if (tags.indexOf('Adult') !== -1) mangaInfo.ageRating = 18;
+    else if (tags.indexOf('Mature') !== -1) mangaInfo.ageRating = 16;
 
     return { mangaInfo };
   }
@@ -245,17 +253,18 @@ class Source {
   }
 
   async getChapters(mangaId) {
-    const url = `${SITE_BASE}/manga/${encodeURIComponent(mangaId)}`;
+    const url = `${SITE_BASE}/title/${encodePiece(mangaId)}`;
     const html = await this.requestHTML(url);
     const $ = cheerio.load(html);
 
-    const prefix = `/read/${mangaId}/`;
     const raw = [];
-    $(`a.py-4.group[href^="${prefix}"]`).each((_, el) => {
+    const seen = new Set();
+    $('a.py-4.group').each((_, el) => {
       const $el = $(el);
-      const href = $el.attr('href') || '';
-      const chapterId = href.slice(prefix.length).split(/[?#]/)[0];
-      if (!chapterId) return;
+      const m = ($el.attr('href') || '').match(/^\/title\/[^/?#]+\/([^/?#]+)/);
+      if (!m || seen.has(m[1])) return;
+      seen.add(m[1]);
+      const chapterId = m[1];
 
       const name = cleanText($el.find('span.text-zinc-100').first().text());
       const dateText = cleanText($el.find('span.whitespace-nowrap').first().text());
@@ -278,16 +287,17 @@ class Source {
   }
 
   async getChapterDetails(mangaId, chapterId) {
-    const url = `${API_BASE}/api/local-manga?${qs({ id: mangaId, chapter: chapterId })}`;
-    const json = await this.requestJSON(url);
+    const url = `${SITE_BASE}/title/${encodePiece(mangaId)}/${encodePiece(chapterId)}`;
+    const html = await this.requestHTML(url);
+    const $ = cheerio.load(html);
 
-    if (!json || json.success !== true || !json.data || !Array.isArray(json.data.images)) {
-      throw new Error('ManhwaHQ: malformed chapter API response');
-    }
-
-    const pages = stripTrailingCreditImage(
-      json.data.images.filter((p) => typeof p === 'string' && /^https?:\/\//.test(p))
-    );
+    const found = [];
+    $('img[id^="page-"]').each((_, el) => {
+      const src = ($(el).attr('src') || '').trim();
+      if (/^https?:\/\//.test(src)) found.push(src);
+    });
+    const pages = stripTrailingCreditImage(found);
+    if (pages.length === 0) throw new Error('ManhwaHQ: no pages found in this chapter');
 
     return { id: chapterId, mangaId, pages };
   }
@@ -304,20 +314,6 @@ class Source {
       throw new Error(`HTTP ${response.status}`);
     }
     return response.data;
-  }
-
-  async requestJSON(url) {
-    const manager = App.createRequestManager({});
-    const request = App.createRequest({
-      url,
-      method: 'GET',
-      headers: { 'User-Agent': UA, Accept: 'application/json' },
-    });
-    const response = await manager.schedule(request);
-    if (response.status < 200 || response.status >= 300) {
-      throw new Error(`HTTP ${response.status}`);
-    }
-    return JSON.parse(response.data);
   }
 }
 

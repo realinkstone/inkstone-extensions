@@ -115,9 +115,9 @@ class Source {
     const $ = cheerio.load(await this.text(url));
     const results = [];
     const seen = new Set();
-    $('.cineapse-movie-card').each((i, el) => {
+    $('.cineapse-movie-card, a[href^="/detail/"]').each((i, el) => {
       const card = $(el);
-      const m = /\/detail\/(tv|movie)\/(?:[a-z0-9-]*?-)?(\d+)/i.exec(card.attr('onclick') || '');
+      const m = /\/detail\/(tv|movie)\/(?:[a-z0-9-]*?-)?(\d+)/i.exec(card.attr('href') || card.attr('onclick') || '');
       if (!m) return;
       const mangaId = `${m[1].toLowerCase()}~${m[2]}`;
       const img = card.find('img').first();

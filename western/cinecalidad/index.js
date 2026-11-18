@@ -10,6 +10,23 @@ const BROWSER = {
 
 const VIDEO_HEADERS = { 'User-Agent': BROWSER['User-Agent'] };
 
+const VOE = /^https?:\/\/([a-z0-9-]+\.)*voe\.sx\//i;
+const VIMEOS = /^https?:\/\/([a-z0-9-]+\.)*vimeos\.(net|zip)\//i;
+const VOE_MARKERS = ['@$', '^^', '~@', '%?', '*~', '!!', '#&'];
+
+function rot13(text) {
+  return text.replace(/[a-zA-Z]/g, (ch) => {
+    const base = ch <= 'Z' ? 65 : 97;
+    return String.fromCharCode(((ch.charCodeAt(0) - base + 13) % 26) + base);
+  });
+}
+
+function voeSource(payload) {
+  const clean = VOE_MARKERS.reduce((text, marker) => text.split(marker).join(''), rot13(payload));
+  const shifted = App.base64Decode(clean).split('').map((ch) => String.fromCharCode(ch.charCodeAt(0) - 3)).join('');
+  return JSON.parse(App.base64Decode(shifted.split('').reverse().join(''))).source;
+}
+
 const DIGITS = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 function unpack(source) {
@@ -159,8 +176,9 @@ class Source {
     const postId = kind === 'movies' ? id : String(chapterId);
     const data = await this.json(`${API}/player?postId=${encodeURIComponent(postId)}&demo=0`);
     const embeds = (data && data.data && data.data.embeds) || [];
-    const players = embeds.filter((embed) => embed && embed.url && /^https?:\/\/([a-z0-9-]+\.)*vimeos\.(net|zip)\//i.test(embed.url));
-    const found = await Promise.all(players.map((embed) => this.extract(embed).catch(() => null)));
+    const usable = embeds.filter((embed) => embed && embed.url && (VOE.test(embed.url) || VIMEOS.test(embed.url)));
+    const players = usable.filter((embed) => VOE.test(embed.url)).concat(usable.filter((embed) => !VOE.test(embed.url)));
+    const found = await Promise.all(players.map((embed) => (VOE.test(embed.url) ? this.extractVoe(embed) : this.extract(embed)).catch(() => null)));
     const videos = found.flat().filter((video) => video && /^https?:\/\//.test(video.url));
     if (!videos.length) throw new Error(`CineCalidad: none of the ${embeds.length} servers gave a playable video`);
     return videos;
@@ -178,6 +196,17 @@ class Source {
     const audios = Array.from(master.matchAll(/TYPE=AUDIO[^\n]*NAME="([^"]+)"[^\n]*URI="[^"]*index-(a\d+)\.m3u8/g));
     if (!variant || audios.length < 2) return [{ url, quality, headers: VIDEO_HEADERS }];
     return audios.map(([, name, track]) => ({ url: variant.replace(/index-(v\d+)-a\d+/, `index-$1-${track}`), quality: [name, embed.quality].filter(Boolean).join(' '), headers: VIDEO_HEADERS }));
+  }
+
+  async extractVoe(embed) {
+    let html = await this.get(embed.url, 'text/html');
+    const redirect = /window\.location\.href\s*=\s*'([^']+)'/.exec(html);
+    if (redirect) html = await this.get(redirect[1], 'text/html');
+    const json = /<script type="application\/json">([\s\S]*?)<\/script>/.exec(html);
+    if (!json) throw new Error('CineCalidad: the VOE page has no player data');
+    const url = voeSource(JSON.parse(json[1])[0]);
+    const quality = [embed.lang, embed.quality].filter(Boolean).join(' ') || 'Online';
+    return [{ url, quality, type: 'hls', server: 'VOE', headers: VIDEO_HEADERS }];
   }
 
   async getChapterDetails(mangaId, chapterId) {

@@ -3,6 +3,8 @@ const API = `${SITE}/w/api.php`;
 const USER_AGENT = 'InkstoneWikisource/1.0 (https://github.com/realinkstone/inkstone-extensions)';
 const LOGO = 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Wikisource-logo.svg/330px-Wikisource-logo.svg.png';
 
+const IMAGE_HEADERS = { 'User-Agent': USER_AGENT };
+
 const PAGE_SIZE = 30;
 const PAGE_CACHE_MS = 5 * 60 * 1000;
 
@@ -31,6 +33,7 @@ function partialOf(page) {
     mangaId: page.title,
     title: page.title,
     image: LOGO,
+    headers: IMAGE_HEADERS,
     webURL: wikiUrl(page.title),
     medium: 'novel',
   };
@@ -128,6 +131,7 @@ class Source {
       mangaInfo: {
         title: page.title,
         image: LOGO,
+        headers: IMAGE_HEADERS,
         author,
         desc: intro || `${page.title}${author ? `, de ${author}` : ''}. Texto de dominio público en Wikisource.`,
         status: 'COMPLETED',

@@ -1,14 +1,31 @@
 const SITE_BASE = 'https://inkstory.net';
-const PAGE_SIZE = 30;
+const PAGE_SIZE = 40;
 const UA =
   'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1';
 
 const FEEDS = [
   { id: 'viewsCount,desc', name: 'Популярное' },
-  { id: 'updatedAt,desc', name: 'Обновления' },
+  { id: 'latestChapterAt,desc', name: 'Обновления' },
   { id: 'createdAt,desc', name: 'Новинки' },
   { id: 'averageRating,desc', name: 'Топ рейтинг' },
 ];
+
+const SORT_FIELDS = [
+  'likesCount',
+  'viewsCount',
+  'viewsDayCount',
+  'viewsWeekCount',
+  'viewsMonthCount',
+  'chaptersCount',
+  'bookmarksCount',
+  'averageRating',
+  'createdAt',
+  'latestChapterAt',
+];
+const SORT_ALIASES = { updatedAt: 'latestChapterAt' };
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+const LABEL_IDS = {};
 
 function qs(params) {
   const parts = [];
@@ -32,141 +49,187 @@ function buildURL(base, params) {
   return query ? `${base}?${query}` : base;
 }
 
-function unescapeHtmlAttr(s) {
-  return (s || '')
-    .replace(/&quot;/g, '"')
-    .replace(/&#x27;/g, "'")
-    .replace(/&#39;/g, "'")
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&amp;/g, '&');
-}
+function parseTsrState(html) {
+  const marker = html.indexOf('$tsr-stream-barrier');
+  if (marker === -1) return null;
+  const open = html.indexOf('>', marker);
+  if (open === -1) return null;
+  let close = html.indexOf('</script>', open);
+  if (close === -1) close = html.length;
+  const s = html.slice(open + 1, close);
+  const start = s.indexOf('$R[0]=');
+  if (start === -1) return null;
 
-function unwrapIslandValue(node) {
-  if (Array.isArray(node) && node.length === 2 && typeof node[0] === 'number') {
-    const tag = node[0];
-    const val = node[1];
-    if (tag === 1) {
-      return Array.isArray(val) ? val.map(unwrapIslandValue) : val;
-    }
-    if (val && typeof val === 'object' && !Array.isArray(val)) {
-      const out = {};
-      Object.keys(val).forEach((k) => {
-        out[k] = unwrapIslandValue(val[k]);
-      });
-      return out;
-    }
-    return val;
+  const defs = {};
+  const KEY_RE = /[A-Za-z0-9_$]+/y;
+  const IDENT_RE = /[A-Za-z_$][A-Za-z0-9_$]*/y;
+  const NUM_RE = /-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?/y;
+  let p = start;
+
+  function ws() {
+    while (p < s.length && s.charCodeAt(p) <= 32) p++;
   }
-  return node;
-}
 
-function getIslandProps(html, componentExport) {
-  const marker = `component-export="${componentExport}"`;
-  const markerIdx = html.indexOf(marker);
-  if (markerIdx === -1) return null;
-  const propsAttr = 'props="';
-  const propsIdx = html.indexOf(propsAttr, markerIdx);
-  if (propsIdx === -1) return null;
-  const valueStart = propsIdx + propsAttr.length;
-  const valueEnd = html.indexOf('"', valueStart);
-  if (valueEnd === -1) return null;
-  const raw = html.slice(valueStart, valueEnd);
-  let json;
-  try {
-    json = JSON.parse(unescapeHtmlAttr(raw));
-  } catch (e) {
-    return null;
-  }
-  const out = {};
-  Object.keys(json).forEach((k) => {
-    out[k] = unwrapIslandValue(json[k]);
-  });
-  return out;
-}
-
-function unflattenDevalue(values) {
-  const UNDEFINED = -1;
-  const NAN_VALUE = -2;
-  const POSITIVE_INFINITY = -3;
-  const NEGATIVE_INFINITY = -4;
-  const NEGATIVE_ZERO = -5;
-
-  const hydrated = new Map();
-
-  function hydrate(index) {
-    if (index === UNDEFINED) return undefined;
-    if (index === NAN_VALUE) return NaN;
-    if (index === POSITIVE_INFINITY) return Infinity;
-    if (index === NEGATIVE_INFINITY) return -Infinity;
-    if (index === NEGATIVE_ZERO) return -0;
-    if (hydrated.has(index)) return hydrated.get(index);
-
-    const value = values[index];
-
-    if (value === null || typeof value !== 'object') {
-      hydrated.set(index, value);
-      return value;
-    }
-
-    if (Array.isArray(value)) {
-      if (value.length > 0 && typeof value[0] === 'string') {
-        const tag = value[0];
-        if (tag === 'Set') {
-          const set = [];
-          hydrated.set(index, set);
-          for (let i = 1; i < value.length; i++) set.push(hydrate(value[i]));
-          return set;
+  function skipExpr() {
+    let depth = 0;
+    while (p < s.length) {
+      const c = s[p];
+      if (c === '"' || c === "'" || c === '`') {
+        p++;
+        while (p < s.length && s[p] !== c) {
+          if (s[p] === '\\') p++;
+          p++;
         }
-        if (tag === 'Map') {
-          const map = {};
-          hydrated.set(index, map);
-          for (let i = 1; i < value.length; i += 2) {
-            map[String(hydrate(value[i]))] = hydrate(value[i + 1]);
-          }
-          return map;
-        }
-        const generic = { __tag: tag, __args: value.slice(1).map(hydrate) };
-        hydrated.set(index, generic);
-        return generic;
+        p++;
+        continue;
       }
-      const arr = new Array(value.length);
-      hydrated.set(index, arr);
-      for (let i = 0; i < value.length; i++) arr[i] = hydrate(value[i]);
-      return arr;
+      if (c === '(' || c === '[' || c === '{') depth++;
+      else if (c === ')' || c === ']' || c === '}') {
+        if (depth === 0) return undefined;
+        depth--;
+      } else if (c === ',' && depth === 0) return undefined;
+      p++;
     }
-
-    const obj = {};
-    hydrated.set(index, obj);
-    Object.keys(value).forEach((k) => {
-      obj[k] = hydrate(value[k]);
-    });
-    return obj;
+    return undefined;
   }
 
-  return hydrate(0);
+  function str() {
+    const a = p;
+    p++;
+    while (p < s.length && s[p] !== '"') {
+      if (s[p] === '\\') p++;
+      p++;
+    }
+    p++;
+    const raw = s.slice(a, p);
+    if (raw.indexOf('\\') === -1) return raw.slice(1, -1);
+    const json = raw.replace(/\\(\\|x([0-9a-fA-F]{2}))/g, (m, a2, hex) => (hex ? '\\u00' + hex : m));
+    try {
+      return JSON.parse(json);
+    } catch (e) {
+      return raw.slice(1, -1);
+    }
+  }
+
+  function read(re) {
+    re.lastIndex = p;
+    const m = re.exec(s);
+    if (!m) return null;
+    p += m[0].length;
+    return m[0];
+  }
+
+  function val() {
+    ws();
+    const c = s[p];
+    if (c === '"') return str();
+    if (c === '{') {
+      p++;
+      const o = {};
+      for (;;) {
+        ws();
+        if (s[p] === '}') {
+          p++;
+          break;
+        }
+        const k = s[p] === '"' ? str() : read(KEY_RE);
+        if (k === null) {
+          skipExpr();
+          break;
+        }
+        ws();
+        if (s[p] === ':') p++;
+        o[k] = val();
+        ws();
+        if (s[p] === ',') p++;
+        else if (s[p] === '}') {
+          p++;
+          break;
+        } else break;
+      }
+      return o;
+    }
+    if (c === '[') {
+      p++;
+      const a = [];
+      for (;;) {
+        ws();
+        if (s[p] === ']') {
+          p++;
+          break;
+        }
+        a.push(val());
+        ws();
+        if (s[p] === ',') p++;
+        else if (s[p] === ']') {
+          p++;
+          break;
+        } else break;
+      }
+      return a;
+    }
+    if (c === '!') {
+      const v = s[p + 1] === '0';
+      p += 2;
+      return v;
+    }
+    if (c === '-' || (c >= '0' && c <= '9')) {
+      const n = read(NUM_RE);
+      if (n !== null) return Number(n);
+    }
+    if (c === '$' && s.substr(p, 3) === '$R[') {
+      const e = s.indexOf(']', p);
+      const n = s.slice(p + 3, e);
+      p = e + 1;
+      if (s[p] === '=' && s[p + 1] !== '=') {
+        p++;
+        const v = val();
+        defs[n] = v;
+        return v;
+      }
+      return defs[n];
+    }
+    const a = p;
+    const id = read(IDENT_RE);
+    if (id === 'null') return null;
+    if (id === 'true') return true;
+    if (id === 'false') return false;
+    if (id === 'NaN') return NaN;
+    if (id === 'Infinity') return Infinity;
+    if (id === 'undefined') return undefined;
+    if (id === 'void') {
+      ws();
+      p++;
+      return undefined;
+    }
+    p = a;
+    return skipExpr();
+  }
+
+  const root = val();
+  return root && typeof root === 'object' ? { root } : null;
 }
 
-function extractNanostores(html) {
-  const idAttr = 'id="it-astro-state"';
-  const idIdx = html.indexOf(idAttr);
-  if (idIdx === -1) return null;
-  const tagEnd = html.indexOf('>', idIdx);
-  if (tagEnd === -1) return null;
-  const scriptEnd = html.indexOf('</script>', tagEnd);
-  if (scriptEnd === -1) return null;
-  const jsonText = html.slice(tagEnd + 1, scriptEnd);
-
-  let values;
-  try {
-    values = JSON.parse(jsonText);
-  } catch (e) {
-    return null;
+function queryData(state, name) {
+  const root = state && state.root;
+  const dehydrated = root && root.dehydratedData && root.dehydratedData.dehydratedQueryClient;
+  const queries = dehydrated && dehydrated.queries;
+  if (!Array.isArray(queries)) return undefined;
+  for (let i = 0; i < queries.length; i++) {
+    const q = queries[i];
+    if (q && Array.isArray(q.queryKey) && q.queryKey[0] === name && q.state) return q.state.data;
   }
-  if (!Array.isArray(values) || values.length === 0) return null;
+  return undefined;
+}
 
-  const root = unflattenDevalue(values);
-  return (root && root['@inox-tools/request-nanostores']) || null;
+function loaderData(state, field) {
+  const matches = state && state.root && state.root.matches;
+  if (!Array.isArray(matches)) return undefined;
+  for (let i = 0; i < matches.length; i++) {
+    const m = matches[i];
+    if (m && m.l && typeof m.l === 'object' && m.l[field] !== undefined) return m.l[field];
+  }
+  return undefined;
 }
 
 function pickTitle(name) {
@@ -204,6 +267,27 @@ function mapStatus(status) {
   }
 }
 
+function ratingOf(contentStatus) {
+  switch (String(contentStatus || '').toUpperCase()) {
+    case 'SAFE':
+      return 0;
+    case 'EROTIC':
+    case 'PORNOGRAPHIC':
+      return 18;
+    default:
+      return 16;
+  }
+}
+
+function isReadable(book) {
+  return !book || !book.readingRestriction || book.readingRestriction === 'NONE';
+}
+
+function thumb(url, width) {
+  if (typeof url !== 'string' || url.indexOf('static.inuko.me/book/') === -1 || url.indexOf('?') !== -1) return url;
+  return `${url}?width=${width}&type=jpeg`;
+}
+
 function bookToPartialManga(book) {
   if (!book || !book.slug) return null;
   const title = pickTitle(book.name);
@@ -213,9 +297,10 @@ function bookToPartialManga(book) {
   const manga = {
     mangaId: book.slug,
     title,
-    image: book.poster,
+    image: thumb(book.poster, 320),
     webURL: `${SITE_BASE}/content/${book.slug}`,
     medium: 'comics',
+    ageRating: ratingOf(book.contentStatus),
   };
   if (typeof book.averageRating === 'number' && book.averageRating > 0) {
     manga.rating = book.averageRating;
@@ -234,23 +319,51 @@ function repairPageURL(url) {
   return url.replace(INUKO_UUID_VERSION_FIX, '$1' + '4' + '$2');
 }
 
+function searchParam(text) {
+  const t = String(text || '').trim();
+  if (!t) return '';
+  try {
+    if (typeof JSON.parse(t) !== 'string') return JSON.stringify(t);
+    return JSON.stringify(t);
+  } catch (e) {
+    return t;
+  }
+}
+
 class Source {
   getSourceFeeds() {
     return FEEDS.map((f) => ({ id: f.id, name: f.name }));
   }
 
+  async loadLabels() {
+    const html = await this.requestHTML(`${SITE_BASE}/content`);
+    return this.rememberLabels(queryData(parseTsrState(html), 'labels'));
+  }
+
+  rememberLabels(labels) {
+    const list = (Array.isArray(labels) ? labels : []).filter((l) => l && l.id && l.slug && l.name);
+    list.forEach((l) => {
+      LABEL_IDS[l.slug] = l.id;
+    });
+    return list
+      .filter((l) => l.kind === 'GENRE')
+      .concat(list.filter((l) => l.kind !== 'GENRE'));
+  }
+
   async getSearchTags() {
     try {
-      const html = await this.requestHTML(`${SITE_BASE}/content`);
-      const props = getIslandProps(html, 'BookCatalogGridWithFilters');
-      const labels = (props && props.labels) || [];
-      return labels
-        .filter((l) => l && l.slug && l.name)
-        .map((l) => ({ id: l.slug, label: l.name }));
+      const labels = await this.loadLabels();
+      return labels.map((l) => ({ id: l.slug, label: l.name }));
     } catch (e) {
       console.error('InkStory getSearchTags failed: ' + (e && e.message));
       return [];
     }
+  }
+
+  async labelUUIDs(tags) {
+    if (tags.length === 0) return [];
+    if (tags.some((t) => !UUID_RE.test(t) && !LABEL_IDS[t])) await this.loadLabels();
+    return tags.map((t) => (UUID_RE.test(t) ? t : LABEL_IDS[t])).filter(Boolean);
   }
 
   async getSearchResults(request, metadata) {
@@ -259,7 +372,10 @@ class Source {
     }
 
     const query = (request && request.title) || '';
-    const feed = (request && request.feed) || FEEDS[0].id;
+    const feed = ((request && request.feed) || FEEDS[0].id).split(',');
+    const sortRaw = SORT_ALIASES[feed[0]] || feed[0];
+    const sort = SORT_FIELDS.indexOf(sortRaw) === -1 ? 'viewsCount' : sortRaw;
+    const order = feed[1] === 'asc' ? 'asc' : 'desc';
     const includedTags = ((request && request.includedTags) || [])
       .map((t) => t && t.id)
       .filter(Boolean);
@@ -268,21 +384,35 @@ class Source {
       .filter(Boolean);
     const page = (metadata && metadata.page) || 0;
 
+    const include = await this.labelUUIDs(includedTags);
+    if (include.length < includedTags.length) return { results: [] };
+    const exclude = await this.labelUUIDs(excludedTags);
+
     const url = buildURL(`${SITE_BASE}/content`, {
-      search: query,
-      sort: feed,
-      page,
-      labelsInclude: includedTags,
-      labelsExclude: excludedTags,
+      search: searchParam(query),
+      sort: sort === 'viewsCount' ? '' : sort,
+      orderBy: order === 'desc' ? '' : order,
+      page: page > 0 ? page : '',
+      labelsInclude: include.length ? JSON.stringify(include) : '',
+      labelsExclude: exclude.length ? JSON.stringify(exclude) : '',
     });
 
     const html = await this.requestHTML(url);
-    const props = getIslandProps(html, 'BookCatalogGridWithFilters');
-    const books = (props && props.initialBooks) || [];
-    const totalHits = (props && props.initialTotalHits) || 0;
+    const state = parseTsrState(html);
+    const catalog = queryData(state, 'book-catalog') || {};
+    const books = Array.isArray(catalog.books) ? catalog.books : [];
+    const totalHits = typeof catalog.total === 'number' ? catalog.total : 0;
+    this.rememberLabels(queryData(state, 'labels'));
 
-    const results = books.map(bookToPartialManga).filter(Boolean);
-    const hasNext = results.length > 0 && (page + 1) * PAGE_SIZE < totalHits;
+    if (!state || !catalog.books) {
+      throw new Error('InkStory: the catalog page has no book list');
+    }
+
+    const results = books
+      .filter(isReadable)
+      .map(bookToPartialManga)
+      .filter(Boolean);
+    const hasNext = books.length > 0 && (page + 1) * PAGE_SIZE < totalHits;
 
     return {
       results,
@@ -293,9 +423,9 @@ class Source {
   async getMangaDetails(mangaId) {
     const url = `${SITE_BASE}/content/${encodeURIComponent(mangaId)}`;
     const html = await this.requestHTML(url);
-    const state = extractNanostores(html);
-    const book = state && state['current-book'];
-    if (!book) throw new Error(`InkStory: current-book missing for ${mangaId}`);
+    const state = parseTsrState(html);
+    const book = queryData(state, 'book') || loaderData(state, 'book');
+    if (!book) throw new Error(`InkStory: book missing for ${mangaId}`);
 
     const title = pickTitle(book.name) || mangaId;
     const tags = (book.labels || []).map((l) => l && l.name).filter(Boolean);
@@ -316,12 +446,13 @@ class Source {
 
     const mangaInfo = {
       title,
-      image: book.poster || '',
+      image: thumb(book.poster, 400) || '',
       desc: book.description || '',
       status: mapStatus(book.status),
       tags,
       webURL: url,
       medium: 'comics',
+      ageRating: ratingOf(book.contentStatus),
     };
     if (authorNames.length > 0) mangaInfo.author = authorNames.join(', ');
     if (publisherNames.length > 0) mangaInfo.publisher = publisherNames[0];
@@ -337,11 +468,14 @@ class Source {
   }
 
   async getChapters(mangaId) {
-    const url = `${SITE_BASE}/content/${encodeURIComponent(mangaId)}`;
+    const url = `${SITE_BASE}/content/${encodeURIComponent(mangaId)}/chapters`;
     const html = await this.requestHTML(url);
-    const state = extractNanostores(html);
-    const chapters = (state && state['current-book-chapters']) || [];
-    const branches = (state && state['current-book-branches']) || [];
+    const state = parseTsrState(html);
+    const chapters = loaderData(state, 'chapters') || [];
+    const branches = loaderData(state, 'branches') || [];
+    if (loaderData(state, 'canRead') === false) {
+      throw new Error('InkStory: this title can only be read by a signed in account on the site');
+    }
     if (chapters.length === 0) return [];
 
     let primaryBranchId = null;
@@ -396,7 +530,7 @@ class Source {
       const chapter = {
         id: c.id,
         chapterId: c.id,
-        name: c.name || `Глава ${c.number}`,
+        name: c.title || c.name || `Глава ${c.number}`,
         number,
       };
       if (groupName) chapter.group = groupName;
@@ -409,9 +543,9 @@ class Source {
   async getChapterDetails(mangaId, chapterId) {
     const url = `${SITE_BASE}/content/${encodeURIComponent(mangaId)}/${encodeURIComponent(chapterId)}`;
     const html = await this.requestHTML(url);
-    const state = extractNanostores(html);
-    const chapter = state && state['reader-current-chapter'];
-    if (!chapter) throw new Error(`InkStory: reader-current-chapter missing for ${chapterId}`);
+    const state = parseTsrState(html);
+    const chapter = queryData(state, 'chapter') || loaderData(state, 'chapter');
+    if (!chapter) throw new Error(`InkStory: chapter missing for ${chapterId}`);
 
     const rawPages = Array.isArray(chapter.pages) ? chapter.pages.slice() : [];
     rawPages.sort((a, b) => (a && a.index ? a.index : 0) - (b && b.index ? b.index : 0));
