@@ -55,7 +55,7 @@ Prefer to review a written plan before any code is written? This repo works with
 
 ## Extensions
 
-350 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
+351 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
 
 Each extension lives in the folder for what it offers: `comics`, `novels`, `mixed` for those that do both, or `anime`. The site still serves every one at `inkstone.web.app/<id>/index.js`, so the folders change nothing in the apps.
 
@@ -410,6 +410,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [AnimeKhor](donghua/animekhor/index.js) | animekhor.org | English | Safe | 1.0.10 |
 | [AnimeXin](donghua/animexin/index.js) | animexin.dev | English | Safe | 1.0.10 |
 | [Donghua4K](donghua/donghua4k/index.js) | donghua4k.net | English | Safe | 1.0.10 |
+| [DonghuaStream](donghua/donghuastream/index.js) | donghuastream.org | English | Safe | 1.0.0 |
 | [DonghuaWorld](donghua/donghuaworld/index.js) | donghuaworld.com | English | Safe | 1.0.0 |
 | [LMAnime](donghua/lmanime/index.js) | lmanime.com | English | Safe | 1.0.11 |
 | [LuciferDonghua](donghua/luciferdonghua/index.js) | luciferdonghua.org | English | Safe | 1.0.10 |

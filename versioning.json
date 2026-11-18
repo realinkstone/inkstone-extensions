@@ -9267,6 +9267,45 @@
         "www.scrollerspub.com"
       ],
       "sha256": "13cd4c0eb66c1df0ee9656909ca3042f17b2a68e8f10cac48c83621971fab1e4"
+    },
+    {
+      "id": "donghuastream",
+      "name": "DonghuaStream",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://donghuastream.org",
+      "iconUrl": "https://inkstone.web.app/donghuastream/icon.png",
+      "hosts": [
+        "donghuastream.org",
+        "*.donghuastream.org",
+        "dailymotion.com",
+        "*.dailymotion.com",
+        "rumble.com",
+        "*.rumble.com",
+        "*.rumble.cloud",
+        "ok.ru",
+        "*.ok.ru",
+        "*.mycdn.me",
+        "*.okcdn.ru",
+        "mp4upload.com",
+        "*.mp4upload.com",
+        "morencius.com",
+        "*.acek-cdn.com",
+        "vidhide.com",
+        "earnvids.com"
+      ],
+      "description": "Donghua\n\nCatalog・200+\n\nRestrictions:\n・Cloudflare Checks",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "safe",
+      "sha256": "6de0d5eb7f1677369a24bfc8002aa2030d8fcb9e9a631b26c9cb60d13a6ca65a"
     }
   ]
 }
