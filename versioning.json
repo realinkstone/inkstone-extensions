@@ -6475,7 +6475,7 @@
     {
       "id": "animejl",
       "name": "AnimeJL",
-      "version": "1.0.15",
+      "version": "1.0.16",
       "medium": "anime",
       "website": "https://www.anime-jl.net",
       "iconUrl": "https://inkstone.web.app/animejl/icon.png",
@@ -6563,7 +6563,8 @@
       "language": "es",
       "contentRating": "adult",
       "tags": [
-        "hentai"
+        "hentai",
+        "sumizuri-exclusive"
       ],
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",

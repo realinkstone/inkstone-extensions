@@ -366,7 +366,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [AnimeDUB](anime/animedub/index.js) | animedub.app | English | Mature | 1.0.0 |
 | [AnimeGG](anime/animegg/index.js) | animegg.org | English | Mature | 1.0.8 |
 | [AnimeHeaven](anime/animeheaven/index.js) | animeheaven.me | English | Mature | 1.0.8 |
-| [AnimeJL](anime/animejl/index.js) | anime-jl.net | Spanish | Adult | 1.0.15 |
+| [AnimeJL](anime/animejl/index.js) | anime-jl.net | Spanish | Adult | 1.0.16 |
 | [AnimeLatinoHD](anime/animelatinohd/index.js) | animelatinohd.com | Spanish | Mature | 1.0.8 |
 | [AnimeMovil](anime/animemovil/index.js) | tvanime.tv | Spanish | Adult | 1.0.5 |
 | [AnimeOnline.Ninja](anime/animeonlineninja/index.js) | ver2.animeonline.ninja | Spanish | Mature | 1.0.8 |
