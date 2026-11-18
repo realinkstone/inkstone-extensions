@@ -394,7 +394,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [SerienStream](anime/serienstream/index.js) | serienstream.to | German | Mature | 1.0.3 |
 | [TioAnime](anime/tioanime/index.js) | tioanime.com | Spanish | Mature | 1.0.10 |
 | [UniqueStream](anime/uniquestream/index.js) | anime.uniquestream.net | English | Mature | 1.1.5 |
-| [VerAnime](anime/veranime/index.js) | verani.me | Spanish | Mature | 1.0.10 |
+| [VerAnime](anime/veranime/index.js) | verani.me | Spanish | Mature | 1.0.11 |
 | [VerAnimes](anime/veranimes/index.js) | wwv.veranimes.net | Spanish | Mature | 1.0.11 |
 | [Watch Anime World](anime/watchanimeworld/index.js) | watchanimeworld.one | Hindi | Mature | 1.0.1 |
 | [Xanime](anime/xanime/index.js) | xanime.me | English | Mature | 1.0.1 |
@@ -414,7 +414,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [DonghuaWorld](donghua/donghuaworld/index.js) | donghuaworld.com | English | Safe | 1.0.1 |
 | [LMAnime](donghua/lmanime/index.js) | lmanime.com | English | Safe | 1.0.12 |
 | [LuciferDonghua](donghua/luciferdonghua/index.js) | luciferdonghua.org | English | Safe | 1.0.11 |
-| [MundoDonghua](donghua/mundodonghua/index.js) | mundodonghua.com | Spanish | Mature | 1.0.9 |
+| [MundoDonghua](donghua/mundodonghua/index.js) | mundodonghua.com | Spanish | Mature | 1.0.10 |
 | [MyDonghua](donghua/mydonghua/index.js) | mydonghua.com | English | Safe | 1.0.1 |
 | [NarulDonghua](donghua/naruldonghua/index.js) | naruldonghua.com | English | Safe | 1.0.11 |
 | [WowTopix](donghua/wowtopix/index.js) | wowtopix.com | English | Safe | 1.0.1 |
@@ -444,7 +444,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | --- | --- | --- | --- | --- |
 | [Bingr](western/bingr/index.js) | bingr.one | English | Mature | 1.0.6 |
 | [CineCalidad](western/cinecalidad/index.js) | cinecalidad.org | Spanish | Mature | 1.0.2 |
-| [CinePlus123](western/cineplus123/index.js) | cineplus123.org | Spanish | Mature | 1.0.6 |
+| [CinePlus123](western/cineplus123/index.js) | cineplus123.org | Spanish | Mature | 1.0.7 |
 | [Cno.to](western/cno/index.js) | cno.to | English | Mature | 1.0.5 |
 | [Cuevana](western/cuevana/index.js) | cuevana3.eu | Spanish | Mature | 1.0.1 |
 | [Gnula](western/gnula/index.js) | gnula.life | Spanish | Mature | 1.0.2 |

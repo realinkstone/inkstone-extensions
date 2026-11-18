@@ -357,6 +357,10 @@ function collapseSeasons(page, request) {
   return results === page.results ? page : Object.assign({}, page, { results });
 }
 
+const DEAD_HOSTS = /(^|\.)(mdnemonicplayer\.xyz|vgembed\.com)$|(^|\.)byse\w*\./i;
+const hostOf = (u) => (/^https?:\/\/([^/]+)/.exec(u) || [])[1] || '';
+const pageKey = (u) => String(u || '').replace(/[?#].*$/, '');
+
 class Source {
   constructor() {
     this.requests = App.createRequestManager({ rateLimit: { requestsPerSecond: 6 } });
@@ -483,7 +487,15 @@ class Source {
       const candidate = match[0].replace(/\\+$/, '');
       if (/(voe\.sx|vidhide|embedwish|streamwish)/.test(candidate)) urls.push(candidate);
     }
-    const found = await Promise.all(Array.from(new Set(urls)).map((url) => this.extract(url).catch(() => null)));
+    const deadPages = new Set();
+    const found = await Promise.all(
+      Array.from(new Set(urls)).map((url) =>
+        this.extract(url).catch((e) => {
+          if (/HTTP (404|410)\b/.test(String((e && e.message) || ''))) deadPages.add(pageKey(url));
+          return null;
+        })
+      )
+    );
     const videos = found
       .filter((video) => video && /^https?:\/\//.test(video.url))
       .sort((a, b) => SERVERS.indexOf(a.quality) - SERVERS.indexOf(b.quality))
@@ -491,6 +503,7 @@ class Source {
 
     const extras = [];
     for (const block of code.matchAll(/\$\("#(\w+)"\)\.click\(function\(e\)\{[\s\S]*?url:"([^"]+)",data:\{"slug":"([^"]+)"\}[\s\S]*?\.attr\("src","([^"]+)"\+json\[id\]\["url"\]\)/g)) {
+      if (DEAD_HOSTS.test(hostOf(block[4]))) continue;
       try {
         const answer = await this.get(`${SITE}${block[2]}?slug=${encodeURIComponent(block[3])}`, { Referer: pageUrl, 'X-Requested-With': 'XMLHttpRequest' });
         const list = JSON.parse(answer);
@@ -504,17 +517,32 @@ class Source {
       }
     }
     const asura = /asura_player"\)[\s\S]{0,300}?file:"(https?:[^"]+)"/.exec(code);
-    if (asura) extras.push({ url: asura[1], quality: 'Asura', server: 'Asura', headers: { ...BROWSER, Referer: `${SITE}/` } });
+    if (asura && !DEAD_HOSTS.test(hostOf(asura[1]))) {
+      const entry = { url: asura[1], quality: 'Asura', server: 'Asura', headers: { ...BROWSER, Referer: `${SITE}/` } };
+      if (await this.reachable(entry)) extras.push(entry);
+    }
     const taken = new Set(found.filter(Boolean).map((v) => v.quality));
     for (const match of code.matchAll(/<iframe src=\\?'(https?:\/\/[^'\\]+)/g)) {
       const host = (/^https?:\/\/([^/]+)/.exec(match[1]) || [])[1] || '';
       const name = host.replace(/^www\./, '');
+      if (DEAD_HOSTS.test(host) || deadPages.has(pageKey(match[1]))) continue;
       if (extras.some((e) => e.url === match[1]) || videos.length && /(voe\.sx|vidhide|embedwish|streamwish)/.test(host) && taken.size) continue;
       extras.push({ url: match[1], type: 'embed', quality: name, server: name });
     }
     const all = videos.concat(extras);
     if (!all.length) throw new Error(`MundoDonghua: none of the ${urls.length} servers gave a playable video`);
     return all;
+  }
+
+  async reachable(entry) {
+    try {
+      const response = await this.requests.schedule(App.createRequest({ url: entry.url, method: 'GET', headers: { ...entry.headers, Range: 'bytes=0-255' } }));
+      const type = String((response.headers && (response.headers['content-type'] || response.headers['Content-Type'])) || '');
+      return response.status >= 200 && response.status < 400 && !/text\/html/i.test(type);
+    } catch (e) {
+      if (e && e.kind === 'challenge') throw e;
+      return false;
+    }
   }
 
   async extract(url) {

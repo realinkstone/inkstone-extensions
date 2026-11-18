@@ -489,7 +489,7 @@ class Source {
     const host = (/^https?:\/\/([^/]+)/.exec(url) || [])[1] || '';
     const origin = `https://${host}/`;
     if (/(^|\.)zilla-networks\.com$/.test(host)) {
-      return { url: url.replace('/play/', '/m3u8/'), server: 'HLS', lang, headers: { Referer: `${SITE}/` } };
+      return { url: url.replace('/play/', '/m3u8/'), server: 'HLS', lang, headers: { Referer: `${SITE}/`, 'Sec-Fetch-Site': 'same-origin' } };
     }
     if (!/(^|\.)(voe\.sx|lulu|filelions\.|uqload\.|mi?xdrop\.|ok\.ru|yourupload\.com|mp4upload\.com)/.test(host)) return null;
     let html = await this.get(url.replace(/^http:/, 'https:'));

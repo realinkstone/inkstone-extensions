@@ -6842,7 +6842,7 @@
     {
       "id": "cineplus123",
       "name": "CinePlus123",
-      "version": "1.0.6",
+      "version": "1.0.7",
       "medium": "anime",
       "website": "https://cineplus123.org",
       "iconUrl": "https://inkstone.web.app/cineplus123/icon.png",
@@ -6859,7 +6859,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "c80fb2d198f1b7f69b4a89674b6698b93827e424d9c598108987224c5bad6c18"
+      "sha256": "73189bc37f011e4ece654d44a47a62300a95f6a25dd97478a7f21650cb2e071f"
     },
     {
       "id": "cuevana",
@@ -7289,7 +7289,7 @@
     {
       "id": "mundodonghua",
       "name": "MundoDonghua",
-      "version": "1.0.9",
+      "version": "1.0.10",
       "medium": "anime",
       "website": "https://www.mundodonghua.com",
       "iconUrl": "https://inkstone.web.app/mundodonghua/icon.png",
@@ -7306,7 +7306,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "7dc036fa2b78a38ce61fa8e1aaf77083429453c5631282c541145fb35b27dace"
+      "sha256": "a9e9e71f6285aee4727966782aa7a811731f49358367ba5fb37f1ece1741afbf"
     },
     {
       "id": "novelaenespanol",
@@ -7480,7 +7480,7 @@
     {
       "id": "veranime",
       "name": "VerAnime",
-      "version": "1.0.10",
+      "version": "1.0.11",
       "medium": "anime",
       "website": "https://verani.me",
       "iconUrl": "https://inkstone.web.app/veranime/icon.png",
@@ -7497,7 +7497,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "507673e8096a59fdc6fbbf1273de536125594f4a57a95ca0f5cc573c5618d30d"
+      "sha256": "1a90696ec675a75d07d1846c9699fa5546227b0dec22939340a7e6d2656777b4"
     },
     {
       "id": "veranimes",
