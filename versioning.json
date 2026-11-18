@@ -3440,7 +3440,7 @@
     {
       "id": "anikoto",
       "name": "Anikoto",
-      "version": "1.0.9",
+      "version": "1.0.10",
       "medium": "anime",
       "website": "https://anikototv.bz",
       "iconUrl": "https://anikototv.to/AnikotoTheme/assets/images/favicon.png",
@@ -3473,7 +3473,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "55366419009dd630d027b2d836e1a3be47a95d7f2e33125fe440b2296f900922"
+      "sha256": "dd2362851727a74570e8a9e832b66d8b6b50289aa365528b1257727689dfd378"
     },
     {
       "id": "aniworld",
@@ -3518,7 +3518,7 @@
     {
       "id": "miruro",
       "name": "Miruro",
-      "version": "1.0.8",
+      "version": "1.0.9",
       "medium": "anime",
       "website": "https://miruro.cx",
       "iconUrl": "https://miruro.cx/icon-dark-1024x1024.png",
@@ -3544,7 +3544,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "b775a15e222c4c47730199fe362f376bb0343e0e3b507244ce7bb3a642268a9b"
+      "sha256": "a2efe8016464412666891165de88ed3f9b2171209e9059cd734f8ed5b45080e4"
     },
     {
       "id": "akazascans",
@@ -5465,7 +5465,7 @@
     {
       "id": "monoschinos",
       "name": "MonosChinos",
-      "version": "1.0.8",
+      "version": "1.0.9",
       "medium": "anime",
       "website": "https://monoschinos.st",
       "iconUrl": "https://inkstone.web.app/monoschinos/icon.png",
@@ -5500,9 +5500,9 @@
       ],
       "language": "es",
       "contentRating": "mature",
-      "sha256": "a9e20adc9f79b53309744fb19d59a3de5e831210356a0a97a26184b92f801c7a",
       "author": "matsukiender-star",
-      "authorUrl": "https://github.com/matsukiender-star"
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "e2e549e0a0991be005445791e00f07dbd1fe278313eac1fd9b2305ca7c92f0fc"
     },
     {
       "id": "doodmanga",
@@ -5865,7 +5865,7 @@
     {
       "id": "animegg",
       "name": "AnimeGG",
-      "version": "1.0.7",
+      "version": "1.0.8",
       "medium": "anime",
       "website": "https://www.animegg.org",
       "iconUrl": "https://inkstone.web.app/animegg/icon.png",
@@ -5884,12 +5884,12 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "d47503c6a5955cbb0b4b257d00a03025adf5fc6fea9bcf597c3116da29b2c2fd"
+      "sha256": "dddfae48945d934d083ba3b1e3d69e669f04c4cc02f1b3697cb3d2b9bd3c491c"
     },
     {
       "id": "animeheaven",
       "name": "AnimeHeaven",
-      "version": "1.0.7",
+      "version": "1.0.8",
       "medium": "anime",
       "website": "https://animeheaven.me",
       "iconUrl": "https://inkstone.web.app/animeheaven/icon.png",
@@ -5908,7 +5908,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "a589640887c22f5b7bfb9282b57de88db8beaa732da8a8023924107241156021"
+      "sha256": "eab48ed0ce3ed53d83c4fdb8ef11547b179d7a3693aa29131cfc55eae185103e"
     },
     {
       "id": "aryplus",
@@ -5941,7 +5941,7 @@
     {
       "id": "anizone",
       "name": "AniZone",
-      "version": "1.0.8",
+      "version": "1.0.9",
       "medium": "anime",
       "website": "https://anizone.to",
       "iconUrl": "https://inkstone.web.app/anizone/icon.png",
@@ -5960,12 +5960,12 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "c6beead70ece26792a9f633f17ee04e0f3d2e22d6b2d82ca268782d7a65f6d07"
+      "sha256": "66ac0a84dca475698c55f96812a9684d276265b6d66a2241ee44929aa9382f72"
     },
     {
       "id": "kickassanime",
       "name": "KickAssAnime",
-      "version": "1.0.8",
+      "version": "1.0.9",
       "medium": "anime",
       "website": "https://kaa.lt",
       "iconUrl": "https://inkstone.web.app/kickassanime/icon.png",
@@ -5983,12 +5983,12 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "8e2f5ee0eac1acb122770264d709deae25fda323412e41806b0802e15bdcbdc2"
+      "sha256": "187050b71aa35374f82854ed393396cb63811033a3570b361c3f0f9320ad2bc7"
     },
     {
       "id": "uniquestream",
       "name": "UniqueStream",
-      "version": "1.1.4",
+      "version": "1.1.5",
       "medium": "anime",
       "website": "https://anime.uniquestream.net",
       "iconUrl": "https://inkstone.web.app/uniquestream/icon.png",
@@ -6007,7 +6007,6 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "ec0e2d4acf2d5cc648325b8dc36580a3028e42a0ed712f97190d49c9bc69869f",
       "settingsSchema": [
         {
           "type": "select",
@@ -6053,12 +6052,13 @@
             }
           ]
         }
-      ]
+      ],
+      "sha256": "bff94d8909e4ab800dd60e78790d9fa4572178d5ca8dfd89149dc1a051c31c3f"
     },
     {
       "id": "animexin",
       "name": "AnimeXin",
-      "version": "1.0.10",
+      "version": "1.0.11",
       "medium": "anime",
       "website": "https://animexin.dev",
       "iconUrl": "https://inkstone.web.app/animexin/icon.png",
@@ -6092,12 +6092,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "d0a073bfd749aa956cdd852fcee96738c493634d92c2aff8f99877ef3c84984a"
+      "sha256": "0d0a3833add337e243279d7c8da43db917c6a48fb57b815b0e365f320f9e7c56"
     },
     {
       "id": "animekhor",
       "name": "AnimeKhor",
-      "version": "1.0.10",
+      "version": "1.0.11",
       "medium": "anime",
       "website": "https://animekhor.org",
       "iconUrl": "https://inkstone.web.app/animekhor/icon.png",
@@ -6131,12 +6131,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "64f062ab1c56e1633aefe8c8302212bd9f6e817c4bd7dd5c377dad924bd7312f"
+      "sha256": "bfb54ea81940569caf0724661ca5a84e569b7e8d755d70433965a34ebeb88681"
     },
     {
       "id": "luciferdonghua",
       "name": "LuciferDonghua",
-      "version": "1.0.10",
+      "version": "1.0.11",
       "medium": "anime",
       "website": "https://luciferdonghua.org",
       "iconUrl": "https://inkstone.web.app/luciferdonghua/icon.png",
@@ -6170,12 +6170,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "97be8347a0a1b402215dcec4b4649954c6a0e26b58f5f59b8f5c19c595c40e44"
+      "sha256": "31f2dc5e7e9dc773e7e032e1ad2ca983e2ee9b0d2b88590ff955608cec2ff5fb"
     },
     {
       "id": "donghua4k",
       "name": "Donghua4K",
-      "version": "1.0.10",
+      "version": "1.0.11",
       "medium": "anime",
       "website": "https://donghua4k.net",
       "iconUrl": "https://inkstone.web.app/donghua4k/icon.png",
@@ -6209,12 +6209,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "30fdbbae39e42eee7cc38877eded13c8bed839f03be59d28afae9aa24e52c338"
+      "sha256": "be2afc0349f005b48326f2496cfb1bb54bb85819a4d5e8d5da34b0f30eb37972"
     },
     {
       "id": "naruldonghua",
       "name": "NarulDonghua",
-      "version": "1.0.10",
+      "version": "1.0.11",
       "medium": "anime",
       "website": "https://naruldonghua.com",
       "iconUrl": "https://inkstone.web.app/naruldonghua/icon.png",
@@ -6248,12 +6248,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "16cad74593d2d5d5018bf3b82b57e33bba9bb9123887ab1246f147bf4cb265fe"
+      "sha256": "c0d63c30ae8c5f147f501cc39d33a8b7af4971ad297e39b57844ffa8d86653df"
     },
     {
       "id": "anime4i",
       "name": "Anime4i",
-      "version": "1.0.10",
+      "version": "1.0.11",
       "medium": "anime",
       "website": "https://anime4i.com",
       "iconUrl": "https://inkstone.web.app/anime4i/icon.png",
@@ -6287,12 +6287,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "c210aa242d8e7100f6bd63a00d0e236844a66775d89101537f526c7a3d3f22c8"
+      "sha256": "4e57bc9daf6e6bf9df6cba4b54cea22f456a48cd7ba2d61f3eb6b71e5aab9106"
     },
     {
       "id": "lmanime",
       "name": "LMAnime",
-      "version": "1.0.11",
+      "version": "1.0.12",
       "medium": "anime",
       "website": "https://lmanime.com",
       "iconUrl": "https://inkstone.web.app/lmanime/icon.png",
@@ -6308,7 +6308,7 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "5c593deee6d5d5129016787b94a462e1fed3d302d6dcc7ece1176fd3692dfac0"
+      "sha256": "de41a8a839ebda41fd5a02b7381a96c792136b69b3e343e30a7a3c5e9cca4ba0"
     },
     {
       "id": "hydrahd",
@@ -6422,7 +6422,7 @@
     {
       "id": "kissasian",
       "name": "KissAsian",
-      "version": "1.0.6",
+      "version": "1.0.7",
       "medium": "anime",
       "website": "https://kissasian.com.gr",
       "iconUrl": "https://inkstone.web.app/kissasian/icon.png",
@@ -6449,12 +6449,12 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "fb70f4239165192d610c83110f2e1fa514ffd78afcc2a3fa30189990ebf7e48c"
+      "sha256": "1100cfb1c7984939a57126ca4ea7f333e3167ef055671fabcacf45621e382e40"
     },
     {
       "id": "animeav1",
       "name": "AnimeAV1",
-      "version": "1.0.8",
+      "version": "1.0.9",
       "medium": "anime",
       "website": "https://animeav1.com",
       "iconUrl": "https://inkstone.web.app/animeav1/icon.png",
@@ -6470,12 +6470,12 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "45dcb1314558338c8205de6887af3dafff1a1a0bcdb6c5624062dd5f17c499d1"
+      "sha256": "991940107c2ebb08e0988bd515972ab13c897012f58a50c2c88053a2a7296be2"
     },
     {
       "id": "animejl",
       "name": "AnimeJL",
-      "version": "1.0.13",
+      "version": "1.0.14",
       "medium": "anime",
       "website": "https://www.anime-jl.net",
       "iconUrl": "https://inkstone.web.app/animejl/icon.png",
@@ -6567,12 +6567,12 @@
       ],
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "b94874fdeb6e77e805099687b8403e25eff7756fdc321c6b8176c9d3c47c54eb"
+      "sha256": "c65bbe88121ac27d9741dcea5324dd35b82b4b8b8b14bc52ce4bc6024ffafc4b"
     },
     {
       "id": "animelatinohd",
       "name": "AnimeLatinoHD",
-      "version": "1.0.6",
+      "version": "1.0.7",
       "medium": "anime",
       "website": "https://www.animelatinohd.com",
       "iconUrl": "https://inkstone.web.app/animelatinohd/icon.png",
@@ -6648,12 +6648,12 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "84f5389aa965e0a79acb6f7cf7ffaddcaf7ad0a15f9992619e7da95414d3d333"
+      "sha256": "bc44abd5638f232adafb8fd89fa926e829f4b31af0cd9f434e3c34f7cbaf47b7"
     },
     {
       "id": "animemovil",
       "name": "AnimeMovil",
-      "version": "1.0.4",
+      "version": "1.0.5",
       "medium": "anime",
       "website": "https://tvanime.tv",
       "iconUrl": "https://inkstone.web.app/animemovil/icon.png",
@@ -6673,12 +6673,12 @@
       ],
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "4a7a585ca7adeefa409f5da3bdffba455d4fcf921d31cbdfd609dee7b8d296b4"
+      "sha256": "efa3d6942559bb49edb667164bdc055dec00dec52aad147a89ccb92809e6aac4"
     },
     {
       "id": "animeonlineninja",
       "name": "AnimeOnline.Ninja",
-      "version": "1.0.6",
+      "version": "1.0.7",
       "medium": "anime",
       "website": "https://ver2.animeonline.ninja",
       "iconUrl": "https://inkstone.web.app/animeonlineninja/icon.png",
@@ -6767,12 +6767,12 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "1c988c33a6498b66965abe34063253a0ec7eae0e1248fbe879c7447bcb692242"
+      "sha256": "97d27fbf84e0944d5dbe5e146d39b117dae45a919411481b9cfa53164f2b58e8"
     },
     {
       "id": "asialiveaction",
       "name": "AsiaLiveAction",
-      "version": "1.0.8",
+      "version": "1.0.9",
       "medium": "anime",
       "website": "https://asialiveaction.com",
       "iconUrl": "https://inkstone.web.app/asialiveaction/icon.png",
@@ -6789,12 +6789,12 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "ea76c0e6e32ec7d0f726959327bcaaceaaef34ba9efb07abdde10859c2528e02"
+      "sha256": "59f878780bf1adc40c47fd2fe8457f7a608e19e442dbc846027f2aadb9b95f95"
     },
     {
       "id": "beatzanime",
       "name": "Beatz Anime",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "anime",
       "website": "https://www.beatz-anime.net",
       "iconUrl": "https://inkstone.web.app/beatzanime/icon.png",
@@ -6815,7 +6815,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "6ccae30776f50703d3aa60ee73a85f1c037a79af848c38eb1255b345c3e5db08"
+      "sha256": "bee96704f10924ac4e520ec7ab036f450539a8b51a8b7f45647733397da59708"
     },
     {
       "id": "cinecalidad",
@@ -6908,7 +6908,7 @@
     {
       "id": "doramasyt",
       "name": "DoramasYT",
-      "version": "1.0.8",
+      "version": "1.0.9",
       "medium": "anime",
       "website": "https://www.doramasyt.com",
       "iconUrl": "https://inkstone.web.app/doramasyt/icon.png",
@@ -6925,7 +6925,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "e4e5e60b40ff1cb174264b41b2515ed23589f9cd5fcbd7f698032321fa718562"
+      "sha256": "4907ffbc56e86918580f8e9374e36bdd53e1e4843988613c6b5d1946725841f7"
     },
     {
       "id": "dragontranslation",
@@ -7002,7 +7002,7 @@
     {
       "id": "jkanime",
       "name": "JKAnime",
-      "version": "1.0.6",
+      "version": "1.0.7",
       "medium": "anime",
       "website": "https://jkanime.net",
       "iconUrl": "https://inkstone.web.app/jkanime/icon.png",
@@ -7018,12 +7018,12 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "872161de6cdd6a049492fc91b0e3c11e2555ef89a54c3419b5d9986a2d45bddc"
+      "sha256": "03f2b4a7fb6b3da3e11bca77d46833b726374aeb533b962cec134d8db5139f5f"
     },
     {
       "id": "katanime",
       "name": "Katanime",
-      "version": "1.0.8",
+      "version": "1.0.9",
       "medium": "anime",
       "website": "https://katanime.net",
       "iconUrl": "https://inkstone.web.app/katanime/icon.png",
@@ -7067,12 +7067,12 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "a0b4fbe59a7c9387ac8c6c822a5c89e5ab161664ed8204f8d6da9f2be47ae2ed"
+      "sha256": "961cbb87e04a631f462cd9a5546242d55fb71df2aedc5eb9ccd602fbe0b439f2"
     },
     {
       "id": "latanime",
       "name": "Latanime",
-      "version": "1.0.9",
+      "version": "1.0.10",
       "medium": "anime",
       "website": "https://latanime.org",
       "iconUrl": "https://inkstone.web.app/latanime/icon.png",
@@ -7088,7 +7088,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "9748f40858f7c6efcddfb5dd26dcfe52b77dc4e62f9f9dd0a581288d05ced61d"
+      "sha256": "606dc377b824552d23c7b7c3a4886e35ebfbed6c6855e690c1ba6d5b5beef0a5"
     },
     {
       "id": "leercapitulo",
@@ -7289,7 +7289,7 @@
     {
       "id": "mundodonghua",
       "name": "MundoDonghua",
-      "version": "1.0.8",
+      "version": "1.0.9",
       "medium": "anime",
       "website": "https://www.mundodonghua.com",
       "iconUrl": "https://inkstone.web.app/mundodonghua/icon.png",
@@ -7306,7 +7306,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "fa3a97f7f82e22c9cf4afcde76406cc18a61252caa0f2bca0ace1be8d55f755a"
+      "sha256": "7dc036fa2b78a38ce61fa8e1aaf77083429453c5631282c541145fb35b27dace"
     },
     {
       "id": "novelaenespanol",
@@ -7433,7 +7433,7 @@
     {
       "id": "tioanime",
       "name": "TioAnime",
-      "version": "1.0.9",
+      "version": "1.0.10",
       "medium": "anime",
       "website": "https://tioanime.com",
       "iconUrl": "https://inkstone.web.app/tioanime/icon.png",
@@ -7450,7 +7450,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "14f8d7f6686709872634c340e9e80af2b114cc55316c348ef07998a86576e50f"
+      "sha256": "6c9bff5f3c4502c417c509db289a5a79718ac82eb888edfd9f5cc053520a9e5d"
     },
     {
       "id": "traduccionesisekai",
@@ -7480,7 +7480,7 @@
     {
       "id": "veranime",
       "name": "VerAnime",
-      "version": "1.0.9",
+      "version": "1.0.10",
       "medium": "anime",
       "website": "https://verani.me",
       "iconUrl": "https://inkstone.web.app/veranime/icon.png",
@@ -7497,12 +7497,12 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "b0bfca3a1c14715457f82f622e2f7c825d05901e1e5d966afa5216b18b0c9a5c"
+      "sha256": "507673e8096a59fdc6fbbf1273de536125594f4a57a95ca0f5cc573c5618d30d"
     },
     {
       "id": "veranimes",
       "name": "VerAnimes",
-      "version": "1.0.10",
+      "version": "1.0.11",
       "medium": "anime",
       "website": "https://wwv.veranimes.net",
       "iconUrl": "https://inkstone.web.app/veranimes/icon.png",
@@ -7544,7 +7544,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "080e9cdadb025353a226285569ec51aa70878112eed6b242a2a359acfc406287"
+      "sha256": "836eac48c081303fabeed919600159f75f02d0be3626e011cf54c9cc1e91b76e"
     },
     {
       "id": "wikisourcees",
@@ -7575,7 +7575,7 @@
     {
       "id": "hentaila",
       "name": "HentaiLA",
-      "version": "1.0.8",
+      "version": "1.0.9",
       "medium": "anime",
       "website": "https://hentaila.com",
       "iconUrl": "https://inkstone.web.app/hentaila/icon.png",
@@ -7596,7 +7596,7 @@
       ],
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "f905e0f7e4995352fff2ae9e4f889447cd9c42c133fea53b9422801d7bc785d7"
+      "sha256": "c38851c46a0e5fa3d68c2ce1845813a08efe17a22b0f9089f5bd31487421571a"
     },
     {
       "id": "ikigaimangas",
@@ -7701,7 +7701,7 @@
     {
       "id": "myasiantv",
       "name": "MyAsianTV",
-      "version": "1.0.7",
+      "version": "1.0.8",
       "medium": "anime",
       "website": "https://ww7.myasiantv.rest",
       "iconUrl": "https://inkstone.web.app/myasiantv/icon.png",
@@ -7740,7 +7740,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "fdc5736f272de9c2196c27b2d71cb335ccbebd0904a1e8cf30608189e783c75d"
+      "sha256": "8553e82c58947ba646b1f2dfbb8bfb401ebec6af2a3f199a2249640b3c45e8d5"
     },
     {
       "id": "onlyflix",
@@ -7765,7 +7765,7 @@
     {
       "id": "donghuaworld",
       "name": "DonghuaWorld",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://donghuaworld.com",
       "iconUrl": "https://inkstone.web.app/donghuaworld/icon.png",
@@ -7786,12 +7786,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "01dca78a95c4c507f270daf610aabb6d1416140c25a9eb13ed27881dc6bb8dee"
+      "sha256": "b4c4d9fd85d5d4015573a8bae0587d9118f55bc9a54a9b10c25947f8ead2dc14"
     },
     {
       "id": "animeparadise",
       "name": "AnimeParadise",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "anime",
       "website": "https://www.animeparadise.moe",
       "iconUrl": "https://inkstone.web.app/animeparadise/icon.png",
@@ -7818,12 +7818,12 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "4ed137530b51c5c74d3f1cc81d4e7b9d7bb7c514fe97f6a07138b4dee344a998"
+      "sha256": "a7ed205b1b6753430e3de3c1cbe91ca8bb51b0ba2be2828cd281b324dd3a4c74"
     },
     {
       "id": "nekomiru",
       "name": "Nekomiru",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "anime",
       "website": "https://nekomiru.com",
       "iconUrl": "https://inkstone.web.app/nekomiru/icon.png",
@@ -7853,12 +7853,12 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "860ffcf5bdc1205f9970a4c9facd282e7d83385193e8093582a59cfb608977b6"
+      "sha256": "54d381f426244d95ef59899ad55c007a2bb98036e815501110bc78405c449bc8"
     },
     {
       "id": "just4anime",
       "name": "Just4Anime",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "anime",
       "website": "https://just4anime.online",
       "iconUrl": "https://inkstone.web.app/just4anime/icon.png",
@@ -7883,12 +7883,12 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "add1dd7a7ee0820a01788ad31612b40521ebe82f8728a75d017572cd91ce1bd4"
+      "sha256": "31163a6e82938229372ff2d5028ef84539fd971b825df994c60623d12b755868"
     },
     {
       "id": "xanime",
       "name": "Xanime",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://xanime.me",
       "iconUrl": "https://inkstone.web.app/xanime/icon.png",
@@ -7923,7 +7923,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "8d591d1622c4168fc59f87215349cad98c36d6200bed185d4744c0cfc000f06d"
+      "sha256": "09feee4c8ed8b391ea117e891e16b62d75840dd23d312eca9e0a37337c33c1b3"
     },
     {
       "id": "katdrama",
@@ -7970,7 +7970,7 @@
     {
       "id": "watchanimeworld",
       "name": "Watch Anime World",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://watchanimeworld.one",
       "iconUrl": "https://inkstone.web.app/watchanimeworld/icon.png",
@@ -7986,7 +7986,7 @@
       ],
       "language": "hi",
       "contentRating": "mature",
-      "sha256": "cfa09ac7439d7cc53f908d53620ba1405efb493e3d7e3a4e97a83756c78cce48"
+      "sha256": "582a438335f3a00827b9b529962439d79dea0bd9da6204623fa510be2ae5f2f1"
     },
     {
       "id": "mangade",
@@ -8512,7 +8512,7 @@
     {
       "id": "mmani",
       "name": "MMani",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://mmani.com",
       "iconUrl": "https://inkstone.web.app/mmani/icon.png",
@@ -8536,12 +8536,12 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "19fe3e692446a0e8602f11aebf3c2b74d043e3fb9e94e729806341a83c763cca"
+      "sha256": "57a8404ec0b33c5b81108a71c5d539f3bab3dea1688bb0d238cb1af40ab7c971"
     },
     {
       "id": "zenkai",
       "name": "Zenkai",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://zenkai.to",
       "iconUrl": "https://inkstone.web.app/zenkai/icon.png",
@@ -8567,12 +8567,12 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "cf7882fead0e1271778e1f34995b747ebc40bf71fbee22e8ce4a32119dce4648"
+      "sha256": "fd6ebf87318f6aa33be2fda6de80763ff55d46c5cbbc4428fd43449340b54481"
     },
     {
       "id": "wowtopix",
       "name": "WowTopix",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://wowtopix.com",
       "iconUrl": "https://inkstone.web.app/wowtopix/icon.png",
@@ -8598,12 +8598,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "a162acfa12a7e904dd5ed96351a66b667fafca039b5d602cb1d08294cd87fedc"
+      "sha256": "292a8f46e31bc0efb41ac39054f53e1111dddbf00ef7ef48b42339af5e70afa6"
     },
     {
       "id": "mydonghua",
       "name": "MyDonghua",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://mydonghua.com",
       "iconUrl": "https://inkstone.web.app/mydonghua/icon.png",
@@ -8629,7 +8629,7 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "8f9cdceed56b984e62707be31a09f88bbfd6e2b9fc29ebb72da8c3268ab9b990"
+      "sha256": "8e0414093c029b9335724b095e9b8656fbd060cc2161a7aed941dfc1c0f5c01a"
     },
     {
       "id": "kissasiacam",
@@ -8657,7 +8657,7 @@
     {
       "id": "anilight",
       "name": "AniLight",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://anilight.live",
       "iconUrl": "https://inkstone.web.app/anilight/icon.png",
@@ -8680,7 +8680,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "93d17bec5068c658ae91dd712de80e0ccaa45e00042950e77817e9386c6d17f2"
+      "sha256": "a0fbf1545498a075480afd4993a990f6aa65006d39b3f738c8670ffc2cbf45cc"
     },
     {
       "id": "novelhi",
@@ -8826,7 +8826,7 @@
     {
       "id": "anidap",
       "name": "Anidap",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://anidap.lol",
       "iconUrl": "https://inkstone.web.app/anidap/icon.png",
@@ -8841,7 +8841,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "27dce7fdd6a5fa4a8154ede2ab79990625d0ddd05795b849ff803f398f6ac4d9"
+      "sha256": "a987702746d6d8730b1f538c903114a37f3ba64cf471293b975e458058199959"
     },
     {
       "id": "kissbae",
@@ -8887,7 +8887,7 @@
     {
       "id": "kawaiianime",
       "name": "Kawaii Anime",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://kawaiianime.cc",
       "iconUrl": "https://inkstone.web.app/kawaiianime/icon.png",
@@ -8907,7 +8907,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "f87d2a3d35073ef2debf98896975b5109e6e84717e9bace0f078cbb7c0d478b9"
+      "sha256": "9f2f40865fc54a5de02ec588d2e3b43dbe67ddd49d5207d846c9ebbb0a73649f"
     },
     {
       "id": "animetvplus",
@@ -9271,7 +9271,7 @@
     {
       "id": "donghuastream",
       "name": "DonghuaStream",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://donghuastream.org",
       "iconUrl": "https://inkstone.web.app/donghuastream/icon.png",
@@ -9305,7 +9305,7 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "6de0d5eb7f1677369a24bfc8002aa2030d8fcb9e9a631b26c9cb60d13a6ca65a"
+      "sha256": "fccea14ceb04f4929bf36ca61e0d5bb4167766c87a169343bb88ccce57a04919"
     }
   ]
 }

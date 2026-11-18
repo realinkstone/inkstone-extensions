@@ -206,9 +206,15 @@ class Source {
     let keys = ids.map(() => '');
     const lead = ids.findIndex(Boolean);
     if (lead >= 0) {
-      const proven = await this.hlsKey(chosen[lead].playlist, ids[lead]);
-      if (proven && proven === ids[lead]) keys = ids.map((id) => (/^[0-9a-f]{32}$/.test(id) ? id : ''));
-      else keys = await Promise.all(chosen.map((v, i) => (i === lead ? proven : ids[i] ? this.hlsKey(v.playlist, ids[i]) : '')));
+      const trusted = this.keyTrustedAt && Date.now() - this.keyTrustedAt < 10 * 60 * 1000;
+      const proven = trusted ? ids[lead] : await this.hlsKey(chosen[lead].playlist, ids[lead]);
+      if (proven && proven === ids[lead]) {
+        if (!trusted) this.keyTrustedAt = Date.now();
+        keys = ids.map((id) => (/^[0-9a-f]{32}$/.test(id) ? id : ''));
+      } else {
+        this.keyTrustedAt = 0;
+        keys = await Promise.all(chosen.map((v, i) => (i === lead ? proven : ids[i] ? this.hlsKey(v.playlist, ids[i]) : '')));
+      }
     }
     return chosen.map((v, i) => {
       const video = {

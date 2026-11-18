@@ -125,7 +125,7 @@ class Source {
       seen.add(mangaId);
       const classes = (node.attr('class') || '').split(/\s+/);
       const dubs = classes.filter((c) => c.indexOf('category-') === 0 && DUBS[c.slice(9)]).map((c) => DUBS[c.slice(9)]);
-      const card = { mangaId, title, image: imageUrl(node.find('img').first().attr('src') || node.find('img').first().attr('data-src')), medium: 'anime' };
+      const card = { mangaId, title, image: imageUrl(node.find('img').first().attr('src') || node.find('img').first().attr('data-src')).replace('/t/p/w500/', '/t/p/w342/'), medium: 'anime' };
       card.summary = [m[1] === 'movies' ? 'Movie' : 'Series'].concat(dubs.slice(0, 3)).join(', ');
       if (classes.indexOf('category-ecchi') >= 0) card.ageRating = 16;
       results.push(card);
