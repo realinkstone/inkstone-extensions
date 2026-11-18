@@ -162,7 +162,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [MangaBuddy](comics/mangabuddy/index.js) | mangabuddy1.co.uk | English | Adult | 1.3.0 |
 | [MangaCK](comics/mangack/index.js) | mangack.com | English | Mature | 1.0.0 |
 | [MangaDE](comics/mangade/index.js) | mangade.io | English | Mature | 1.0.0 |
-| [MangaDex](comics/mangadex/index.js) | mangadex.org | English | Safe | 1.3.0 |
+| [MangaDex](comics/mangadex/index.js) | mangadex.org | English | Safe | 1.4.0 |
 | [MangaDot](comics/mangadot/index.js) | mangadot.net | English | Mature | 1.0.0 |
 | [MangaFire](comics/mangafire/index.js) | mangafire.to | English | Safe | 1.4.1 |
 | [MangaFox](comics/mangafox/index.js) | fanfox.net | English | Adult | 1.0.0 |
