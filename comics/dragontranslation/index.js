@@ -47,7 +47,7 @@ class Source {
         ? `${SITE}/manga-genre/${encodeURIComponent(tags[0].id)}/${paged}`
         : `${SITE}/manga/${paged}?m_orderby=${order}`;
     const $ = cheerio.load(await this.get(url));
-    const titles = $('a:has(.ac-img)')
+    const titles = $('a:has(img.wp-post-image)')
       .map((i, el) => {
         const mangaId = slugOf($(el).attr('href'), 'manga');
         return mangaId && { mangaId, title: ($(el).attr('title') || '').trim(), image: $(el).find('img').attr('src'), medium: 'comics' };
@@ -60,15 +60,15 @@ class Source {
 
   async getMangaDetails(mangaId) {
     const $ = cheerio.load(await this.get(`${SITE}/manga/${encodeURIComponent(mangaId)}/`));
-    const heading = $('div.hero h1').first().clone();
+    const heading = $('h1').first().clone();
     heading.find('span').remove();
     return {
       mangaInfo: {
         title: heading.text().trim() || $('title').text().replace(/\s*[–-]\s*Dragon Translation\s*$/, '').trim() || mangaId,
-        image: $('div.hposter img').attr('src'),
-        desc: $('div.syn p').map((i, el) => $(el).text().trim()).get().filter(Boolean).join('\n\n'),
-        status: STATUS[$('div.htags > span.htag').first().text().trim().toLowerCase()] || 'UNKNOWN',
-        tags: $('div.hchips a.chip').map((i, el) => $(el).text().trim()).get(),
+        image: $('img.wp-post-image').first().attr('src') || $('meta[property="og:image"]').attr('content'),
+        desc: $('div.site-content div[id]').filter((i, el) => $(el).children('p').length > 0).first().children('p').map((i, el) => $(el).text().trim()).get().filter(Boolean).join('\n\n'),
+        status: STATUS[$('h1').first().next().find('span').first().text().trim().toLowerCase()] || 'UNKNOWN',
+        tags: $('span.hchips-label').parent().find('a[href*="/manga-genre/"]').map((i, el) => $(el).text().trim()).get(),
         webURL: `${SITE}/manga/${mangaId}/`,
         medium: 'comics',
       },
