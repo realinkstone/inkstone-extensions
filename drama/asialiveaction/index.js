@@ -285,6 +285,21 @@ function collapseSeasons(page, request) {
   return results === page.results ? page : Object.assign({}, page, { results });
 }
 
+const BYSE_HOST = /^(?:www\.)?byse[a-z0-9]{4,}\.com$/i;
+const SERVER_NAMES = [
+  [/(^|\.)vkvideo\.ru$|(^|\.)vk\.com$/i, 'VK Video'],
+  [/(^|\.)ok\.ru$/i, 'OK.ru'],
+  [/(^|\.)mail\.ru$/i, 'Mail.ru'],
+  [BYSE_HOST, 'Byse'],
+  [/(^|\.)vidmoly\.\w+$/i, 'Vidmoly'],
+  [/(^|\.)streamtape\.\w+$/i, 'Streamtape'],
+];
+function serverNameOf(url, fallback) {
+  const host = (/^https?:\/\/([^/:?#]+)/i.exec(String(url)) || [])[1] || '';
+  const hit = SERVER_NAMES.find(([test]) => test.test(host));
+  return hit ? hit[1] : String(fallback || '').trim() || host || 'Server';
+}
+
 class Source {
   constructor() {
     this.requests = App.createRequestManager({
@@ -463,7 +478,16 @@ class Source {
     const match = /var\s+allVideos\s*=\s*(\{[\s\S]*?\});/.exec(html);
     const serverEntries = [];
 
-    if (match) {
+    const $ = cheerio.load(html);
+    const seenSrc = new Set();
+    $('a[data-src]').each((i, el) => {
+      const src = String($(el).attr('data-src') || '').trim().replace(/^\/\//, 'https://');
+      if (!/^https?:\/\//i.test(src) || seenSrc.has(src)) return;
+      seenSrc.add(src);
+      serverEntries.push({ label: serverNameOf(src, $(el).text()), url: src });
+    });
+
+    if (match && !serverEntries.length) {
       try {
         const allVideos = JSON.parse(match[1]);
         for (const key of Object.keys(allVideos)) {
@@ -494,8 +518,16 @@ class Source {
     const seen = new Set();
     const embeds = serverEntries
       .filter((entry, i) => !(resolved[i] && resolved[i].url) && /^https?:\/\//.test(entry.url) && !seen.has(entry.url) && seen.add(entry.url))
-      .map((entry) => ({ url: entry.url, type: 'embed', quality: entry.label, server: String(entry.label).trim() || 'Server' }));
+      .map((entry) => {
+        const embed = { url: entry.url, type: 'embed', quality: entry.label, server: String(entry.label).trim() || 'Server' };
+        const host = (/^https?:\/\/([^/:?#]+)/i.exec(entry.url) || [])[1] || '';
+        if (BYSE_HOST.test(host)) embed.headers = { Referer: pageUrl };
+        return embed;
+      });
     if (!videos.length && !embeds.length) {
+      if (!serverEntries.length && (html.includes('ala-login-options') || /UNIRTE AHORA/.test(html))) {
+        throw new Error('AsiaLiveAction shows the links of this title only to members who sign in on the site, so there is no stream to open');
+      }
       throw new Error(`AsiaLiveAction: none of the ${serverEntries.length} servers gave a playable video`);
     }
 

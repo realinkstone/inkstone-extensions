@@ -6776,7 +6776,7 @@
     {
       "id": "asialiveaction",
       "name": "AsiaLiveAction",
-      "version": "1.0.9",
+      "version": "1.0.10",
       "medium": "anime",
       "website": "https://asialiveaction.com",
       "iconUrl": "https://inkstone.web.app/asialiveaction/icon.png",
@@ -6793,7 +6793,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "59f878780bf1adc40c47fd2fe8457f7a608e19e442dbc846027f2aadb9b95f95"
+      "sha256": "06d0ba01531f7037a80a2bbc3da1f996bbceac73ac5f0dbbdf974dc026e421af"
     },
     {
       "id": "beatzanime",
@@ -6846,7 +6846,7 @@
     {
       "id": "cineplus123",
       "name": "CinePlus123",
-      "version": "1.0.7",
+      "version": "1.0.8",
       "medium": "anime",
       "website": "https://cineplus123.org",
       "iconUrl": "https://inkstone.web.app/cineplus123/icon.png",
@@ -6863,7 +6863,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "73189bc37f011e4ece654d44a47a62300a95f6a25dd97478a7f21650cb2e071f"
+      "sha256": "40d412b3f650deec54c8bf5afc95030f844368124558fb9b7853b9a3f96c3c59"
     },
     {
       "id": "cuevana",
