@@ -357,7 +357,8 @@ function collapseSeasons(page, request) {
   return results === page.results ? page : Object.assign({}, page, { results });
 }
 
-const DEAD_HOSTS = /(^|\.)(mdnemonicplayer\.xyz|vgembed\.com)$|(^|\.)byse\w*\./i;
+const DEAD_HOSTS = /(^|\.)(mdnemonicplayer\.xyz|vgembed\.com)$/i;
+const BYSE_HOST = /^(?:www\.)?byse[a-z0-9]{4,}\.com$/i;
 const hostOf = (u) => (/^https?:\/\/([^/]+)/.exec(u) || [])[1] || '';
 const pageKey = (u) => String(u || '').replace(/[?#].*$/, '');
 
@@ -527,7 +528,9 @@ class Source {
       const name = host.replace(/^www\./, '');
       if (DEAD_HOSTS.test(host) || deadPages.has(pageKey(match[1]))) continue;
       if (extras.some((e) => e.url === match[1]) || videos.length && /(voe\.sx|vidhide|embedwish|streamwish)/.test(host) && taken.size) continue;
-      extras.push({ url: match[1], type: 'embed', quality: name, server: name });
+      const entry = { url: match[1], type: 'embed', quality: name, server: name };
+      if (BYSE_HOST.test(host)) entry.headers = { Referer: pageUrl };
+      extras.push(entry);
     }
     const all = videos.concat(extras);
     if (!all.length) throw new Error(`MundoDonghua: none of the ${urls.length} servers gave a playable video`);

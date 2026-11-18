@@ -6475,7 +6475,7 @@
     {
       "id": "animejl",
       "name": "AnimeJL",
-      "version": "1.0.14",
+      "version": "1.0.15",
       "medium": "anime",
       "website": "https://www.anime-jl.net",
       "iconUrl": "https://inkstone.web.app/animejl/icon.png",
@@ -6567,7 +6567,7 @@
       ],
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "c65bbe88121ac27d9741dcea5324dd35b82b4b8b8b14bc52ce4bc6024ffafc4b"
+      "sha256": "99c50cefe490e58e59902195c92b257eb437da1b8789c3229b43433ff7adfdf7"
     },
     {
       "id": "animelatinohd",
@@ -7271,7 +7271,7 @@
     {
       "id": "mundodonghua",
       "name": "MundoDonghua",
-      "version": "1.0.10",
+      "version": "1.0.11",
       "medium": "anime",
       "website": "https://www.mundodonghua.com",
       "iconUrl": "https://inkstone.web.app/mundodonghua/icon.png",
@@ -7288,7 +7288,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "a9e9e71f6285aee4727966782aa7a811731f49358367ba5fb37f1ece1741afbf"
+      "sha256": "2003b3e4c58f54b07b5c1db3ceefd842ca4715f84c8a5392c6bdf741c8f16747"
     },
     {
       "id": "novelaenespanol",
@@ -7462,7 +7462,7 @@
     {
       "id": "veranime",
       "name": "VerAnime",
-      "version": "1.0.12",
+      "version": "1.0.13",
       "medium": "anime",
       "website": "https://verani.me",
       "iconUrl": "https://inkstone.web.app/veranime/icon.png",
@@ -7479,7 +7479,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "61bc940c8bdc63eb218950ff9b97881eaaba5edfcb6e7aef995b533bfc3e3959"
+      "sha256": "839b149228d8b2e5fe0c1f418d955aa17ee06c38c50d412ee36e1a0cd9e6faf1"
     },
     {
       "id": "veranimes",

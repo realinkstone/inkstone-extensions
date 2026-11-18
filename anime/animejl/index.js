@@ -325,6 +325,8 @@ function collapseSeasons(page, request) {
   return results === page.results ? page : Object.assign({}, page, { results });
 }
 
+const BYSE_HOST = /^(?:www\.)?byse[a-z0-9]{4,}\.com$/i;
+
 class Source {
   constructor() {
     this.requests = App.createRequestManager({ rateLimit: { requestsPerSecond: 4 } });
@@ -465,7 +467,8 @@ class Source {
   }
 
   async getVideosUnnamed(mangaId, chapterId) {
-    const html = await this.get(`${SITE}/anime/${mangaId}/${encodeURIComponent(chapterId)}`);
+    const pageUrl = `${SITE}/anime/${mangaId}/${encodeURIComponent(chapterId)}`;
+    const html = await this.get(pageUrl);
     const players = Array.from(html.matchAll(/video\[\d+\]\s*=\s*'<iframe[^>]+src="([^"]+)"/g), (match) => match[1]);
     const found = await Promise.all(players.map((url) => this.extract(url).catch(() => null)));
     const videos = found
@@ -477,7 +480,11 @@ class Source {
     const embeds = players
       .map((url) => String(url || '').trim().replace(/^\/\//, 'https://').replace(/^http:/, 'https:'))
       .filter((url, i) => !(found[i] && /^https?:\/\//.test(found[i].url)) && /^https?:\/\/\S+$/.test(url) && !NEVER_PLAYS.test((/^https?:\/\/([^/]+)/.exec(url) || [])[1] || '') && !seenPlayers.has(url) && seenPlayers.add(url))
-      .map((url) => ({ url, type: 'embed', quality: hostLabel(url), server: hostLabel(url) }));
+      .map((url) => {
+        const embed = { url, type: 'embed', quality: hostLabel(url), server: hostLabel(url) };
+        if (BYSE_HOST.test((/^https?:\/\/([^/:?#]+)/i.exec(url) || [])[1] || '')) embed.headers = { Referer: pageUrl };
+        return embed;
+      });
     if (videos.length) return videos;
     if (!embeds.length) throw new Error(`AnimeJL: none of the ${players.length} servers gave a playable video`);
     return embeds;

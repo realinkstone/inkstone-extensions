@@ -334,6 +334,8 @@ const headerOf = (response, name) => {
   return '';
 };
 
+const BYSE_HOST = /^(?:www\.)?byse[a-z0-9]{4,}\.com$/i;
+
 class Source {
   constructor() {
     this.requests = App.createRequestManager({ rateLimit: { requestsPerSecond: 6 } });
@@ -468,7 +470,8 @@ class Source {
   }
 
   async getVideos(mangaId, chapterId) {
-    const $ = cheerio.load(await this.get(`${SITE}/${chapterId}/`));
+    const pageUrl = `${SITE}/${chapterId}/`;
+    const $ = cheerio.load(await this.get(pageUrl));
     const entries = $('iframe[src], iframe[data-src]')
       .map((i, el) => {
         const frame = $(el);
@@ -494,7 +497,11 @@ class Source {
     const seen = new Set();
     const embeds = entries
       .filter((entry, i) => !isUns(entry.url) && !(found[i] && /^https?:\/\//.test(found[i].url)) && !seen.has(entry.url) && seen.add(entry.url))
-      .map((entry) => ({ url: entry.url, type: 'embed', quality: entry.lang ? `${hostLabel(entry.url)} (${entry.lang})` : hostLabel(entry.url), server: hostLabel(entry.url) }));
+      .map((entry) => {
+        const embed = { url: entry.url, type: 'embed', quality: entry.lang ? `${hostLabel(entry.url)} (${entry.lang})` : hostLabel(entry.url), server: hostLabel(entry.url) };
+        if (BYSE_HOST.test((/^https?:\/\/([^/:?#]+)/i.exec(entry.url) || [])[1] || '')) embed.headers = { Referer: pageUrl };
+        return embed;
+      });
     if (!videos.length && !embeds.length) throw new Error(`VerAnime: none of the ${entries.length} servers gave a playable video`);
     return videos.concat(embeds);
   }
