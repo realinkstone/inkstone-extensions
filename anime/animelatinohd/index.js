@@ -561,12 +561,22 @@ class Source {
         if (metadata && metadata.hlsManifestUrl) return { url: metadata.hlsManifestUrl, server: 'OK.ru', lang };
       }
     }
-    if (/dood|ds2play|d000/.test(lowerHost)) {
+    if (/dood|ds2play|d000|playmogo/.test(lowerHost)) {
       const pass = /\/pass_md5\/([^']+)'/.exec(html);
       if (pass) {
         const token = pass[1].split('/').pop();
-        const base = await this.get(`${origin}pass_md5/${pass[1]}`, { Referer: origin });
-        return { url: `${base}1234567890?token=${token}&expiry=${Date.now()}`, server: 'Doodstream', lang, headers: { Referer: origin } };
+        const ask = async (o) => {
+          try {
+            const answer = String(await this.get(`${o}pass_md5/${pass[1]}`, { Referer: o })).trim();
+            return /^https?:\/\//.test(answer) ? { base: answer, origin: o } : null;
+          } catch (e) {
+            if (e && (e.kind === 'challenge' || e.kind === 'blocked')) throw e;
+            return null;
+          }
+        };
+        const got = (await ask(origin)) || (origin !== 'https://playmogo.com/' ? await ask('https://playmogo.com/') : null);
+        if (!got) return null;
+        return { url: `${got.base}1234567890?token=${token}&expiry=${Date.now()}`, server: 'Doodstream', lang, headers: { Referer: got.origin } };
       }
     }
     if (/streamtape|shavetape/.test(lowerHost)) {

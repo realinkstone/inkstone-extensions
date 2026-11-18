@@ -9,7 +9,7 @@ function embedsOf(sources) {
   const out = [];
   const seen = new Set();
   for (const s of Array.isArray(sources) ? sources : []) {
-    if (!s || s.kind !== 'embed' || !/^https:\/\/(cinesrc\.st|vidfast\.vc)\//.test(String(s.url))) continue;
+    if (!s || s.kind !== 'embed' || !/^https:\/\/vidfast\.vc\//.test(String(s.url))) continue;
     if (seen.has(s.url)) continue;
     seen.add(s.url);
     out.push({ url: String(s.url), type: 'embed', quality: clean(s.label) || 'Player', server: clean(s.label) || 'Player' });

@@ -589,11 +589,21 @@ class Source {
       const part = /document\.getElementById\('(?:norobot|robot)link'\)\.innerHTML\s*=\s*'([^']+)'\s*\+\s*\('([^']+)'\)\.substring\((\d+)\)/.exec(html);
       return { url: `https:${part[1]}${part[2].substring(+part[3])}`, server: 'StreamTape', lang, headers: { Referer: origin } };
     }
-    if (/dood|ds2play|ds2video|d000/.test(lower)) {
+    if (/dood|ds2play|ds2video|d000|playmogo/.test(lower)) {
       const pass = /\/pass_md5\/([^']+)'/.exec(html);
       const token = pass[1].split('/').pop();
-      const base = await this.get(`${origin}pass_md5/${pass[1]}`, { Referer: origin });
-      return { url: `${base}1234567890?token=${token}&expiry=${Date.now()}`, server: 'DoodStream', lang, headers: { Referer: origin } };
+      const ask = async (o) => {
+        try {
+          const answer = String(await this.get(`${o}pass_md5/${pass[1]}`, { Referer: o })).trim();
+          return /^https?:\/\//.test(answer) ? { base: answer, origin: o } : null;
+        } catch (e) {
+          if (e && (e.kind === 'challenge' || e.kind === 'blocked')) throw e;
+          return null;
+        }
+      };
+      const got = (await ask(origin)) || (origin !== 'https://playmogo.com/' ? await ask('https://playmogo.com/') : null);
+      if (!got) return null;
+      return { url: `${got.base}1234567890?token=${token}&expiry=${Date.now()}`, server: 'DoodStream', lang, headers: { Referer: got.origin } };
     }
     return null;
   }

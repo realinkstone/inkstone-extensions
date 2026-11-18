@@ -366,9 +366,9 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [AnimeGG](anime/animegg/index.js) | animegg.org | English | Mature | 1.0.8 |
 | [AnimeHeaven](anime/animeheaven/index.js) | animeheaven.me | English | Mature | 1.0.8 |
 | [AnimeJL](anime/animejl/index.js) | anime-jl.net | Spanish | Adult | 1.0.14 |
-| [AnimeLatinoHD](anime/animelatinohd/index.js) | animelatinohd.com | Spanish | Mature | 1.0.7 |
+| [AnimeLatinoHD](anime/animelatinohd/index.js) | animelatinohd.com | Spanish | Mature | 1.0.8 |
 | [AnimeMovil](anime/animemovil/index.js) | tvanime.tv | Spanish | Adult | 1.0.5 |
-| [AnimeOnline.Ninja](anime/animeonlineninja/index.js) | ver2.animeonline.ninja | Spanish | Mature | 1.0.7 |
+| [AnimeOnline.Ninja](anime/animeonlineninja/index.js) | ver2.animeonline.ninja | Spanish | Mature | 1.0.8 |
 | [AnimeParadise](anime/animeparadise/index.js) | animeparadise.moe | English | Mature | 1.0.2 |
 | [animeTVplus](anime/animetvplus/index.js) | animetvplus.xyz | English | Mature | 1.0.0 |
 | [Anistream](anime/anistream/index.js) | anistream.one | English | Mature | 1.0.0 |
@@ -445,7 +445,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [Bingr](western/bingr/index.js) | bingr.one | English | Mature | 1.0.6 |
 | [CineCalidad](western/cinecalidad/index.js) | cinecalidad.org | Spanish | Mature | 1.0.2 |
 | [CinePlus123](western/cineplus123/index.js) | cineplus123.org | Spanish | Mature | 1.0.7 |
-| [Cno.to](western/cno/index.js) | cno.to | English | Mature | 1.0.5 |
+| [Cno.to](western/cno/index.js) | cno.to | English | Mature | 1.0.6 |
 | [Cuevana](western/cuevana/index.js) | cuevana3.eu | Spanish | Mature | 1.0.1 |
 | [Gnula](western/gnula/index.js) | gnula.life | Spanish | Mature | 1.0.2 |
 | [HydraHD](western/hydrahd/index.js) | hydrahd.gd | English | Mature | 1.0.4 |

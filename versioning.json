@@ -6572,7 +6572,7 @@
     {
       "id": "animelatinohd",
       "name": "AnimeLatinoHD",
-      "version": "1.0.7",
+      "version": "1.0.8",
       "medium": "anime",
       "website": "https://www.animelatinohd.com",
       "iconUrl": "https://inkstone.web.app/animelatinohd/icon.png",
@@ -6620,6 +6620,8 @@
         "*.ds2play.com",
         "d000d.com",
         "*.d000d.com",
+        "playmogo.com",
+        "*.playmogo.com",
         "streamtape.com",
         "*.streamtape.com",
         "shavetape.cash",
@@ -6648,7 +6650,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "bc44abd5638f232adafb8fd89fa926e829f4b31af0cd9f434e3c34f7cbaf47b7"
+      "sha256": "32c031981a2c585a04284c0b25dcbb73fd07082f133621b994c080d41358c600"
     },
     {
       "id": "animemovil",
@@ -6678,7 +6680,7 @@
     {
       "id": "animeonlineninja",
       "name": "AnimeOnline.Ninja",
-      "version": "1.0.7",
+      "version": "1.0.8",
       "medium": "anime",
       "website": "https://ver2.animeonline.ninja",
       "iconUrl": "https://inkstone.web.app/animeonlineninja/icon.png",
@@ -6752,7 +6754,9 @@
         "ds2play.com",
         "*.ds2play.com",
         "d000d.com",
-        "*.d000d.com"
+        "*.d000d.com",
+        "playmogo.com",
+        "*.playmogo.com"
       ],
       "description": "Anime・Movies・Live Action\n\nRestrictions:\n・Cloudflare Checks\n・Rate Limit",
       "capabilities": [
@@ -6767,7 +6771,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "97d27fbf84e0944d5dbe5e146d39b117dae45a919411481b9cfa53164f2b58e8"
+      "sha256": "2e43fdd9c943e88441303648777d42303c6fe258b80b8bf5b80e01c0a07b3fdf"
     },
     {
       "id": "asialiveaction",
@@ -7949,7 +7953,7 @@
     {
       "id": "cno",
       "name": "Cno.to",
-      "version": "1.0.5",
+      "version": "1.0.6",
       "medium": "anime",
       "website": "https://cno.to",
       "iconUrl": "https://inkstone.web.app/cno/icon.png",
@@ -7965,7 +7969,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "988790395b3426ef105d3a91f596b42f0a6b2ab79d5337b2b07cc4ffa91fec83"
+      "sha256": "d660f5f6f07a93af7a970765bea09fc066702bb70d2d4cdb9ad21366dc2b6a76"
     },
     {
       "id": "watchanimeworld",
