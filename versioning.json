@@ -1831,7 +1831,7 @@
     {
       "id": "mangadex",
       "name": "MangaDex",
-      "version": "1.4.0",
+      "version": "1.4.1",
       "medium": "comics",
       "website": "https://mangadex.org",
       "iconUrl": "https://inkstone.web.app/mangadex/icon.png",
@@ -2000,7 +2000,7 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "bb8d1a462497f7acbe04252434f564f864191750af41baeb78cac4e9f2e8c999"
+      "sha256": "1aaaa93c4695fdee0d05303677204be050282ad5201c38ad5bb57e460f1ee138"
     },
     {
       "id": "kagane",

@@ -538,16 +538,21 @@ class Source {
   }
 
   async requestJSON(url) {
-    if (this.agent !== 'plain') {
+    if (this.agent !== 'browser') {
       try {
-        return await this.fetchJSON(url, false);
+        return await this.fetchJSON(url, true);
       } catch (e) {
-        if (!(e && e.botCheck)) throw e;
-        this.agent = 'plain';
-        console.error(`MangaDex: the browser identity met its bot check (${e.message}), using the plain agent from now on`);
+        if (!(e && e.refused)) throw e;
+        this.agent = 'browser';
+        console.error(`MangaDex: the plain agent was refused (${e.message}), using the app's browser identity from now on`);
       }
     }
-    return this.fetchJSON(url, true);
+    try {
+      return await this.fetchJSON(url, false);
+    } catch (e) {
+      if (e && e.botCheck) this.agent = undefined;
+      throw e;
+    }
   }
 
   async fetchJSON(url, plain) {
@@ -559,12 +564,13 @@ class Source {
     try {
       response = await manager.schedule(request);
     } catch (e) {
-      if (!plain && isBotCheck(null, e)) throw Object.assign(new Error((e && e.message) || 'check not cleared'), { botCheck: true });
+      if (isBotCheck(null, e)) throw Object.assign(new Error((e && e.message) || 'check not cleared'), plain ? { refused: true } : { botCheck: true });
       throw e;
     }
-    if (!plain && isBotCheck(response)) {
-      throw Object.assign(new Error(`HTTP ${response.status} check page`), { botCheck: true });
+    if (isBotCheck(response)) {
+      throw Object.assign(new Error(`HTTP ${response.status} check page`), plain ? { refused: true } : { botCheck: true });
     }
+    if (plain && response.status === 403) throw Object.assign(new Error('HTTP 403'), { refused: true });
     if (response.status < 200 || response.status >= 300) {
       throw new Error(`MangaDex API HTTP ${response.status} for ${url}`);
     }
