@@ -1,6 +1,7 @@
 const SITE_BASE = 'https://chikari.moe';
 const API_BASE = 'https://chikari.moe/api';
 const PAGE_SIZE = 24;
+const RATE_PER_SECOND = 2;
 const CHAPTER_BATCH = 500;
 const CHAPTER_HARD_CAP = 5000;
 
@@ -211,7 +212,7 @@ class Source {
   }
 
   async requestJSON(url) {
-    const manager = App.createRequestManager({});
+    const manager = App.createRequestManager({ rateLimit: { requestsPerSecond: RATE_PER_SECOND } });
     const request = App.createRequest({
       url,
       method: 'GET',
@@ -219,6 +220,9 @@ class Source {
     });
     const response = await manager.schedule(request);
     if (response.status < 200 || response.status >= 300) {
+      if (response.status === 429 && /challenge_required/.test(String(response.data))) {
+        throw new Error(`Chikari asked for a verification (HTTP 429 challenge_required, it lifts after about 10 minutes) for ${url}`);
+      }
       throw new Error(`Chikari API HTTP ${response.status} for ${url}`);
     }
     return JSON.parse(response.data);

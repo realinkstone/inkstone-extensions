@@ -47,7 +47,7 @@
     {
       "id": "chikari",
       "name": "Chikari",
-      "version": "4.4.1",
+      "version": "4.4.2",
       "medium": "both",
       "website": "https://chikari.moe",
       "iconUrl": "https://inkstone.web.app/chikari/icon.png",
@@ -62,7 +62,7 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "sha256": "2e7157f1079dec5e4286364d14d571eeedd3418beacbd8682e7628c16f7253eb"
+      "sha256": "d6fd45431b8cacf83ef25666ad7316450007422a5a36533e4eeb44b61c56df91"
     },
     {
       "id": "novelfire",

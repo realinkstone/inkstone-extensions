@@ -83,7 +83,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [Boruto Explorer](comics/borutoexplorer/index.js) | leitor.borutoexplorer.com.br | Brazilian Portuguese | Safe | 1.0.0 |
 | [Bun Manga](comics/bunmanga/index.js) | bunmanga.com | English | Safe | 1.0.0 |
 | [Café com Yaoi](comics/cafcomyaoi/index.js) | cafecomyaoi.com.br | Brazilian Portuguese | Mature | 1.0.2 |
-| [Chikari](mixed/chikari/index.js) | chikari.moe | English | Adult | 4.4.1 |
+| [Chikari](mixed/chikari/index.js) | chikari.moe | English | Adult | 4.4.2 |
 | [CManga](comics/cmanga/index.js) | cmangavn.com | Vietnamese | Adult | 1.0.0 |
 | [Cocomic](comics/cocomic/index.js) | cocomic.co | English | Adult | 1.0.2 |
 | [ComicFury](comics/comicfury/index.js) | comicfury.com | English | Adult | 1.0.0 |
@@ -304,7 +304,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [AsuraScans](mixed/asurascans/index.js) | asurascans.com | English | Safe | 2.4.0 |
 | [Atsumaru](mixed/atsu/index.js) | atsu.moe | English | Mature | 1.0.1 |
 | [Baka-Tsuki](novels/bakatsuki/index.js) | baka-tsuki.org | English | Mature | 1.0.0 |
-| [Chikari](mixed/chikari/index.js) | chikari.moe | English | Adult | 4.4.1 |
+| [Chikari](mixed/chikari/index.js) | chikari.moe | English | Adult | 4.4.2 |
 | [Dreame](novels/dreame/index.js) | dreame.com | English | Adult | 1.2.0 |
 | [Elejandría](novels/elejandria/index.js) | elejandria.com | Spanish | Mature | 1.0.0 |
 | [Exnovels](novels/exnovels/index.js) | exnovels.com | English | Safe | 1.0.1 |
