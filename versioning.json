@@ -3520,7 +3520,7 @@
     {
       "id": "miruro",
       "name": "Miruro",
-      "version": "1.0.9",
+      "version": "1.0.10",
       "medium": "anime",
       "website": "https://miruro.cx",
       "iconUrl": "https://miruro.cx/icon-dark-1024x1024.png",
@@ -3533,7 +3533,11 @@
         "s1.keeply.top",
         "s2.keeply.top",
         "*.krussdomi.com",
-        "krussdomi.com"
+        "krussdomi.com",
+        "miruro.tv",
+        "*.miruro.tv",
+        "miruro.to",
+        "*.miruro.to"
       ],
       "description": "Anime\n\nCatalog・10,000+",
       "capabilities": [
@@ -3546,7 +3550,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "a2efe8016464412666891165de88ed3f9b2171209e9059cd734f8ed5b45080e4"
+      "sha256": "8f5ba06a5b4af5ca85d69652905f4fabd13dde9ba68cbce6cbe1a8daaf0c9f04"
     },
     {
       "id": "akazascans",
@@ -6366,7 +6370,7 @@
     {
       "id": "pressplayz",
       "name": "PressPlayZ",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "medium": "anime",
       "website": "https://pressplayz.top",
       "iconUrl": "https://inkstone.web.app/pressplayz/icon.png",
@@ -6379,7 +6383,9 @@
         "*.paretocdn.site",
         "netrocdn.site",
         "*.netrocdn.site",
-        "*.workers.dev"
+        "*.workers.dev",
+        "moviesapi.to",
+        "*.moviesapi.to"
       ],
       "description": "Western",
       "capabilities": [
@@ -6392,7 +6398,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "1ba3c639b7a10572fbeb42756060649b1ddeb0d1bd6c3768658d3787144f26aa"
+      "sha256": "cef2f21be1d18a2f6fa96a15d7165871554cbe85ede84ef9bbf556e3ca16db76"
     },
     {
       "id": "bingr",
@@ -7591,7 +7597,7 @@
     {
       "id": "ikigaimangas",
       "name": "Ikigai Mangas",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "medium": "comics",
       "website": "https://ikigaimangas.com",
       "iconUrl": "https://inkstone.web.app/ikigaimangas/icon.png",
@@ -7599,6 +7605,7 @@
       "capabilities": [
         "browse",
         "search",
+        "genres",
         "details",
         "chapters",
         "reader"
@@ -7607,7 +7614,7 @@
       "contentRating": "adult",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "630d4852a5921afa57623bf8db1d3db72368d4f32d705699cbfe8cb3b9a25f82"
+      "sha256": "916faeac4d43379193a214f15a611c0815e2c921981100814189392b3d8d7a27"
     },
     {
       "id": "mangolibreria",
@@ -8816,7 +8823,7 @@
     {
       "id": "anidap",
       "name": "Anidap",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "anime",
       "website": "https://anidap.lol",
       "iconUrl": "https://inkstone.web.app/anidap/icon.png",
@@ -8831,7 +8838,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "a987702746d6d8730b1f538c903114a37f3ba64cf471293b975e458058199959"
+      "sha256": "df8c9de8cf7a980638b1233e509c388044d35029f40d09403de7660f083f6f97"
     },
     {
       "id": "kissbae",
@@ -9006,7 +9013,7 @@
     {
       "id": "anistream",
       "name": "Anistream",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://anistream.one/",
       "iconUrl": "https://inkstone.web.app/anistream/icon.png",
@@ -9022,7 +9029,7 @@
       "language": "en",
       "contentRating": "mature",
       "hostsNote": "no hosts list on purpose. The extension itself requests only graphql.animex.one and api.anistream.one, but the stream and subtitle hosts it hands to the player belong to several providers and change (fetch.nexabloom.top, *.mysubsplay.com, s-NN.megavid.se, hls.dramahot.top, hls.krussdomi.com, subst.krussdomi.com, spr-cdn.echovideo.to); if the orchestrator knows the apps only check hosts on the extension's own requests, [\"graphql.animex.one\", \"api.anistream.one\"] is the complete list. The guide test only warns when it is empty.",
-      "sha256": "405aff1745278333a241c743d24940aae9dc07c976661aadcfadb21c7f2694eb"
+      "sha256": "ed050b6e565a99831006f4a83267ddabf32d210e9111b7e9d29366f3517eebdb"
     },
     {
       "id": "wuxiadreams",

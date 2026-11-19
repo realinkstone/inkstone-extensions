@@ -1,5 +1,6 @@
 const SITE = 'https://pressplayz.top';
-const SPARK = 'https://vidspark.to';
+const SPARKS = ['https://vidspark.to', 'https://moviesapi.to'];
+let sparkIndex = 0;
 const SPARK_KEY = '3a67e8866ae1d2bb9e81fe7f73315a56eb3bdf5e3e755c7554c8be6910aa6b13';
 const IMG = 'https://image.tmdb.org/t/p';
 const UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1';
@@ -353,17 +354,44 @@ class Source {
   }
 
   async vidSpark(path) {
-    const api = await this.send({
-        url: `${SPARK}/api/vidora/v1/${path}`,
-        method: 'GET',
-        headers: { 'User-Agent': UA, Accept: 'application/json', 'x-player-key': SPARK_KEY, Referer: `${SPARK}/${path}` },
-      });
+    let api = null;
     let data = null;
-    try {
-      data = JSON.parse(api.data);
-    } catch (e) {
-      data = null;
+    let base = SPARKS[sparkIndex];
+    let failure = null;
+    let challenge = null;
+    for (let i = 0; i < SPARKS.length; i++) {
+      const index = (sparkIndex + i) % SPARKS.length;
+      let answer;
+      try {
+        answer = await this.send({
+          url: `${SPARKS[index]}/api/vidora/v1/${path}`,
+          method: 'GET',
+          headers: { 'User-Agent': UA, Accept: 'application/json', 'x-player-key': SPARK_KEY, Referer: `${SPARKS[index]}/${path}` },
+        });
+      } catch (e) {
+        if (e && (e.kind === 'blocked' || /allowed hosts/i.test(String(e.message)))) throw e;
+        if (e && e.kind === 'challenge') challenge = challenge || e;
+        else failure = failure || e;
+        continue;
+      }
+      let parsed = null;
+      try {
+        parsed = JSON.parse(answer.data);
+      } catch (e) {
+        parsed = null;
+      }
+      const down = answer.status === 403 || answer.status === 451 || answer.status >= 500 || (answer.status >= 200 && answer.status < 300 && !parsed);
+      if (!api || !down) {
+        api = answer;
+        data = parsed;
+        base = SPARKS[index];
+      }
+      if (!down) {
+        sparkIndex = index;
+        break;
+      }
     }
+    if (!api) throw challenge || failure;
     if (api.status === 404) throw new Error('VidSpark: ' + ((data && data.message) || 'no stream for this title yet'));
     if (api.status >= 500) throw new Error(`VidSpark is not answering for this title (HTTP ${api.status})`);
     if (api.status < 200 || api.status >= 300 || !data) throw new Error(`VidSpark: HTTP ${api.status}`);
@@ -378,7 +406,7 @@ class Source {
     const english = subtitles.some((t) => t.language === 'en');
     const parts = ['VidSpark', 'Auto'];
     if (subtitles.length) parts.push(subtitles.length <= 3 ? 'Softsub: ' + subtitles.map((t) => t.label).join(', ') : english ? `Softsub: English and ${subtitles.length - 1} more` : `Softsub: ${subtitles.length} languages`);
-    const video = { url: source.url, quality: parts.join(', '), type: 'hls', server: 'VidSpark', headers: { Referer: `${SPARK}/` } };
+    const video = { url: source.url, quality: parts.join(', '), type: 'hls', server: 'VidSpark', headers: { Referer: `${base}/` } };
     if (subtitles.length) video.subtitles = subtitles;
     return video;
   }

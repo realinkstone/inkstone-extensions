@@ -36,9 +36,31 @@ function qwikObjects(json) {
     });
 }
 
+function qwikGenres(json) {
+  const objs = json._objs || [];
+  const ref = (value) => (typeof value === 'string' && /^[0-9a-z]+$/.test(value) ? objs[parseInt(value, 36)] : value);
+  const holder = objs.find((item) => item && typeof item === 'object' && !Array.isArray(item) && 'genres' in item && 'statuses' in item);
+  const list = holder ? ref(holder.genres) : null;
+  if (!Array.isArray(list)) return [];
+  const seen = new Set();
+  return list
+    .map((entry) => {
+      const item = ref(entry);
+      return item && typeof item === 'object' ? { id: String(ref(item.id)), label: String(ref(item.name)).trim() } : null;
+    })
+    .filter((genre) => genre && /^\d+$/.test(genre.id) && genre.label && !seen.has(genre.id) && seen.add(genre.id));
+}
+
+function cardAge(mature, slug, badges) {
+  return Math.max(mature && mature.get(slug) ? 18 : 0, ageOfTags(badges) || 0) || undefined;
+}
+
+const STATE_KEY = 'qwik-functions';
+
 class Source {
   constructor() {
     this.requests = App.createRequestManager({ rateLimit: { requestsPerSecond: 4 } });
+    this.state = App.createSourceStateManager();
   }
 
   getSourceFeeds() {
@@ -66,31 +88,101 @@ class Source {
     return this.site;
   }
 
-  async seriesList() {
+  async qfuncCall(site, qfunc) {
+    const response = await this.send({
+      url: `${site}/?qfunc=${qfunc}`,
+      method: 'POST',
+      headers: { 'X-QRL': qfunc, 'Content-Type': 'application/qwik-json', Accept: 'application/json' },
+      body: JSON.stringify({ _entry: '1', _objs: [`\u0002_#s_${qfunc}`, ['0']] }),
+    }).catch(() => null);
+    try {
+      return response ? JSON.parse(response) : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async qwikData(kind) {
+    const site = await this.origin();
+    const read = kind === 'series' ? qwikObjects : qwikGenres;
+    let saved = null;
+    try {
+      saved = await this.state.retrieve(STATE_KEY);
+    } catch (e) {
+      saved = null;
+    }
+    if (!saved || typeof saved !== 'object' || saved.site !== site) saved = { site };
+    if (saved[kind]) {
+      const json = await this.qfuncCall(site, saved[kind]);
+      const data = json ? read(json) : [];
+      if (data.length) return data;
+    }
+    const home = await this.get(site);
+    const search = (/on:input="(q-[\w-]+\.js)#/.exec(home) || [])[1];
+    if (!search) throw new Error('Ikigai Mangas: the search module was not found');
+    const modules = [search].concat(Array.from((await this.get(`${site}/build/${search}`)).matchAll(/from"\.\/(q-[\w-]+\.js)"/g), (match) => match[1]));
+    const candidates = new Set();
+    for (const name of modules) {
+      for (const match of (await this.get(`${site}/build/${name}`)).matchAll(/\w+\(\w+\("s_(\w+)"\)\)/g)) candidates.add(match[1]);
+    }
+    const found = { site, series: saved.series, filters: saved.filters };
+    let data = [];
+    for (const qfunc of candidates) {
+      const json = await this.qfuncCall(site, qfunc);
+      if (!json) continue;
+      const list = qwikObjects(json);
+      const genres = qwikGenres(json);
+      if (list.length) found.series = qfunc;
+      if (genres.length) found.filters = qfunc;
+      if ((kind === 'series' ? list : genres).length) {
+        data = kind === 'series' ? list : genres;
+        break;
+      }
+    }
+    if (!data.length) throw new Error(kind === 'series' ? 'Ikigai Mangas: the search list could not be loaded' : 'Ikigai Mangas: the genre list could not be loaded');
+    try {
+      await this.state.store(STATE_KEY, found);
+    } catch (e) {
+    }
+    return data;
+  }
+
+  seriesList() {
     if (!this.series) {
-      this.series = (async () => {
-        const site = await this.origin();
-        const search = (/on:input="(q-[\w-]+\.js)#/.exec(await this.get(site)) || [])[1];
-        const modules = [search].concat(Array.from((await this.get(`${site}/build/${search}`)).matchAll(/from"\.\/(q-[\w-]+\.js)"/g), (match) => match[1]));
-        const candidates = new Set();
-        for (const name of modules) {
-          for (const match of (await this.get(`${site}/build/${name}`)).matchAll(/\w+\(\w+\("s_(\w+)"\)\)/g)) candidates.add(match[1]);
-        }
-        for (const qfunc of candidates) {
-          const response = await this.send({
-            url: `${site}/?qfunc=${qfunc}`,
-            method: 'POST',
-            headers: { 'X-QRL': qfunc, 'Content-Type': 'application/qwik-json', Accept: 'application/json' },
-            body: JSON.stringify({ _entry: '1', _objs: [`\u0002_#s_${qfunc}`, ['0']] }),
-          }).catch(() => null);
-          const list = response ? qwikObjects(JSON.parse(response)) : [];
-          if (list.length) return list;
-        }
-        throw new Error('Ikigai Mangas: the search list could not be loaded');
-      })();
+      this.series = this.qwikData('series');
       this.series.catch(() => (this.series = null));
     }
     return this.series;
+  }
+
+  filterGenres() {
+    if (!this.filters) {
+      this.filters = this.qwikData('filters');
+      this.filters.catch(() => (this.filters = null));
+    }
+    return this.filters;
+  }
+
+  matureFlags() {
+    if (!this.mature) {
+      this.mature = this.seriesList()
+        .then((list) => new Map(list.map((series) => [series.slug, Boolean(series.is_mature)])))
+        .catch(() => {
+          this.mature = null;
+          return null;
+        });
+    }
+    return this.mature;
+  }
+
+  async getSearchTags() {
+    try {
+      const genres = await this.filterGenres();
+      return genres.map((genre) => ({ id: genre.id, label: genre.label })).sort((a, b) => a.label.localeCompare(b.label));
+    } catch (e) {
+      console.error('Ikigai Mangas: the genre list could not be loaded', e);
+      return [];
+    }
   }
 
   async getSearchResults(request, metadata) {
@@ -111,26 +203,34 @@ class Source {
       }));
       return { results, metadata: matches.length > page * PAGE_SIZE ? { page: page + 1 } : undefined };
     }
-    const feed = (request && request.feed) || 'popular';
+    const chosen = (Array.isArray(request && request.includedTags) ? request.includedTags : [])
+      .map((tag) => String(tag && typeof tag === 'object' ? tag.id || tag.label : tag))
+      .filter((id) => /^\d+$/.test(id));
+    const feed = chosen.length ? 'directory' : (request && request.feed) || 'popular';
     if (feed === 'popular') {
-      const $ = cheerio.load(await this.get(`${site}/clasificacion/`));
+      const [html, mature] = await Promise.all([this.get(`${site}/clasificacion/`), this.matureFlags()]);
+      const $ = cheerio.load(html);
       const results = $('div.grid > div.card')
         .map((i, el) => {
           const mangaId = slugOf($(el).find('.card-actions > a.btn[href]').attr('href'));
-          return mangaId && { mangaId, title: $(el).find('.card-body .card-title').first().text().trim(), image: $(el).find('img').attr('src'), headers: IMAGE_HEADERS, medium: 'comics' };
+          const badges = $(el).find('li.badge').map((j, badge) => $(badge).text().trim()).get();
+          return mangaId && { mangaId, title: $(el).find('.card-body .card-title').first().text().trim(), image: $(el).find('img').attr('src'), headers: IMAGE_HEADERS, ageRating: cardAge(mature, mangaId, badges), medium: 'comics' };
         })
         .get()
         .filter(Boolean);
       return { results };
     }
-    const url = feed === 'latest' ? `${site}/?pagina=${page}` : `${site}/series/?tipos[]=comic&pagina=${page}`;
-    const $ = cheerio.load(await this.get(url));
+    const genres = chosen.map((id) => `&generos[]=${id}`).join('');
+    const url = feed === 'latest' ? `${site}/?pagina=${page}` : `${site}/series/?tipos[]=comic${genres}&pagina=${page}`;
+    const [html, mature] = await Promise.all([this.get(url), this.matureFlags()]);
+    const $ = cheerio.load(html);
     const cards = feed === 'latest' ? $('section[aria-labelledby="new-chapters-heading"] > ul.grid').last().find('a.card') : $('section[aria-labelledby="archive-heading"] > ul.grid a.card');
     const titles = cards
       .map((i, el) => {
         const mangaId = slugOf($(el).attr('href'));
         const title = ($(el).find('.card-body .card-title').first().text() || $(el).find('h3').first().text()).trim();
-        return mangaId && { mangaId, title, image: $(el).find('img').attr('src'), headers: IMAGE_HEADERS, medium: 'comics' };
+        const badges = $(el).find('li.badge').map((j, badge) => $(badge).text().trim()).get();
+        return mangaId && { mangaId, title, image: $(el).find('img').attr('src'), headers: IMAGE_HEADERS, ageRating: cardAge(mature, mangaId, badges), medium: 'comics' };
       })
       .get()
       .filter(Boolean);

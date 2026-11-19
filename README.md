@@ -116,7 +116,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [Hot Cabaret Scan](comics/hotcabaretscan/index.js) | hotcabaretscan.com | Brazilian Portuguese | Mature | 1.0.2 |
 | [House Of Otakus](comics/houseofotakus/index.js) | houseofotakusv2.xyz | Spanish | Safe | 1.0.0 |
 | [Hunlight Comics](comics/hunlightcomics/index.js) | hunlightcomics.com | English | Safe | 1.0.0 |
-| [Ikigai Mangas](comics/ikigaimangas/index.js) | ikigaimangas.com | Spanish | Adult | 1.0.0 |
+| [Ikigai Mangas](comics/ikigaimangas/index.js) | ikigaimangas.com | Spanish | Adult | 1.1.0 |
 | [InkStory](comics/inkstory/index.js) | inkstory.net | Russian | Mature | 1.1.1 |
 | [InManga](comics/inmanga/index.js) | inmanga.com | Spanish | Safe | 1.1.1 |
 | [Inu Manga](comics/inumanga/index.js) | inu-manga.net | Thai | Mature | 1.0.2 |
@@ -358,7 +358,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | Extension | Site | Language | Rating | Version |
 | --- | --- | --- | --- | --- |
 | [9ime](anime/nineime/index.js) | 9ime.live | English | Mature | 1.0.0 |
-| [Anidap](anime/anidap/index.js) | anidap.lol | English | Mature | 1.0.1 |
+| [Anidap](anime/anidap/index.js) | anidap.lol | English | Mature | 1.0.2 |
 | [AniHQ](anime/anihq/index.js) | anihq.cc | English | Mature | 1.0.0 |
 | [Anikoto](anime/anikoto/index.js) | anikototv.bz | English | Mature | 1.0.10 |
 | [AniLight](anime/anilight/index.js) | anilight.live | English | Mature | 1.0.1 |
@@ -372,7 +372,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [AnimeOnline.Ninja](anime/animeonlineninja/index.js) | ver2.animeonline.ninja | Spanish | Mature | 1.0.8 |
 | [AnimeParadise](anime/animeparadise/index.js) | animeparadise.moe | English | Mature | 1.0.2 |
 | [animeTVplus](anime/animetvplus/index.js) | animetvplus.xyz | English | Mature | 1.0.0 |
-| [Anistream](anime/anistream/index.js) | anistream.one | English | Mature | 1.0.0 |
+| [Anistream](anime/anistream/index.js) | anistream.one | English | Mature | 1.0.1 |
 | [AniWorld](anime/aniworld/index.js) | aniworld.to | German | Mature | 1.0.3 |
 | [AniZone](anime/anizone/index.js) | anizone.to | English | Mature | 1.0.9 |
 | [Beatz Anime](anime/beatzanime/index.js) | beatz-anime.net | Spanish | Mature | 1.0.3 |
@@ -387,7 +387,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [KickAssAnime](anime/kickassanime/index.js) | kaa.lt | English | Mature | 1.0.9 |
 | [Kuroko](anime/kuroko/index.js) | kuroko.cc | English | Mature | 1.0.0 |
 | [Latanime](anime/latanime/index.js) | latanime.org | Spanish | Mature | 1.0.10 |
-| [Miruro](anime/miruro/index.js) | miruro.cx | English | Mature | 1.0.9 |
+| [Miruro](anime/miruro/index.js) | miruro.cx | English | Mature | 1.0.10 |
 | [MMani](anime/mmani/index.js) | mmani.com | English | Mature | 1.0.1 |
 | [MonosChinos](anime/monoschinos/index.js) | monoschinos.st | Spanish | Mature | 1.0.9 |
 | [Nekomiru](anime/nekomiru/index.js) | nekomiru.com | English | Mature | 1.0.2 |
@@ -452,7 +452,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [OnlyFlix](western/onlyflix/index.js) | onlyflix.to | English | Mature | 1.0.2 |
 | [PelisForte](western/pelisforte/index.js) | www2.pelisforte.se | Spanish | Mature | 1.0.0 |
 | [PoseidonHD](western/poseidonhd/index.js) | poseidonhd2.co | Spanish | Mature | 1.0.1 |
-| [PressPlayZ](western/pressplayz/index.js) | pressplayz.top | English | Mature | 1.0.3 |
+| [PressPlayZ](western/pressplayz/index.js) | pressplayz.top | English | Mature | 1.0.4 |
 
 ## Known issues
 

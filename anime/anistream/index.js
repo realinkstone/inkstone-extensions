@@ -1,5 +1,6 @@
-const GRAPHQL = 'https://graphql.animex.one/graphql';
-const API = 'https://api.anistream.one/rest/api';
+const GRAPHQL_HOSTS = ['https://graphql.animex.one', 'https://graphql.anidap.lol'];
+const API_HOSTS = ['https://api.anistream.one', 'https://chad.anidap.lol'];
+const liveHost = { graphql: 0, rest: 0 };
 const PAGE_SIZE = 30;
 
 const CARD_FIELDS = 'id titleRomaji titleEnglish coverImage format status seasonYear episodeCount subCount dubCount isAdult genres';
@@ -129,11 +130,38 @@ class Source {
           await pause(wait * 1000 + 300);
           continue;
         }
-        throw new Error(`Anistream asked to slow down${body && body.reason ? ` (${body.reason})` : ''}, try again in about ${Math.ceil(wait)} seconds`);
+        throw Object.assign(new Error(`Anistream asked to slow down${body && body.reason ? ` (${body.reason})` : ''}, try again in about ${Math.ceil(wait)} seconds`), { slow: true });
       }
       return { status: response.status, body, text: String(response.data || '') };
     }
-    throw new Error('Anistream asked to slow down');
+    throw Object.assign(new Error('Anistream asked to slow down'), { slow: true });
+  }
+
+  async mirrored(kind, hosts, manager, make) {
+    let first = null;
+    let challenge = null;
+    let notJson = null;
+    for (let i = 0; i < hosts.length; i++) {
+      const index = (liveHost[kind] + i) % hosts.length;
+      let r;
+      try {
+        r = await this.call(manager, make(hosts[index]));
+      } catch (e) {
+        if (e && (e.kind === 'blocked' || /allowed hosts/i.test(String(e.message)))) throw e;
+        if (e && e.slow) throw e;
+        if (e && e.kind === 'challenge') challenge = challenge || e;
+        else first = first || e;
+        continue;
+      }
+      if (r.body === null) {
+        notJson = notJson || r;
+        continue;
+      }
+      liveHost[kind] = index;
+      return r;
+    }
+    if (notJson) return notJson;
+    throw challenge || first;
   }
 
   async graphql(query, variables) {
@@ -141,12 +169,12 @@ class Source {
     const hit = this.memo.get(key);
     if (hit && Date.now() - hit.at < 5 * 60 * 1000) return hit.promise;
     const promise = (async () => {
-      const r = await this.call(this.catalog, {
-        url: GRAPHQL,
+      const r = await this.mirrored('graphql', GRAPHQL_HOSTS, this.catalog, (host) => ({
+        url: `${host}/graphql`,
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({ query, variables }),
-      });
+      }));
       if (r.status < 200 || r.status >= 300 || !r.body) throw new Error(`Anistream: the catalog answered HTTP ${r.status}`);
       if (r.body.errors && r.body.errors.length) throw new Error(`Anistream: ${clean(r.body.errors[0].message)}`);
       if (!r.body.data) throw new Error('Anistream: the catalog gave no data');
@@ -161,7 +189,7 @@ class Source {
   }
 
   async restJson(path) {
-    const r = await this.call(this.rest, { url: `${API}${path}`, method: 'GET', headers: { Accept: 'application/json' } });
+    const r = await this.mirrored('rest', API_HOSTS, this.rest, (host) => ({ url: `${host}/rest/api${path}`, method: 'GET', headers: { Accept: 'application/json' } }));
     return r;
   }
 

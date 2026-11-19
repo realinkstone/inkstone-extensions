@@ -2,6 +2,9 @@ const SITE = 'https://anidap.lol';
 const GRAPHQL = 'https://graphql.anidap.lol/graphql';
 const RECENT = 'https://graphql.anidap.lol/api/recent';
 const CHAD = 'https://chad.anidap.lol/rest/api';
+const GRAPHQL_HOSTS = ['https://graphql.anidap.lol', 'https://graphql.animex.one'];
+const CHAD_HOSTS = ['https://chad.anidap.lol', 'https://api.anistream.one'];
+const liveHost = { graphql: 0, chad: 0 };
 const PAGE_SIZE = 30;
 const CACHE_MS = 5 * 60 * 1000;
 const EPISODE_CACHE_MS = 10 * 60 * 1000;
@@ -494,7 +497,7 @@ class Source {
       headers['Content-Type'] = 'application/json';
       options.body = body;
     }
-    const response = await this.requests.schedule(App.createRequest(options));
+    const response = await this.mirrored('graphql', GRAPHQL_HOSTS, options);
     const left = Number(headerOf(response, 'x-ratelimit-remaining'));
     const reset = Number(headerOf(response, 'x-ratelimit-reset'));
     if (Number.isFinite(left) && Number.isFinite(reset) && left <= 1) this.holdUntil = Date.now() + (reset + 1) * 1000;
@@ -527,11 +530,43 @@ class Source {
     return (data && data.data) || {};
   }
 
+  async mirrored(kind, hosts, options) {
+    let first = null;
+    let challenge = null;
+    let notJson = null;
+    for (let i = 0; i < hosts.length; i++) {
+      const index = (liveHost[kind] + i) % hosts.length;
+      let response;
+      try {
+        response = await this.requests.schedule(App.createRequest(Object.assign({}, options, { url: hosts[index] + String(options.url).slice(hosts[0].length) })));
+      } catch (e) {
+        if (e && (e.kind === 'blocked' || /allowed hosts/i.test(String(e.message)))) throw e;
+        if (e && e.kind === 'challenge') challenge = challenge || e;
+        else first = first || e;
+        continue;
+      }
+      let json = true;
+      try {
+        JSON.parse(response.data);
+      } catch (e) {
+        json = false;
+      }
+      if (!json) {
+        notJson = notJson || response;
+        continue;
+      }
+      liveHost[kind] = index;
+      return response;
+    }
+    if (notJson) return notJson;
+    throw challenge || first;
+  }
+
   async chad(path) {
     let failure;
     for (let attempt = 0; attempt < 2; attempt++) {
       try {
-        const response = await this.requests.schedule(App.createRequest({ url: `${CHAD}/${path}${attempt ? '&r=1' : ''}`, method: 'GET', headers: { Accept: 'application/json' } }));
+        const response = await this.mirrored('chad', CHAD_HOSTS, { url: `${CHAD}/${path}${attempt ? '&r=1' : ''}`, method: 'GET', headers: { Accept: 'application/json' } });
         let data = null;
         try {
           data = JSON.parse(response.data);

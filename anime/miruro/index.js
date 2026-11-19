@@ -1,4 +1,6 @@
-const SITE = 'https://miruro.cx';
+const SITES = ['https://miruro.cx', 'https://miruro.tv', 'https://miruro.to'];
+const SITE = SITES[0];
+let siteIndex = 0;
 const PROXY_BASE = 'https://s1.keeply.top/';
 const PROXY_KEY_HEX = 'a54d389c18527d9fd3e7f0643e27edbe';
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
@@ -831,20 +833,45 @@ class Source {
   }
 
   async text(url, extraHeaders) {
+    if (url.indexOf(`${SITE}/`) !== 0) return this.textFrom(url, SITE, extraHeaders);
+    const path = url.slice(SITE.length);
+    let first = null;
+    let challenge = null;
+    for (let i = 0; i < SITES.length; i++) {
+      const index = (siteIndex + i) % SITES.length;
+      try {
+        const html = await this.textFrom(SITES[index] + path, SITES[index], extraHeaders);
+        siteIndex = index;
+        return html;
+      } catch (e) {
+        if (e && (e.kind === 'blocked' || /allowed hosts/i.test(String(e.message)))) throw e;
+        if (e && e.kind === 'challenge') challenge = challenge || e;
+        else if (e && e.final) throw e;
+        first = first || e;
+      }
+    }
+    throw challenge || first;
+  }
+
+  async textFrom(url, base, extraHeaders) {
     const headers = Object.assign(
       {
         'User-Agent': UA,
         Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
         'Accept-Language': 'en-US,en;q=0.9',
-        Referer: `${SITE}/`,
+        Referer: `${base}/`,
       },
       extraHeaders || {}
     );
     const response = await this.requests.schedule(App.createRequest({ url, method: 'GET', headers }));
+    const html = String(response.data);
+    const isSite = html.indexOf('__sveltekit_') !== -1;
     if (response.status < 200 || response.status >= 300) {
-      throw new Error(`Miruro: HTTP ${response.status} for ${url}`);
+      const down = response.status === 403 || response.status === 451 || response.status >= 500;
+      throw Object.assign(new Error(`Miruro: HTTP ${response.status} for ${url}`), { final: !down && isSite });
     }
-    return String(response.data);
+    if (!isSite) throw new Error(`Miruro: ${url} did not answer with the site`);
+    return html;
   }
 }
 
