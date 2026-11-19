@@ -1,5 +1,9 @@
 const SITE = 'https://k-drama.in';
 const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36';
+const PLAYER = 'https://vidly.pro';
+const SEAL_KEY = 'vY7#qL2!mZ9@wK4$';
+const ORIGINAL_AUDIO = ['original', 'korean', 'chinese', 'mandarin', 'cantonese', 'japanese', 'thai'];
+const SERVER_LIMIT_MS = 12000;
 
 const FEEDS = [
   { id: 'kdrama', name: 'K-Dramas', type: 'kdrama', sort: 'popular' },
@@ -20,6 +24,8 @@ const LANGUAGES = {
   english: 'en', arabic: 'ar', chinese: 'zh', danish: 'da', dutch: 'nl', finnish: 'fi', 'français': 'fr', french: 'fr', german: 'de', hindi: 'hi', indonesia: 'id', indonesian: 'id',
   italian: 'it', japanese: 'ja', khmer: 'km', korean: 'ko', malay: 'ms', polish: 'pl', 'português': 'pt', portuguese: 'pt', russian: 'ru', 'español': 'es', spanish: 'es', thai: 'th',
   turkish: 'tr', vietnamese: 'vi', 'ไทย': 'th', 'tiếng việt': 'vi',
+  'اَلْعَرَبِيَّةُ': 'ar', 'বাংলা': 'bn', filipino: 'fil', tagalog: 'fil', 'هَرْشٜن هَوْس': 'ha', 'ਪੰਜਾਬੀ': 'pa', 'русский': 'ru', kiswahili: 'sw', swahili: 'sw', 'اُردُو': 'ur', '中文': 'zh',
+  'हिन्दी': 'hi', 'українська': 'uk', deutsch: 'de', italiano: 'it', 'ภาษาไทย': 'th', hebrew: 'he', czech: 'cs', greek: 'el', hungarian: 'hu', norwegian: 'no', romanian: 'ro', swedish: 'sv',
 };
 
 function clean(text) {
@@ -32,40 +38,207 @@ function parseId(mangaId) {
   return { kind: m[1], tmdb: m[2] };
 }
 
-function decodeEntities(text) {
-  return String(text || '').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#0?39;|&apos;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>');
-}
-
-function queryOf(url) {
-  const out = {};
-  const q = String(url).split('?').slice(1).join('?');
-  for (const pair of q.split('&')) {
-    const at = pair.indexOf('=');
-    if (at < 0) continue;
-    try {
-      out[pair.slice(0, at)] = decodeURIComponent(pair.slice(at + 1).replace(/\+/g, ' '));
-    } catch (e) {
-      out[pair.slice(0, at)] = pair.slice(at + 1);
-    }
-  }
-  return out;
-}
-
-function parseJsonList(text) {
-  try {
-    const v = JSON.parse(text);
-    return Array.isArray(v) ? v : [];
-  } catch (e) {
-    return [];
-  }
-}
-
 function thumb(url) {
   return String(url || '').replace('/t/p/w500/', '/t/p/w342/');
 }
 
 function languageCode(name) {
   return LANGUAGES[clean(name).toLowerCase()] || clean(name);
+}
+
+function pause(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function within(ms, promise) {
+  return new Promise((resolve, reject) => {
+    let done = false;
+    setTimeout(() => {
+      if (!done) {
+        done = true;
+        reject(new Error('timed out'));
+      }
+    }, ms);
+    promise.then(
+      (value) => {
+        if (!done) {
+          done = true;
+          resolve(value);
+        }
+      },
+      (error) => {
+        if (!done) {
+          done = true;
+          reject(error);
+        }
+      }
+    );
+  });
+}
+
+function base64urlBytes(text) {
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+  const bytes = [];
+  let bits = 0;
+  let acc = 0;
+  for (let i = 0; i < text.length; i++) {
+    let v = alphabet.indexOf(text.charAt(i));
+    if (v < 0) {
+      const c = text.charAt(i);
+      if (c === '+') v = 62;
+      else if (c === '/') v = 63;
+      else continue;
+    }
+    acc = (acc << 6) | v;
+    bits += 6;
+    if (bits >= 8) {
+      bits -= 8;
+      bytes.push((acc >> bits) & 255);
+      acc &= (1 << bits) - 1;
+    }
+  }
+  return bytes;
+}
+
+function utf8Text(bytes) {
+  let out = '';
+  for (let i = 0; i < bytes.length; ) {
+    const b = bytes[i++];
+    let cp;
+    if (b < 128) cp = b;
+    else if (b < 224) cp = ((b & 31) << 6) | (bytes[i++] & 63);
+    else if (b < 240) {
+      cp = ((b & 15) << 12) | ((bytes[i] & 63) << 6) | (bytes[i + 1] & 63);
+      i += 2;
+    } else {
+      cp = ((b & 7) << 18) | ((bytes[i] & 63) << 12) | ((bytes[i + 1] & 63) << 6) | (bytes[i + 2] & 63);
+      i += 3;
+    }
+    if (cp > 0xffff) {
+      cp -= 0x10000;
+      out += String.fromCharCode(0xd800 + (cp >> 10), 0xdc00 + (cp & 1023));
+    } else out += String.fromCharCode(cp);
+  }
+  return out;
+}
+
+function unseal(sealed) {
+  if (String(sealed).indexOf('v1.') !== 0) throw new Error('Kat Drama: the stream list is not in the format this source knows');
+  const all = base64urlBytes(String(sealed).slice(3));
+  const nonce = all.slice(0, 12);
+  const body = all.slice(12);
+  const seeds = [];
+  for (let n = 0; n < 4; n++) {
+    let h = (0x811c9dc5 ^ Math.imul(0x9e3779b9, n)) >>> 0;
+    for (let i = 0; i < SEAL_KEY.length; i++) h = Math.imul(h ^ SEAL_KEY.charCodeAt(i), 0x1000193) >>> 0;
+    for (let i = 0; i < nonce.length; i++) h = Math.imul(h ^ nonce[i], 0x1000193) >>> 0;
+    seeds.push(h);
+  }
+  let a = seeds[0];
+  let b = seeds[1];
+  let c = seeds[2];
+  let d = seeds[3];
+  let word = 0;
+  for (let t = 0; t < body.length; t++) {
+    if ((t & 3) === 0) {
+      c >>>= 0;
+      d >>>= 0;
+      a >>>= 0;
+      b >>>= 0;
+      let x = (a + b) | 0;
+      a = b ^ (b >>> 9);
+      b = (c + (c << 3)) | 0;
+      c = (((c << 21) | (c >>> 11)) + (x = (x + (d = (d + 1) | 0)) | 0)) | 0;
+      word = x >>> 0;
+    }
+    body[t] ^= (word >>> ((t & 3) * 8)) & 255;
+  }
+  return JSON.parse(utf8Text(body));
+}
+
+function flightOf(html) {
+  const pieces = [];
+  const re = /self\.__next_f\.push\(\[1,"((?:[^"\\]|\\.)*)"\]\)/g;
+  let m;
+  while ((m = re.exec(html)) !== null) {
+    try {
+      pieces.push(JSON.parse('"' + m[1] + '"'));
+    } catch (e) {
+    }
+  }
+  return pieces.join('');
+}
+
+function sealedOf(all) {
+  const inline = /"sealed":"(v1\.[A-Za-z0-9_+\/=-]+)"/.exec(all);
+  if (inline) return inline[1];
+  const ref = /"sealed":"\$([0-9a-f]+)"/.exec(all);
+  if (!ref) return null;
+  const chunk = new RegExp('(?:^|\\n)' + ref[1] + ':T([0-9a-f]+),').exec(all);
+  if (!chunk) return null;
+  return all.substr(chunk.index + chunk[0].length, parseInt(chunk[1], 16));
+}
+
+function tokenOf(all) {
+  const m = /"token":"([^"]+)"/.exec(all);
+  return m ? m[1] : '';
+}
+
+function playable(list) {
+  return Array.isArray(list) ? list.filter((s) => s && /^https?:\/\//.test(String(s.url || ''))) : [];
+}
+
+function audioRank(st) {
+  const l = clean(st.language).toLowerCase();
+  if (!l || ORIGINAL_AUDIO.indexOf(l) >= 0) return 0;
+  if (l === 'english') return 1;
+  return / sub$/.test(l) ? 3 : 2;
+}
+
+function heightOf(st) {
+  return parseInt(String(st.quality || '').replace(/\D/g, ''), 10) || 0;
+}
+
+function subtitleFormat(url) {
+  const m = /\.(srt|vtt)(?:[?#]|$)/i.exec(String(url || ''));
+  return m ? m[1].toLowerCase() : undefined;
+}
+
+function videoOf(st, server) {
+  const lang = clean(st.language);
+  const parts = [];
+  if (lang) {
+    const hard = /^(.*?)\s+sub$/i.exec(lang);
+    if (hard) parts.push(`Original audio, Hardsub ${hard[1]}`);
+    else if (/^original$/i.test(lang)) parts.push('Original audio');
+    else if (ORIGINAL_AUDIO.indexOf(lang.toLowerCase()) >= 0) parts.push(`${lang} audio`);
+    else if (/^english$/i.test(lang)) parts.push('English audio');
+    else parts.push(`${lang} audio Dub`);
+  }
+  const quality = clean(st.quality);
+  if (quality) parts.push(quality);
+  const subs = [];
+  const used = new Set();
+  (Array.isArray(st.subtitles) ? st.subtitles : []).forEach((t) => {
+    if (!t || !/^https?:\/\//.test(String(t.url || ''))) return;
+    const base = clean(t.label || t.lang) || 'Subtitles';
+    let name = base;
+    for (let n = 2; used.has(name.toLowerCase()); n++) name = `${base} ${n}`;
+    used.add(name.toLowerCase());
+    const code = clean(t.lang);
+    const entry = { url: t.url, label: name, language: /^[a-z]{2,3}$/.test(code) ? (code === 'iw' ? 'he' : code) : languageCode(base) };
+    const format = subtitleFormat(t.url);
+    if (format) entry.format = format;
+    subs.push(entry);
+  });
+  const ordered = subs.filter((t) => t.language === 'en').concat(subs.filter((t) => t.language !== 'en'));
+  if (ordered.length) {
+    const english = ordered.some((t) => t.language === 'en');
+    parts.push(ordered.length <= 3 ? 'Softsub: ' + ordered.map((t) => t.label).join(', ') : english ? `Softsub: English and ${ordered.length - 1} more` : `Softsub: ${ordered.length} languages`);
+  }
+  const video = { url: st.url, quality: parts.join(', ') || 'Auto', type: 'hls', server, headers: { Referer: `${PLAYER}/`, Origin: PLAYER } };
+  if (ordered.length) video.subtitles = ordered;
+  return video;
 }
 
 class Source {
@@ -175,10 +348,16 @@ class Source {
         const n = (/-episode-(\d+(?:\.\d+)?)/.exec($(a).attr('href') || '') || [])[1];
         if (n === undefined || seen.has(n)) return;
         seen.add(n);
-        let row = $(a).parent();
-        for (let up = 0; up < 3 && !/^EP\s*\d/i.test(clean(row.text())); up++) row = row.parent();
-        const text = clean(row.text()).replace(/\s*Download\s*$/i, '');
-        const m = /^EP\s*(\d+(?:\.\d+)?)\s+(.*?)\s*(\d{4}-\d{2}-\d{2})?$/i.exec(text) || [];
+        const card = $(a).closest('.ep-card');
+        let m;
+        if (card.length && card.find('.ep-card__date').length) {
+          m = [null, null, clean(card.find('.ep-card__title').first().text()), clean(card.find('.ep-card__date').first().text())];
+        } else {
+          let row = $(a).parent();
+          for (let up = 0; up < 3 && !/^EP\s*\d/i.test(clean(row.text())); up++) row = row.parent();
+          const text = clean(row.text()).replace(/\s*Download\s*$/i, '');
+          m = /^EP\s*(\d+(?:\.\d+)?)\s+(.*?)\s*(\d{4}-\d{2}-\d{2})?$/i.exec(text) || [];
+        }
         const number = Number(n);
         const title = clean(m[2]);
         const row2 = { id: `${season}:${n}`, chapterId: `${season}:${n}`, name: title && !/^Episode\s+\d+$/i.test(title) ? `Episode ${number}: ${title}` : `Episode ${number}`, number, season };
@@ -205,102 +384,99 @@ class Source {
   }
 
   async getVideos(mangaId, chapterId) {
-    const { tmdb } = parseId(mangaId);
+    const { kind, tmdb } = parseId(mangaId);
     const m = /^(\d+):(\d+(?:\.\d+)?)$/.exec(String(chapterId));
     if (!m) throw new Error('Kat Drama: unknown episode id ' + chapterId);
-    const videos = [];
-    let first = null;
-    try {
-      const list = await this.fromPlayer(`${SITE}/2.php/${tmdb}/${m[1]}/${m[2]}`);
-      if (list.length && !(await this.reachable(list[0].url))) first = new Error('Kat Drama: the stream of this episode is on a host that does not answer');
-      else videos.push(...list);
-    } catch (e) {
-      first = e;
-    }
-    if (!videos.length) {
+    const path = kind === 'movie' ? `/movie/${tmdb}` : `/tv/${tmdb}/${m[1]}/${m[2]}`;
+
+    let payload = null;
+    let token = '';
+    let failure = null;
+    const fresh = Date.now().toString(36);
+    for (let attempt = 0; attempt < 3; attempt++) {
+      let page;
       try {
-        videos.push(...(await this.fromVid2(`${SITE}/vid2.php/${tmdb}/${m[1]}/${m[2]}`)));
+        page = await this.playerText(`${PLAYER}${path}${attempt ? `?r=${fresh}${attempt}` : ''}`);
       } catch (e) {
+        if (e && e.kind === 'challenge') throw e;
+        failure = e;
+        if (/HTTP 404/.test(String(e && e.message))) break;
+        continue;
+      }
+      const flight = flightOf(page);
+      const sealed = sealedOf(flight);
+      let found = null;
+      if (sealed) {
+        try {
+          found = unseal(sealed);
+        } catch (e) {
+          found = null;
+        }
+      }
+      if (found) {
+        payload = found;
+        token = tokenOf(flight);
+        if (Array.isArray(found.streams) && found.streams.length) break;
       }
     }
-    if (!videos.length) {
-      if (first && !/HTTP 404|not found/i.test(first.message)) throw first;
+    if (!payload) {
+      if (failure && !/HTTP 404/.test(String(failure.message))) throw failure;
       throw new Error('Kat Drama has no stream for this episode yet. A new episode can take a few hours, try again later.');
     }
-    return videos;
-  }
 
-  async fromPlayer(url) {
-    const html = await this.text(url);
-    const m = /<iframe[^>]+src="([^"]*player\.html\?[^"]+)"/i.exec(html);
-    if (!m) throw new Error('Kat Drama: not found (no player)');
-    const q = queryOf(decodeEntities(m[1]));
-    const subtitles = [];
-    const used = new Set();
-    for (const s of parseJsonList(q.subtitle || '[]')) {
-      if (!s || !/^https?:\/\//.test(String(s.file || ''))) continue;
-      const base = clean(s.name) || 'Subtitles';
-      let label = base;
-      for (let n = 2; used.has(label.toLowerCase()); n++) label = `${base} ${n}`;
-      used.add(label.toLowerCase());
-      subtitles.push({ url: s.file, label, language: languageCode(base), format: 'vtt' });
-    }
-    const ordered = subtitles.filter((s) => s.language === 'en').concat(subtitles.filter((s) => s.language !== 'en'));
+    const label = (id, name) => clean(name) || (id ? String(id).charAt(0).toUpperCase() + String(id).slice(1) : 'Kat Drama');
+    const defaultId = payload.provider && payload.provider.id;
+    const videos = playable(payload.streams).map((st, i) => ({ st, i, server: label(defaultId, payload.provider && payload.provider.label) }));
+    const others = (Array.isArray(payload.servers) ? payload.servers : []).filter((x) => x && x.id && x.id !== defaultId);
+    const answers = token
+      ? await Promise.all(others.map((x) => within(SERVER_LIMIT_MS, this.otherServer(kind, tmdb, x.id, token, m[1], m[2])).then((list) => ({ x, list }), (error) => ({ x, error }))))
+      : [];
+    const groups = [{ list: videos }];
+    answers.forEach((a) => {
+      if (a.list && a.list.length) groups.push({ list: a.list.map((st, i) => ({ st, i, server: label(a.x.id, a.x.label) })) });
+    });
     const out = [];
-    for (const f of parseJsonList(q.file || '[]')) {
-      if (!f || !/^https?:\/\//.test(String(f.file || ''))) continue;
-      const name = (/\(([^)]+)\)/.exec(String(f.title || '')) || [])[1];
-      const shown = ordered.slice(0, 3).map((s) => s.label);
-      const video = {
-        url: f.file,
-        quality: `720p, Softsub${ordered.length ? `: ${shown.join(', ')}${ordered.length > 3 ? ` and ${ordered.length - 3} more` : ''}` : ''}`,
-        type: 'hls',
-        server: name ? name.charAt(0).toUpperCase() + name.slice(1) : 'Kat Drama',
-      };
-      if (ordered.length) video.subtitles = ordered;
-      out.push(video);
+    groups.forEach((g) => {
+      g.list.sort((x, y) => audioRank(x.st) - audioRank(y.st) || heightOf(y.st) - heightOf(x.st) || x.i - y.i);
+      g.list.forEach((e) => out.push(videoOf(e.st, e.server)));
+    });
+    if (!out.length) {
+      const challenged = answers.find((a) => a.error && a.error.kind === 'challenge');
+      if (challenged) throw challenged.error;
+      throw new Error('Kat Drama has no stream for this episode yet. A new episode can take a few hours, try again later.');
     }
     return out;
   }
 
-  async fromVid2(url) {
-    const html = await this.text(url);
-    const grab = (name) => {
-      const m = new RegExp(`const ${name}\\s*=\\s*(\\[[\\s\\S]*?\\]);`).exec(html);
-      return m ? parseJsonList(m[1]) : [];
-    };
-    const subs = [];
-    const used = new Set();
-    for (const s of grab('SUBTITLES')) {
-      const file = clean(s && (s.file || s.url));
-      if (!/^https?:\/\//.test(file)) continue;
-      const base = clean(String(s.label || s.language || 'Subtitles').replace(/^[A-Za-z]+\s+-\s+/, '')) || 'Subtitles';
-      let label = base;
-      for (let n = 2; used.has(label.toLowerCase()); n++) label = `${base} ${n}`;
-      used.add(label.toLowerCase());
-      subs.push({ url: file, label, language: clean(s.lang) || languageCode(base), format: String(s.format) === 'srt' ? 'srt' : 'vtt' });
-    }
-    const ordered = subs.filter((s) => s.language === 'en').concat(subs.filter((s) => s.language !== 'en'));
-    const out = [];
-    for (const s of grab('SOURCES')) {
-      if (!s || s.provider !== 'kisskh' || s.type !== 'hls' || !/^https?:\/\//.test(String(s.url || ''))) continue;
-      const video = { url: s.url, quality: `${clean(s.quality) || 'Auto'}${ordered.length ? ', Softsub: ' + ordered.slice(0, 3).map((t) => t.label).join(', ') : ', Sub'}`, type: 'hls', server: 'KissKH' };
-      if (ordered.length) video.subtitles = ordered;
-      out.push(video);
-    }
-    return out;
+  async otherServer(kind, tmdb, provider, token, season, episode) {
+    let url = `${PLAYER}/api/sources?kind=${kind}&provider=${encodeURIComponent(provider)}&t=${encodeURIComponent(token)}&tmdb=${tmdb}`;
+    if (kind === 'tv') url += `&s=${season}&e=${episode}`;
+    const body = unseal((await this.playerText(url, 'text/plain,*/*')).trim());
+    return playable(body && body.streams);
   }
 
-  async reachable(url) {
-    try {
-      const playlist = await this.text(url, '*/*');
-      const seg = playlist.split('\n').map((l) => l.trim()).find((l) => l && l.charAt(0) !== '#');
-      if (!/^https?:\/\//.test(seg || '')) return playlist.indexOf('#EXTM3U') >= 0;
-      const response = await this.requests.schedule(App.createRequest({ url: seg, method: 'GET', headers: { 'User-Agent': UA, Range: 'bytes=0-1023', Accept: '*/*' } }));
-      return response.status >= 200 && response.status < 400;
-    } catch (e) {
-      return false;
+  async playerText(url, accept) {
+    let response = null;
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const target = attempt ? `${url}${url.indexOf('?') >= 0 ? '&' : '?'}r=${attempt}` : url;
+      let last = null;
+      for (let again = 0; again < 2; again++) {
+        try {
+          response = await this.requests.schedule(App.createRequest({ url: target, method: 'GET', headers: { 'User-Agent': UA, Accept: accept || 'text/html,application/xhtml+xml' } }));
+          last = null;
+          break;
+        } catch (e) {
+          if (e && e.kind === 'challenge') throw e;
+          last = e;
+        }
+      }
+      if (last) throw last;
+      if (response.status !== 429 && (response.status < 502 || response.status > 504)) break;
+      if (attempt < 2) await pause(700 * (attempt + 1));
     }
+    if (response.status === 404) throw new Error('Kat Drama: not found (HTTP 404)');
+    if (response.status < 200 || response.status >= 300) throw new Error(`Kat Drama: HTTP ${response.status}`);
+    return String(response.data || '');
   }
 
   async getChapterDetails(mangaId, chapterId) {

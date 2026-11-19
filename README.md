@@ -55,7 +55,7 @@ Prefer to review a written plan before any code is written? This repo works with
 
 ## Extensions
 
-351 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
+368 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
 
 Each extension lives in the folder for what it offers: `comics`, `novels`, `mixed` for those that do both, or `anime`. The site still serves every one at `inkstone.web.app/<id>/index.js`, so the folders change nothing in the apps.
 
@@ -360,7 +360,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [9ime](anime/nineime/index.js) | 9ime.live | English | Mature | 1.0.0 |
 | [Anidap](anime/anidap/index.js) | anidap.lol | English | Mature | 1.0.2 |
 | [AniHQ](anime/anihq/index.js) | anihq.cc | English | Mature | 1.0.0 |
-| [Anikoto](anime/anikoto/index.js) | anikototv.bz | English | Mature | 1.0.10 |
+| [Anikoto](anime/anikoto/index.js) | anikototv.bz | English | Mature | 1.0.11 |
 | [AniLight](anime/anilight/index.js) | anilight.live | English | Mature | 1.0.1 |
 | [AnimeAV1](anime/animeav1/index.js) | animeav1.com | Spanish | Mature | 1.0.10 |
 | [AnimeDUB](anime/animedub/index.js) | animedub.app | English | Mature | 1.0.0 |
@@ -371,9 +371,11 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [AnimeMovil](anime/animemovil/index.js) | tvanime.tv | Spanish | Adult | 1.0.5 |
 | [AnimeOnline.Ninja](anime/animeonlineninja/index.js) | ver2.animeonline.ninja | Spanish | Mature | 1.0.8 |
 | [AnimeParadise](anime/animeparadise/index.js) | animeparadise.moe | English | Mature | 1.0.2 |
+| [AnimeSuge](anime/animesuge/index.js) | animesuge.cz | English | Mature | 1.0.0 |
 | [animeTVplus](anime/animetvplus/index.js) | animetvplus.xyz | English | Mature | 1.0.0 |
 | [Anistream](anime/anistream/index.js) | anistream.one | English | Mature | 1.0.1 |
 | [AniWorld](anime/aniworld/index.js) | aniworld.to | German | Mature | 1.0.3 |
+| [AniXo](anime/anixo/index.js) | anixo.live | English | Mature | 1.0.0 |
 | [AniZone](anime/anizone/index.js) | anizone.to | English | Mature | 1.0.9 |
 | [Beatz Anime](anime/beatzanime/index.js) | beatz-anime.net | Spanish | Mature | 1.0.3 |
 | [HentaiLA](anime/hentaila/index.js) | hentaila.com | Spanish | Adult | 1.0.9 |
@@ -430,7 +432,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [DoramasFlix](drama/doramasflix/index.js) | doramasflix.in | Spanish | Mature | 1.1.0 |
 | [DoramasYT](drama/doramasyt/index.js) | doramasyt.com | Spanish | Mature | 1.0.10 |
 | [Dramahood](drama/dramahood/index.js) | dramahood.mom | English | Mature | 1.0.0 |
-| [Kat Drama](drama/katdrama/index.js) | k-drama.in | English | Mature | 1.0.1 |
+| [Kat Drama](drama/katdrama/index.js) | k-drama.in | English | Mature | 1.1.0 |
 | [KissAsian](drama/kissasian/index.js) | kissasian.com.gr | English | Mature | 1.0.7 |
 | [KissAsian (kissasia.cam)](drama/kissasiacam/index.js) | kissasia.cam | English | Mature | 1.0.0 |
 | [KissBae](drama/kissbae/index.js) | kissbae.com | English | Mature | 1.0.0 |
@@ -442,17 +444,32 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 
 | Extension | Site | Language | Rating | Version |
 | --- | --- | --- | --- | --- |
+| [AniCine](western/anicine/index.js) | anicine.sbs | English | Mature | 1.0.0 |
+| [arc018](western/arc018/index.js) | arc018.stream | English | Mature | 1.0.0 |
+| [ArrowTV](western/arrowtv/index.js) | arrowtv.net | English | Mature | 1.0.0 |
 | [Bingr](western/bingr/index.js) | bingr.one | English | Mature | 1.0.6 |
+| [Chillflix](western/chillflix/index.js) | chillflix.lol | English | Mature | 1.0.0 |
 | [CineCalidad](western/cinecalidad/index.js) | cinecalidad.org | Spanish | Mature | 1.0.2 |
 | [CinePlus123](western/cineplus123/index.js) | cineplus123.org | Spanish | Mature | 1.0.8 |
 | [Cno.to](western/cno/index.js) | cno.to | English | Mature | 1.0.7 |
+| [CorsFlix](western/corsflix/index.js) | watch.corsflix.net | English | Mature | 1.0.0 |
 | [Cuevana](western/cuevana/index.js) | cuevana3.eu | Spanish | Mature | 1.0.1 |
+| [Danish Silent Film](western/danishsilentfilm/index.js) | stumfilm.dk | English | Mature | 1.0.0 |
+| [Ghostflix](western/ghostflix/index.js) | ghostflix.st | English | Mature | 1.0.0 |
 | [Gnula](western/gnula/index.js) | gnula.life | Spanish | Mature | 1.0.2 |
 | [HydraHD](western/hydrahd/index.js) | hydrahd.gd | English | Mature | 1.0.4 |
+| [Internet Archive Films](western/internetarchive/index.js) | archive.org | English | Mature | 1.0.0 |
+| [moanatv](western/moanatv/index.js) | lfmx.app | English | Mature | 1.0.0 |
+| [NEPU](western/nepu/index.js) | nepu.us | English | Mature | 1.0.0 |
 | [OnlyFlix](western/onlyflix/index.js) | onlyflix.to | English | Mature | 1.0.2 |
 | [PelisForte](western/pelisforte/index.js) | www2.pelisforte.se | Spanish | Mature | 1.0.0 |
 | [PoseidonHD](western/poseidonhd/index.js) | poseidonhd2.co | Spanish | Mature | 1.0.1 |
 | [PressPlayZ](western/pressplayz/index.js) | pressplayz.top | English | Mature | 1.0.4 |
+| [Primeshows](western/primeshows/index.js) | primeshows.org | English | Mature | 1.0.0 |
+| [Q62](western/q62flix/index.js) | q62flix.ws | English | Mature | 1.0.0 |
+| [Spacedom](western/spacedom/index.js) | spacedom.live | English | Mature | 1.0.0 |
+| [Way2Movies](western/way2movies/index.js) | beta.way2movies.live | English | Mature | 1.0.0 |
+| [WCO](western/wco/index.js) | wco.tv | English | Mature | 1.0.0 |
 
 ## Known issues
 

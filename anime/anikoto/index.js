@@ -1,4 +1,5 @@
-const SITE = 'https://anikototv.bz';
+const SITES = ['https://anikototv.bz', 'https://anikototv.se', 'https://anikoto.me', 'https://anikoto.net', 'https://anikoto.cz'];
+let SITE = SITES[0];
 const PLAYER_ORIGIN = 'https://megaplay.buzz';
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 
@@ -59,6 +60,57 @@ function absoluteUrl(url, base) {
   if (raw.startsWith('//')) return 'https:' + raw;
   const origin = base || SITE;
   return raw.startsWith('/') ? origin + raw : origin + '/' + raw;
+}
+
+function isMirrorFault(status) {
+  return status === 403 || status === 429 || status === 451 || status >= 500;
+}
+
+function looksLikeSite(response, kind) {
+  const body = String(response.data === undefined || response.data === null ? '' : response.data);
+  return kind === 'json' ? /^\s*[{[]/.test(body) : /anikoto/i.test(body);
+}
+
+async function siteRequest(manager, url, headers, kind) {
+  const origin = SITES.find((s) => url === s || url.indexOf(s + '/') === 0 || url.indexOf(s + '?') === 0);
+  if (!origin) return manager.schedule(App.createRequest({ url, method: 'GET', headers }));
+  const path = url.slice(origin.length);
+  const start = Math.max(0, SITES.indexOf(SITE));
+  const failures = [];
+  let challenge = null;
+  for (let i = 0; i < SITES.length; i++) {
+    const site = SITES[(start + i) % SITES.length];
+    const sent = {};
+    for (const key of Object.keys(headers || {})) {
+      const value = headers[key];
+      const named = typeof value === 'string' ? SITES.find((s) => value === s || value.indexOf(s + '/') === 0) : '';
+      sent[key] = named ? site + value.slice(named.length) : value;
+    }
+    let response;
+    try {
+      response = await manager.schedule(App.createRequest({ url: site + path, method: 'GET', headers: sent }));
+    } catch (e) {
+      if (e && e.kind === 'challenge') challenge = e;
+      else failures.push({ error: e });
+      continue;
+    }
+    const status = response.status;
+    if (isMirrorFault(status)) {
+      failures.push({ response });
+      continue;
+    }
+    if ((status < 300 || status === 404) && !looksLikeSite(response, kind)) {
+      failures.push({ notSite: true });
+      continue;
+    }
+    SITE = site;
+    return response;
+  }
+  if (challenge) throw challenge;
+  const first = failures.find((f) => !f.error || f.error.kind !== 'blocked') || failures[0];
+  if (first.error) throw first.error;
+  if (first.response) return first.response;
+  throw new Error(`Anikoto: none of its ${SITES.length} addresses answered with the site (a blocked network or a parked domain)`);
 }
 
 function slugFromHref(href) {
@@ -482,13 +534,7 @@ class Source {
     parts.push(`page=${encodeURIComponent(String(page))}`);
 
     const url = `${SITE}/filter?${parts.join('&')}`;
-    const response = await this.requests.schedule(
-      App.createRequest({
-        url,
-        method: 'GET',
-        headers: { 'User-Agent': UA, Accept: 'text/html' },
-      })
-    );
+    const response = await siteRequest(this.requests, url, { 'User-Agent': UA, Accept: 'text/html' }, 'html');
     if (response.status === 404) {
       return { results: [] };
     }
@@ -810,7 +856,7 @@ class Source {
 
   async text(url, extraHeaders) {
     const headers = Object.assign({ 'User-Agent': UA, Accept: 'text/html,*/*' }, extraHeaders || {});
-    const response = await this.requests.schedule(App.createRequest({ url, method: 'GET', headers }));
+    const response = await siteRequest(this.requests, url, headers, 'html');
     if (response.status < 200 || response.status >= 300) {
       throw new Error(`Anikoto: HTTP ${response.status}`);
     }
@@ -819,7 +865,7 @@ class Source {
 
   async json(url, extraHeaders) {
     const headers = Object.assign({ 'User-Agent': UA, Accept: 'application/json' }, extraHeaders || {});
-    const response = await this.requests.schedule(App.createRequest({ url, method: 'GET', headers }));
+    const response = await siteRequest(this.requests, url, headers, 'json');
     if (response.status < 200 || response.status >= 300) {
       throw new Error(`Anikoto: HTTP ${response.status}`);
     }

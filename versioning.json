@@ -3442,7 +3442,7 @@
     {
       "id": "anikoto",
       "name": "Anikoto",
-      "version": "1.0.10",
+      "version": "1.0.11",
       "medium": "anime",
       "website": "https://anikototv.bz",
       "iconUrl": "https://anikototv.to/AnikotoTheme/assets/images/favicon.png",
@@ -3462,7 +3462,15 @@
         "*.zhaevor.top",
         "*.embermeadow.world",
         "*.midnightvoyage.site",
-        "cdn.anipixcdn.co"
+        "cdn.anipixcdn.co",
+        "anikototv.se",
+        "*.anikototv.se",
+        "anikoto.me",
+        "*.anikoto.me",
+        "anikoto.net",
+        "*.anikoto.net",
+        "anikoto.cz",
+        "*.anikoto.cz"
       ],
       "description": "Anime\n\nCatalog・10,000+",
       "capabilities": [
@@ -3475,7 +3483,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "dd2362851727a74570e8a9e832b66d8b6b50289aa365528b1257727689dfd378"
+      "sha256": "738066c0d27d7558d626e23aa6d336215d09b951fd5d25dba6674c72ce6fd8aa"
     },
     {
       "id": "aniworld",
@@ -7925,7 +7933,7 @@
     {
       "id": "katdrama",
       "name": "Kat Drama",
-      "version": "1.0.1",
+      "version": "1.1.0",
       "medium": "anime",
       "website": "https://k-drama.in",
       "iconUrl": "https://inkstone.web.app/katdrama/icon.png",
@@ -7941,7 +7949,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "02f0ba6b2881fa3299203596ba7a6a32ab8e16727184d32e51580b1aeedf8f18"
+      "sha256": "e8520afba524650840c983354894bba9e97faece93da2953ca0ff4e80617aed2"
     },
     {
       "id": "cno",
@@ -9323,6 +9331,377 @@
       "language": "en",
       "contentRating": "mature",
       "sha256": "0f2e44fbdc5d994ec7bb9041684f35722d6b98a99f247f09f6b042a1fae2426e"
+    },
+    {
+      "id": "anicine",
+      "name": "AniCine",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://anicine.sbs",
+      "iconUrl": "https://inkstone.web.app/anicine/icon.png",
+      "description": "Western・Movies・TV・Anime",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "13ca00dccf030b2cc50b093927bd26fa02161264a4cca127dcb8fc20313839e5"
+    },
+    {
+      "id": "animesuge",
+      "name": "AnimeSuge",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://animesuge.cz",
+      "iconUrl": "https://inkstone.web.app/animesuge/icon.png",
+      "description": "Anime・Movies\n\nCatalog・9,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "3bcb238fbd9870ff81eb9bc524fd7ed00d975a51d2cef7a5ef33f0c94d79abea"
+    },
+    {
+      "id": "anixo",
+      "name": "AniXo",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://anixo.live",
+      "iconUrl": "https://inkstone.web.app/anixo/icon.png",
+      "hosts": [
+        "db.anixo.buzz",
+        "graphql.anilist.co",
+        "vidcloud.sbs",
+        "*.vidcloud.sbs"
+      ],
+      "description": "Anime・Subbed・Dubbed\n\nCatalog・9,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "c2fd6e3baf21fb87a45a4e9d00007becedc21c832cc2211bb4bc5e22b5026e3b"
+    },
+    {
+      "id": "spacedom",
+      "name": "Spacedom",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://spacedom.live/",
+      "iconUrl": "https://inkstone.web.app/spacedom/icon.png",
+      "description": "Western・Movies・TV\n\nCatalog・10,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "0a0d2057a11be865d5acc90dc6eb76708bffc2b4d02581c783b35e4d8d1fcd37"
+    },
+    {
+      "id": "q62flix",
+      "name": "Q62",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://q62flix.ws",
+      "iconUrl": "https://inkstone.web.app/q62flix/icon.png",
+      "hosts": [
+        "q62flix.ws",
+        "api.q62flix.ws",
+        "proxy.7movie.ws"
+      ],
+      "description": "Western・Movies・TV\n\nCatalog・70+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "49119d648506aa96e76b2c59c568d3802b26c99c6f18d4767cf7a944a811d7d6"
+    },
+    {
+      "id": "danishsilentfilm",
+      "name": "Danish Silent Film",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://www.stumfilm.dk/en/stumfilm",
+      "iconUrl": "https://inkstone.web.app/danishsilentfilm/icon.png",
+      "hosts": [
+        "www.stumfilm.dk",
+        "stumfilm.dk",
+        "dfi-dam.qonqord.cloud",
+        "player.vimeo.com",
+        "vimeo.com",
+        "*.vimeo.com",
+        "*.vimeocdn.com"
+      ],
+      "description": "Western・Movies・Silent Films\n\nCatalog・400+",
+      "capabilities": [
+        "browse",
+        "search",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "58b8bb79f093de02069d4b90915546ecde881226cde211978cb360277fce211f"
+    },
+    {
+      "id": "arc018",
+      "name": "arc018",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://arc018.stream",
+      "iconUrl": "https://inkstone.web.app/arc018/icon.png",
+      "description": "Western・Movies・TV\n\nCatalog・40,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "0147283f82419b4e412c66a70554a593dc2e39d681baf66c37d3b3015f4d777f"
+    },
+    {
+      "id": "internetarchive",
+      "name": "Internet Archive Films",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://archive.org/details/moviesandfilms",
+      "iconUrl": "https://inkstone.web.app/internetarchive/icon.png",
+      "hosts": [
+        "archive.org",
+        "*.archive.org"
+      ],
+      "description": "Western・Movies・Silent Films・Serials\n\nCatalog・20,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "e79e150ae3f1335600b86cab45327753beaf39db9af48dbd158e97bb29885e7e"
+    },
+    {
+      "id": "ghostflix",
+      "name": "Ghostflix",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://ghostflix.st",
+      "iconUrl": "https://inkstone.web.app/ghostflix/icon.png",
+      "description": "Western・Movies・TV\n\nCatalog・10,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "a00ac9d9881b1312eaccbb3136e8dd943db3d9b51bf08ed2ed312b302e4f23d4"
+    },
+    {
+      "id": "primeshows",
+      "name": "Primeshows",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://www.primeshows.org",
+      "iconUrl": "https://inkstone.web.app/primeshows/icon.png",
+      "description": "Western・Movies・TV\n\nCatalog・10,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "b3c3ac53c436104df3d900f7cbb6a94e34784362f8a5580ced39c8c236fe0f3b"
+    },
+    {
+      "id": "corsflix",
+      "name": "CorsFlix",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://watch.corsflix.net",
+      "iconUrl": "https://inkstone.web.app/corsflix/icon.png",
+      "description": "Western・Movies・TV\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "a8313131bfcd4680e5e3bcfead59afba24c05efdc204b6eabfad419affd1754e"
+    },
+    {
+      "id": "chillflix",
+      "name": "Chillflix",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://chillflix.lol",
+      "iconUrl": "https://inkstone.web.app/chillflix/icon.png",
+      "description": "Western・Movies・TV",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "4d378d8851782844e7536328401948f8cecb8d5562c8c9ec92bdf8772848c027"
+    },
+    {
+      "id": "arrowtv",
+      "name": "ArrowTV",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://arrowtv.net",
+      "iconUrl": "https://inkstone.web.app/arrowtv/icon.png",
+      "description": "Western・Movies・TV\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "c6c9762c9c624f8032fc648bc55aa803e7841ce61fc99e038a091f027e76102a"
+    },
+    {
+      "id": "way2movies",
+      "name": "Way2Movies",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://beta.way2movies.live/",
+      "iconUrl": "https://inkstone.web.app/way2movies/icon.png",
+      "description": "Western・Movies・TV\n\nCatalog・10,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "705cb7e7d415305ec13af1ebb298c7ea92b5602b5833af90c3e8ddf85cca009c"
+    },
+    {
+      "id": "moanatv",
+      "name": "moanatv",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://lfmx.app/",
+      "iconUrl": "https://inkstone.web.app/moanatv/icon.png",
+      "description": "Western・Movies・TV\n\nCatalog・10,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "8445f264426e7c8042cf93f11cb83f1f72f5e26636ab65f2957daa0e1823a51d"
+    },
+    {
+      "id": "nepu",
+      "name": "NEPU",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://nepu.us/",
+      "iconUrl": "https://inkstone.web.app/nepu/icon.png",
+      "description": "Western・Movies・TV・Anime\n\nCatalog・100,000+\n\nRestrictions:\n・Cloudflare Checks",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "57a0f327c6f75f21b868b66c24d0be05ca90f6bd5ea76afbe6c310e159868f81"
+    },
+    {
+      "id": "wco",
+      "name": "WCO",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://www.wco.tv/",
+      "iconUrl": "https://inkstone.web.app/wco/icon.png",
+      "hosts": [
+        "www.wco.tv",
+        "wco.tv",
+        "www.wcoforever.net",
+        "wcoforever.net",
+        "www.wcoflix.tv",
+        "wcoflix.tv",
+        "wcostream.com",
+        "*.wcostream.com"
+      ],
+      "description": "Western・Cartoons・Anime\n\nCatalog・3,000+\n\nRestrictions:\n・Cloudflare Checks",
+      "capabilities": [
+        "browse",
+        "search",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "3a04e314cb29139b880b6fde61f52129304462f522117b0afb6ad41c8b0a4e2a"
     }
   ]
 }
