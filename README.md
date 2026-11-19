@@ -55,7 +55,7 @@ Prefer to review a written plan before any code is written? This repo works with
 
 ## Extensions
 
-368 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
+372 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
 
 Each extension lives in the folder for what it offers: `comics`, `novels`, `mixed` for those that do both, or `anime`. The site still serves every one at `inkstone.web.app/<id>/index.js`, so the folders change nothing in the apps.
 
@@ -459,6 +459,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [Gnula](western/gnula/index.js) | gnula.life | Spanish | Mature | 1.0.2 |
 | [HydraHD](western/hydrahd/index.js) | hydrahd.gd | English | Mature | 1.0.4 |
 | [Internet Archive Films](western/internetarchive/index.js) | archive.org | English | Mature | 1.0.0 |
+| [MeowTV](western/meowtv/index.js) | meowtv.ru | English | Mature | 1.0.0 |
 | [moanatv](western/moanatv/index.js) | lfmx.app | English | Mature | 1.0.0 |
 | [NEPU](western/nepu/index.js) | nepu.us | English | Mature | 1.0.0 |
 | [OnlyFlix](western/onlyflix/index.js) | onlyflix.to | English | Mature | 1.0.2 |
@@ -467,7 +468,10 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [PressPlayZ](western/pressplayz/index.js) | pressplayz.top | English | Mature | 1.0.4 |
 | [Primeshows](western/primeshows/index.js) | primeshows.org | English | Mature | 1.0.0 |
 | [Q62](western/q62flix/index.js) | q62flix.ws | English | Mature | 1.0.0 |
+| [Reelix](western/reelix/index.js) | reelix.ac | English | Mature | 1.0.0 |
+| [ShuttleTV](western/shuttletv/index.js) | shuttletv.pk | English | Mature | 1.0.0 |
 | [Spacedom](western/spacedom/index.js) | spacedom.live | English | Mature | 1.0.0 |
+| [SweetFox](western/sweetfox/index.js) | sweetfox.app | English | Mature | 1.0.0 |
 | [Way2Movies](western/way2movies/index.js) | beta.way2movies.live | English | Mature | 1.0.0 |
 | [WCO](western/wco/index.js) | wco.tv | English | Mature | 1.0.0 |
 

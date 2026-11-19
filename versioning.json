@@ -9702,6 +9702,115 @@
       "language": "en",
       "contentRating": "mature",
       "sha256": "3a04e314cb29139b880b6fde61f52129304462f522117b0afb6ad41c8b0a4e2a"
+    },
+    {
+      "id": "meowtv",
+      "name": "MeowTV",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://meowtv.ru/",
+      "iconUrl": "https://inkstone.web.app/meowtv/icon.png",
+      "hosts": [
+        "vaplayer.ru",
+        "v3-cinemeta.strem.io",
+        "cinemeta-catalogs.strem.io",
+        "images.metahub.space",
+        "episodes.metahub.space",
+        "image.tmdb.org"
+      ],
+      "description": "Western・Movies・TV\n\nCatalog・30,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "f93e0cf08608a883f362cfd8c60860676dd2056cfa477349a54200cdfe6a3392"
+    },
+    {
+      "id": "shuttletv",
+      "name": "ShuttleTV",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://shuttletv.pk",
+      "iconUrl": "https://inkstone.web.app/shuttletv/icon.png",
+      "hosts": [
+        "cinesrc.st",
+        "v3-cinemeta.strem.io",
+        "cinemeta-catalogs.strem.io",
+        "images.metahub.space",
+        "episodes.metahub.space"
+      ],
+      "description": "Western・Movies・TV\n\nCatalog・30,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "ae662a07e5138978c40fc7db69a647ab832678ef12af98bfd6c8b45dc2514136"
+    },
+    {
+      "id": "sweetfox",
+      "name": "SweetFox",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://sweetfox.app/",
+      "iconUrl": "https://inkstone.web.app/sweetfox/icon.png",
+      "hosts": [
+        "player.vidqueen.st",
+        "v3-cinemeta.strem.io",
+        "cinemeta-catalogs.strem.io",
+        "images.metahub.space",
+        "episodes.metahub.space"
+      ],
+      "description": "Western・Movies・TV\n\nCatalog・30,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "51eed7efe3adf4f270659afa1612e8ff8a8f8d9756bc91ebf8c477cc61dcdf4b"
+    },
+    {
+      "id": "reelix",
+      "name": "Reelix",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://reelix.ac/",
+      "iconUrl": "https://inkstone.web.app/reelix/icon.png",
+      "hosts": [
+        "vidcore.io",
+        "v3-cinemeta.strem.io",
+        "cinemeta-catalogs.strem.io",
+        "images.metahub.space",
+        "episodes.metahub.space"
+      ],
+      "description": "Western・Movies・TV\n\nCatalog・30,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "818026a21651a4601e4dd8e0473a1544911bdded4fe27e1388b63acb4f565cf7"
     }
   ]
 }
