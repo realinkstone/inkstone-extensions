@@ -445,7 +445,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [Bingr](western/bingr/index.js) | bingr.one | English | Mature | 1.0.6 |
 | [CineCalidad](western/cinecalidad/index.js) | cinecalidad.org | Spanish | Mature | 1.0.2 |
 | [CinePlus123](western/cineplus123/index.js) | cineplus123.org | Spanish | Mature | 1.0.8 |
-| [Cno.to](western/cno/index.js) | cno.to | English | Mature | 1.0.6 |
+| [Cno.to](western/cno/index.js) | cno.to | English | Mature | 1.0.7 |
 | [Cuevana](western/cuevana/index.js) | cuevana3.eu | Spanish | Mature | 1.0.1 |
 | [Gnula](western/gnula/index.js) | gnula.life | Spanish | Mature | 1.0.2 |
 | [HydraHD](western/hydrahd/index.js) | hydrahd.gd | English | Mature | 1.0.4 |
@@ -460,7 +460,10 @@ These extensions are known to be broken right now:
 
 - **Kami Sama Explorer** (`kamisamaexplorer`): The reader site shows a "Coming Soon" page on every address.
 - **KuManga** (`kumanga`): Chapters cannot be opened: the site now needs a token its own script builds. Latest, details and chapter lists still load.
+- **NirvanaManga** (`nirvanamanga`): The site's server answers HTTP 521 (down) on every address (checked on 2026-11-18 and 2026-11-19).
+- **Nocturne Summer** (`nocturnesummer`): The site shows a maintenance page on every address (checked on 2026-11-18 and 2026-11-19).
 - **Renascans** (`renascans`): The site's API address (api.renascans.net) no longer exists.
+- **RichtoScan** (`richtoscan`): The site's server answers HTTP 500 on every page (checked on 2026-11-18 and 2026-11-19).
 
 ## Credits
 

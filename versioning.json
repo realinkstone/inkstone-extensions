@@ -1267,7 +1267,9 @@
       ],
       "language": "tr",
       "contentRating": "adult",
-      "sha256": "530e071d846bab9724a8c917b9b17c1467f2985d9e7c14dcade95206b5b86aa9"
+      "sha256": "530e071d846bab9724a8c917b9b17c1467f2985d9e7c14dcade95206b5b86aa9",
+      "status": "broken",
+      "statusNote": "The site's server answers HTTP 521 (down) on every address (checked on 2026-11-18 and 2026-11-19)."
     },
     {
       "id": "remanga",
@@ -5268,7 +5270,9 @@
       ],
       "language": "pt-BR",
       "contentRating": "mature",
-      "sha256": "4cb52323c252543321e90a8c3902cc859c2869f05cecc1cac168f7f787be7462"
+      "sha256": "4cb52323c252543321e90a8c3902cc859c2869f05cecc1cac168f7f787be7462",
+      "status": "broken",
+      "statusNote": "The site shows a maintenance page on every address (checked on 2026-11-18 and 2026-11-19)."
     },
     {
       "id": "rahpchanhdy",
@@ -5316,7 +5320,9 @@
       ],
       "language": "es",
       "contentRating": "safe",
-      "sha256": "4e4b9c4a7330968ed7018d6583a26b36968363a0c61682d888716e919671e6e8"
+      "sha256": "4e4b9c4a7330968ed7018d6583a26b36968363a0c61682d888716e919671e6e8",
+      "status": "broken",
+      "statusNote": "The site's server answers HTTP 500 on every page (checked on 2026-11-18 and 2026-11-19)."
     },
     {
       "id": "slowmanga",
@@ -7933,7 +7939,7 @@
     {
       "id": "cno",
       "name": "Cno.to",
-      "version": "1.0.6",
+      "version": "1.0.7",
       "medium": "anime",
       "website": "https://cno.to",
       "iconUrl": "https://inkstone.web.app/cno/icon.png",
@@ -7949,7 +7955,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "d660f5f6f07a93af7a970765bea09fc066702bb70d2d4cdb9ad21366dc2b6a76"
+      "sha256": "68d2dcc69479d7cc27f0a1e5183c728500ec58261da48c5acc38632e1cf4a131"
     },
     {
       "id": "watchanimeworld",

@@ -53,6 +53,8 @@ function clean(text) {
   return String(text || '').replace(/\s+/g, ' ').trim();
 }
 
+const SUBTITLE_BUDGET_MS = 3000;
+
 function pause(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -126,6 +128,7 @@ async function pool(items, limit, fn) {
 
 class Source {
   constructor() {
+    this.listCalls = new Map();
     this.requests = App.createRequestManager({ rateLimit: { requestsPerSecond: 20 } });
     this.details = new Map();
     this.probes = new Map();
@@ -485,10 +488,19 @@ class Source {
     let shift = 0;
     try {
       const bestPath = `/api/subs/best/${key}/en?stream=${encodeURIComponent(stream)}`;
-      let [list, pick] = await Promise.all([this.call(`/api/subs/list/${key}`).catch(() => null), this.call(bestPath).catch(() => null)]);
-      for (let wait = 0; wait < 4 && pick && pick.status === 'pending'; wait++) {
+      const started = Date.now();
+      const left = () => Math.max(0, SUBTITLE_BUDGET_MS - (Date.now() - started));
+      const within = (promise) => Promise.race([promise, pause(left()).then(() => null)]);
+      let listCall = this.listCalls.get(key);
+      if (!listCall || Date.now() - listCall.at > 2 * 60 * 1000) {
+        listCall = { at: Date.now(), promise: this.call(`/api/subs/list/${key}`).catch(() => null).then((answer) => { if (!answer || answer.pending) this.listCalls.delete(key); return answer; }) };
+        this.listCalls.set(key, listCall);
+        if (this.listCalls.size > 40) this.listCalls.delete(this.listCalls.keys().next().value);
+      }
+      let [list, pick] = await Promise.all([within(listCall.promise), within(this.call(bestPath).catch(() => null))]);
+      for (let wait = 0; wait < 4 && pick && pick.status === 'pending' && left() > 1200; wait++) {
         await pause(1000);
-        pick = await this.call(bestPath).catch(() => null);
+        pick = await within(this.call(bestPath).catch(() => null));
       }
       files = list && Array.isArray(list.files) ? list.files : [];
       best = pick && pick.status === 'ready' && pick.file ? String(pick.file) : null;
