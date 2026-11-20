@@ -391,7 +391,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [Kuroko](anime/kuroko/index.js) | kuroko.cc | English | Mature | 1.0.0 |
 | [Latanime](anime/latanime/index.js) | latanime.org | Spanish | Mature | 1.0.10 |
 | [Miruro](anime/miruro/index.js) | miruro.cx | English | Mature | 1.0.10 |
-| [MKissa](anime/mkissa/index.js) | mkissa.to | English | Mature | 1.1.2 |
+| [MKissa](anime/mkissa/index.js) | mkissa.to | English | Mature | 1.1.3 |
 | [MMani](anime/mmani/index.js) | mmani.com | English | Mature | 1.0.1 |
 | [MonosChinos](anime/monoschinos/index.js) | monoschinos.st | Spanish | Mature | 1.0.9 |
 | [Nekomiru](anime/nekomiru/index.js) | nekomiru.com | English | Mature | 1.0.2 |

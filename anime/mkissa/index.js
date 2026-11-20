@@ -6,6 +6,7 @@ const IMAGE_PROXY = 'https://wp.youtube-anime.com/aln.youtube-anime.com/';
 const PAGE = 100;
 const MAX_PAGE = 100;
 const API_GAP_MS = 1100;
+const VIEW_GAP_MS = 5000;
 
 const CARD = '_id name englishName thumbnail type status rating isAdult genres availableEpisodes';
 const searchQuery = (fields) =>
@@ -186,6 +187,7 @@ class Source {
     this.requests = App.createRequestManager({ rateLimit: { requestsPerSecond: 2 } });
     this.api = 0;
     this.nextApi = 0;
+    this.nextView = 0;
     this.shows = new Map();
   }
 
@@ -365,8 +367,16 @@ class Source {
     const html = String(titlePage.data);
     const at = html.search(/<head[^>]*>/i);
     const hooked = at >= 0 ? html.replace(/<head[^>]*>/i, (tag) => `${tag}<script>${HOOK}</script>`) : `<script>${HOOK}</script>${html}`;
-    const run = async () =>
-      App.executeInWebView({ html: hooked, baseUrl: `${SITE}/anime/${showId}`, script: pageScript(showId, number, languages, 40000), timeoutMs: 50000 });
+    const run = async () => {
+      const at = Math.max(Date.now(), this.nextView);
+      this.nextView = at + VIEW_GAP_MS;
+      if (at > Date.now()) await sleep(at - Date.now());
+      try {
+        return await App.executeInWebView({ html: hooked, baseUrl: `${SITE}/anime/${showId}`, script: pageScript(showId, number, languages, 25000), timeoutMs: 30000 });
+      } finally {
+        this.nextView = Math.max(this.nextView, Date.now() + VIEW_GAP_MS);
+      }
+    };
     let result = await run();
     if (result && result.value && result.value.check) {
       await App.requestBrowserVerification({ url: `${SITE}/anime/${showId}/p-${number}-${languages[0]}` });
@@ -382,6 +392,7 @@ class Source {
     const label = language.label;
     const sources = found && Array.isArray(found.sources) ? found.sources : [];
     const videos = [];
+    const embeds = [];
     const tries = sources.filter((x) => x && typeof x.url === 'string' && x.url.indexOf('--') === 0).slice(0, 3);
     const clocks = await Promise.all(tries.map((x) => this.clock(x.url, label)));
     clocks.forEach((list) => list.forEach((v) => videos.push(v)));
@@ -391,12 +402,30 @@ class Source {
         const height = found.resolution ? `${found.resolution}p` : 'Auto';
         videos.push({ type: 'mp4', url: x.url, quality: `${height} ${label}`, server: NAME, headers: { Referer: `${SITE}/` } });
       } else if (/^https:\/\/(www\.)?ok\.ru\/videoembed\//.test(x.url)) {
-        videos.push({ type: 'embed', url: x.url, quality: `Auto ${label}`, server: 'OK.ru' });
+        embeds.push({ type: 'embed', url: x.url, quality: `Auto ${label}`, server: 'OK.ru' });
       } else if (/^https:\/\/(www\.)?mp4upload\.com\/embed-/.test(x.url)) {
-        videos.push({ type: 'embed', url: x.url, quality: `Auto ${label}`, server: 'mp4upload' });
+        embeds.push({ type: 'embed', url: x.url, quality: `Auto ${label}`, server: 'mp4upload' });
       }
     });
+    const alive = await Promise.all(embeds.map((e) => this.embedAlive(e)));
+    embeds.forEach((e, i) => {
+      if (alive[i]) videos.push(e);
+    });
     return videos;
+  }
+
+  async embedAlive(entry) {
+    try {
+      const response = await this.requests.schedule(App.createRequest({ url: entry.url, method: 'GET', headers: { Accept: 'text/html', Referer: `${SITE}/` } }));
+      if (response.status >= 500) return true;
+      if (response.status < 200 || response.status >= 300) return false;
+      const body = String(response.data);
+      if (entry.server === 'mp4upload') return body.length > 200 && /\.mp4/i.test(body) && !/deleted/i.test(body.slice(0, 300));
+      return /hlsManifestUrl|flashvars/.test(body);
+    } catch (e) {
+      if (e && (e.kind === 'challenge' || e.kind === 'blocked')) throw e;
+      return true;
+    }
   }
 
   async clock(hex, label) {
