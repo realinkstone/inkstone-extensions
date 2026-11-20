@@ -55,7 +55,7 @@ Prefer to review a written plan before any code is written? This repo works with
 
 ## Extensions
 
-376 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
+377 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
 
 Each extension lives in the folder for what it offers: `comics`, `novels`, `mixed` for those that do both, or `anime`. The site still serves every one at `inkstone.web.app/<id>/index.js`, so the folders change nothing in the apps.
 
@@ -450,6 +450,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [arc018](western/arc018/index.js) | arc018.stream | English | Mature | 1.0.0 |
 | [ArrowTV](western/arrowtv/index.js) | arrowtv.net | English | Mature | 1.0.0 |
 | [Atlantic](western/atlantic/index.js) | atlantic.bz | English | Mature | 1.0.0 |
+| [Best Series](western/bestseries/index.js) | bstsrs.in | English | Mature | 1.0.0 |
 | [Bingr](western/bingr/index.js) | bingr.one | English | Mature | 1.0.6 |
 | [Chillflix](western/chillflix/index.js) | chillflix.lol | English | Mature | 1.0.0 |
 | [CineCalidad](western/cinecalidad/index.js) | cinecalidad.org | Spanish | Mature | 1.0.2 |

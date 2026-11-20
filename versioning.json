@@ -9934,6 +9934,26 @@
       "language": "en",
       "contentRating": "mature",
       "sha256": "a40a8ede4e429386d48b2f11e4d1117f0285810a82bcb8ce3412831d4022f94d"
+    },
+    {
+      "id": "bestseries",
+      "name": "Best Series",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://bstsrs.in",
+      "iconUrl": "https://inkstone.web.app/bestseries/icon.png",
+      "description": "Western・TV\n\nRestrictions:\n・Recent Episodes Only",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "e6eb50c5dac14956fc9e824a2d8f9af50f3bf7cc8477679600eeb5143e308b21"
     }
   ]
 }
