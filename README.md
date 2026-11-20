@@ -55,7 +55,7 @@ Prefer to review a written plan before any code is written? This repo works with
 
 ## Extensions
 
-377 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
+379 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
 
 Each extension lives in the folder for what it offers: `comics`, `novels`, `mixed` for those that do both, or `anime`. The site still serves every one at `inkstone.web.app/<id>/index.js`, so the folders change nothing in the apps.
 
@@ -216,6 +216,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [MGeko](comics/mgeko/index.js) | mgeko.cc | English | Safe | 1.0.0 |
 | [Mgread.io](comics/mangayy/index.js) | mgread.io | English | Mature | 2.0.0 |
 | [MHScans](comics/mhscans/index.js) | mhscans.com | Spanish | Safe | 1.1.0 |
+| [MKissa Manga](comics/mkissamanga/index.js) | mkissa.to | English | Mature | 1.0.0 |
 | [Monopoly Scan](comics/monopolyscan/index.js) | monopolymanhua.com | Spanish | Safe | 1.0.2 |
 | [Natomanga](comics/natomanga/index.js) | natumanga.com | English | Adult | 1.3.0 |
 | [Naver Webtoon](comics/navercomic/index.js) | comic.naver.com | Korean | Mature | 1.2.0 |
@@ -390,6 +391,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [Kuroko](anime/kuroko/index.js) | kuroko.cc | English | Mature | 1.0.0 |
 | [Latanime](anime/latanime/index.js) | latanime.org | Spanish | Mature | 1.0.10 |
 | [Miruro](anime/miruro/index.js) | miruro.cx | English | Mature | 1.0.10 |
+| [MKissa](anime/mkissa/index.js) | mkissa.to | English | Mature | 1.1.2 |
 | [MMani](anime/mmani/index.js) | mmani.com | English | Mature | 1.0.1 |
 | [MonosChinos](anime/monoschinos/index.js) | monoschinos.st | Spanish | Mature | 1.0.9 |
 | [Nekomiru](anime/nekomiru/index.js) | nekomiru.com | English | Mature | 1.0.2 |
@@ -449,8 +451,8 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [AniCine](western/anicine/index.js) | anicine.sbs | English | Mature | 1.0.0 |
 | [arc018](western/arc018/index.js) | arc018.stream | English | Mature | 1.0.0 |
 | [ArrowTV](western/arrowtv/index.js) | arrowtv.net | English | Mature | 1.0.0 |
-| [Atlantic](western/atlantic/index.js) | atlantic.bz | English | Mature | 1.0.0 |
-| [Best Series](western/bestseries/index.js) | bstsrs.in | English | Mature | 1.0.0 |
+| [Atlantic](western/atlantic/index.js) | atlantic.bz | English | Mature | 1.0.1 |
+| [Best Series](western/bestseries/index.js) | bstsrs.in | English | Mature | 1.0.1 |
 | [Bingr](western/bingr/index.js) | bingr.one | English | Mature | 1.0.6 |
 | [Chillflix](western/chillflix/index.js) | chillflix.lol | English | Mature | 1.0.0 |
 | [CineCalidad](western/cinecalidad/index.js) | cinecalidad.org | Spanish | Mature | 1.0.2 |

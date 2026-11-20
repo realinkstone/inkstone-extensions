@@ -401,9 +401,12 @@ class Source {
   }
 
   async streamtape(row) {
-    const page = await this.get(row.url);
-    if (page.status !== 200 || !/robotlink/.test(page.text)) throw new Error('Streamtape: the video is gone');
-    return { type: 'embed', url: row.url, quality: ['Streamtape', row.label].filter(Boolean).join(', '), server: 'Streamtape' };
+    const m = /^(https?:\/\/[^/]+)\/(?:v|e)\/([A-Za-z0-9_-]+)/.exec(row.url);
+    if (!m) throw new Error('Streamtape: not a video page');
+    const url = `${m[1]}/e/${m[2]}`;
+    const page = await this.get(url);
+    if (page.status !== 200 || !/getElementById\(['"]robotlink['"]\)/.test(page.text)) throw new Error('Streamtape: the video is gone');
+    return { type: 'embed', url, quality: ['Streamtape', row.label].filter(Boolean).join(', '), server: 'Streamtape' };
   }
 
   async getChapterDetails(mangaId, chapterId) {

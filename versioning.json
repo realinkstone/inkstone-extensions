@@ -9918,7 +9918,7 @@
     {
       "id": "atlantic",
       "name": "Atlantic",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://atlantic.bz",
       "iconUrl": "https://inkstone.web.app/atlantic/icon.png",
@@ -9933,12 +9933,12 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "a40a8ede4e429386d48b2f11e4d1117f0285810a82bcb8ce3412831d4022f94d"
+      "sha256": "adcb7e11488d855a1cd1181eb01462f4c0740d5ea4b38cdb7f1d8e991d9bc18a"
     },
     {
       "id": "bestseries",
       "name": "Best Series",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://bstsrs.in",
       "iconUrl": "https://inkstone.web.app/bestseries/icon.png",
@@ -9953,7 +9953,74 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "e6eb50c5dac14956fc9e824a2d8f9af50f3bf7cc8477679600eeb5143e308b21"
+      "sha256": "823f7262cead1c23160944b10660b5662d53f8b6802411c46cc350a893865d6b"
+    },
+    {
+      "id": "mkissa",
+      "name": "MKissa",
+      "version": "1.1.2",
+      "medium": "anime",
+      "website": "https://mkissa.to",
+      "iconUrl": "https://inkstone.web.app/mkissa/icon.png",
+      "hosts": [
+        "mkissa.to",
+        "api.mkissa.net",
+        "api.allanime.day",
+        "allanime.day",
+        "tools.fast4speed.rsvp",
+        "*.fast4speed.rsvp",
+        "repackager.wixmp.com",
+        "*.wixmp.com",
+        "ok.ru",
+        "*.okcdn.ru",
+        "*.mycdn.me",
+        "mp4upload.com",
+        "*.mp4upload.com",
+        "aln.youtube-anime.com",
+        "wp.youtube-anime.com",
+        "s4.anilist.co",
+        "static.wixstatic.com"
+      ],
+      "description": "Anime\n\nCatalog・10,000+\n\nRestrictions:\n・Cloudflare Checks\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "abd283712a513edde7d75505998d5d06adbd3e559330a1dbbad699a712ff4803"
+    },
+    {
+      "id": "mkissamanga",
+      "name": "MKissa Manga",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://mkissa.to",
+      "iconUrl": "https://inkstone.web.app/mkissamanga/icon.png",
+      "hosts": [
+        "mkissa.to",
+        "api.mkissa.net",
+        "api.allanime.day",
+        "aln.youtube-anime.com",
+        "ytimgf.youtube-anime.com",
+        "s4.anilist.co"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・10,000+\n\nRestrictions:\n・Cloudflare Checks\n・Web View\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "8b7e0a41f7d1d6fcac75d3988d4c5ff8697eb84f7e4038dd460fb946bba700ea"
     }
   ]
 }

@@ -366,8 +366,8 @@ class Source {
     const tasks = [
       ['Astra', () => this.astra(q)],
       ['Bolo', () => this.bolo(kind, tmdb, season, episode)],
-      ['Vixsrc', () => this.vixsrc(q)],
       ['Vidbox', () => this.vidbox(q)],
+      ['Vixsrc', () => this.vixsrc(q)],
     ];
     const skips = this.skipTimes(kind, tmdb, season, episode).catch(() => ({}));
     const answers = await Promise.all(tasks.map(([name, run]) => within(14000, run()).then((video) => ({ name, video }), (error) => ({ name, error }))));
