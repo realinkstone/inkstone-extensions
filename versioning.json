@@ -9811,6 +9811,128 @@
       "language": "en",
       "contentRating": "mature",
       "sha256": "818026a21651a4601e4dd8e0473a1544911bdded4fe27e1388b63acb4f565cf7"
+    },
+    {
+      "id": "7movies",
+      "name": "7Movies",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://7movies.ac",
+      "iconUrl": "https://inkstone.web.app/7movies/icon.png",
+      "hosts": [
+        "embed.vidrift.net",
+        "embed.vidrift.in",
+        "v3-cinemeta.strem.io",
+        "cinemeta-catalogs.strem.io",
+        "images.metahub.space",
+        "live.metahub.space",
+        "episodes.metahub.space",
+        "image.tmdb.org"
+      ],
+      "description": "Western・Movies・TV\n\nCatalog・30,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "5bdcb92c7c5104b7a5a40b264610a008317672209b175d5d51bb88d06cf05cb2"
+    },
+    {
+      "id": "1flex",
+      "name": "1Flex",
+      "version": "1.0.1",
+      "medium": "anime",
+      "website": "https://www.1flex.org",
+      "iconUrl": "https://inkstone.web.app/1flex/icon.png",
+      "hosts": [
+        "www.viduki.net",
+        "vidfast.vc",
+        "player.vidzee.wtf",
+        "vidy.st",
+        "www.vidy.st",
+        "v3-cinemeta.strem.io",
+        "cinemeta-catalogs.strem.io",
+        "images.metahub.space",
+        "live.metahub.space",
+        "episodes.metahub.space",
+        "image.tmdb.org"
+      ],
+      "description": "Western・Movies・TV\n\nCatalog・30,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "b97eceb3bbf0b31a5a0d24062a08ccc0f1a460a8c5bf89b2f8808deae380a85f"
+    },
+    {
+      "id": "zetmoon",
+      "name": "ZetMoon",
+      "version": "1.0.2",
+      "medium": "anime",
+      "website": "https://zetmoon.live",
+      "iconUrl": "https://inkstone.web.app/zetmoon/icon.png",
+      "hosts": [
+        "cinesrc.st",
+        "player.vidqueen.st",
+        "embed.vidrift.net",
+        "vidcore.io",
+        "player.vidzee.wtf",
+        "vidfast.vc",
+        "embed.cinelite.xyz",
+        "mapple.fun",
+        "atlantic.st",
+        "vidy.st",
+        "www.vidy.st",
+        "v3-cinemeta.strem.io",
+        "cinemeta-catalogs.strem.io",
+        "images.metahub.space",
+        "live.metahub.space",
+        "episodes.metahub.space",
+        "image.tmdb.org"
+      ],
+      "description": "Western・Movies・TV\n\nCatalog・30,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "29176f83893b18c444e6093fd0e6cd829d928e950767570acdbaa0dc636a1db5"
+    },
+    {
+      "id": "atlantic",
+      "name": "Atlantic",
+      "version": "1.0.0",
+      "medium": "anime",
+      "website": "https://atlantic.bz",
+      "iconUrl": "https://inkstone.web.app/atlantic/icon.png",
+      "description": "Western・Movies・TV\n\nCatalog・10,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "videos"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "a40a8ede4e429386d48b2f11e4d1117f0285810a82bcb8ce3412831d4022f94d"
     }
   ]
 }
