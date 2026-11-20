@@ -187,7 +187,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [MangaTown](comics/mangatown/index.js) | mangatown.com | English | Adult | 1.2.0 |
 | [MangaTV](comics/mangatv/index.js) | mangatv.net | Spanish | Adult | 1.0.0 |
 | [MangaWOW](comics/mangawow/index.js) | mangawow.org | Turkish | Mature | 1.0.2 |
-| [MangoLibreria](comics/mangolibreria/index.js) | lectorfenix.com | Spanish | Adult | 1.0.1 |
+| [MangoLibreria](comics/mangolibreria/index.js) | lectorfenix.com | Spanish | Adult | 1.1.0 |
 | [Manhua Plus (.com)](comics/manhuapluscom/index.js) | manhuaplus.com | English | Mature | 1.0.0 |
 | [ManhuaBuddy](comics/manhuabuddy/index.js) | manhuabuddy.com | English | Mature | 1.0.0 |
 | [ManhuaBug](comics/manhuabug/index.js) | manhuabug.com | Thai | Safe | 1.0.0 |

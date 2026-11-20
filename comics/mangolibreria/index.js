@@ -35,6 +35,38 @@ class Source {
     this.requests = App.createRequestManager({});
   }
 
+  async getSearchTags() {
+    if (!this.genres) {
+      this.genres = this.get(`${SITE}/api/comics/genres`).then((list) => {
+        const seen = new Set();
+        return (Array.isArray(list) ? list : [])
+          .filter((genre) => genre && typeof genre.name === 'string' && Number(genre.comicCount) > 0)
+          .map((genre) => genre.name.trim())
+          .filter((name) => name && !name.includes(',') && !seen.has(name.toLowerCase()) && seen.add(name.toLowerCase()))
+          .map((name) => ({ id: name, label: name }))
+          .sort((a, b) => a.label.localeCompare(b.label));
+      });
+      this.genres.catch(() => (this.genres = null));
+    }
+    try {
+      return await this.genres;
+    } catch (e) {
+      console.error('MangoLibreria: the genre list could not be loaded', e);
+      return [];
+    }
+  }
+
+  async comicsList(page, sort, search, genres) {
+    const address = (names) => `${SITE}/comics/__data.json?x-sveltekit-invalidated=01&page=${page}${sort}${search}${names ? `&genres=${names}` : ''}`;
+    let json = await this.get(address(genres));
+    if (json && json.type === 'redirect') {
+      const canonical = (/[?&]genres=([^&]*)/.exec(json.location || '') || [])[1];
+      if (!canonical || canonical === genres) throw new Error(`MangoLibreria: the genre ${decodeURIComponent(genres || '')} is not known to the site`);
+      json = await this.get(address(canonical));
+    }
+    return payload(json, 'comics');
+  }
+
   getSourceFeeds() {
     return [
       { id: 'views', name: 'Popular' },
@@ -47,7 +79,10 @@ class Source {
     const page = (metadata && metadata.page) || 1;
     const sort = query || (request && request.feed === 'latest') ? '' : '&sort=views';
     const search = query ? `&q=${encodeURIComponent(query)}` : '';
-    const list = payload(await this.get(`${SITE}/comics/__data.json?x-sveltekit-invalidated=01&page=${page}${sort}${search}`), 'comics');
+    const chosen = (Array.isArray(request && request.includedTags) ? request.includedTags : [])
+      .map((tag) => String(tag && typeof tag === 'object' ? tag.id || tag.label : tag).trim())
+      .filter((name) => name && !name.includes(','));
+    const list = await this.comicsList(page, sort, search, chosen.length ? encodeURIComponent(chosen.join(',')) : '');
     const results = list.comics
       .map((comic) => ({ mangaId: slugOf(comic.urlPath), title: comic.name, image: comic.urlCover || comic.coverImage, headers: IMAGE_HEADERS, ageRating: nsfw(comic), medium: 'comics' }))
       .filter((title) => title.mangaId && title.title);
