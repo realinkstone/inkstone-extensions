@@ -355,8 +355,9 @@ class Source {
       : await this.json(`${SITE}/api/anime?page=${page}`);
     const shows = Array.isArray(json && json.result) ? json.result : [];
     const last = (json && json.maxPage) || page;
+    const kept = shows.filter((show) => !(show && Array.isArray(show.locales) && show.locales.length === 0));
     return {
-      results: shows.map(toTitle),
+      results: kept.map(toTitle),
       metadata: page < last && shows.length ? { page: page + 1 } : undefined,
     };
   }

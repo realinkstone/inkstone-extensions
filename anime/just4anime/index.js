@@ -1,6 +1,6 @@
-const API = 'https://api.just4anime.online/api';
-const EPISODES = 'https://just4anime.online/api/episodes';
-const SITE = 'https://just4anime.online';
+const API = 'https://api.just4anime.live/api';
+const EPISODES = 'https://just4anime.live/api/episodes';
+const SITE = 'https://just4anime.live';
 const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36';
 const PAGE_SIZE = 24;
 const SERVER_LIMIT_MS = 12000;

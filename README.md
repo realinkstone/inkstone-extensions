@@ -383,11 +383,11 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [HiAnimes](anime/hianimesse/index.js) | hianimes.se | English | Mature | 1.0.0 |
 | [Itasha](anime/itasha/index.js) | itasha.live | English | Mature | 1.0.0 |
 | [JKAnime](anime/jkanime/index.js) | jkanime.net | Spanish | Mature | 1.0.7 |
-| [Just4Anime](anime/just4anime/index.js) | just4anime.online | English | Mature | 1.0.2 |
+| [Just4Anime](anime/just4anime/index.js) | just4anime.live | English | Mature | 1.0.3 |
 | [JustAnime](anime/justanime/index.js) | justanime.to | English | Mature | 1.0.0 |
 | [Katanime](anime/katanime/index.js) | katanime.net | Spanish | Mature | 1.0.10 |
 | [Kawaii Anime](anime/kawaiianime/index.js) | kawaiianime.cc | English | Mature | 1.0.1 |
-| [KickAssAnime](anime/kickassanime/index.js) | kaa.lt | English | Mature | 1.0.9 |
+| [KickAssAnime](anime/kickassanime/index.js) | kaa.lt | English | Mature | 1.0.10 |
 | [Kuroko](anime/kuroko/index.js) | kuroko.cc | English | Mature | 1.0.0 |
 | [Latanime](anime/latanime/index.js) | latanime.org | Spanish | Mature | 1.0.10 |
 | [Miruro](anime/miruro/index.js) | miruro.cx | English | Mature | 1.0.10 |
@@ -399,7 +399,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [TioAnime](anime/tioanime/index.js) | tioanime.com | Spanish | Mature | 1.0.10 |
 | [UniqueStream](anime/uniquestream/index.js) | anime.uniquestream.net | English | Mature | 1.1.5 |
 | [VerAnime](anime/veranime/index.js) | verani.me | Spanish | Mature | 1.0.13 |
-| [VerAnimes](anime/veranimes/index.js) | wwv.veranimes.net | Spanish | Mature | 1.0.12 |
+| [VerAnimes](anime/veranimes/index.js) | wwv.veranimes.net | Spanish | Mature | 1.0.13 |
 | [Watch Anime World](anime/watchanimeworld/index.js) | watchanimeworld.one | Hindi | Mature | 1.0.1 |
 | [Xanime](anime/xanime/index.js) | xanime.me | English | Mature | 1.0.1 |
 | [Zenkai](anime/zenkai/index.js) | zenkai.to | English | Mature | 1.0.1 |
@@ -457,8 +457,8 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [Chillflix](western/chillflix/index.js) | chillflix.lol | English | Mature | 1.0.0 |
 | [CineCalidad](western/cinecalidad/index.js) | cinecalidad.org | Spanish | Mature | 1.0.2 |
 | [CinePlus123](western/cineplus123/index.js) | cineplus123.org | Spanish | Mature | 1.0.8 |
-| [Cno.to](western/cno/index.js) | cno.to | English | Mature | 1.0.7 |
-| [CorsFlix](western/corsflix/index.js) | watch.corsflix.net | English | Mature | 1.0.0 |
+| [Cno.to](western/cno/index.js) | cno.to | English | Mature | 1.0.8 |
+| [CorsFlix](western/corsflix/index.js) | watch.corsflix.net | English | Mature | 1.0.1 |
 | [Cuevana](western/cuevana/index.js) | cuevana3.eu | Spanish | Mature | 1.0.1 |
 | [Danish Silent Film](western/danishsilentfilm/index.js) | stumfilm.dk | English | Mature | 1.0.0 |
 | [Ghostflix](western/ghostflix/index.js) | ghostflix.st | English | Mature | 1.0.0 |

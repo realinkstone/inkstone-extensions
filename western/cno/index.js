@@ -306,7 +306,7 @@ class Source {
     const info = {
       title,
       image: d.poster ? `${IMG}w500${d.poster}` : '',
-      desc: clean(d.overview) || undefined,
+      desc: clean(d.overview) || `${kind === 'movie' ? 'Movie' : 'TV series'}${d.year ? ` from ${d.year}` : ''}. The site has no synopsis for it.`,
       author: makers.length ? makers.slice(0, 3).join(', ') : undefined,
       status: kind === 'movie' ? 'COMPLETED' : /returning|production|planned|pilot/i.test(state) ? 'ONGOING' : /ended|cancel/i.test(state) ? 'COMPLETED' : 'UNKNOWN',
       tags: (Array.isArray(d.genres) ? d.genres : []).map((g) => clean(g && g.name ? g.name : g)).filter(Boolean),

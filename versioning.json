@@ -5983,7 +5983,7 @@
     {
       "id": "kickassanime",
       "name": "KickAssAnime",
-      "version": "1.0.9",
+      "version": "1.0.10",
       "medium": "anime",
       "website": "https://kaa.lt",
       "iconUrl": "https://inkstone.web.app/kickassanime/icon.png",
@@ -6001,7 +6001,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "187050b71aa35374f82854ed393396cb63811033a3570b361c3f0f9320ad2bc7"
+      "sha256": "43ec5c8f96fcb45d8b18d414d9a7d7c0a5cba955e1ca473b10f4b9b961796233"
     },
     {
       "id": "uniquestream",
@@ -7505,7 +7505,7 @@
     {
       "id": "veranimes",
       "name": "VerAnimes",
-      "version": "1.0.12",
+      "version": "1.0.13",
       "medium": "anime",
       "website": "https://wwv.veranimes.net",
       "iconUrl": "https://inkstone.web.app/veranimes/icon.png",
@@ -7533,7 +7533,9 @@
         "www.mp4upload.com",
         "shannoncoldalready.com",
         "ashleyhardat.com",
-        "arianathankspecial.com"
+        "arianathankspecial.com",
+        "caseyseemavoid.com",
+        "*.caseyseemavoid.com"
       ],
       "description": "Anime\n\nCatalog・6,000+",
       "capabilities": [
@@ -7864,13 +7866,13 @@
     {
       "id": "just4anime",
       "name": "Just4Anime",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "anime",
-      "website": "https://just4anime.online",
+      "website": "https://just4anime.live",
       "iconUrl": "https://inkstone.web.app/just4anime/icon.png",
       "hosts": [
-        "just4anime.online",
-        "*.just4anime.online",
+        "just4anime.live",
+        "*.just4anime.live",
         "anilist.co",
         "*.anilist.co",
         "tmdb.org",
@@ -7889,7 +7891,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "31163a6e82938229372ff2d5028ef84539fd971b825df994c60623d12b755868"
+      "sha256": "65338c16693c2e214e2aa6b7c5b14d2c0156204602c123bc730c6c4230998b35"
     },
     {
       "id": "xanime",
@@ -7955,7 +7957,7 @@
     {
       "id": "cno",
       "name": "Cno.to",
-      "version": "1.0.7",
+      "version": "1.0.8",
       "medium": "anime",
       "website": "https://cno.to",
       "iconUrl": "https://inkstone.web.app/cno/icon.png",
@@ -7971,7 +7973,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "68d2dcc69479d7cc27f0a1e5183c728500ec58261da48c5acc38632e1cf4a131"
+      "sha256": "a31d1c8af2a17dcc7e2ca41f3244e69f43a8967ce331cc68969d97c9c0509c9a"
     },
     {
       "id": "watchanimeworld",
@@ -9558,7 +9560,7 @@
     {
       "id": "corsflix",
       "name": "CorsFlix",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "anime",
       "website": "https://watch.corsflix.net",
       "iconUrl": "https://inkstone.web.app/corsflix/icon.png",
@@ -9573,7 +9575,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "a8313131bfcd4680e5e3bcfead59afba24c05efdc204b6eabfad419affd1754e"
+      "sha256": "b5dc7e97db23fc825eafe71bb4e0af6336fc559a3fe45dbf8db614c8d0ba41e3"
     },
     {
       "id": "chillflix",

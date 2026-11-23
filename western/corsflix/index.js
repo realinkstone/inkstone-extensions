@@ -1,4 +1,11 @@
 const SITES = ['https://watch.corsflix.net', 'https://watch.corsflix.dpdns.org'];
+const BACKENDS = [
+  { base: SITES[0], route: (path) => path },
+  { base: SITES[1], route: (path) => path },
+  { base: 'https://db.hls.lol', route: (path) => path.replace(/^\/api\//, '/3/') },
+];
+const CALL_LIMIT_MS = 10000;
+const BAD_FOR_MS = 300000;
 const SCRAPER = 'https://scrapper.rivestream.app';
 const IMG = 'https://image.tmdb.org/t/p/';
 const UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1';
@@ -216,6 +223,7 @@ class Source {
   constructor() {
     this.requests = App.createRequestManager({});
     this.mirror = 0;
+    this.badUntil = [0, 0, 0];
     this.stamps = [];
     this.lastAt = 0;
     this.ages = new Map();
@@ -235,17 +243,21 @@ class Source {
 
   async api(path) {
     let last = null;
-    for (let k = 0; k < SITES.length; k++) {
-      const index = (this.mirror + k) % SITES.length;
+    const now = Date.now();
+    const all = BACKENDS.map((b, k) => (this.mirror + k) % BACKENDS.length);
+    const healthy = all.filter((i) => !(this.badUntil[i] > now));
+    const order = healthy.concat(all.filter((i) => healthy.indexOf(i) === -1));
+    for (const index of order) {
       for (let attempt = 0; attempt < 3; attempt++) {
         await this.pace();
-        const url = SITES[index] + path + (attempt ? `${path.indexOf('?') >= 0 ? '&' : '?'}_r=${attempt}` : '');
+        const url = BACKENDS[index].base + BACKENDS[index].route(path) + (attempt ? `${path.indexOf('?') >= 0 ? '&' : '?'}_r=${attempt}` : '');
         let response;
         try {
-          response = await this.requests.schedule(App.createRequest({ url, method: 'GET', headers: { 'User-Agent': UA, Accept: 'application/json' } }));
+          response = await within(CALL_LIMIT_MS, this.requests.schedule(App.createRequest({ url, method: 'GET', headers: { 'User-Agent': UA, Accept: 'application/json' } })));
         } catch (e) {
           if (e && e.kind === 'challenge') throw e;
           last = e;
+          this.badUntil[index] = Date.now() + BAD_FOR_MS;
           break;
         }
         if (response.status === 429) {
@@ -255,7 +267,8 @@ class Source {
         }
         if (response.status === 404 || response.status === 400) return null;
         if (response.status >= 500 || response.status === 451 || response.status === 403 || response.status < 200 || response.status >= 300) {
-          last = new Error(`CorsFlix: HTTP ${response.status} from ${SITES[index]}`);
+          last = new Error(`CorsFlix: HTTP ${response.status} from ${BACKENDS[index].base}`);
+          this.badUntil[index] = Date.now() + BAD_FOR_MS;
           break;
         }
         let json = null;
@@ -265,10 +278,12 @@ class Source {
           json = null;
         }
         if (json === null || typeof json !== 'object') {
-          last = new Error(`CorsFlix: ${SITES[index]} did not answer with JSON`);
+          last = new Error(`CorsFlix: ${BACKENDS[index].base} did not answer with JSON`);
+          this.badUntil[index] = Date.now() + BAD_FOR_MS;
           break;
         }
         this.mirror = index;
+        this.badUntil[index] = 0;
         return json;
       }
     }
@@ -413,7 +428,7 @@ class Source {
       desc: clean(d.overview),
       status: kind === 'movie' ? 'COMPLETED' : statusOfShow(d.status),
       tags: (d.genres || []).map((g) => clean(g.name)).filter(Boolean),
-      webURL: `${SITES[this.mirror]}/${kind === 'movie' ? 'movies' : 'tv'}/${id}`,
+      webURL: `${SITES[Math.min(this.mirror, SITES.length - 1)]}/${kind === 'movie' ? 'movies' : 'tv'}/${id}`,
       medium: 'anime',
     };
     info.completed = info.status === 'COMPLETED';
