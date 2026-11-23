@@ -41,9 +41,16 @@ function fixUrl(url) {
   }
 }
 
+const ENCODED_HYPHEN = /%(?:25)*2D/i;
+
+function addressOf(id) {
+  return ENCODED_HYPHEN.test(id) ? id : encodeURIComponent(id);
+}
+
 function slugOf(href) {
   const m = /\/manga\/([^/?#]+)/.exec(String(href || ''));
   if (!m) return '';
+  if (ENCODED_HYPHEN.test(m[1])) return m[1];
   let s = m[1];
   for (let i = 0; i < 3; i++) {
     try {
@@ -163,12 +170,12 @@ class Source {
       title: r.title,
       image: r.image || undefined,
       medium: 'comics',
-      webURL: `${SITE_BASE}/manga/${encodeURIComponent(r.id)}`,
+      webURL: `${SITE_BASE}/manga/${addressOf(r.id)}`,
     };
   }
 
   async getMangaDetails(mangaId) {
-    const $ = cheerio.load(await this._html(`/manga/${encodeURIComponent(mangaId)}`));
+    const $ = cheerio.load(await this._html(`/manga/${addressOf(mangaId)}`));
     const box = $('#manga-info-container');
     if (!box.length) throw new Error('Manga Demon: title not found');
     const tags = [];
@@ -197,13 +204,13 @@ class Source {
       tags,
       ageRating: ageRatingOfGenres(tags),
       medium: 'comics',
-      webURL: `${SITE_BASE}/manga/${encodeURIComponent(mangaId)}`,
+      webURL: `${SITE_BASE}/manga/${addressOf(mangaId)}`,
     };
     return { mangaInfo: info };
   }
 
   async getChapters(mangaId) {
-    const $ = cheerio.load(await this._html(`/manga/${encodeURIComponent(mangaId)}`));
+    const $ = cheerio.load(await this._html(`/manga/${addressOf(mangaId)}`));
     const rows = [];
     const seen = new Set();
     $('#chapters-list a.chplinks').each((_, el) => {

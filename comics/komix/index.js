@@ -294,6 +294,14 @@ class Source {
       })
       .filter((u) => /^https?:\/\//.test(u));
     if (!pages.length) throw new Error('Komix has no pages for this chapter yet');
+    let gone = false;
+    try {
+      const probe = await this.requests.schedule(App.createRequest({ url: pages[0], method: 'HEAD', headers: {} }));
+      gone = probe.status === 404;
+    } catch (e) {
+      gone = false;
+    }
+    if (gone) throw new Error('Komix no longer has the images of this chapter (its image server answers Not Found, in its own reader too)');
     return { id: chapterId, mangaId, pages };
   }
 }

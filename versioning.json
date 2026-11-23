@@ -3823,7 +3823,7 @@
     {
       "id": "mangademon",
       "name": "Manga Demon",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://demonicscans.org",
       "hosts": [
@@ -3842,7 +3842,7 @@
       "language": "en",
       "contentRating": "mature",
       "iconUrl": "https://inkstone.web.app/mangademon/icon.png",
-      "sha256": "7b702e581a46f12e81a6f90c30e8542ab8b09601e9948111af1ab302fbe51034"
+      "sha256": "d73b29a88eaa8f67e0f3cce254a78b391bbb9fce1ab6709d5f884e32fc3ae054"
     },
     {
       "id": "roliascan",
@@ -8739,7 +8739,7 @@
     {
       "id": "komix",
       "name": "Komix",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://komix.to",
       "iconUrl": "https://inkstone.web.app/komix/icon.png",
@@ -8757,7 +8757,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "1f7e99bf5f2600216d5742f7666dc459aae2447f09ad9468b13de9a5d1c74726"
+      "sha256": "93c8d628942bcb2f42450e514bc6a4ce23470c3db24f33d9746739268f657129"
     },
     {
       "id": "novelcool",

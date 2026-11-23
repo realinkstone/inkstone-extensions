@@ -135,7 +135,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [KokoMangas](comics/kokomangas/index.js) | kokomangas.com | English | Adult | 1.0.0 |
 | [Komikindo](comics/komikindo/index.js) | komikindo.ch | Indonesian | Adult | 1.0.1 |
 | [Komiku](comics/komiku/index.js) | komiku.org | Indonesian | Adult | 1.0.0 |
-| [Komix](comics/komix/index.js) | komix.to | English | Mature | 1.0.0 |
+| [Komix](comics/komix/index.js) | komix.to | English | Mature | 1.0.1 |
 | [Koreli Scans](comics/koreliscans/index.js) | nabicix.com | Turkish | Safe | 1.0.2 |
 | [KSGroupScans](comics/ksgroupscans/index.js) | ksgroupscans.com | English | Mature | 1.0.0 |
 | [KuManga](comics/kumanga/index.js) | kumanga.com | Spanish | Adult | 1.0.1 |
@@ -151,7 +151,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [LupiTeam](comics/lupiteam/index.js) | lupiteam.net | Italian | Safe | 1.0.1 |
 | [Madara Scans](comics/madarascans/index.js) | madarascans.net | English | Mature | 1.0.0 |
 | [Magus Manga](comics/magusmanga/index.js) | magustoon.org | English | Safe | 1.0.0 |
-| [Manga Demon](comics/mangademon/index.js) | demonicscans.org | English | Mature | 1.0.0 |
+| [Manga Demon](comics/mangademon/index.js) | demonicscans.org | English | Mature | 1.0.1 |
 | [Manga District](comics/mangadistrict/index.js) | mangadistrict.com | English | Adult | 1.0.0 |
 | [Manga Eclipse](comics/mangaeclipse/index.js) | mangaeclipse.com | English | Mature | 1.0.0 |
 | [Manga Livre.to](comics/mangalivreto/index.js) | mangalivre.to | Brazilian Portuguese | Mature | 1.0.0 |
