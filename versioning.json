@@ -648,7 +648,7 @@
     {
       "id": "webtoons",
       "name": "WEBTOON",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "medium": "comics",
       "website": "https://www.webtoons.com",
       "iconUrl": "https://inkstone.web.app/webtoons/icon.png",
@@ -663,7 +663,7 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "e385f87751f6d77e8b3fe06a341fd306c41703c295ca55aa46bdbfc4409ae42a",
+      "sha256": "a39bafb3e9dc28cbfffc7b67596db43d1304bc375a8accb8b1728a83223ead4f",
       "hosts": [
         "webtoons.com",
         "*.webtoons.com",

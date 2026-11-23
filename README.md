@@ -283,7 +283,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [VyManga](comics/vymanga/index.js) | mangavyvy.com | English | Mature | 1.0.0 |
 | [WaManga](comics/wamanga/index.js) | wamanga.ru | Russian | Adult | 1.2.0 |
 | [Webnex](comics/webnex/index.js) | webnex.cc | English | Mature | 1.0.0 |
-| [WEBTOON](comics/webtoons/index.js) | webtoons.com | English | Safe | 1.1.0 |
+| [WEBTOON](comics/webtoons/index.js) | webtoons.com | English | Safe | 1.2.0 |
 | [Webtoon Hatti](comics/webtoonhatti/index.js) | webtoonhatti.club | Turkish | Safe | 1.0.0 |
 | [Weeb Central](comics/weebcentral/index.js) | weebcentral.com | English | Adult | 1.0.0 |
 | [YakshaComics](comics/yakshacomics/index.js) | yakshacomics.com | English | Safe | 1.0.0 |

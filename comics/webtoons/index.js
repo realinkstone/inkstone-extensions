@@ -3,6 +3,7 @@ const MOBILE_BASE = 'https://m.webtoons.com';
 const IMAGE_DOMAIN = 'https://webtoon-phinf.pstatic.net';
 const IMAGE_REFERER = 'https://www.webtoons.com/';
 const LANGUAGES = ['en', 'es'];
+const CANVAS_AGE_RATING = 16;
 
 const MOBILE_UA =
   'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1';
@@ -134,22 +135,24 @@ function parseGenreListItem(item) {
   };
 }
 
-function parseSearchItem(item) {
-  const genreSeo = GENRE_CODE_TO_SEO[item.representGenre] || 'drama';
-  const titleSlug = item.titleGroupName || '';
+function parseSearchItem(item, isCanvas) {
+  const genreSeo = isCanvas ? 'canvas' : (GENRE_CODE_TO_SEO[item.representGenre] || 'drama');
+  const titleSlug = item.titleGroupName || (isCanvas ? '-' : '');
   const titleNo = String(item.titleNo);
   const authors = [item.writingAuthorName, item.pictureAuthorName].filter(Boolean);
   const uniqueAuthors = authors.filter((a, i) => authors.indexOf(a) === i);
-  return {
+  const manga = {
     mangaId: buildMangaId(genreSeo, titleSlug, titleNo),
     title: item.title || '',
     image: absoluteImage(item.thumbnailMobile),
     referer: IMAGE_REFERER,
     author: uniqueAuthors.join(', ') || undefined,
     views: typeof item.readCount === 'number' ? item.readCount : undefined,
-    webURL: `${SITE_BASE}/${lang()}/${genreSeo}/${titleSlug}/list?title_no=${titleNo}`,
+    webURL: `${SITE_BASE}/${lang()}/${genreSeo}/${titleSlug || '-'}/list?title_no=${titleNo}`,
     medium: 'comics',
   };
+  if (isCanvas) manga.ageRating = CANVAS_AGE_RATING;
+  return manga;
 }
 
 function parseOriginalsList($, dayKey, markCompleted) {
@@ -206,12 +209,22 @@ class Source {
 
     if (query) {
       const start = (page - 1) * 20 + 1;
-      const url = `${MOBILE_BASE}/${lang()}/search/result?keyword=${encodeURIComponent(query)}&searchType=WEBTOON&start=${start}`;
-      const json = await this.requestMobileJSON(url);
-      const webtoonResult = (json && json.result && json.result.webtoonResult) || { titleList: [], totalCount: 0 };
-      const titleList = webtoonResult.titleList || [];
-      const results = titleList.map(parseSearchItem);
-      const hasNext = start - 1 + titleList.length < (webtoonResult.totalCount || 0);
+      const base = `${MOBILE_BASE}/${lang()}/search/result?keyword=${encodeURIComponent(query)}`;
+      const [originals, canvas] = await Promise.all([
+        this.requestMobileJSON(`${base}&searchType=WEBTOON&start=${start}`),
+        this.requestMobileJSON(`${base}&searchType=CHALLENGE&start=${start}`),
+      ]);
+      const webtoonResult = (originals && originals.result && originals.result.webtoonResult) || { titleList: [], totalCount: 0 };
+      const challengeResult = (canvas && canvas.result && canvas.result.challengeResult) || { titleList: [], totalCount: 0 };
+      const webtoonList = webtoonResult.titleList || [];
+      const challengeList = challengeResult.titleList || [];
+      const results = [
+        ...webtoonList.map((item) => parseSearchItem(item, false)),
+        ...challengeList.map((item) => parseSearchItem(item, true)),
+      ];
+      const hasNext =
+        start - 1 + webtoonList.length < (webtoonResult.totalCount || 0) ||
+        start - 1 + challengeList.length < (challengeResult.totalCount || 0);
       return { results, metadata: hasNext ? { page: page + 1 } : undefined };
     }
 
@@ -236,7 +249,7 @@ class Source {
 
   async getMangaDetails(mangaId) {
     const { genreSeo, titleSlug, titleNo } = parseMangaId(mangaId);
-    const url = `${MOBILE_BASE}/${lang()}/${genreSeo}/${titleSlug}/list?title_no=${titleNo}`;
+    const url = `${MOBILE_BASE}/${lang()}/${genreSeo}/${titleSlug || '-'}/list?title_no=${titleNo}`;
     const html = await this.requestMobileHTML(url);
     const $ = cheerio.load(html);
 
@@ -256,7 +269,8 @@ class Source {
     const status = mapStatus(statusDD ? statusDD.text() : '');
 
     const ratingDD = findLabeledDD($, ['Content Rating']);
-    const ageRating = ratingDD ? extractAgeRating(ratingDD.text()) : undefined;
+    let ageRating = ratingDD ? extractAgeRating(ratingDD.text()) : undefined;
+    if (ageRating === undefined && genreSeo === 'canvas') ageRating = CANVAS_AGE_RATING;
 
     const mangaInfo = {
       title,
@@ -274,19 +288,21 @@ class Source {
   }
 
   async getChapters(mangaId) {
-    const { titleNo } = parseMangaId(mangaId);
+    const { genreSeo, titleNo } = parseMangaId(mangaId);
+    const apiKind = genreSeo === 'canvas' ? 'canvas' : 'webtoon';
     const chapters = [];
     let cursor;
     for (let i = 0; i < 20; i++) {
-      let url = `${MOBILE_BASE}/api/v1/webtoon/${encodeURIComponent(titleNo)}/episodes?pageSize=500&readingLanguageCode=${lang()}`;
+      let url = `${MOBILE_BASE}/api/v1/${apiKind}/${encodeURIComponent(titleNo)}/episodes?pageSize=500&readingLanguageCode=${lang()}`;
       if (cursor !== undefined) url += `&cursor=${encodeURIComponent(cursor)}`;
       const json = await this.requestMobileJSON(url);
       const result = (json && json.result) || {};
       const episodeList = result.episodeList || [];
 
       episodeList.forEach((ep) => {
-        const hrefParts = (ep.viewerLink || '').split('/').filter(Boolean);
-        const episodeSlug = hrefParts[hrefParts.length - 2] || `ep-${ep.episodeNo}`;
+        if (!ep.viewerLink) return;
+        const hrefParts = ep.viewerLink.split('/').filter(Boolean);
+        const episodeSlug = hrefParts[hrefParts.length - 2] || '-';
         const chapterId = buildChapterId(ep.episodeNo, episodeSlug);
         const chapter = {
           id: chapterId,
@@ -308,7 +324,7 @@ class Source {
   async getChapterDetails(mangaId, chapterId) {
     const { genreSeo, titleSlug, titleNo } = parseMangaId(mangaId);
     const { episodeNo, episodeSlug } = parseChapterId(chapterId);
-    const url = `${SITE_BASE}/${lang()}/${genreSeo}/${titleSlug}/${episodeSlug}/viewer?title_no=${titleNo}&episode_no=${episodeNo}`;
+    const url = `${SITE_BASE}/${lang()}/${genreSeo}/${titleSlug || '-'}/${episodeSlug || '-'}/viewer?title_no=${titleNo}&episode_no=${episodeNo}`;
     const html = await this.requestDesktopHTML(url);
     const $ = cheerio.load(html);
 
@@ -339,7 +355,7 @@ class Source {
     const request = App.createRequest({
       url,
       method: 'GET',
-      headers: { 'User-Agent': userAgent },
+      headers: { 'User-Agent': userAgent, Referer: IMAGE_REFERER },
     });
     const response = await manager.schedule(request);
     if (response.status < 200 || response.status >= 300) {
