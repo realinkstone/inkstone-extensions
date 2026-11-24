@@ -10025,6 +10025,1115 @@
       "language": "en",
       "contentRating": "mature",
       "sha256": "8b7e0a41f7d1d6fcac75d3988d4c5ff8697eb84f7e4038dd460fb946bba700ea"
+    },
+    {
+      "id": "bymichiscan",
+      "name": "ByMichiScan",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://bymichiby.com",
+      "iconUrl": "https://inkstone.web.app/bymichiscan/icon.png",
+      "hosts": [
+        "bymichiby.com",
+        "*.bymichiby.com",
+        "*.wp.com"
+      ],
+      "description": "Manga\n\nCatalog・300+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "b17ea34f00e3fb8da57e8346abd019809a3f97c45ea96a6f9c72d153a482005d"
+    },
+    {
+      "id": "asialotus",
+      "name": "AsiaLotus",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://asialotuss.com",
+      "iconUrl": "https://inkstone.web.app/asialotus/icon.png",
+      "hosts": [
+        "asialotuss.com",
+        "*.asialotuss.com",
+        "img.gopar.dev",
+        "*.wp.com"
+      ],
+      "description": "Manhwa・Manga・Manhua・Novels\n\nCatalog・100+\n\nRestrictions:\n・Locked Chapters",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "9345b3b9686d1fd269718897b88c1a8d2b7eb8e070454f2b18b7ede8660c3ec5"
+    },
+    {
+      "id": "cerberusseries",
+      "name": "CerberusSeries",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://legionscans.com/wp",
+      "iconUrl": "https://inkstone.web.app/cerberusseries/icon.png",
+      "hosts": [
+        "legionscans.com",
+        "*.legionscans.com",
+        "*.wp.com",
+        "*.imageshack.com"
+      ],
+      "description": "Manhwa・Manga・Manhua・Comics\n\nCatalog・100+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "800d756e2be7f57ce7ce36cb7b34926ebf12add8f2aa081693f832139d6ff439"
+    },
+    {
+      "id": "miauscan",
+      "name": "Miau Scan",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://leer.lectovela.com",
+      "iconUrl": "https://inkstone.web.app/miauscan/icon.png",
+      "hosts": [
+        "leer.lectovela.com",
+        "*.lectovela.com",
+        "*.wp.com"
+      ],
+      "description": "Manga・Manhwa・Manhua・Novels\n\nCatalog・7,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "4e60ebf94fae0615658b23defd8365e33965867b97262d749b4622039182c50d"
+    },
+    {
+      "id": "apollcomics",
+      "name": "ApollComics",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://apollcomics.es",
+      "iconUrl": "https://inkstone.web.app/apollcomics/icon.png",
+      "hosts": [
+        "apollcomics.es",
+        "*.apollcomics.es",
+        "*.wp.com"
+      ],
+      "description": "Manhwa\n\nCatalog・500+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "bd1db29c13c2f163a45c67808638b903a8fdda6a75c2e68796c7b4d1c3517af3"
+    },
+    {
+      "id": "taurusfansub",
+      "name": "TaurusFansub",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://lectortaurus.com",
+      "iconUrl": "https://inkstone.web.app/taurusfansub/icon.png",
+      "hosts": [
+        "lectortaurus.com",
+        "*.lectortaurus.com",
+        "*.wp.com"
+      ],
+      "description": "Manhua・Webtoons・Manhwa・Manga\n\nCatalog・500+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "29f98b08decb848c7a926106421ad76c603e7a5de2e4d4e0aa5e911e1d5dde4c"
+    },
+    {
+      "id": "mundomanhwa",
+      "name": "MundoManhwa",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://mundomanhwa.com",
+      "iconUrl": "https://inkstone.web.app/mundomanhwa/icon.png",
+      "hosts": [
+        "mundomanhwa.com",
+        "*.mundomanhwa.com",
+        "*.wp.com"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・400+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "adult",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "1b82e9897733061cc1ab9aed4dec408514c3043d89b02354c9bffcf174546105"
+    },
+    {
+      "id": "manhwashot",
+      "name": "ManhwaShot",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://manhwashot.lat",
+      "iconUrl": "https://inkstone.web.app/manhwashot/icon.png",
+      "hosts": [
+        "manhwashot.lat",
+        "*.manhwashot.lat"
+      ],
+      "description": "Manhua・Manhwa・Manga\n\nCatalog・3,000+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "98b8876a1f8a10f51a38111d94ab5d04bbdfb4ec3221584ee01b87bdd1615bb6"
+    },
+    {
+      "id": "anzmanga",
+      "name": "AnzManga",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://www.anzmanga25.com",
+      "iconUrl": "https://inkstone.web.app/anzmanga/icon.png",
+      "hosts": [
+        "anzmanga25.com",
+        "*.anzmanga25.com",
+        "drive.google.com",
+        "*.googleusercontent.com"
+      ],
+      "description": "Manga\n\nCatalog・200+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "957a7961aba3c46dc1117237277b3a7ea5edc5bc3ea71032cb5feb06b44cf9d3"
+    },
+    {
+      "id": "traduccionesmoonlight",
+      "name": "Traducciones Moonlight",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://traduccionesmoonlight.com",
+      "iconUrl": "https://inkstone.web.app/traduccionesmoonlight/icon.png",
+      "hosts": [
+        "traduccionesmoonlight.com",
+        "*.traduccionesmoonlight.com",
+        "imagizer.imageshack.com",
+        "wsrv.nl"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・300+\n\nRestrictions:\n・Rate Limit\n・Locked Chapters",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "adult",
+      "tags": [
+        "explicit",
+        "sumizuri-exclusive"
+      ],
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "bfc3d2f44760535669bde649b3f9d21a4e02c301c3fec5649bb71ccec3c57c7b"
+    },
+    {
+      "id": "traduccionesmoonlightnovelas",
+      "name": "Traducciones Moonlight Novelas",
+      "version": "1.0.0",
+      "medium": "novel",
+      "website": "https://traduccionesmoonlight.com",
+      "iconUrl": "https://inkstone.web.app/traduccionesmoonlightnovelas/icon.png",
+      "hosts": [
+        "traduccionesmoonlight.com",
+        "*.traduccionesmoonlight.com"
+      ],
+      "description": "Web Novels\n\nCatalog・100+\n\nRestrictions:\n・Rate Limit\n・Locked Chapters",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "adult",
+      "tags": [
+        "explicit",
+        "sumizuri-exclusive"
+      ],
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "15577185b5b6429fe220a49769265ee24f3a11153bffec15c968a258eef4c827"
+    },
+    {
+      "id": "lectorasteria",
+      "name": "Lector Asteria",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://visor.chifa-tong.online",
+      "iconUrl": "https://inkstone.web.app/lectorasteria/icon.png",
+      "hosts": [
+        "visor.chifa-tong.online",
+        "media.lectorasteria.com",
+        "wsrv.nl"
+      ],
+      "description": "Manhwa・Manhua・Manga\n\nCatalog・60+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "adult",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "1d27594237499dcfd60876fe113815f24b0f956afa05a54972926639240c6a3f"
+    },
+    {
+      "id": "spnmanga",
+      "name": "SpnManga",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://www.spnmanga.com",
+      "iconUrl": "https://inkstone.web.app/spnmanga/icon.png",
+      "hosts": [
+        "spnmanga.com",
+        "*.spnmanga.com",
+        "*.t34798ndc.com"
+      ],
+      "description": "Manga・Manhwa・Manhua・Comics\n\nCatalog・20,000+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "80cbb47d78b2b77881ce027e1188960c8a4d087dd71e0bff2de26736a3adb0c4"
+    },
+    {
+      "id": "seinagi",
+      "name": "Seinagi",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://online.seinagi.org.es",
+      "iconUrl": "https://inkstone.web.app/seinagi/icon.png",
+      "hosts": [
+        "online.seinagi.org.es"
+      ],
+      "description": "Manga\n\nCatalog・100+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "da9bc8f5734b34660878c77432afddfa37c99fa80c8b8a79e57ab58762ec1c55"
+    },
+    {
+      "id": "pzykosis666hfansub",
+      "name": "Pzykosis666HFansub",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://lector.pzykosis666hfansub.com",
+      "iconUrl": "https://inkstone.web.app/pzykosis666hfansub/icon.png",
+      "hosts": [
+        "lector.pzykosis666hfansub.com"
+      ],
+      "description": "Manga・Doujinshi\n\nCatalog・70+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "adult",
+      "tags": [
+        "hentai",
+        "sumizuri-exclusive"
+      ],
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "17565fe849627a6ce338becf571fa6a8a8d61ce5b4241be36db28297cae84078"
+    },
+    {
+      "id": "tmomanhwa",
+      "name": "TmoManhwa",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://tmomanhwa.com",
+      "iconUrl": "https://inkstone.web.app/tmomanhwa/icon.png",
+      "hosts": [
+        "tmomanhwa.com",
+        "*.tmomanhwa.com"
+      ],
+      "description": "Manhwa・Manga・Manhua\n\nCatalog・3,000+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "adult",
+      "tags": [
+        "explicit"
+      ],
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "e7750547985ffd37ba7b8e420d7850735862ba78139f438621818dd2d383f4fc"
+    },
+    {
+      "id": "dynasty",
+      "name": "Dynasty (Manhuako)",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://manhuako.net",
+      "iconUrl": "https://inkstone.web.app/dynasty/icon.png",
+      "hosts": [
+        "manhuako.net",
+        "*.manhuako.net"
+      ],
+      "description": "Manhwa・Manga・Manhua\n\nCatalog・200+\n\nRestrictions:\n・Rate Limit\n・Locked Chapters",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "ee81b35e860028518629dffc2f52033b3bc0b8d73f632701590106278fb7770b"
+    },
+    {
+      "id": "platinumlilyscan",
+      "name": "Platinum Lily Scan",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://platinumlilyscan.com",
+      "iconUrl": "https://inkstone.web.app/platinumlilyscan/icon.png",
+      "hosts": [
+        "platinumlilyscan.com",
+        "*.platinumlilyscan.com"
+      ],
+      "description": "Manga・Light Novels・Doujinshi\n\nCatalog・70+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "3a4402901c33b836e70bd139ae3c175d944b57295d6ef6b90d4aa042b76448e5"
+    },
+    {
+      "id": "menudofansub",
+      "name": "Menudo-Fansub",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://www.menudo-fansub.com/slide/",
+      "iconUrl": "https://inkstone.web.app/menudofansub/icon.png",
+      "hosts": [
+        "www.menudo-fansub.com"
+      ],
+      "description": "Manga\n\nCatalog・100+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "chapters",
+        "details",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "safe",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "7ccb9be991516830dff9779bbd0fd8cb4245ce51d074667364899f1d27002be0"
+    },
+    {
+      "id": "ragnascans",
+      "name": "RagnaScans",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://lector.ragnascan.xyz",
+      "iconUrl": "https://inkstone.web.app/ragnascans/icon.png",
+      "hosts": [
+        "lector.ragnascan.xyz"
+      ],
+      "description": "Manhwa\n\nCatalog・80+\n\nRestrictions:\n・Rate Limit\n・Locked Chapters",
+      "capabilities": [
+        "browse",
+        "search",
+        "chapters",
+        "details",
+        "genres",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "44992eef40d8013a26e26ca8eef67a225aefe0bbb4666fdff71049c3c6a5d0f5"
+    },
+    {
+      "id": "bloomscans",
+      "name": "BloomScans",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://bloomscans.com",
+      "iconUrl": "https://inkstone.web.app/bloomscans/icon.png",
+      "hosts": [
+        "bloomscans.com"
+      ],
+      "description": "Manhwa・Manga\n\nCatalog・50+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "chapters",
+        "details",
+        "genres",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "c10363334130da50e6746ee1f47390932fa5a1349a09b021b47f8a1f0e56ae85"
+    },
+    {
+      "id": "ritto",
+      "name": "Ritto",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://ritto.cc",
+      "iconUrl": "https://inkstone.web.app/ritto/icon.png",
+      "hosts": [
+        "ritto.cc"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・200+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "chapters",
+        "details",
+        "genres",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "af934c2abba27aeb5fa9de62d8df73cafd0e78146ddbd194066cb95bd817f63f"
+    },
+    {
+      "id": "ranoa",
+      "name": "Ranoa",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://www.ranoa.lat",
+      "iconUrl": "https://inkstone.web.app/ranoa/icon.png",
+      "hosts": [
+        "www.ranoa.lat"
+      ],
+      "description": "Manga\n\nCatalog・10+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "chapters",
+        "details",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "safe",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "7d13e8bf92c6fce6e4d92f9c0724692ee015c005ae7ecfc60d62bf9d30702957"
+    },
+    {
+      "id": "gcomics",
+      "name": "Gcomics",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://gcomics.online",
+      "iconUrl": "https://inkstone.web.app/gcomics/icon.png",
+      "hosts": [
+        "gcomics.online"
+      ],
+      "description": "Comics・Webtoons\n\nCatalog・80+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "chapters",
+        "details",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "safe",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "39824e6fa611077cefc76d10e067eae3dea6eb4308fd546a77adce24b955c315"
+    },
+    {
+      "id": "mangaoni",
+      "name": "MangaOni",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://manga-oni.com",
+      "iconUrl": "https://inkstone.web.app/mangaoni/icon.png",
+      "hosts": [
+        "manga-oni.com"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nRestrictions:\n・Cloudflare Checks\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "chapters",
+        "details",
+        "genres",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "370080eef062ee8768d3208dd007410a6beaa0c8c8d318ee578885c96f52fb70"
+    },
+    {
+      "id": "mangamukai",
+      "name": "MangaMukai",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://mangamukai.com",
+      "iconUrl": "https://inkstone.web.app/mangamukai/icon.png",
+      "hosts": [
+        "mangamukai.com"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・100+\n\nRestrictions:\n・Rate Limit\n・Locked Chapters",
+      "capabilities": [
+        "browse",
+        "search",
+        "chapters",
+        "details",
+        "genres",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "1883b7a5707e21155d1e2aae4631fd12d0b3822737d4fab28f746744167cbcd1"
+    },
+    {
+      "id": "skymangas",
+      "name": "SkyMangas",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://skymangas.com",
+      "iconUrl": "https://inkstone.web.app/skymangas/icon.png",
+      "hosts": [
+        "skymangas.com",
+        "api.skymangas.com"
+      ],
+      "description": "Manhua・Manhwa・Manga\n\nCatalog・60+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "chapters",
+        "details",
+        "genres",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "f82a203744a5148814868bd7e43f8409856a72050d401a4143e53a7ced37d88d"
+    },
+    {
+      "id": "seraphicdeviltry",
+      "name": "Seraphic Deviltry",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://spanish.seraphic-deviltry.com",
+      "iconUrl": "https://inkstone.web.app/seraphicdeviltry/icon.png",
+      "hosts": [
+        "spanish.seraphic-deviltry.com"
+      ],
+      "description": "Manga\n\nCatalog・70+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "chapters",
+        "details",
+        "genres",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "adult",
+      "tags": [
+        "hentai",
+        "sumizuri-exclusive"
+      ],
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "2fc67fa2069c76f401b72d32c0458e50d011ef2367cb4210e8f27e0acb7b3beb"
+    },
+    {
+      "id": "hentaimode",
+      "name": "HentaiMode",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://hentaimode.com",
+      "iconUrl": "https://inkstone.web.app/hentaimode/icon.png",
+      "hosts": [
+        "hentaimode.com"
+      ],
+      "description": "Doujinshi・Manga\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "chapters",
+        "details",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "adult",
+      "tags": [
+        "hentai",
+        "sumizuri-exclusive"
+      ],
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "ca01733861d3f9fee64a081b400dd267cc5dcfe8f2474706b0e3ad3b6b680407"
+    },
+    {
+      "id": "swordmangas",
+      "name": "SwordMangas",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://swordmangas.com/esp",
+      "iconUrl": "https://inkstone.web.app/swordmangas/icon.png",
+      "hosts": [
+        "swordmangas.com"
+      ],
+      "description": "Manhwa\n\nCatalog・30+\n\nRestrictions:\n・Rate Limit\n・Locked Chapters",
+      "capabilities": [
+        "browse",
+        "search",
+        "chapters",
+        "details",
+        "genres",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "4b0eb7bdad79e60c3c8e2b99553aabff1b5f628cfba90691299719aa2f85b005"
+    },
+    {
+      "id": "doujinhentai",
+      "name": "DoujinHentai",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://doujinhentai.net",
+      "iconUrl": "https://inkstone.web.app/doujinhentai/icon.png",
+      "hosts": [
+        "doujinhentai.net",
+        "zx89.site",
+        "*.zx89.site"
+      ],
+      "description": "Doujinshi・Manga\n\nCatalog・3,000+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "chapters",
+        "details",
+        "genres",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "adult",
+      "tags": [
+        "hentai",
+        "sumizuri-exclusive"
+      ],
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "306aa4624e814a998200e9b6725f43bb65d8dd72bc6798b1759444a621bc5734"
+    },
+    {
+      "id": "namicomi",
+      "name": "NamiComi",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://namicomi.com",
+      "iconUrl": "https://inkstone.web.app/namicomi/icon.png",
+      "hosts": [
+        "namicomi.com",
+        "api.namicomi.com",
+        "uploads.namicomi.com"
+      ],
+      "description": "Comics・Manga・Manhwa\n\nCatalog・200+\n\nRestrictions:\n・Rate Limit\n・Locked Chapters",
+      "capabilities": [
+        "browse",
+        "search",
+        "chapters",
+        "details",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "6d869ddcd0e21311774ba13bb9a8d199fbd13aa7ea79e7491e0d83c03381b06a"
+    },
+    {
+      "id": "ravenmanga",
+      "name": "RavenManga",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://raventard.xyz",
+      "iconUrl": "https://inkstone.web.app/ravenmanga/icon.png",
+      "hosts": [
+        "raventard.xyz",
+        "brakeout.xyz",
+        "wsrv.nl"
+      ],
+      "description": "Manhwa・Manga・Manhua\n\nCatalog・200+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "chapters",
+        "details",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "593b33ff1d84ede912797d00c767316ce1f4f4950ac89ccf5be42e3f3dfb4d41"
+    },
+    {
+      "id": "heavenmanga",
+      "name": "HeavenManga",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://heavenmanga.com",
+      "iconUrl": "https://inkstone.web.app/heavenmanga/icon.png",
+      "hosts": [
+        "heavenmanga.com",
+        "cdn.rinconandropple.com",
+        "files.rinconandropple.com",
+        "i.ibb.co",
+        "*.googleusercontent.com",
+        "images2.imgbox.com",
+        "image.issuu.com"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・10,000+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "chapters",
+        "details",
+        "genres",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "c9bfff9c73f0f3e5e2d56cce9fd16f97ab3f9a858923ed831b631265852f718e"
+    },
+    {
+      "id": "leermangaesp",
+      "name": "LeerMangaEsp",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://mangalect.org",
+      "iconUrl": "https://inkstone.web.app/leermangaesp/icon.png",
+      "hosts": [
+        "mangalect.org",
+        "images.mangalect.org"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・7,000+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "chapters",
+        "details",
+        "genres",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "ff58010b334c65adf92fb99d63a454bb1bcd848a22f8c2a807e51bc3a5e5cb3a"
+    },
+    {
+      "id": "luscious",
+      "name": "Luscious",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://www.luscious.net",
+      "iconUrl": "https://inkstone.web.app/luscious/icon.png",
+      "hosts": [
+        "www.luscious.net"
+      ],
+      "description": "Doujinshi・Manga\n\nRestrictions:\n・Cloudflare Checks\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "chapters",
+        "details",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "adult",
+      "tags": [
+        "hentai",
+        "sumizuri-exclusive"
+      ],
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "06675bef984e549e1033fda8ba827b16aecb593d9beb9a4e9fbe6d8eaf7b4770"
+    },
+    {
+      "id": "submanhwa",
+      "name": "SubManhwa",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://submanhwa.com",
+      "iconUrl": "https://inkstone.web.app/submanhwa/icon.png",
+      "hosts": [
+        "submanhwa.com"
+      ],
+      "description": "Manhwa・Manga\n\nCatalog・10,000+\n\nRestrictions:\n・Cloudflare Checks\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "chapters",
+        "details",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "adult",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "sha256": "d99e0a6208752451c686c81a3f808e8099320d7d5e0645a7909c8a3206124cdd"
+    },
+    {
+      "id": "komiwa",
+      "name": "Komiwa",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://www.komiwa.net",
+      "iconUrl": "https://inkstone.web.app/komiwa/icon.png",
+      "description": "Manga・Manhwa・Manhua・Novels\n\nCatalog・20,000+\n\nRestrictions:\n・Web View",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "sha256": "8e016d5395f077577c03f231566ed45b18644425c1d9c3e30d2a6fb748bd5e0e"
+    },
+    {
+      "id": "niadd",
+      "name": "NiAdd",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://es.niadd.com",
+      "iconUrl": "https://inkstone.web.app/niadd/icon.png",
+      "hosts": [
+        "es.niadd.com",
+        "img11.niadd.com",
+        "movietop.cc",
+        "*.movietop.cc"
+      ],
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・4,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "mature",
+      "sha256": "e971890e4c7ca360f0e1c20bfcdc89ac74de3c71a4abea458fadf20023f154be"
+    },
+    {
+      "id": "readanybook",
+      "name": "ReadAnyBook",
+      "version": "1.0.0",
+      "medium": "novel",
+      "website": "https://www.readanybook.com",
+      "iconUrl": "https://inkstone.web.app/readanybook/icon.png",
+      "hosts": [
+        "www.readanybook.com",
+        "readanybook.com",
+        "files.readanybook.com"
+      ],
+      "description": "Books\n\nCatalog・400,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "cf073fd23d8e6e9e06fb6c0f05ef3be9890a839734ad89a0a8cfc76fd9b059f8"
+    },
+    {
+      "id": "bookfrom",
+      "name": "BookFrom",
+      "version": "1.0.0",
+      "medium": "novel",
+      "website": "https://www.bookfrom.net",
+      "iconUrl": "https://inkstone.web.app/bookfrom/icon.png",
+      "hosts": [
+        "www.bookfrom.net",
+        "bookfrom.net",
+        "picture.bookfrom.net"
+      ],
+      "description": "Books\n\nCatalog・700,000+",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "fe595a7495b7566f0dd58cf931c01162b73f5e520df33c5cdc535926c67a1df0"
+    },
+    {
+      "id": "memoryoftheworld",
+      "name": "Memory of the World",
+      "version": "1.0.0",
+      "medium": "novel",
+      "website": "https://library.memoryoftheworld.org",
+      "iconUrl": "https://inkstone.web.app/memoryoftheworld/icon.png",
+      "hosts": [
+        "library.memoryoftheworld.org"
+      ],
+      "description": "Books\n\nCatalog・100,000+\n\nRestrictions:\n・Book Files",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "en",
+      "contentRating": "mature",
+      "sha256": "fdbee1544c45c1fc26efec62bf702431119af161ec3c01355d97c5f129cb5235"
     }
   ]
 }
