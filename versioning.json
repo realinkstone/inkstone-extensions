@@ -6701,11 +6701,12 @@
     {
       "id": "animeonlineninja",
       "name": "AnimeOnline.Ninja",
-      "version": "1.0.8",
+      "version": "1.0.9",
       "medium": "anime",
-      "website": "https://ver2.animeonline.ninja",
+      "website": "https://ww4.animeonline.ninja",
       "iconUrl": "https://inkstone.web.app/animeonlineninja/icon.png",
       "hosts": [
+        "ww4.animeonline.ninja",
         "ver2.animeonline.ninja",
         "ww3.animeonline.ninja",
         "*.animeonline.ninja",
@@ -6792,7 +6793,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "2e43fdd9c943e88441303648777d42303c6fe258b80b8bf5b80e01c0a07b3fdf"
+      "sha256": "de6875c679bcae951dd37f0d37aa24e9156b8c9a5ed250f288c689af744a4744"
     },
     {
       "id": "asialiveaction",
