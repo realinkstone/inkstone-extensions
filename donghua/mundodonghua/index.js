@@ -511,7 +511,9 @@ class Source {
         const first = Array.isArray(list) ? list[0] : Object.values(list || {})[0];
         if (first && first.url) {
           const name = block[1].replace(/play$/, '');
-          extras.push({ url: block[4] + first.url, type: 'embed', quality: name.charAt(0).toUpperCase() + name.slice(1), server: name.charAt(0).toUpperCase() + name.slice(1) });
+          const label = name.charAt(0).toUpperCase() + name.slice(1);
+          const stream = block[4].startsWith(`${SITE}/player/`) ? await this.playerStream(block[4] + first.url, label) : null;
+          extras.push(stream || { url: block[4] + first.url, type: 'embed', quality: label, server: label });
         }
       } catch (e) {
         if (e && e.kind === 'challenge') throw e;
@@ -535,6 +537,20 @@ class Source {
     const all = videos.concat(extras);
     if (!all.length) throw new Error(`MundoDonghua: none of the ${urls.length} servers gave a playable video`);
     return all;
+  }
+
+  async playerStream(url, label) {
+    try {
+      const html = await this.get(url, { Referer: `${SITE}/` });
+      const manifest = /manifest:\s*"([^"]+)"/.exec(html);
+      if (!manifest) return null;
+      const path = manifest[1].replace(/\\\//g, '/');
+      const entry = { url: path.startsWith('/') ? `${SITE}${path}` : path, type: 'hls', quality: label, server: label, headers: { ...BROWSER, Referer: `${SITE}/` } };
+      return (await this.reachable(entry)) ? entry : null;
+    } catch (e) {
+      if (e && e.kind === 'challenge') throw e;
+      return null;
+    }
   }
 
   async reachable(entry) {

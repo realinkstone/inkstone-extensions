@@ -6701,9 +6701,9 @@
     {
       "id": "animeonlineninja",
       "name": "AnimeOnline.Ninja",
-      "version": "1.0.8",
+      "version": "1.0.9",
       "medium": "anime",
-      "website": "https://ver2.animeonline.ninja",
+      "website": "https://ww4.animeonline.ninja",
       "iconUrl": "https://inkstone.web.app/animeonlineninja/icon.png",
       "hosts": [
         "ver2.animeonline.ninja",
@@ -6777,7 +6777,9 @@
         "d000d.com",
         "*.d000d.com",
         "playmogo.com",
-        "*.playmogo.com"
+        "*.playmogo.com",
+        "ww4.animeonline.ninja",
+        "*.ww4.animeonline.ninja"
       ],
       "description": "Anime・Movies・Live Action\n\nRestrictions:\n・Cloudflare Checks\n・Rate Limit",
       "capabilities": [
@@ -6792,7 +6794,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "2e43fdd9c943e88441303648777d42303c6fe258b80b8bf5b80e01c0a07b3fdf"
+      "sha256": "de6875c679bcae951dd37f0d37aa24e9156b8c9a5ed250f288c689af744a4744"
     },
     {
       "id": "asialiveaction",
@@ -6867,7 +6869,7 @@
     {
       "id": "cineplus123",
       "name": "CinePlus123",
-      "version": "1.0.8",
+      "version": "1.0.10",
       "medium": "anime",
       "website": "https://cineplus123.org",
       "iconUrl": "https://inkstone.web.app/cineplus123/icon.png",
@@ -6884,7 +6886,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "40d412b3f650deec54c8bf5afc95030f844368124558fb9b7853b9a3f96c3c59"
+      "sha256": "3297842719536b51ecb0c637e769ba04cb12801e073729b6c315fc7b6d73b4d3"
     },
     {
       "id": "cuevana",
@@ -7292,7 +7294,7 @@
     {
       "id": "mundodonghua",
       "name": "MundoDonghua",
-      "version": "1.0.11",
+      "version": "1.0.12",
       "medium": "anime",
       "website": "https://www.mundodonghua.com",
       "iconUrl": "https://inkstone.web.app/mundodonghua/icon.png",
@@ -7309,7 +7311,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "2003b3e4c58f54b07b5c1db3ceefd842ca4715f84c8a5392c6bdf741c8f16747"
+      "sha256": "07d87d572214b5fde56dd729afe08f372b32f05940617d9e04c5b92ec2297d05"
     },
     {
       "id": "novelaenespanol",

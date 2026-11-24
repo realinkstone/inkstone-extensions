@@ -39,6 +39,12 @@ function voeSource(payload) {
   return JSON.parse(App.base64Decode(shifted.split('').reverse().join(''))).source;
 }
 
+function fullSize(url) {
+  return url
+    .replace(/\/([A-Za-z0-9]{25,})-\d+x\d+(\.(?:jpe?g|png|webp))(?:\.webp)?$/i, '/$1$2')
+    .replace(/(image\.tmdb\.org\/t\/p\/)w\d+\//, '$1w342/');
+}
+
 function hostLabel(url) {
   const host = ((/^https?:\/\/([^/]+)/.exec(String(url)) || [])[1] || '').replace(/^www\./, '');
   const parts = host.split('.');
@@ -103,7 +109,7 @@ class Source {
 
       const title = $(el).find('div.title a, h3, h2, .title').first().text().trim() || a.text().trim();
       const img = $(el).find('img').attr('data-src') || $(el).find('img').attr('src') || '';
-      const image = img && img.startsWith('//') ? `https:${img}` : img;
+      const image = fullSize(img && img.startsWith('//') ? `https:${img}` : img);
       if (title && image && !image.startsWith('data:')) {
         results.push({ mangaId, title, image });
       }
@@ -117,7 +123,11 @@ class Source {
     const html = await this.get(`${SITE}/${mangaId}/`);
     const $ = cheerio.load(html);
     const title = $('h1').first().text().trim();
-    const desc = $('div.wp-content p, #info div.wp-content, div.desc p').first().text().trim() || undefined;
+    const desc = $('div.wp-content p, div.desc p')
+      .filter((i, el) => !$(el).find('strong').length)
+      .first()
+      .text()
+      .trim() || undefined;
     const genres = $('div.sgeneros a, span.genres a')
       .map((i, el) => $(el).text().trim())
       .get()
@@ -146,7 +156,7 @@ class Source {
       const match = /\/capitulo\/([^/?#]+)/.exec(href);
       if (!match) return;
       const chapterId = `capitulo/${match[1]}`;
-      const title = $(el).find('.episodiotitle a').text().trim();
+      const title = $(el).find('.episodiotitle a').text().trim().replace(/^Episodio\s*\d+\s*[-–:]?\s*/i, '');
       const numMatch = /(\d+)\s*-\s*(\d+)/.exec($(el).find('.numerando').text().trim());
       if (!numMatch) {
         chapters.push({ id: chapterId, name: title || `Episodio ${i + 1}`, number: i + 1 });
