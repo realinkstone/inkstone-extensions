@@ -7292,7 +7292,7 @@
     {
       "id": "mundodonghua",
       "name": "MundoDonghua",
-      "version": "1.0.11",
+      "version": "1.0.12",
       "medium": "anime",
       "website": "https://www.mundodonghua.com",
       "iconUrl": "https://inkstone.web.app/mundodonghua/icon.png",
@@ -7309,7 +7309,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "2003b3e4c58f54b07b5c1db3ceefd842ca4715f84c8a5392c6bdf741c8f16747"
+      "sha256": "f6292754cb814db2ed2d43ffed48727cef75b2c5cd162caa13782d96f80d042d"
     },
     {
       "id": "novelaenespanol",
