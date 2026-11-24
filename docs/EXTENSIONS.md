@@ -412,8 +412,8 @@ that does not know a tag, or the field, ignores it, and a source without `tags` 
 | --- | --- | --- |
 | `hentai` | The source lists hentai titles, alone or next to regular ones | Apps may filter, group or hide it |
 | `explicit` | The source lists other sexually explicit content (pornographic live action, erotica) | Same |
-| `sumizuri-exclusive` | The source is only for Sumizuri | The Boundless apps (Reader and Player) do not list it |
-| `boundless-exclusive` | The source is only for the Boundless apps | Sumizuri does not list it |
+| `sumizuri-exclusive` | The source is only for Sumizuri | The Boundless apps (Reader and Player) do not list it, and the Extensions page on the website marks it with a Sumizuri exclusive badge |
+| `boundless-exclusive` | The source is only for the Boundless apps | Sumizuri does not list it, and the Extensions page on the website marks it with a Boundless exclusive badge |
 
 - Set `hentai` or `explicit` only for what you saw on the site, and give the source `contentRating: "adult"`
   (`npm run hash` refuses `hentai` or `explicit` on any other rating). They label the source; a source
