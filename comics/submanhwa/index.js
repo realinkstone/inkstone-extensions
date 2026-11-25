@@ -7,6 +7,36 @@ const FEEDS = [
   { id: 'latest', name: 'Latest Updates' },
 ];
 
+const GENRES = [
+  { id: 'cat:22', label: 'Seinen' },
+  { id: 'romance', label: 'Romance' },
+  { id: 'drama', label: 'Drama' },
+  { id: 'comedia', label: 'Comedia' },
+  { id: 'harem', label: 'Harem' },
+  { id: 'ecchi', label: 'Ecchi' },
+  { id: 'fetiches', label: 'Fetiches' },
+  { id: 'milf', label: 'Milf' },
+  { id: 'maduras', label: 'Maduras' },
+  { id: 'mujer-madura', label: 'Mujer madura' },
+  { id: 'mujer-casada', label: 'Mujer casada' },
+  { id: 'relacion-secreta', label: 'Relación secreta' },
+  { id: 'dominacion', label: 'Dominación' },
+  { id: 'vida-escolar', label: 'Vida Escolar' },
+  { id: 'universidad', label: 'Universidad' },
+  { id: 'convivencia', label: 'Convivencia' },
+  { id: 'cohabitacion', label: 'Cohabitación' },
+  { id: 'venganza', label: 'Venganza' },
+  { id: 'corrupcion', label: 'Corrupción' },
+  { id: 'masoquismo', label: 'Masoquismo' },
+  { id: 'pareja-sexual', label: 'Pareja Sexual' },
+  { id: 'ninfomanas', label: 'Ninfómanas' },
+  { id: 'infidelidad', label: 'Infidelidad' },
+  { id: 'netori', label: 'Netori' },
+  { id: 'netorare', label: 'Netorare' },
+  { id: 'netorase', label: 'Netorase' },
+  { id: 'ntr', label: 'NTR' },
+];
+
 const MONTHS_EN = {
   jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
   jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11,
@@ -50,10 +80,15 @@ class Source {
     return FEEDS.map((f) => ({ id: f.id, name: f.name }));
   }
 
+  getSearchTags() {
+    return GENRES.map((g) => ({ id: g.id, label: g.label }));
+  }
+
   async getSearchResults(request, metadata) {
     if (request && request.medium && request.medium !== 'comics') return { results: [] };
     const query = cleanText(request && request.title);
     const feed = FEEDS.find((f) => f.id === (request && request.feed)) || FEEDS[0];
+    const tags = ((request && request.includedTags) || []).map((t) => cleanText(t && (t.id || t.label)).toLowerCase()).filter(Boolean);
     const page = (metadata && metadata.page) || 1;
 
     if (query) {
@@ -80,7 +115,7 @@ class Source {
       return { results, metadata: hasNext ? { page: page + 1 } : undefined };
     }
 
-    if (feed.id === 'latest') {
+    if (feed.id === 'latest' && tags.length === 0) {
       if (page > 1) return { results: [], metadata: undefined };
       const $ = cheerio.load(await this.requestHTML(SITE_BASE));
       const results = [];
@@ -105,7 +140,13 @@ class Source {
       return { results, metadata: undefined };
     }
 
-    const $ = cheerio.load(await this.requestHTML(`${SITE_BASE}/filterList?page=${page}&sortBy=views&asc=false`));
+    let filterQs = `page=${page}&sortBy=views&asc=false`;
+    if (tags.length > 0) {
+      const first = tags[0];
+      if (first.indexOf('cat:') === 0) filterQs += `&cat=${encodeURIComponent(first.slice(4))}`;
+      else filterQs += `&tag=${encodeURIComponent(first)}`;
+    }
+    const $ = cheerio.load(await this.requestHTML(`${SITE_BASE}/filterList?${filterQs}`));
     const results = [];
     const seen = new Set();
     $('.series-card').each((_, el) => {

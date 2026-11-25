@@ -10858,7 +10858,7 @@
     {
       "id": "namicomi",
       "name": "NamiComi",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://namicomi.com",
       "iconUrl": "https://inkstone.web.app/namicomi/icon.png",
@@ -10871,6 +10871,7 @@
       "capabilities": [
         "browse",
         "search",
+        "genres",
         "chapters",
         "details",
         "reader"
@@ -10879,7 +10880,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "6d869ddcd0e21311774ba13bb9a8d199fbd13aa7ea79e7491e0d83c03381b06a"
+      "sha256": "e66d6ff1e61c84bc91ffef50b5e85d0219b0fa7080a8b68ddd6f80b3baf87c56"
     },
     {
       "id": "ravenmanga",
@@ -10995,7 +10996,7 @@
     {
       "id": "submanhwa",
       "name": "SubManhwa",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://submanhwa.com",
       "iconUrl": "https://inkstone.web.app/submanhwa/icon.png",
@@ -11006,6 +11007,7 @@
       "capabilities": [
         "browse",
         "search",
+        "genres",
         "chapters",
         "details",
         "reader"
@@ -11014,7 +11016,7 @@
       "contentRating": "adult",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "d99e0a6208752451c686c81a3f808e8099320d7d5e0645a7909c8a3206124cdd"
+      "sha256": "c3e4b1821a25103299d989130e3e742c49195ad8ce4a766edf558c42c7a9199e"
     },
     {
       "id": "komiwa",
@@ -11134,6 +11136,32 @@
       "language": "en",
       "contentRating": "mature",
       "sha256": "fdbee1544c45c1fc26efec62bf702431119af161ec3c01355d97c5f129cb5235"
+    },
+    {
+      "id": "megabanana",
+      "name": "MegaBanana",
+      "version": "1.0.0",
+      "medium": "comics",
+      "website": "https://megabanana.mx",
+      "iconUrl": "https://inkstone.web.app/megabanana/icon.png",
+      "hosts": [
+        "megabanana.mx"
+      ],
+      "description": "Comics・Superheroes\n\nCatalog・1,300+\n\nRestrictions:\n・Rate Limit",
+      "capabilities": [
+        "browse",
+        "search",
+        "genres",
+        "details",
+        "chapters",
+        "reader"
+      ],
+      "language": "es",
+      "contentRating": "safe",
+      "author": "matsukiender-star",
+      "authorUrl": "https://github.com/matsukiender-star",
+      "file": "comics/megabanana/index.js",
+      "sha256": "26df74924815ee3fa736b737f69d7f43badf5ae14602996c345584b99c66309e"
     }
   ]
 }
