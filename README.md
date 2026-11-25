@@ -55,7 +55,7 @@ Prefer to review a written plan before any code is written? This repo works with
 
 ## Extensions
 
-421 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
+422 extensions right now. Ratings are Safe, Mature or Adult, and some extensions also rate each title on its own.
 
 Each extension lives in the folder for what it offers: `comics`, `novels`, `mixed` for those that do both, or `anime`. The site still serves every one at `inkstone.web.app/<id>/index.js`, so the folders change nothing in the apps.
 
@@ -231,6 +231,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [ManhwaTop](comics/manhwatop/index.js) | manhwatop.com | English | Adult | 1.0.1 |
 | [ManhwaWeb](comics/manhwaweb/index.js) | manhwaweb.com | Spanish | Adult | 1.0.2 |
 | [Marmota](comics/marmota/index.js) | marmota.me | Spanish | Safe | 1.0.0 |
+| [MegaBanana](comics/megabanana/index.js) | megabanana.mx | Spanish | Mature | 1.0.0 |
 | [Menudo-Fansub](comics/menudofansub/index.js) | menudo-fansub.com | Spanish | Safe | 1.0.0 |
 | [MGeko](comics/mgeko/index.js) | mgeko.cc | English | Safe | 1.0.0 |
 | [Mgread.io](comics/mangayy/index.js) | mgread.io | English | Mature | 2.0.0 |
@@ -239,7 +240,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [MKissa Manga](comics/mkissamanga/index.js) | mkissa.to | English | Mature | 1.0.0 |
 | [Monopoly Scan](comics/monopolyscan/index.js) | monopolymanhua.com | Spanish | Safe | 1.0.2 |
 | [MundoManhwa](comics/mundomanhwa/index.js) | mundomanhwa.com | Spanish | Adult | 1.0.0 |
-| [NamiComi](comics/namicomi/index.js) | namicomi.com | Spanish | Mature | 1.0.0 |
+| [NamiComi](comics/namicomi/index.js) | namicomi.com | Spanish | Mature | 1.0.1 |
 | [Natomanga](comics/natomanga/index.js) | natumanga.com | English | Adult | 1.3.0 |
 | [Naver Webtoon](comics/navercomic/index.js) | comic.naver.com | Korean | Mature | 1.2.0 |
 | [Nebulosa Scan](comics/nebulosascan/index.js) | nebulosascan.com | Brazilian Portuguese | Mature | 1.0.2 |
@@ -288,7 +289,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [Slow Manga](comics/slowmanga/index.js) | slow-manga.net | Thai | Mature | 1.0.2 |
 | [Speed Manga](comics/speedmanga/index.js) | speed-manga.com | Thai | Mature | 1.0.1 |
 | [SpnManga](comics/spnmanga/index.js) | spnmanga.com | Spanish | Mature | 1.0.0 |
-| [SubManhwa](comics/submanhwa/index.js) | submanhwa.com | Spanish | Adult | 1.0.0 |
+| [SubManhwa](comics/submanhwa/index.js) | submanhwa.com | Spanish | Adult | 1.0.1 |
 | [SwordMangas](comics/swordmangas/index.js) | swordmangas.com | Spanish | Mature | 1.0.0 |
 | [Tanuki-Manga](comics/tanukimanga/index.js) | tanuki-manga.net | Thai | Mature | 1.0.1 |
 | [Tapas](comics/tapas/index.js) | tapas.io | English | Mature | 1.2.0 |
@@ -539,7 +540,7 @@ These extensions are known to be broken right now:
 
 Thanks to the people who built extensions for Inkstone.
 
-- [matsukiender-star](https://github.com/matsukiender-star): AnimeAV1, AnimeJL, AnimeLatinoHD, AnimeMovil, AnimeOnline.Ninja, AnzManga, ApollComics, AsiaLiveAction, AsiaLotus, Beatz Anime, BloomScans, ByMichiScan, CerberusSeries, CineCalidad, CinePlus123, Cuevana, DoramasFlix, DoramasYT, DoujinHentai, Dragon Translation, Dynasty (Manhuako), Elejandría, Eternal Mangas, Gcomics, Gnula, HeavenManga, HentaiLA, HentaiMode, Ikigai Mangas, JKAnime, Katanime, KuManga, Latanime, Lector Asteria, Lectulandia, Leer Manhwas, LeerCapitulo, LeerMangaEsp, Luscious, MangaMukai, MangaOni, Mangas.in, MangaTV, MangoLibreria, Manhwa Latino, ManhwaShot, ManhwaWeb, Marmota, Menudo-Fansub, Miau Scan, MonosChinos, MundoDonghua, MundoManhwa, NamiComi, Novela en Español, NovelasLigeras, PelisForte, Platinum Lily Scan, PoseidonHD, Pzykosis666HFansub, RagnaScans, Ranoa, RavenManga, Ritto, Seinagi, Seraphic Deviltry, Shadow Manga, SkyMangas, SpnManga, SubManhwa, SwordMangas, TaurusFansub, TioAnime, TmoManhwa, Traducciones Isekai, Traducciones Moonlight, Traducciones Moonlight Novelas, VerAnime, VerAnimes, Wikisource (Español), ZonaTMO.org
+- [matsukiender-star](https://github.com/matsukiender-star): AnimeAV1, AnimeJL, AnimeLatinoHD, AnimeMovil, AnimeOnline.Ninja, AnzManga, ApollComics, AsiaLiveAction, AsiaLotus, Beatz Anime, BloomScans, ByMichiScan, CerberusSeries, CineCalidad, CinePlus123, Cuevana, DoramasFlix, DoramasYT, DoujinHentai, Dragon Translation, Dynasty (Manhuako), Elejandría, Eternal Mangas, Gcomics, Gnula, HeavenManga, HentaiLA, HentaiMode, Ikigai Mangas, JKAnime, Katanime, KuManga, Latanime, Lector Asteria, Lectulandia, Leer Manhwas, LeerCapitulo, LeerMangaEsp, Luscious, MangaMukai, MangaOni, Mangas.in, MangaTV, MangoLibreria, Manhwa Latino, ManhwaShot, ManhwaWeb, Marmota, MegaBanana, Menudo-Fansub, Miau Scan, MonosChinos, MundoDonghua, MundoManhwa, NamiComi, Novela en Español, NovelasLigeras, PelisForte, Platinum Lily Scan, PoseidonHD, Pzykosis666HFansub, RagnaScans, Ranoa, RavenManga, Ritto, Seinagi, Seraphic Deviltry, Shadow Manga, SkyMangas, SpnManga, SubManhwa, SwordMangas, TaurusFansub, TioAnime, TmoManhwa, Traducciones Isekai, Traducciones Moonlight, Traducciones Moonlight Novelas, VerAnime, VerAnimes, Wikisource (Español), ZonaTMO.org
 - [omfgitsjesus](https://discord.com/users/177424485526274048): HiperDEX
 
 ## Contributing

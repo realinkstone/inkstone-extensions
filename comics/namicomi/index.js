@@ -9,6 +9,74 @@ const FEEDS = [
   { id: 'latest', name: 'Latest Updates', order: 'order[publishedAt]=desc' },
 ];
 
+const GENRES = [
+  { id: '4-koma', label: '4-Koma' },
+  { id: 'action', label: 'Action' },
+  { id: 'adaptation', label: 'Adaptation' },
+  { id: 'adventure', label: 'Adventure' },
+  { id: 'aliens', label: 'Aliens' },
+  { id: 'angst', label: 'Angst' },
+  { id: 'animals', label: 'Animals' },
+  { id: 'anthology', label: 'Anthology' },
+  { id: 'comedy', label: 'Comedy' },
+  { id: 'cooking', label: 'Cooking' },
+  { id: 'crime', label: 'Crime' },
+  { id: 'crossdressing', label: 'Crossdressing' },
+  { id: 'delinquents', label: 'Delinquents' },
+  { id: 'demons', label: 'Demons' },
+  { id: 'drama', label: 'Drama' },
+  { id: 'drugs', label: 'Drugs' },
+  { id: 'fantasy', label: 'Fantasy' },
+  { id: 'full-color', label: 'Full Color' },
+  { id: 'gambling', label: 'Gambling' },
+  { id: 'genderswap', label: 'Genderswap' },
+  { id: 'ghosts', label: 'Ghosts' },
+  { id: 'girls-love', label: "Girls' Love" },
+  { id: 'gore', label: 'Gore' },
+  { id: 'harem', label: 'Harem' },
+  { id: 'historical', label: 'Historical' },
+  { id: 'horror', label: 'Horror' },
+  { id: 'isekai', label: 'Isekai' },
+  { id: 'lgbtq', label: 'LGBTQ' },
+  { id: 'mafia', label: 'Mafia' },
+  { id: 'magic', label: 'Magic' },
+  { id: 'magical-girls', label: 'Magical Girls' },
+  { id: 'martial-arts', label: 'Martial Arts' },
+  { id: 'medical', label: 'Medical' },
+  { id: 'mental-disorders', label: 'Mental Disorders' },
+  { id: 'military', label: 'Military' },
+  { id: 'monster-girls', label: 'Monster Girls' },
+  { id: 'monsters', label: 'Monsters' },
+  { id: 'music', label: 'Music' },
+  { id: 'mystery', label: 'Mystery' },
+  { id: 'ninja', label: 'Ninja' },
+  { id: 'office-workers', label: 'Office Workers' },
+  { id: 'omegaverse', label: 'Omegaverse' },
+  { id: 'oneshot', label: 'Oneshot' },
+  { id: 'philosophical', label: 'Philosophical' },
+  { id: 'physical-abuse', label: 'Physical Abuse' },
+  { id: 'police', label: 'Police' },
+  { id: 'post-apocalyptic', label: 'Post-Apocalyptic' },
+  { id: 'psychological', label: 'Psychological' },
+  { id: 'reincarnation', label: 'Reincarnation' },
+  { id: 'reverse-harem', label: 'Reverse Harem' },
+  { id: 'romance', label: 'Romance' },
+  { id: 'samurai', label: 'Samurai' },
+  { id: 'school-life', label: 'School Life' },
+  { id: 'sci-fi', label: 'Sci-Fi' },
+  { id: 'slice-of-life', label: 'Slice of Life' },
+  { id: 'superhero', label: 'Superhero' },
+  { id: 'supernatural', label: 'Supernatural' },
+  { id: 'survival', label: 'Survival' },
+  { id: 'thriller', label: 'Thriller' },
+  { id: 'time-travel', label: 'Time Travel' },
+  { id: 'tragedy', label: 'Tragedy' },
+  { id: 'vampires', label: 'Vampires' },
+  { id: 'video-games', label: 'Video Games' },
+  { id: 'villainess', label: 'Villainess' },
+  { id: 'zombies', label: 'Zombies' },
+];
+
 const LANG_QS = 'availableTranslatedLanguages[]=es-es&availableTranslatedLanguages[]=es-419';
 const CH_LANG_QS = 'translatedLanguages[]=es-es&translatedLanguages[]=es-419';
 
@@ -58,10 +126,15 @@ class Source {
     return FEEDS.map((f) => ({ id: f.id, name: f.name }));
   }
 
+  getSearchTags() {
+    return GENRES.map((g) => ({ id: g.id, label: g.label }));
+  }
+
   async getSearchResults(request, metadata) {
     if (request && request.medium && request.medium !== 'comics') return { results: [] };
     const query = cleanText(request && request.title);
     const feed = FEEDS.find((f) => f.id === (request && request.feed)) || FEEDS[0];
+    const tags = ((request && request.includedTags) || []).map((t) => cleanText(t && (t.id || t.label)).toLowerCase()).filter(Boolean);
     const page = (metadata && metadata.page) || 1;
     const limit = 24;
     const offset = (page - 1) * limit;
@@ -73,6 +146,7 @@ class Source {
       'includes[]=cover_art',
       'includes[]=organization',
     ];
+    tags.forEach((t) => params.push(`includedTags[]=${encodeURIComponent(t)}`));
     if (query) params.push(`title=${encodeURIComponent(query)}`);
     else params.push(feed.order);
 
