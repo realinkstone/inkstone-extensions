@@ -6378,7 +6378,7 @@
     {
       "id": "pressplayz",
       "name": "PressPlayZ",
-      "version": "1.0.4",
+      "version": "1.0.5",
       "medium": "anime",
       "website": "https://pressplayz.top",
       "iconUrl": "https://inkstone.web.app/pressplayz/icon.png",
@@ -6393,7 +6393,9 @@
         "*.netrocdn.site",
         "*.workers.dev",
         "moviesapi.to",
-        "*.moviesapi.to"
+        "*.moviesapi.to",
+        "vidfast.vc",
+        "*.vidfast.vc"
       ],
       "description": "Western",
       "capabilities": [
@@ -6406,7 +6408,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "cef2f21be1d18a2f6fa96a15d7165871554cbe85ede84ef9bbf556e3ca16db76"
+      "sha256": "2ca2a647aeca559bc6f6d757a58a26ec4314e5446105068633d58b84d88f60a3"
     },
     {
       "id": "bingr",

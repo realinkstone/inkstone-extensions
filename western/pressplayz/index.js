@@ -335,9 +335,32 @@ class Source {
       path = `tv/${tmdb}/${ep[1]}/${ep[2]}`;
     }
     const servers = await this.playerServers();
-    const listed = servers.some((s) => s && s.active !== false && /moviesapi\.to|vidspark\.to/i.test(`${s.id} ${s.movieUrl} ${s.tvUrl}`));
-    if (!listed) throw new Error('PressPlayZ lists no server this app can play for this title (it reads only the VidSpark server)');
-    return [await this.vidSpark(path)];
+    const active = (pattern) => servers.some((s) => s && s.active !== false && pattern.test(`${s.id} ${s.movieUrl} ${s.tvUrl}`));
+    const sparkListed = active(/moviesapi\.to|vidspark\.to/i);
+    const fastListed = active(/vidfast\./i);
+    if (!sparkListed && !fastListed) throw new Error('PressPlayZ lists no server this app can play for this title (it reads only the VidSpark and VidFast servers)');
+    const out = [];
+    let failure = null;
+    if (sparkListed) {
+      try {
+        out.push(await this.vidSpark(path));
+      } catch (e) {
+        if (!fastListed || (e && (e.kind === 'challenge' || e.kind === 'blocked' || /allowed hosts/i.test(String(e.message))))) throw e;
+        failure = e;
+      }
+    }
+    if (fastListed) out.push(this.vidFast(kind, tmdb, chapterId));
+    if (!out.length) throw failure || new Error('PressPlayZ has no stream for this title');
+    return out;
+  }
+
+  vidFast(kind, tmdb, chapterId) {
+    let url = `https://vidfast.vc/movie/${tmdb}`;
+    if (kind === 'tv') {
+      const ep = /^s(\d+)e(\d+)$/.exec(String(chapterId || ''));
+      url = `https://vidfast.vc/tv/${tmdb}/${ep[1]}/${ep[2]}`;
+    }
+    return { url, type: 'embed', quality: 'VidFast, Auto', server: 'VidFast' };
   }
 
   async playerServers() {

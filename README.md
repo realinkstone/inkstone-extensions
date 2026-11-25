@@ -514,7 +514,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [OnlyFlix](western/onlyflix/index.js) | onlyflix.to | English | Mature | 1.0.2 |
 | [PelisForte](western/pelisforte/index.js) | www2.pelisforte.se | Spanish | Mature | 1.0.0 |
 | [PoseidonHD](western/poseidonhd/index.js) | poseidonhd2.co | Spanish | Mature | 1.0.1 |
-| [PressPlayZ](western/pressplayz/index.js) | pressplayz.top | English | Mature | 1.0.4 |
+| [PressPlayZ](western/pressplayz/index.js) | pressplayz.top | English | Mature | 1.0.5 |
 | [Primeshows](western/primeshows/index.js) | primeshows.org | English | Mature | 1.0.0 |
 | [Q62](western/q62flix/index.js) | q62flix.ws | English | Mature | 1.0.0 |
 | [Reelix](western/reelix/index.js) | reelix.ac | English | Mature | 1.0.0 |
