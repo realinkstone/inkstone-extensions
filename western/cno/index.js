@@ -178,11 +178,11 @@ class Source {
     try {
       if (kind === 'movie') {
         const d = await this.detail('movie', id);
-        out = { hls: hasOwnStream(d.sources), age: ageOfTitle(d), art: artOf(d) };
+        out = { hls: hasOwnStream(d.sources), embed: embedsOf(d.sources).length > 0, age: ageOfTitle(d), art: artOf(d) };
       } else {
         try {
           const d = await this.call(`/api/tv/${id}/episode/1/1`);
-          out = { hls: hasOwnStream(d.sources), age: ageOfTitle(d.show), art: artOf(d.show) };
+          out = { hls: hasOwnStream(d.sources), embed: embedsOf(d.sources).length > 0, age: ageOfTitle(d.show), art: artOf(d.show) };
         } catch (e) {
           if (!/404|not found/i.test(String(e.message))) throw e;
           const d = await this.detail('tv', id);
@@ -207,7 +207,7 @@ class Source {
       medium: 'anime',
     };
     const bits = [item.type === 'tv' ? 'Show' : 'Movie', item.year || ''].filter(Boolean);
-    if (probe && probe.hls === false) bits.push('no stream');
+    if (probe && probe.hls === false && !probe.embed) bits.push('no stream');
     out.summary = bits.join(', ');
     if (probe && probe.age !== undefined) out.ageRating = probe.age;
     if (item.year) out.year = String(item.year);
@@ -292,7 +292,7 @@ class Source {
       seen.add(`${it.type}~${it.id}`);
       list.push(it);
     }
-    return this.fill(page, async (n) => ({ items: list.slice((n - 1) * 20, n * 20), more: n * 20 < list.length }));
+    return this.fill(page, async (n) => ({ items: list.slice((n - 1) * 20, n * 20), more: n * 20 < list.length }), true);
   }
 
   async getMangaDetails(mangaId) {

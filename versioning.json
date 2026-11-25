@@ -7959,7 +7959,7 @@
     {
       "id": "cno",
       "name": "Cno.to",
-      "version": "1.0.8",
+      "version": "1.0.9",
       "medium": "anime",
       "website": "https://cno.to",
       "iconUrl": "https://inkstone.web.app/cno/icon.png",
@@ -7975,7 +7975,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "a31d1c8af2a17dcc7e2ca41f3244e69f43a8967ce331cc68969d97c9c0509c9a"
+      "sha256": "14640ff0ad5ea04fadf7fe3286c8e7aa2b58dd6db88a7c44633ad156f2604b86"
     },
     {
       "id": "watchanimeworld",

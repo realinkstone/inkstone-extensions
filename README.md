@@ -499,7 +499,7 @@ Video extensions use `medium: "anime"` and a `getVideos` method. Sumizuri plays 
 | [Chillflix](western/chillflix/index.js) | chillflix.lol | English | Mature | 1.0.0 |
 | [CineCalidad](western/cinecalidad/index.js) | cinecalidad.org | Spanish | Mature | 1.0.2 |
 | [CinePlus123](western/cineplus123/index.js) | cineplus123.org | Spanish | Mature | 1.0.10 |
-| [Cno.to](western/cno/index.js) | cno.to | English | Mature | 1.0.8 |
+| [Cno.to](western/cno/index.js) | cno.to | English | Mature | 1.0.9 |
 | [CorsFlix](western/corsflix/index.js) | watch.corsflix.net | English | Mature | 1.0.1 |
 | [Cuevana](western/cuevana/index.js) | cuevana3.eu | Spanish | Mature | 1.0.1 |
 | [Danish Silent Film](western/danishsilentfilm/index.js) | stumfilm.dk | English | Mature | 1.0.0 |
