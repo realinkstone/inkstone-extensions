@@ -1,5 +1,6 @@
-const SITE = 'https://justmanga.cc';
-const API = 'https://core.justmanga.cc/api';
+const SITE = 'https://justanime.to';
+const API = 'https://core.justanime.to/api/manga';
+const API_HEADERS = { Accept: 'application/json', Origin: SITE, Referer: SITE + '/manga' };
 
 const FEEDS = [
   { id: 'popular', name: 'Popular', sort: 'popular' },
@@ -88,7 +89,7 @@ class Source {
     for (let attempt = 0; attempt < 2; attempt++) {
       const url = `${API}${path}${attempt ? `${path.indexOf('?') >= 0 ? '&' : '?'}_r=${Date.now()}` : ''}`;
       try {
-        response = await this.requests.schedule(App.createRequest({ url, method: 'GET', headers: { Accept: 'application/json' } }));
+        response = await this.requests.schedule(App.createRequest({ url, method: 'GET', headers: API_HEADERS }));
       } catch (e) {
         if (attempt === 1) throw e;
         await pause(700);
@@ -189,7 +190,7 @@ class Source {
       status: statusOf(t.status),
       tags: card.tags,
       author: people.join(', ') || undefined,
-      webURL: card.webURL || SITE,
+      webURL: card.webURL || SITE + '/manga',
       medium: 'comics',
       ageRating: card.ageRating,
     };

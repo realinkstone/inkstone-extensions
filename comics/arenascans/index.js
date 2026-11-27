@@ -119,8 +119,17 @@ function idFromHref(href) {
   return parts.length >= 2 ? parts[parts.length - 1] : '';
 }
 
+function seg(piece) {
+  let text = String(piece);
+  try {
+    text = decodeURIComponent(text);
+  } catch (e) {
+  }
+  return encodeURIComponent(text);
+}
+
 function detailUrlOf(mangaId) {
-  return `${SITE_BASE}${CONFIG.archivePath}${encodeURIComponent(mangaId)}/`;
+  return `${SITE_BASE}${CONFIG.archivePath}${seg(mangaId)}/`;
 }
 
 function parseGrid($) {
@@ -297,7 +306,7 @@ class Source {
   }
 
   async getChapterDetails(mangaId, chapterId) {
-    const url = `${SITE_BASE}/${String(chapterId).split('~').map(encodeURIComponent).join('/')}/`;
+    const url = `${SITE_BASE}/${String(chapterId).split('~').map(seg).join('/')}/`;
     const html = await this.requestHTML(url);
     let pages = [];
     const m = /ts_reader\.run\((\{[\s\S]*?\})\)\s*;/.exec(html);

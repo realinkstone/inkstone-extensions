@@ -275,6 +275,7 @@ class Source {
       method: 'GET',
       headers: { 'User-Agent': UA, Accept: 'application/json', Referer: SITE_BASE + '/' },
     }));
+    if (response.status === 402) throw new Error('NamiComi: this chapter is paid (it needs coins on the site), so it can only be read there');
     if (response.status < 200 || response.status >= 300) throw new Error(`NamiComi HTTP ${response.status}`);
     return JSON.parse(response.data);
   }

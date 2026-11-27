@@ -477,7 +477,15 @@ class Source {
 
   async getChapterDetails(mangaId, chapterId) {
     const firstPageUrl = `${SITE_BASE}/read-manga/${encodeURIComponent(mangaId)}/${chapterId}/pg-1/`;
-    const html = await this.requestHTML(firstPageUrl);
+    let html;
+    let plainPages = false;
+    try {
+      html = await this.requestHTML(firstPageUrl);
+    } catch (e) {
+      if (!/HTTP 404/.test(String((e && e.message) || e))) throw e;
+      html = await this.requestHTML(`${SITE_BASE}/read-manga/${encodeURIComponent(mangaId)}/${chapterId}/`);
+      plainPages = true;
+    }
 
     const totalPagesMatch = html.match(/total_pages\s*=\s*(\d+)/);
     const totalPages = totalPagesMatch ? parseInt(totalPagesMatch[1], 10) : 0;
@@ -490,7 +498,7 @@ class Source {
       for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
         if (merged[pageNum - 1]) continue;
         try {
-          const pageUrl = `${SITE_BASE}/read-manga/${encodeURIComponent(mangaId)}/${chapterId}/pg-${pageNum}/`;
+          const pageUrl = `${SITE_BASE}/read-manga/${encodeURIComponent(mangaId)}/${chapterId}/${plainPages ? '' : 'pg-'}${pageNum}/`;
           const pageHtml = pageNum === 1 ? html : await this.requestHTML(pageUrl);
           const pageImages = await this.decodeChapterImages(pageHtml);
           if (pageImages[pageNum - 1]) merged[pageNum - 1] = pageImages[pageNum - 1];

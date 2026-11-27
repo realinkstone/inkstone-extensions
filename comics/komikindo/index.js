@@ -3,6 +3,15 @@ const BROWSE_URL = `${SITE_BASE}/daftar-manga/`;
 const UA =
   'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1';
 
+function seg(piece) {
+  let text = String(piece);
+  try {
+    text = decodeURIComponent(text);
+  } catch (e) {
+  }
+  return encodeURIComponent(text);
+}
+
 function cleanText(text) {
   return (text || '').replace(/\s+/g, ' ').trim();
 }
@@ -86,7 +95,7 @@ function parseListingCards($) {
       mangaId,
       title,
       image,
-      webURL: `${SITE_BASE}/komik/${encodeURIComponent(mangaId)}/`,
+      webURL: `${SITE_BASE}/komik/${seg(mangaId)}/`,
       medium: 'comics',
     };
 
@@ -174,7 +183,7 @@ class Source {
   }
 
   async getMangaDetails(mangaId) {
-    const url = `${SITE_BASE}/komik/${encodeURIComponent(mangaId)}/`;
+    const url = `${SITE_BASE}/komik/${seg(mangaId)}/`;
     const html = await this.requestHTML(url);
     const $ = cheerio.load(html);
 
@@ -223,7 +232,7 @@ class Source {
   }
 
   async getChapters(mangaId) {
-    const url = `${SITE_BASE}/komik/${encodeURIComponent(mangaId)}/`;
+    const url = `${SITE_BASE}/komik/${seg(mangaId)}/`;
     const html = await this.requestHTML(url);
     const $ = cheerio.load(html);
 
@@ -254,7 +263,7 @@ class Source {
   }
 
   async getChapterDetails(mangaId, chapterId) {
-    const url = `${SITE_BASE}/${encodeURIComponent(chapterId)}/`;
+    const url = `${SITE_BASE}/${seg(chapterId)}/`;
     const html = await this.requestHTML(url);
     const $ = cheerio.load(html);
 

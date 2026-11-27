@@ -416,23 +416,23 @@ class Source {
     if (!novelId) throw new Error('Novgo: no novel id on the page of ' + mangaId);
     if (isNaN(total)) throw new Error('Novgo: no chapter count on the page of ' + mangaId);
     if (total === 0) return [];
-    const pages = Math.ceil(total / CHAPTER_PAGE_SIZE);
+    const first = await this.chapterPage(novelId, 1, 1);
+    const pages = Math.max(first.totalPage || 1, Math.ceil(total / CHAPTER_PAGE_SIZE));
     const numbers = [];
-    for (let p = 1; p <= pages; p++) numbers.push(p);
-    const lists = await pool(numbers, CHAPTER_CONCURRENCY, (p) => this.chapterPage(novelId, p, pages));
-    let rowCount = 0;
+    for (let p = 2; p <= pages; p++) numbers.push(p);
+    const rest = await pool(numbers, CHAPTER_CONCURRENCY, (p) => this.chapterPage(novelId, p, pages));
     const chapters = [];
     const seen = {};
-    lists.forEach((rows) => {
-      rows.forEach((row) => {
-        rowCount++;
+    [first].concat(rest).forEach((page) => {
+      page.rows.forEach((row) => {
         if (seen[row.id]) return;
         seen[row.id] = true;
         chapters.push({ id: row.id, chapterId: row.id, name: row.name, number: chapters.length + 1 });
       });
     });
-    if (rowCount !== total) {
-      throw new Error('Novgo: chapter list of ' + mangaId + ' has ' + rowCount + ' rows, the site says ' + total);
+    const expected = Math.min(total, first.totalChapters || total);
+    if (chapters.length < expected) {
+      throw new Error('Novgo: chapter list of ' + mangaId + ' has ' + chapters.length + ' chapters, the site says ' + expected);
     }
     return chapters;
   }
@@ -457,7 +457,7 @@ class Source {
       const name = cleanText($(a).attr('title') || $(a).text()) || 'Chapter';
       rows.push({ id: m[1], name });
     });
-    return rows;
+    return { rows, totalPage: parseInt(data.totalPage, 10) || 0, totalChapters: parseInt(data.totalChapters, 10) || 0 };
   }
 
   async getChapterDetails(mangaId, chapterId) {

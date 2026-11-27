@@ -231,7 +231,7 @@ class Source {
 
     let url;
     if (query) {
-      url = `${SITE_BASE}/?s=${encodeURIComponent(query)}&post_type=fictionposts&pg=${page}`;
+      url = `${SITE_BASE}/series-finder/?sf=1&sh=${encodeURIComponent(query)}&order=desc&sort=ratings&pg=${page}`;
     } else {
       const params = [`sort=${encodeURIComponent(feed)}`, `order=${encodeURIComponent(order)}`];
       if (tagIds.length > 0) params.push(`ge=${tagIds.map(encodeURIComponent).join(',')}`);

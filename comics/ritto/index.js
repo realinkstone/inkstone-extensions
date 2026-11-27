@@ -8,23 +8,24 @@ const FEEDS = [
 ];
 
 const GENRES = [
-  ['accion', 'Acción'], ['artes-marciales', 'Artes Marciales'], ['aventura', 'Aventura'],
-  ['boys-love', 'Boys Love'], ['ciencia-ficcion', 'Ciencia Ficción'], ['comedia', 'Comedia'],
-  ['crimen', 'Crimen'], ['demonios', 'Demonios'], ['deporte', 'Deporte'],
-  ['drama', 'Drama'], ['ecchi', 'Ecchi'], ['fantasia', 'Fantasía'],
-  ['girls-love', 'Girls Love'], ['gore', 'Gore'], ['guerra', 'Guerra'],
-  ['harem', 'Harem'], ['historico', 'Histórico'], ['horror', 'Horror'],
-  ['isekai', 'Isekai'], ['josei', 'Josei'], ['magia', 'Magia'],
-  ['mecha', 'Mecha'], ['misterio', 'Misterio'], ['psicologico', 'Psicológico'],
-  ['recuentos-de-la-vida', 'Recuentos de la vida'], ['romance', 'Romance'],
-  ['seinen', 'Seinen'], ['shojo', 'Shojo'], ['shonen', 'Shonen'],
-  ['sobrenatural', 'Sobrenatural'], ['tragedia', 'Tragedia'],
+  ['accion', 'Acción'], ['apocaliptico', 'Apocalíptico'], ['artes-marciales', 'Artes Marciales'],
+  ['aventura', 'Aventura'], ['boys-love', 'Boys Love'], ['ciberpunk', 'Ciberpunk'],
+  ['ciencia-ficcion', 'Ciencia Ficción'], ['comedia', 'Comedia'], ['crimen', 'Crimen'],
+  ['demonios', 'Demonios'], ['deporte', 'Deporte'], ['drama', 'Drama'],
+  ['ecchi', 'Ecchi'], ['fantasia', 'Fantasia'], ['girls-love', 'Girls Love'],
+  ['gore', 'Gore'], ['guerra', 'Guerra'], ['genero-bender', 'Género Bender'],
+  ['harem', 'Harem'], ['historia', 'Historia'], ['horror', 'Horror'],
+  ['magia', 'Magia'], ['mecha', 'Mecha'], ['militar', 'Militar'],
+  ['misterio', 'Misterio'], ['musica', 'Musica'], ['ninos', 'Niños'],
+  ['original', 'Original'], ['parodia', 'Parodia'], ['policiaco', 'Policiaco'],
+  ['psicologico', 'Psicológico'], ['realidad', 'Realidad'], ['realidad-virtual', 'Realidad Virtual'],
+  ['recuentos-de-la-vida', 'Recuentos de la vida'], ['reencarnacion', 'Reencarnación'], ['romance', 'Romance'],
+  ['samurai', 'Samurái'], ['sobrenatural', 'Sobrenatural'], ['superpoderes', 'Superpoderes'],
+  ['supervivencia', 'Supervivencia'], ['telenovela', 'Telenovela'], ['thriller', 'Thriller'],
+  ['tragedia', 'Tragedia'], ['vampiros', 'Vampiros'], ['vida-escolar', 'Vida Escolar'],
+  ['yaoi', 'Yaoi'], ['yuri', 'Yuri'],
 ];
 
-const MONTHS_ES = {
-  ene: 0, feb: 1, mar: 2, abr: 3, may: 4, jun: 5,
-  jul: 6, ago: 7, sept: 8, sep: 8, oct: 9, nov: 10, dic: 11,
-};
 
 const ADULT_GENRE = /^(adult|adulto|hentai|smut|erotica|erótico|erotico|nsfw|\+18|18\+)$/i;
 const SUGGESTIVE_GENRE = /^(mature|maduro|ecchi|bl|yaoi)$/i;
@@ -98,23 +99,13 @@ function findArrayContaining(rsc, needle) {
   return null;
 }
 
-function parseDateEs(text) {
-  const m = /(\d{1,2})\s+([a-záéíóú]+)\s+(\d{4})/i.exec(cleanText(text));
-  if (!m) return undefined;
-  const mon = MONTHS_ES[m[2].toLowerCase()];
-  if (mon === undefined) return undefined;
-  const t = Date.UTC(parseInt(m[3], 10), mon, parseInt(m[1], 10));
-  return Number.isFinite(t) ? t : undefined;
-}
-
-function mapStatusFromHref(href) {
-  const m = /[?&]estado=([^&]+)/.exec(String(href || ''));
-  const val = m ? m[1].toUpperCase() : '';
-  if (val === 'EN_EMISION') return 'ONGOING';
-  if (val === 'FINALIZADO') return 'COMPLETED';
-  if (val === 'PAUSADO') return 'HIATUS';
-  if (val === 'CANCELADO') return 'CANCELLED';
-  return 'UNKNOWN';
+function seg(piece) {
+  let text = String(piece);
+  try {
+    text = decodeURIComponent(text);
+  } catch (e) {
+  }
+  return encodeURIComponent(text);
 }
 
 class Source {
@@ -144,38 +135,37 @@ class Source {
     if (tags.length > 0) params.push(`genero=${encodeURIComponent(tags[0].id)}`);
 
     const html = await this.requestHTML(`${SITE_BASE}/catalogo?${params.join('&')}`);
-    const $ = cheerio.load(html);
+    const rsc = extractNextF(html);
     const results = [];
     const seen = new Set();
 
-    $('a.ritto-work-card').each((_, el) => {
-      const card = $(el);
-      let isNovel = false;
-      card.find('span').each((__, sp) => {
-        if (cleanText($(sp).text()) === 'Novela') isNovel = true;
-      });
-      if (isNovel) return;
-      const href = String(card.attr('href') || '').trim();
-      const m = /\/obra\/([^/?#]+)/.exec(href);
+    const cards = findArrayContaining(rsc, '"obraId"');
+    (Array.isArray(cards) ? cards : []).forEach((c) => {
+      if (!c || !c.href || String(c.tipo || '').toLowerCase() === 'novela') return;
+      const m = /\/obra\/([^/?#]+)/.exec(String(c.href));
       if (!m) return;
       const mangaId = m[1];
       if (seen.has(mangaId)) return;
-      const title = cleanText(card.find('h3').first().text());
-      const image = absolute(card.find('img').first().attr('src'));
+      const title = cleanText(c.titulo);
+      const image = absolute(c.portada);
       if (!title || !image) return;
       seen.add(mangaId);
-      results.push({
+      const genres = Array.isArray(c.generos) ? c.generos.map(cleanText).filter(Boolean) : [];
+      const card = {
         mangaId,
         title,
         image,
         referer: SITE_BASE + '/',
-        webURL: `${SITE_BASE}/obra/${encodeURIComponent(mangaId)}`,
+        webURL: `${SITE_BASE}/obra/${seg(mangaId)}`,
         medium: 'comics',
-      });
+      };
+      if (genres.length) card.tags = genres;
+      if (c.adulto === true || genres.some((t) => ADULT_GENRE.test(t))) card.ageRating = 18;
+      else if (genres.some((t) => SUGGESTIVE_GENRE.test(t))) card.ageRating = 16;
+      results.push(card);
     });
 
-    const rsc = extractNextF(html);
-    const pm = /"paginaActual":(\d+),"totalPaginas":(\d+)/.exec(rsc);
+    const pm = /"pagina":(\d+),"totalPaginas":(\d+)/.exec(rsc);
     const hasNext = pm ? parseInt(pm[1], 10) < parseInt(pm[2], 10) : false;
     return { results, metadata: hasNext && results.length > 0 ? { page: page + 1 } : undefined };
   }
@@ -183,7 +173,7 @@ class Source {
   async titleHtml(mangaId) {
     const kept = this.pageCache.get(mangaId);
     if (kept && Date.now() - kept.at < 300000) return kept.html;
-    const html = await this.requestHTML(`${SITE_BASE}/obra/${encodeURIComponent(mangaId)}`);
+    const html = await this.requestHTML(`${SITE_BASE}/obra/${seg(mangaId)}`);
     this.pageCache.set(mangaId, { at: Date.now(), html });
     return html;
   }
@@ -191,23 +181,28 @@ class Source {
   async getMangaDetails(mangaId) {
     const html = await this.titleHtml(mangaId);
     const $ = cheerio.load(html);
-    const title = cleanText($('h1.rf-hero__title').first().text()) || cleanText($('h1').first().text()) || mangaId;
-    const image = absolute($('.rf-hero__cover img').first().attr('src') || $('img').first().attr('src'));
-    const desc = cleanText($('.rf-hero__synopsis .whitespace-pre-wrap').first().text()) || cleanText($('.rf-hero__synopsis').first().text()) || title;
+    const title = cleanText($('h1.obra-head__titulo').first().text()) || cleanText($('h1').first().text()) || mangaId;
+    const image = absolute($('meta[property="og:image"]').attr('content') || $('img.cover-img').first().attr('src'));
+    const desc = cleanText($('.sinopsis__texto').first().text()) || title;
 
-    let author = '';
+    const authorBox = $('.obra-head__autor').first().clone();
+    authorBox.find('i').remove();
+    const author = cleanText(authorBox.text()).replace(/[\s·]+$/, '');
+
     const tags = [];
-    let status = 'UNKNOWN';
-    $('a[href*="estado="]').each((_, el) => {
-      if (status === 'UNKNOWN') status = mapStatusFromHref($(el).attr('href'));
-    });
-    $('a[href*="/autor/"]').each((_, el) => {
-      const a = cleanText($(el).text());
-      if (a && !author) author = a;
-    });
-    $('a[href*="genero="], .rf-hero__genres a').each((_, el) => {
+    $('a.chip[href*="genero="]').each((_, el) => {
       const g = cleanText($(el).text());
       if (g && tags.indexOf(g) === -1) tags.push(g);
+    });
+
+    let status = 'UNKNOWN';
+    $('dt').each((_, el) => {
+      if (cleanText($(el).text()).toLowerCase() !== 'estado') return;
+      const v = cleanText($(el).next('dd').text()).toLowerCase();
+      if (v.indexOf('emisi') >= 0 || v.indexOf('curso') >= 0) status = 'ONGOING';
+      else if (v.indexOf('finaliz') >= 0 || v.indexOf('complet') >= 0) status = 'COMPLETED';
+      else if (v.indexOf('paus') >= 0 || v.indexOf('hiato') >= 0) status = 'HIATUS';
+      else if (v.indexOf('cancel') >= 0) status = 'CANCELLED';
     });
 
     const info = {
@@ -219,7 +214,7 @@ class Source {
       status,
       completed: status === 'COMPLETED',
       tags,
-      webURL: `${SITE_BASE}/obra/${encodeURIComponent(mangaId)}`,
+      webURL: `${SITE_BASE}/obra/${seg(mangaId)}`,
       medium: 'comics',
     };
     if (tags.some((t) => ADULT_GENRE.test(t))) info.ageRating = 18;
@@ -230,32 +225,28 @@ class Source {
   async getChapters(mangaId) {
     const html = await this.titleHtml(mangaId);
     const rsc = extractNextF(html);
-    const arr = findArrayContaining(rsc, '"capituloEsImagen"');
+    const arr = findArrayContaining(rsc, '"versiones"');
     const rows = [];
     const seen = new Set();
 
-    const pushEntry = (entry, fallbackNum) => {
-      if (!entry || !entry.capituloEsImagen || !entry.href) return;
-      const cid = String(entry.href).trim();
+    const pushEntry = (row, v) => {
+      if (!v || !v.href) return;
+      const cid = String(v.href).trim();
       if (!cid || seen.has(cid)) return;
       seen.add(cid);
-      const parts = [cleanText(entry.nombre), cleanText(entry.tituloExtra)].filter(Boolean);
+      const parts = [cleanText(row.etiqueta), cleanText(row.titulo)].filter(Boolean);
       const name = parts.join(' - ') || cid;
-      const numVal = typeof entry.numero === 'number' ? entry.numero : (typeof fallbackNum === 'number' ? fallbackNum : NaN);
       const numM = /(\d+(?:\.\d+)?)/.exec(name);
-      const number = Number.isFinite(numVal) ? numVal : (numM ? parseFloat(numM[1]) : 0);
-      const time = parseDateEs(entry.fechaLabel);
-      const group = cleanText(entry.scanLabel) || undefined;
-      rows.push({ id: cid, chapterId: cid, name, number, time, group });
+      const number = typeof row.numero === 'number' ? row.numero : (numM ? parseFloat(numM[1]) : 0);
+      const time = v.publicado ? Date.parse(v.publicado) : NaN;
+      const group = cleanText(v.scan) || undefined;
+      rows.push({ id: cid, name, number, time: Number.isFinite(time) ? time : undefined, group, locked: !!v.bloqueo });
     };
 
     if (Array.isArray(arr)) {
-      arr.forEach((c) => {
-        if (!c) return;
-        pushEntry(c, c.numero);
-        if (Array.isArray(c.versiones)) {
-          c.versiones.forEach((v) => pushEntry(v, c.numero));
-        }
+      arr.forEach((row) => {
+        if (!row || !Array.isArray(row.versiones)) return;
+        row.versiones.forEach((v) => pushEntry(row, v));
       });
     }
 
@@ -274,11 +265,11 @@ class Source {
 
   async getChapterDetails(mangaId, chapterId) {
     const url = absolute(chapterId);
-    const $ = cheerio.load(await this.requestHTML(url));
-    const pages = [];
-    $('img.reader-image').each((_, el) => {
-      const src = cleanText($(el).attr('src') || $(el).attr('data-src'));
-      if (src) pages.push(absolute(src));
+    const rsc = extractNextF(await this.requestHTML(url));
+    const servers = findArrayContaining(rsc, '"paginas"');
+    let pages = [];
+    (Array.isArray(servers) ? servers : []).forEach((sv) => {
+      if (pages.length === 0 && sv && Array.isArray(sv.paginas)) pages = sv.paginas.map((u) => absolute(cleanText(u))).filter(Boolean);
     });
     if (pages.length === 0) throw new Error('Ritto returned no pages for this chapter');
     return { id: chapterId, mangaId, pages, referer: SITE_BASE + '/' };

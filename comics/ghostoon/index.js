@@ -175,11 +175,20 @@ function idFromHref(href) {
   return prefix === CONFIG.detailPrefix ? slug : `${prefix}~${slug}`;
 }
 
+function seg(piece) {
+  let text = String(piece);
+  try {
+    text = decodeURIComponent(text);
+  } catch (e) {
+  }
+  return encodeURIComponent(text);
+}
+
 function detailUrlOf(mangaId) {
   const at = String(mangaId).indexOf('~');
   const prefix = at < 0 ? CONFIG.detailPrefix : mangaId.slice(0, at);
   const slug = at < 0 ? mangaId : mangaId.slice(at + 1);
-  return `${SITE_BASE}/${encodeURIComponent(prefix)}/${encodeURIComponent(slug)}/`;
+  return `${SITE_BASE}/${seg(prefix)}/${seg(slug)}/`;
 }
 
 function absolute(url) {
@@ -504,7 +513,7 @@ class Source {
   }
 
   async getChapterDetails(mangaId, chapterId) {
-    const url = `${detailUrlOf(mangaId)}${String(chapterId).split('~').map(encodeURIComponent).join('/')}/`;
+    const url = `${detailUrlOf(mangaId)}${String(chapterId).split('~').map(seg).join('/')}/`;
     const html = await this.requestHTML(url);
     const $ = cheerio.load(html);
     const pages = [];

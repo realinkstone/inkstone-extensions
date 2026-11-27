@@ -692,7 +692,7 @@
     {
       "id": "novelfull",
       "name": "NovelFull",
-      "version": "1.1.1",
+      "version": "1.1.2",
       "medium": "novel",
       "website": "https://novelfull.net",
       "iconUrl": "https://inkstone.web.app/novelfull/icon.png",
@@ -707,7 +707,7 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "sha256": "fbd149a60cc4fb520e81de9170babe2af46fea20b4f7e9a0811baf82c5688039"
+      "sha256": "8c4e771d34f55b5168fd8cd8afbb721b1732ff7eaf4c7f45ede812f0cc5082ec"
     },
     {
       "id": "readnovelfull",
@@ -776,7 +776,7 @@
     {
       "id": "scribblehub",
       "name": "ScribbleHub",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "novel",
       "website": "https://www.scribblehub.com",
       "iconUrl": "https://inkstone.web.app/scribblehub/icon.png",
@@ -791,7 +791,7 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "sha256": "f44a42a263c51e00c62b590aaff30780e97b033cddc64992a5cbce3b6c8bfea8"
+      "sha256": "31c94a6791067f404b134be74da0cf970b9987fc5db34e2f99032d8592a99047"
     },
     {
       "id": "toongod",
@@ -855,7 +855,7 @@
     {
       "id": "mangago",
       "name": "MangaGo",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "medium": "comics",
       "website": "https://www.mangago.me",
       "iconUrl": "https://inkstone.web.app/mangago/icon.png",
@@ -870,7 +870,7 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "sha256": "ea488a3f499af166e96fd0c05cd449dc1465a3acc12aec80619abee0b032633a"
+      "sha256": "27891116fc003e569c19047e64c9b0038a62c29d2980a960f8d12fc284d190ee"
     },
     {
       "id": "manhuafast",
@@ -1193,7 +1193,7 @@
     {
       "id": "komikindo",
       "name": "Komikindo",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://komikindo.ch",
       "iconUrl": "https://inkstone.web.app/komikindo/icon.png",
@@ -1208,7 +1208,7 @@
       ],
       "language": "id",
       "contentRating": "adult",
-      "sha256": "e1930e5f652858239b82b69edf08bb9b4cab5967815934cbc72db20b240a22b4"
+      "sha256": "803ab84405b47f6db3f442aff4fda52fd58df595fc08ae1200ace55689f331c2"
     },
     {
       "id": "manhuavn",
@@ -2441,7 +2441,7 @@
     {
       "id": "arenascans",
       "name": "Arena Scans",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://arenascan.com",
       "iconUrl": "https://inkstone.web.app/arenascans/icon.png",
@@ -2460,12 +2460,12 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "242fee6f519597b92df85081db9aef61fa54f6ccd66f7303ccbbddf154e4f6ca"
+      "sha256": "e04268afcb12cf89230d22ebdbfad0c2286e760ad5daf1d520db4b42fb38398f"
     },
     {
       "id": "athreascans",
       "name": "Athrea Scans",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://athreascans.com",
       "iconUrl": "https://inkstone.web.app/athreascans/icon.png",
@@ -2484,12 +2484,12 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "sha256": "a6d82f70b38d1474ec889872e2149625dda32e6096cfe4b81401149eceb1cd8d"
+      "sha256": "45fe7fd56f50965a1456c42070c4d40311e80ad7cd7d8279543212625283326c"
     },
     {
       "id": "cocomic",
       "name": "Cocomic",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://cocomic.co",
       "iconUrl": "https://inkstone.web.app/cocomic/icon.png",
@@ -2508,12 +2508,12 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "sha256": "fa770042acef5d4ca5ffa9209f17128a47eab4417bd7b3c51b5d0682a7f8b3ed"
+      "sha256": "6c47aa6a40c96953fa5b9961b715f285544c062739cf9d3daab407cc177fd3de"
     },
     {
       "id": "evascans",
       "name": "Eva Scans",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://evascans.net",
       "iconUrl": "https://inkstone.web.app/evascans/icon.png",
@@ -2532,12 +2532,12 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "sha256": "35f441a08adb48a28bde4b9b3ae8219c74834bd1d3ad00c6b99b3ad2db036c3c"
+      "sha256": "c5c463331c764d2ea9af71868c0dec4676a49ae8994996d5ba61e8be97a5ef2d"
     },
     {
       "id": "gakamangas",
       "name": "GakaMangas",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://gakamangas.com",
       "iconUrl": "https://inkstone.web.app/gakamangas/icon.png",
@@ -2556,12 +2556,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "8fb84be31558c5207f4e12af23810ffdda3ecd24d1769b1c1426d0a38a02f615"
+      "sha256": "2e72c53ae3081aba12523f1fd3f72e6145778cf60cc74138f6fcdef18778b7cc"
     },
     {
       "id": "hunlightcomics",
       "name": "Hunlight Comics",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://hunlightcomics.com",
       "iconUrl": "https://inkstone.web.app/hunlightcomics/icon.png",
@@ -2579,12 +2579,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "93a6326a1f91f24abffca390cc1dbd44b186c63b6cbade56c635aae6a26bc273"
+      "sha256": "e91c6bf018f44d1aeb489867fe1d2fe2a17750854d4a9c5e4ca63da5849f5160"
     },
     {
       "id": "kokomangas",
       "name": "KokoMangas",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://kokomangas.com",
       "iconUrl": "https://inkstone.web.app/kokomangas/icon.png",
@@ -2602,12 +2602,12 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "sha256": "3f96e6790336ec3c57ef726f02dd2b6fd8a012fdd72704fbf0194c83e8db0f40"
+      "sha256": "128d68361bc3a5e5833a890c40ca47a1acd8108ac181b3625e046e7a289208a1"
     },
     {
       "id": "ksgroupscans",
       "name": "KSGroupScans",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://ksgroupscans.com",
       "iconUrl": "https://inkstone.web.app/ksgroupscans/icon.png",
@@ -2626,12 +2626,12 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "cdb1ee496eae2928c2c5f933d46e304d30ce70901a48147e467349861062565b"
+      "sha256": "d22cbc66556d668b81cb58d5382dd3b320224145888dc0d992b699f7a81c7b56"
     },
     {
       "id": "lagoonscans",
       "name": "Lagoon Scans",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://lagoonscans.com",
       "iconUrl": "https://inkstone.web.app/lagoonscans/icon.png",
@@ -2650,12 +2650,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "4b6bb946d9052ba714463e6a5444a29f7b0e0b7ef2c27198b62b846de156f6dd"
+      "sha256": "c12973561c291c86c60bd5407651824322de9c238a4b5726d37e8f10bd204fce"
     },
     {
       "id": "lhtranslation",
       "name": "LHTranslation",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://lhtranslation.net",
       "iconUrl": "https://inkstone.web.app/lhtranslation/icon.png",
@@ -2674,12 +2674,12 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "80723ab3cf00d8a49a3c93c0b3daf34455d6416a3ae386edace084c9bb69b1d0"
+      "sha256": "b0e77a57741b090329fffae8e579d5df026e6821e97db892309bab78bdb2c38e"
     },
     {
       "id": "mangaeclipse",
       "name": "Manga Eclipse",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://mangaeclipse.com",
       "iconUrl": "https://inkstone.web.app/mangaeclipse/icon.png",
@@ -2698,12 +2698,12 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "b685d15d3f3c4677553c86ab07fcd267205cc718ccd52a9dfeb7086ff80f3b3e"
+      "sha256": "6a498e6ae15502e6efefcc6acdd41d2010881fa2dd918be7de5bd652d0a02911"
     },
     {
       "id": "mangasushi",
       "name": "Mangasushi",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://mangasushi.org",
       "iconUrl": "https://inkstone.web.app/mangasushi/icon.png",
@@ -2722,12 +2722,12 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "sha256": "14f54271e6d0243055f3add5f949b112de6f1f6e66bb1a0a94c639717cdb2635"
+      "sha256": "d72b672bff1e7029927612e400828bc504a514588147ff5bc9a715afac24908e"
     },
     {
       "id": "mangatrend",
       "name": "Manga Trend",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://mangatrend.org",
       "iconUrl": "https://inkstone.web.app/mangatrend/icon.png",
@@ -2745,7 +2745,7 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "a09a4df747588e4c83f418a70bbf97e70460541739a254250a5bfff7b49140e8"
+      "sha256": "8797cc0937f91e5aafdfd62f602b63cc76c12c49c568728c833125cdc695e639"
     },
     {
       "id": "mangayy",
@@ -2774,7 +2774,7 @@
     {
       "id": "manhuanext",
       "name": "Manhuanext",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://manhuanext.com",
       "iconUrl": "https://inkstone.web.app/manhuanext/icon.png",
@@ -2793,36 +2793,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "f4badbb33251135ac1000c325904cc5ffb72bd9dac5d71dbaa379aa1e810e17b"
-    },
-    {
-      "id": "manhwanex",
-      "name": "ManhwaNex",
-      "version": "1.0.0",
-      "medium": "comics",
-      "website": "https://manhwanex.com",
-      "iconUrl": "https://inkstone.web.app/manhwanex/icon.png",
-      "hosts": [
-        "manhwanex.com",
-        "*.manhwanex.com"
-      ],
-      "description": "Manhwa\n\nCatalog・100+",
-      "capabilities": [
-        "browse",
-        "search",
-        "genres",
-        "details",
-        "chapters",
-        "reader"
-      ],
-      "language": "en",
-      "contentRating": "safe",
-      "sha256": "531887a288ab2a89652a35c11e66a9747d691f2342e49c62e9f880159242bae6"
+      "sha256": "4332bb83a5958d1981f82149d476ba1b0ee8b671619302e5a6d55ce7db6a54c0"
     },
     {
       "id": "manhwareads",
       "name": "Manhwa Reads",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://manhwareads.com",
       "iconUrl": "https://inkstone.web.app/manhwareads/icon.png",
@@ -2841,12 +2817,12 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "552cc80078437fd0f0bd6a84c72cd8af88d6551c25bef95d385fa909e72c00f1"
+      "sha256": "c5fe27d34ed0709dd5a79266cbb9b438498ca04596c87a8692cf6c60a16ee326"
     },
     {
       "id": "rackus",
       "name": "Rackus",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://rackusreads.com",
       "iconUrl": "https://inkstone.web.app/rackus/icon.png",
@@ -2865,12 +2841,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "c91ef92da264375f4e216b2bbcf41d7788ab53bcacbd393eb983132dd186c018"
+      "sha256": "6229f02c429a94e9bc58b5d5b567fde5ccbf95d4486862c4203150249a0beeb2"
     },
     {
       "id": "ravenscans",
       "name": "Raven Scans",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://ravenscans.org",
       "iconUrl": "https://inkstone.web.app/ravenscans/icon.png",
@@ -2889,12 +2865,12 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "sha256": "3486bba6eceae0c8b8ee2879ecd3634d9f0fd545a4ac4d3f8bb02028753e98e8"
+      "sha256": "bf165d5a1304ed2e3606213363ecf71c104dff355b2b3fe638a737a0a8d45fa7"
     },
     {
       "id": "s2manga",
       "name": "S2Manga",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://s2read.com",
       "iconUrl": "https://inkstone.web.app/s2manga/icon.png",
@@ -2913,12 +2889,12 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "sha256": "b28385a37bbc3aae8fcf82b4bb74a1b790e756d632a72ce9e9db8418ac9bb2ef"
+      "sha256": "46864e77de21798940e262712b048411d79e5baf57e8cec369e66d767061f663"
     },
     {
       "id": "thunderscans",
       "name": "Thunder Scans",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "medium": "both",
       "website": "https://en-thunderscans.com",
       "iconUrl": "https://inkstone.web.app/thunderscans/icon.png",
@@ -2937,12 +2913,12 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "9c78638170af7233395a8464edca8f8d16561cb468771a4afea425a60f333c84"
+      "sha256": "34af800fcbf3580be253ccfc8f5c6d12b29aa71d1fe3371b8987b2a46a7a72aa"
     },
     {
       "id": "violetscans",
       "name": "Violet Scans",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://violetmanga.com",
       "iconUrl": "https://inkstone.web.app/violetscans/icon.png",
@@ -2961,12 +2937,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "d24880efbd453764cf942f481cd29a5db9d6592191ca102b6c653eaac40aea35"
+      "sha256": "b33c24319fca3dc66f23adacc6336805282765754b855913904f7d6a1f4a077a"
     },
     {
       "id": "yakshacomics",
       "name": "YakshaComics",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://yakshacomics.com",
       "iconUrl": "https://inkstone.web.app/yakshacomics/icon.png",
@@ -2984,12 +2960,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "8ce7094b75d9eec86982497603396938b742b21ddb3e88387a36284c95791049"
+      "sha256": "89048bcbffdc93bc4e22faababdac2fed5280f2d030873d77d1c58c15436f6d6"
     },
     {
       "id": "bunmanga",
       "name": "Bun Manga",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://bunmanga.com",
       "iconUrl": "https://inkstone.web.app/bunmanga/icon.png",
@@ -3008,12 +2984,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "a0ceaf6350308afd8af9e82343d7fd1406a6300d2bcc76bab9f9b1068490b7a8"
+      "sha256": "9dc3e05ceb22cb4e6d56fdb862938442f9b581904268a3c470d6eb802457683f"
     },
     {
       "id": "zinmanga",
       "name": "Zinmanga",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://www.zinmanga.net",
       "iconUrl": "https://inkstone.web.app/zinmanga/icon.png",
@@ -3032,7 +3008,7 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "674503e3e42ca274d59aa1a240d7cd6aab33bb6a31a75dc76d2eb0bf779ac7bf"
+      "sha256": "c93453899f50adbe59a13045f614b245a317d26ed092561de527ca9bf727b044"
     },
     {
       "id": "vortexscans",
@@ -3563,7 +3539,7 @@
     {
       "id": "akazascans",
       "name": "Akaza Scans",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://akazascans.org",
       "iconUrl": "https://inkstone.web.app/akazascans/icon.png",
@@ -3582,12 +3558,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "833627cd122100072afeac9f6ed594676523cd4469774f111758c01143d110e6"
+      "sha256": "c49b347bf2c6a5c886e8f5647997cf0008fad8b84c00cd79c2ba8dcf9a3f87a1"
     },
     {
       "id": "asterscans",
       "name": "Aster Scans",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://asterscans.com",
       "iconUrl": "https://inkstone.web.app/asterscans/icon.png",
@@ -3606,12 +3582,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "dac81b8abe1cd5d764ed695b6b3d134ff80f7406b7625f11a380881f4709d5a3"
+      "sha256": "ddcd8f149ed7d45d83830cade802102b82112242149ed280bff1b9f7e70db380"
     },
     {
       "id": "decadencescans",
       "name": "Decadence Scans",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://reader.decadencescans.com",
       "iconUrl": "https://inkstone.web.app/decadencescans/icon.png",
@@ -3630,12 +3606,12 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "sha256": "8eb26168e6ade9dba2b364d15ecc194e0e8c2f8550bfecbd734b574e03f8724b"
+      "sha256": "014315ec68e3945df968eec6c069bb4360db1ef5184e41efe93e4faae6e36731"
     },
     {
       "id": "grabberzone",
       "name": "Grabber Zone",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://grabber.zone",
       "iconUrl": "https://inkstone.web.app/grabberzone/icon.png",
@@ -3654,12 +3630,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "0b1483d32814f97a70068e769a854cb5588886d778843eaa2a563d0b7c269bd7"
+      "sha256": "8a1ca8a954683e8047b8040c431a646c32b0fa110a88e83de57fb7e91fa50b7e"
     },
     {
       "id": "madarascans",
       "name": "Madara Scans",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://madarascans.net",
       "iconUrl": "https://inkstone.web.app/madarascans/icon.png",
@@ -3678,12 +3654,12 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "78537bec4b38043368d65da13e0af212ec2a70339f4bed6c186daff4c53a8ba9"
+      "sha256": "25e7465e2b0bc8cb2a8d7ab1c426bd1a9a556426136575b5f17405f63aee86cf"
     },
     {
       "id": "manhuapluscom",
       "name": "Manhua Plus (.com)",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://manhuaplus.com",
       "iconUrl": "https://inkstone.web.app/manhuapluscom/icon.png",
@@ -3702,12 +3678,12 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "7c1c119f1b1357e7eeb4ed9c91775bf7230f736e1a602f9eaa3b8d52f0779c08"
+      "sha256": "daa312b3ef8557e350d4f67240d3f48611eddeb256c328903e62d0c6ac37bb89"
     },
     {
       "id": "rokaricomics",
       "name": "RokariComics",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://rokaricomics.com",
       "iconUrl": "https://inkstone.web.app/rokaricomics/icon.png",
@@ -3726,12 +3702,12 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "sha256": "a408b93696acab3523d0e7c17df6b0a5f23f3c4f0784eed14e3503320de7fd42"
+      "sha256": "47b4404df1dd2899d4b20884042e33bf36c71025ceaf1412d2a06b9fae0d1f82"
     },
     {
       "id": "toonizy",
       "name": "Toonizy",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://toonizy.com",
       "iconUrl": "https://inkstone.web.app/toonizy/icon.png",
@@ -3750,12 +3726,12 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "f4df10fb887600c4016d6389952abe6029ec9305d51c9e0da0c3ea48cd86a001"
+      "sha256": "7c6a1a10ab15d48ca7d8d2ac743e7cbadda7628f27c65512c11c36489f4d5ccc"
     },
     {
       "id": "scythescans",
       "name": "Scythe Scans",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://scythescans.com",
       "iconUrl": "https://inkstone.web.app/scythescans/icon.png",
@@ -3774,7 +3750,7 @@
       ],
       "language": "en",
       "contentRating": "safe",
-      "sha256": "d7e9334a49b50cf615bc12c4452a5ef722f76a3e42b3aa10bf6360f20e67c6e4"
+      "sha256": "9e42a08524045a2886a70579d7eecf234cfc5b2b39bf14f882c04d9303798c2d"
     },
     {
       "id": "mangafox",
@@ -3988,7 +3964,7 @@
     {
       "id": "hadesnofansub",
       "name": "Hades no Fansub",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://lectorhades.latamtoon.com",
       "iconUrl": "https://inkstone.web.app/hadesnofansub/icon.png",
@@ -4007,12 +3983,12 @@
       ],
       "language": "es",
       "contentRating": "adult",
-      "sha256": "619e8531422d7b1ba38b4fa078c0d3ecf27bd2d0cdd0f95c1b870c3b96ab8d79"
+      "sha256": "751d837738885a71506e91dff628e9879dd4173d2c09770f5b40a35c7d77a02c"
     },
     {
       "id": "inventariooculto",
       "name": "Inventario Oculto",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://inventariooculto.com",
       "iconUrl": "https://inkstone.web.app/inventariooculto/icon.png",
@@ -4031,12 +4007,12 @@
       ],
       "language": "es",
       "contentRating": "adult",
-      "sha256": "6393f930fc717c4445ca7fe6c5eb000163a2de9bd53cd952a6d772acb211c203"
+      "sha256": "1774cf0af8c51d06c5779e7b75f0d402d2ac3886026730049ebdb8e716a55d19"
     },
     {
       "id": "kazokuden",
       "name": "Kazoku Den",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://www.kazokuden.com",
       "iconUrl": "https://inkstone.web.app/kazokuden/icon.png",
@@ -4055,7 +4031,7 @@
       ],
       "language": "es",
       "contentRating": "mature",
-      "sha256": "de0048b4779a0577073d10c1983864728b851014821bb9c6e03cc269c31498b6"
+      "sha256": "9673cbe4a4bba3bb2a51325f7fc71d92497af7dc317adb67a0f26948c7b52f47"
     },
     {
       "id": "mhscans",
@@ -4084,7 +4060,7 @@
     {
       "id": "monopolyscan",
       "name": "Monopoly Scan",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://monopolymanhua.com",
       "iconUrl": "https://inkstone.web.app/monopolyscan/icon.png",
@@ -4103,7 +4079,7 @@
       ],
       "language": "es",
       "contentRating": "safe",
-      "sha256": "62cc540a9fdd6eceef54bbab1058053fc94294e59095158d004fee32cd228a0b"
+      "sha256": "c0f8beb49ad24d270a6f0e67bd1541a2a4f58257cd01552f919eb729170ea97d"
     },
     {
       "id": "ragnarokscanlation",
@@ -4132,7 +4108,7 @@
     {
       "id": "rakuentranslations",
       "name": "Rakuen Translations",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://rakuentranslations.com",
       "iconUrl": "https://inkstone.web.app/rakuentranslations/icon.png",
@@ -4151,12 +4127,12 @@
       ],
       "language": "es",
       "contentRating": "mature",
-      "sha256": "252a6d1dcb4adde8a76d5c56ee084f3ee073ab2056f76a6b60b5570502a23f93"
+      "sha256": "bdeaab51813951c08050bcec7fbdf720d550e1e33059b2dcafb633c50dbd7fd2"
     },
     {
       "id": "uchuujinprojects",
       "name": "Uchuujin Projects",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://uchuujinmangas.com",
       "iconUrl": "https://inkstone.web.app/uchuujinprojects/icon.png",
@@ -4175,12 +4151,12 @@
       ],
       "language": "es",
       "contentRating": "mature",
-      "sha256": "9996bde2ae8585c17e52d720478034a15b20b16b9973515acf6a65297b0d04b9"
+      "sha256": "625e503c3a99842e0c157aeedec8eadd40c9efee931dde1c34b6ef92532b7e2d"
     },
     {
       "id": "undertranslations",
       "name": "UnderTranslations",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://undertranslations.com",
       "iconUrl": "https://inkstone.web.app/undertranslations/icon.png",
@@ -4199,12 +4175,12 @@
       ],
       "language": "es",
       "contentRating": "mature",
-      "sha256": "c5138b10a886318df68a78419ba9a55fe5e9a2d11945291db23dd8415142e66b"
+      "sha256": "fb13d2e2c90b94d621b26e3396265963dadea7751975c0fe5867cff26db1699f"
     },
     {
       "id": "yurionline",
       "name": "Yuri-Online",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://yuri-online.com",
       "iconUrl": "https://inkstone.web.app/yurionline/icon.png",
@@ -4223,12 +4199,12 @@
       ],
       "language": "es",
       "contentRating": "safe",
-      "sha256": "2fb96da77b3368ffc95f474de284c44ec0268b498b5472cf02b60069395edd0c"
+      "sha256": "ecc96b2bd29cc98b9530b1b2bf49b5568737dd001e015287195160a2397b04d8"
     },
     {
       "id": "cafcomyaoi",
       "name": "Café com Yaoi",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://cafecomyaoi.com.br",
       "iconUrl": "https://inkstone.web.app/cafcomyaoi/icon.png",
@@ -4247,12 +4223,12 @@
       ],
       "language": "pt-BR",
       "contentRating": "mature",
-      "sha256": "9fe9f807f0b87c8a72923f84bd7417d56cacaf4d4af12522a18b436d6bfcf462"
+      "sha256": "5c77ec69425ec818e81cc304d53e3cddeaff49cefc032b1d8d5bc868ff7840eb"
     },
     {
       "id": "hotcabaretscan",
       "name": "Hot Cabaret Scan",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://hotcabaretscan.com",
       "iconUrl": "https://inkstone.web.app/hotcabaretscan/icon.png",
@@ -4271,12 +4247,12 @@
       ],
       "language": "pt-BR",
       "contentRating": "mature",
-      "sha256": "785f0778fe5438970052a0173dbacc90a037f1d93f45d09dd1fdb2dc3fa4442f"
+      "sha256": "5b19239fdc048b92ce0d7185c58ca2168c8d5a9cc88c48e649de77477dd351de"
     },
     {
       "id": "kamisamaexplorer",
       "name": "Kami Sama Explorer",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://leitor.kamisama.com.br",
       "iconUrl": "https://inkstone.web.app/kamisamaexplorer/icon.png",
@@ -4294,14 +4270,14 @@
       ],
       "language": "pt-BR",
       "contentRating": "safe",
-      "sha256": "6ee6dc8ac03a0ae16cf760490c3ad53b10e0966ad0107064914f7f29242f70b4",
+      "sha256": "bfb3a71d4180a3e12f903d76276ca7adf78d0280ba0fb38d638f278081ed79c7",
       "status": "broken",
       "statusNote": "The reader site shows a \"Coming Soon\" page on every address."
     },
     {
       "id": "nebulosascan",
       "name": "Nebulosa Scan",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://nebulosascan.com",
       "iconUrl": "https://inkstone.web.app/nebulosascan/icon.png",
@@ -4320,12 +4296,12 @@
       ],
       "language": "pt-BR",
       "contentRating": "mature",
-      "sha256": "fae6c436087dc541ccf6ea04480c11414b0bd3a9c2001128688d0b0a0673f21f"
+      "sha256": "3699bc2a4060b7b745db5a5d874fc28eeda6310dc80dcb83450e36f5d543c254"
     },
     {
       "id": "tsundokutradues",
       "name": "Tsundoku Traduções",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://tsundoku.com.br",
       "iconUrl": "https://inkstone.web.app/tsundokutradues/icon.png",
@@ -4344,12 +4320,12 @@
       ],
       "language": "pt-BR",
       "contentRating": "adult",
-      "sha256": "aa7df778e141a09e3da0f156814da5b74de7088cd156efdc11b99b38465da5c4"
+      "sha256": "3dae68709b2aee1cad620f64cd1884f4b583674262b05bf08d924770c6ab783b"
     },
     {
       "id": "anikiga",
       "name": "Anikiga",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://anikiga.com",
       "iconUrl": "https://inkstone.web.app/anikiga/icon.png",
@@ -4368,12 +4344,12 @@
       ],
       "language": "tr",
       "contentRating": "safe",
-      "sha256": "c3b4e3a8af5bf78189dcd5bc881147ba617400db689ea0e1f395ad4e8a8020fe"
+      "sha256": "53817a070561b8fd5bfe95faad933c13987423f68693af7641c32673d731988d"
     },
     {
       "id": "ghostoon",
       "name": "GhosToon",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://ghostoon.com",
       "iconUrl": "https://inkstone.web.app/ghostoon/icon.png",
@@ -4392,12 +4368,12 @@
       ],
       "language": "tr",
       "contentRating": "adult",
-      "sha256": "add9727edc8a141931f952567fdb70be2d7746ba96d0df806c1c4af0c7b9d22a"
+      "sha256": "8a85914d46ed14a1803e157beb5dadeabeef753f9ac16f568aef70e83ca0cbe3"
     },
     {
       "id": "koreliscans",
       "name": "Koreli Scans",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://www.nabicix.com",
       "iconUrl": "https://inkstone.web.app/koreliscans/icon.png",
@@ -4416,12 +4392,12 @@
       ],
       "language": "tr",
       "contentRating": "safe",
-      "sha256": "09a208ff8ed2ede1a70f22ee405a8ed0a1bada63c545b4f13ced24d9d96f5434"
+      "sha256": "043ec245eae29bf8538f7c915cbdc7b19c872ef4903c2f9caae2baeafa5edb7c"
     },
     {
       "id": "mangawow",
       "name": "MangaWOW",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://mangawow.org",
       "iconUrl": "https://inkstone.web.app/mangawow/icon.png",
@@ -4440,12 +4416,12 @@
       ],
       "language": "tr",
       "contentRating": "mature",
-      "sha256": "9e2c9000008d91f256de96920e1cb6efecc6e997628da2cc407a5cccd667f620"
+      "sha256": "c2fd331e7c98767a70b14363a69274a39f613fae8f4efbdc67eecc9d270f4863"
     },
     {
       "id": "ryamanga",
       "name": "Rüya Manga",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://www.ruyamanga2.com",
       "iconUrl": "https://inkstone.web.app/ryamanga/icon.png",
@@ -4464,12 +4440,12 @@
       ],
       "language": "tr",
       "contentRating": "safe",
-      "sha256": "8da79c74cbe166279951fbf3bbfc07e97710806044ac3a4df5abba2e70222e0f"
+      "sha256": "8036fed748fe9f258ea8a4f5e5f0248447d8c886bf4281daddabf23a492ff6f5"
     },
     {
       "id": "tarotscans",
       "name": "Tarot Scans",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://www.tarotscans.com",
       "iconUrl": "https://inkstone.web.app/tarotscans/icon.png",
@@ -4488,12 +4464,12 @@
       ],
       "language": "tr",
       "contentRating": "adult",
-      "sha256": "2c594d5c272c588d8cb11820e2e486e6594b915376f959b621a43356896717b0"
+      "sha256": "f385165e229b3f0409bac3627e6ea37b34038c3f4c1d43b14791fab01ce22333"
     },
     {
       "id": "tortugaceviri",
       "name": "Tortuga Ceviri",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://tortugaceviri.com",
       "iconUrl": "https://inkstone.web.app/tortugaceviri/icon.png",
@@ -4511,12 +4487,12 @@
       ],
       "language": "tr",
       "contentRating": "safe",
-      "sha256": "6b3aa4f89f1ca0899b69a9b74fcd6c36e8966d6465b62d3684151323326aee16"
+      "sha256": "97b3b9dd99b8409edf372c5ad91afdc01ddc0cb4df4627c0b543ca446bb9b4de"
     },
     {
       "id": "trkemangaoku",
       "name": "Türkçe Manga Oku",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://trmangaoku.com",
       "iconUrl": "https://inkstone.web.app/trkemangaoku/icon.png",
@@ -4535,12 +4511,12 @@
       ],
       "language": "tr",
       "contentRating": "safe",
-      "sha256": "d0879722587bb29caa81903578652f7da3f3e4e398e58640101243571c5cdfbb"
+      "sha256": "0c1effdf6da62461e73e8cf1cff6ad2032648991fb1eedd3103adf191e10fae3"
     },
     {
       "id": "flashmanga",
       "name": "Flash-Manga",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://www.flash-manga.net",
       "hosts": [
@@ -4558,12 +4534,12 @@
       ],
       "language": "th",
       "contentRating": "safe",
-      "sha256": "fce1878e217854f63c6b7a5da74cfc5dd36cf3eab2f7a2fd18223f57b756c7af"
+      "sha256": "c6011b08432accf0dbadd778a0c7071df62250b522a176b5504e9642395734d7"
     },
     {
       "id": "inumanga",
       "name": "Inu Manga",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://www.inu-manga.net",
       "iconUrl": "https://inkstone.web.app/inumanga/icon.png",
@@ -4582,12 +4558,12 @@
       ],
       "language": "th",
       "contentRating": "mature",
-      "sha256": "cddb13dabe7f79c64069e150282e68e39e915fa81c3c6669686150e8643b0c55"
+      "sha256": "a655c893585c9d88b95a952b1b68b7f0018bdf21b41d8ea80f8048e9d4104de4"
     },
     {
       "id": "truyentuoitho",
       "name": "TruyenTuoiTho",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://truyentuoitho.com",
       "iconUrl": "https://inkstone.web.app/truyentuoitho/icon.png",
@@ -4606,12 +4582,12 @@
       ],
       "language": "vi",
       "contentRating": "safe",
-      "sha256": "c06a013707e6e7933575e3d78d51a3059015d524847dd5a0b501c5718130f8b3"
+      "sha256": "15188cd0313fd012791057e9ed369467b2d6daf32fb58f0003626330a49f090f"
     },
     {
       "id": "animeshinigami",
       "name": "AnimeShinigami",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://www.animeshinigami.com",
       "iconUrl": "https://inkstone.web.app/animeshinigami/icon.png",
@@ -4630,12 +4606,12 @@
       ],
       "language": "it",
       "contentRating": "safe",
-      "sha256": "829c1f74d042169a84964ae175cfd5aa21da39237f3641d773925654c0f1f532"
+      "sha256": "09f36b1b89e1f7f0c7501fc85a60a21208a52aef2720e86de914c04adc61a1f6"
     },
     {
       "id": "klikmanga",
       "name": "KlikManga",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://klikmanga.org",
       "iconUrl": "https://inkstone.web.app/klikmanga/icon.png",
@@ -4653,12 +4629,12 @@
       ],
       "language": "id",
       "contentRating": "safe",
-      "sha256": "3e43f56fcc4f2d0bf67585513acb086c24cc1b518ccd5e3c5d9cf08c1fa5327f"
+      "sha256": "c1cf67fc4789532fa6249a51b15546040f0059c1476860a49b81bdd2b602c8f8"
     },
     {
       "id": "mangalik",
       "name": "مانجا ليك",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "medium": "comics",
       "website": "https://mangalik.net",
       "iconUrl": "https://inkstone.web.app/mangalik/icon.png",
@@ -4677,7 +4653,7 @@
       ],
       "language": "ar",
       "contentRating": "safe",
-      "sha256": "71e9d9242ea914df16bd044b284895ff0ef835b0be82d52a9e786a4a4aade8f2"
+      "sha256": "e55c06c61043629acc28e8dbaf2ca1edd9d4ac8ad009640625a5915925f17fc2"
     },
     {
       "id": "phoenixscans",
@@ -4850,7 +4826,7 @@
     {
       "id": "sleepytranslations",
       "name": "Sleepy Translations",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "novel",
       "website": "https://sleepytranslations.com",
       "iconUrl": "https://inkstone.web.app/sleepytranslations/icon.png",
@@ -4869,12 +4845,12 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "sha256": "587767997d363840877e5bc4e9e442453de276e82685619355656b8e2fec7845"
+      "sha256": "10eadcf0a3302a9cbd715f3a54d6e7a414ec5ac8cdb3b3999f9afb0209553e07"
     },
     {
       "id": "wuxiaworldsite",
       "name": "WuxiaWorld.site",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "novel",
       "website": "https://wuxiaworld.site",
       "iconUrl": "https://inkstone.web.app/wuxiaworldsite/icon.png",
@@ -4893,12 +4869,12 @@
       ],
       "language": "en",
       "contentRating": "adult",
-      "sha256": "29898ea62af1b248b2724eaa88ea8137fdaa33b50ca1460426413bd3419d09f0"
+      "sha256": "bfadb5e230aeaa963fe0eac846ab85c01662770373cca558e5f3ced20e8b1037"
     },
     {
       "id": "ngomik",
       "name": "Ngomik",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://02.ngomik.cc",
       "iconUrl": "https://inkstone.web.app/ngomik/icon.png",
@@ -4917,7 +4893,7 @@
       ],
       "language": "id",
       "contentRating": "safe",
-      "sha256": "9b76ca897d4eaef0b8f78791f2b6f317803cac5cff5b96d3798ec32beddb0b6f"
+      "sha256": "e7eafb58923186b233547fb8070d782642cba2a7d0f1e71571f1ff276f373825"
     },
     {
       "id": "kumanga",
@@ -7270,7 +7246,7 @@
     {
       "id": "marmota",
       "name": "Marmota",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://marmota.me",
       "iconUrl": "https://inkstone.web.app/marmota/icon.png",
@@ -7291,7 +7267,7 @@
       "contentRating": "safe",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "2424c0de883d68aabce26099da2e666a7ff4b9116221a3ff1c7d015fa086e654"
+      "sha256": "b55ddc29ebe08c9266d2836d83dd503e5bfe71b9b6567420b07755ee729ce5ba"
     },
     {
       "id": "mundodonghua",
@@ -8091,13 +8067,13 @@
     {
       "id": "justmanga",
       "name": "JustManga",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
-      "website": "https://justmanga.cc",
+      "website": "https://justanime.to/manga",
       "iconUrl": "https://inkstone.web.app/justmanga/icon.png",
       "hosts": [
-        "justmanga.cc",
-        "core.justmanga.cc",
+        "justanime.to",
+        "core.justanime.to",
         "s4.anilist.co"
       ],
       "description": "Manga・Manhwa・Manhua\n\nCatalog・4,000+",
@@ -8217,7 +8193,7 @@
           ]
         }
       ],
-      "sha256": "57dea14c8003d0c128d3145ac041b3a0bf1c0f5ae98277c7c345cb29b4ef9ae7"
+      "sha256": "b43e95f0e8f44a8f1ab47289cecd883c2400dc141528eec84068b79f8ef65be7"
     },
     {
       "id": "xnovel",
@@ -8265,9 +8241,9 @@
     {
       "id": "aquamanga",
       "name": "Aqua Manga",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
-      "website": "https://aquareader.org",
+      "website": "https://aquamanga.io",
       "iconUrl": "https://inkstone.web.app/aquamanga/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nCatalog・2,000+",
       "capabilities": [
@@ -8280,7 +8256,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "86e32e1c17e49b3d7ee6433f5561631ec3c8e921c03849015f4a3786fc6c4e19"
+      "sha256": "cd2a32a55b8e7a6570a40c0c38c523a9174630f9a68f18f87e7e7c6697e9321d"
     },
     {
       "id": "knoxt",
@@ -9097,7 +9073,7 @@
     {
       "id": "novgo",
       "name": "Novgo",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "novel",
       "website": "https://novgo.net",
       "iconUrl": "https://inkstone.web.app/novgo/icon.png",
@@ -9116,7 +9092,7 @@
       ],
       "language": "en",
       "contentRating": "mature",
-      "sha256": "ec28fba659f1f8deb409dd10b313e4707cb578989094ea62862058ac45f346fc"
+      "sha256": "5b5c8ffbadab4ffbd426d795a62bc1997743149afa10d568dff320bb58f06a96"
     },
     {
       "id": "hianimesse",
@@ -10598,14 +10574,15 @@
     {
       "id": "ritto",
       "name": "Ritto",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "medium": "comics",
       "website": "https://ritto.cc",
       "iconUrl": "https://inkstone.web.app/ritto/icon.png",
       "hosts": [
-        "ritto.cc"
+        "ritto.cc",
+        "data.somosrit.top"
       ],
-      "description": "Manga・Manhwa・Manhua\n\nCatalog・200+\n\nRestrictions:\n・Rate Limit",
+      "description": "Manga・Manhwa・Manhua\n\nCatalog・300+\n\nRestrictions:\n・Rate Limit",
       "capabilities": [
         "browse",
         "search",
@@ -10618,7 +10595,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "af934c2abba27aeb5fa9de62d8df73cafd0e78146ddbd194066cb95bd817f63f"
+      "sha256": "f9d33d7eba0be3e86717797605ddf98b741cb8a144d9151e7a361970153630ea"
     },
     {
       "id": "ranoa",
@@ -10860,7 +10837,7 @@
     {
       "id": "namicomi",
       "name": "NamiComi",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
       "website": "https://namicomi.com",
       "iconUrl": "https://inkstone.web.app/namicomi/icon.png",
@@ -10882,7 +10859,7 @@
       "contentRating": "mature",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "e66d6ff1e61c84bc91ffef50b5e85d0219b0fa7080a8b68ddd6f80b3baf87c56"
+      "sha256": "4272a1d74723d158e52a93e4184b5dd5a3d6a1c86a6770db944bec595318a4a2"
     },
     {
       "id": "ravenmanga",
