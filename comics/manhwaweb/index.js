@@ -131,8 +131,9 @@ class Source {
   }
 
   async getChapterDetails(mangaId, chapterId) {
-    const result = await this.get(`${API}/chapters/see/${encodeURIComponent(chapterId)}`);
-    return { id: chapterId, mangaId, pages: result.chapter.img.filter((src) => /^https?:\/\//.test(src)), referer: REFERER };
+    const result = await this.get(`${API}/chapters/see_new/${encodeURIComponent(chapterId)}`);
+    const list = Array.isArray(result.img) ? result.img : (result.chapter && Array.isArray(result.chapter.img) ? result.chapter.img : []);
+    return { id: chapterId, mangaId, pages: list.filter((src) => /^https?:\/\//.test(src)), referer: REFERER };
   }
 
   async get(url) {

@@ -7245,7 +7245,7 @@
     {
       "id": "manhwaweb",
       "name": "ManhwaWeb",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://manhwaweb.com",
       "iconUrl": "https://inkstone.web.app/manhwaweb/icon.png",
@@ -7265,7 +7265,7 @@
       "contentRating": "adult",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "860d1ebaac98b05929508c46f427a0f7ca479144450f5d8bf424c6ec459545e2"
+      "sha256": "d2149952aac1956414d2300d7c56bee54894adba445d35a22b4a56fbbc5c9426"
     },
     {
       "id": "marmota",
