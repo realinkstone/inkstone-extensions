@@ -284,6 +284,13 @@ function hasNextLink($) {
   return $('a.nextpostslink, a.next.page-numbers, .pagination a[rel="next"], link[rel="next"], .nav-previous a').length > 0;
 }
 
+function hiddenImage(el) {
+  for (let n = el; n && n.type === 'tag'; n = n.parent) {
+    if (/display\s*:\s*none|visibility\s*:\s*hidden/i.test((n.attribs && n.attribs.style) || '')) return true;
+  }
+  return false;
+}
+
 class Source {
   getSourceFeeds() {
     return CONFIG.feeds.map((f) => ({ id: f.id, name: f.name }));
@@ -516,14 +523,16 @@ class Source {
     const html = await this.requestHTML(url);
     const $ = cheerio.load(html);
     const pages = [];
+    const hidden = [];
     const seen = new Set();
     $('img.wp-manga-chapter-img, .reading-content img, .page-break img').each((_, el) => {
       const e = $(el);
       const src = (e.attr('data-src') || e.attr('data-lazy-src') || e.attr('data-cfsrc') || e.attr('src') || '').trim();
       if (!src || /^data:/.test(src) || seen.has(src)) return;
       seen.add(src);
-      pages.push(absolute(src));
+      (hiddenImage(el) ? hidden : pages).push(absolute(src));
     });
+    if (pages.length === 0 && hidden.length > 0) pages.push(...hidden);
     if (pages.length === 0 || (MEDIUM === 'novel' && $('.chapter-type-text').length > 0)) {
       const body = $('.reading-content .text-left').first().length ? $('.reading-content .text-left').first() : $('.reading-content').first();
       body.find('script, style, .code-block, .adsbygoogle, ins, noscript').remove();

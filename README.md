@@ -79,7 +79,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [AsuraScans](mixed/asurascans/index.js) | asurascans.com | English | Safe | 2.4.0 |
 | [Athrea Scans](comics/athreascans/index.js) | athreascans.com | English | Adult | 1.0.1 |
 | [Atsumaru](mixed/atsu/index.js) | atsu.moe | English | Mature | 1.0.1 |
-| [Bega Translation](comics/begatranslation/index.js) | begatranslation.com | Spanish | Adult | 1.0.0 |
+| [Bega Translation](comics/begatranslation/index.js) | begatranslation.com | Spanish | Adult | 1.0.1 |
 | [BL village](comics/blvillage/index.js) | blvillage.com | Japanese | Adult | 1.1.1 |
 | [BloomScans](comics/bloomscans/index.js) | bloomscans.com | Spanish | Mature | 1.0.0 |
 | [Blue Solo](comics/bluesolo/index.js) | bluesolo.org | French | Safe | 1.0.1 |
@@ -322,7 +322,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [WaManga](comics/wamanga/index.js) | wamanga.ru | Russian | Adult | 1.2.0 |
 | [Webnex](comics/webnex/index.js) | webnex.cc | English | Mature | 1.0.0 |
 | [WEBTOON](comics/webtoons/index.js) | webtoons.com | English | Safe | 1.2.0 |
-| [Webtoon Hatti](comics/webtoonhatti/index.js) | webtoonhatti.club | Turkish | Safe | 1.0.0 |
+| [Webtoon Hatti](comics/webtoonhatti/index.js) | webtoonhatti.club | Turkish | Safe | 1.0.1 |
 | [Weeb Central](comics/weebcentral/index.js) | weebcentral.com | English | Adult | 1.0.0 |
 | [YakshaComics](comics/yakshacomics/index.js) | yakshacomics.com | English | Safe | 1.0.1 |
 | [Yuri on Air](comics/yurionair/index.js) | yurionair.top | Brazilian Portuguese | Safe | 1.0.0 |
@@ -361,7 +361,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [MoboReader](novels/moboreader/index.js) | moboreader.com | English | Adult | 1.2.0 |
 | [Novel Archive](novels/novelarchive/index.js) | novelarchive.st | English | Mature | 1.0.2 |
 | [Novela en Español](novels/novelaenespanol/index.js) | novelaenespanol.com | Spanish | Mature | 1.0.1 |
-| [NovelasLigeras](novels/novelasligeras/index.js) | novelasligeras.net | Spanish | Adult | 1.0.1 |
+| [NovelasLigeras](novels/novelasligeras/index.js) | novelasligeras.net | Spanish | Adult | 1.0.2 |
 | [NovelBuddy](novels/novelbuddy/index.js) | novelbuddy.me | English | Adult | 1.2.0 |
 | [NovelCool](novels/novelcool/index.js) | novelcool.com | English | Mature | 1.0.0 |
 | [NovelFire](novels/novelfire/index.js) | novelfire.net | English | Adult | 2.6.0 |

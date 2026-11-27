@@ -1,7 +1,7 @@
 const CONFIG = {
   "name": "Bega Translation",
   "origin": "https://begatranslation.com",
-  "archivePath": "/manga/",
+  "archivePath": "/mangas/",
   "detailPrefix": "series",
   "pageSize": 12,
   "referer": true,

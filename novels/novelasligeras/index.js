@@ -93,7 +93,7 @@ class Source {
       if (!chapterId || !/\/\d{4}\/\d{2}\/\d{2}\//.test(href) || seen.has(chapterId)) return;
       seen.add(chapterId);
       const found = /-volumen-(\d+)-/.exec(href);
-      if (found) volume = +found[1];
+      if (found) volume = +found[1] ? String(+found[1]) : undefined;
       if (PAID.test(chapterId)) {
         paid += 1;
         return;

@@ -5788,7 +5788,7 @@
     {
       "id": "begatranslation",
       "name": "Bega Translation",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://begatranslation.com",
       "iconUrl": "https://inkstone.web.app/begatranslation/icon.png",
@@ -5807,12 +5807,12 @@
       ],
       "language": "es",
       "contentRating": "adult",
-      "sha256": "502bc8da0118c147e619e82f99a171a40f0f27758c36c8b0e0d90e01187a3d5e"
+      "sha256": "3af41ae6fd8a3e9942fdb8626d674945d627658beb8366c9dc92483ecda926e9"
     },
     {
       "id": "webtoonhatti",
       "name": "Webtoon Hatti",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "medium": "comics",
       "website": "https://webtoonhatti.club",
       "iconUrl": "https://inkstone.web.app/webtoonhatti/icon.png",
@@ -5831,7 +5831,7 @@
       ],
       "language": "tr",
       "contentRating": "safe",
-      "sha256": "7ff986925576865cf8051a6cbbf6079fbdb4da11b4a0c99ba16e12f6ea597f61"
+      "sha256": "f881f123f83738810791010ccd0a806563fba3574e6f57c6af3a3b671cbfbc5b"
     },
     {
       "id": "gaiatoon",
@@ -7318,7 +7318,7 @@
     {
       "id": "novelasligeras",
       "name": "NovelasLigeras",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "novel",
       "website": "https://novelasligeras.net",
       "iconUrl": "https://inkstone.web.app/novelasligeras/icon.png",
@@ -7337,7 +7337,7 @@
       "contentRating": "adult",
       "author": "matsukiender-star",
       "authorUrl": "https://github.com/matsukiender-star",
-      "sha256": "8297b62269f283a93276fb871bbc700d27f4c343e76dd25a073e74691c912952"
+      "sha256": "1c5255d2b6fe1c0e50d6c2b0c96cc91ee1cdee9f9656b735804622deb496f5e4"
     },
     {
       "id": "pelisforte",
