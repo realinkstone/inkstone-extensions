@@ -1,4 +1,4 @@
-const SITE_BASE = 'https://nettruyenvia.com';
+const SITE_BASE = 'https://nettruyenviet10.com';
 const UA =
   'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1';
 
@@ -265,6 +265,16 @@ class Source {
     const rows = readInfoRows($);
     const group = rowText(rows, 'Chuyển ngữ') || undefined;
 
+    const listed = await this.fetchChapterList(mangaId);
+    if (listed.length > 0) {
+      return listed.map((c) => {
+        const chapter = { id: c.chapterId, chapterId: c.chapterId, name: c.name, number: c.number };
+        if (c.time !== undefined) chapter.time = c.time;
+        if (group) chapter.group = group;
+        return chapter;
+      });
+    }
+
     const raw = [];
     $('#chapter_list > li.row').each((_, el) => {
       const item = $(el);
@@ -288,6 +298,31 @@ class Source {
       if (group) chapter.group = group;
       return chapter;
     });
+  }
+
+  async fetchChapterList(mangaId) {
+    try {
+      const body = await this.requestHTML(`${SITE_BASE}/Comic/Services/ComicService.asmx/ChapterList?slug=${encodeURIComponent(mangaId)}`);
+      const data = (JSON.parse(body) || {}).data;
+      if (!Array.isArray(data)) return [];
+      return data
+        .map((c) => {
+          const chapterId = String(c.chapter_slug || '').replace(/^chapter-/, 'chuong-');
+          if (!chapterId) return null;
+          const number = parseFloat(c.chapter_num);
+          const time = Date.parse(`${String(c.updated_at || '').replace(' ', 'T')}+07:00`);
+          return {
+            chapterId,
+            name: cleanText(c.chapter_name) || chapterId,
+            number: Number.isNaN(number) ? chapterSlugToNumber(chapterId) : number,
+            time: Number.isNaN(time) ? undefined : time,
+          };
+        })
+        .filter(Boolean)
+        .reverse();
+    } catch (e) {
+      return [];
+    }
   }
 
   async getChapterDetails(mangaId, chapterId) {

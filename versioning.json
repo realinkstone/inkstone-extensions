@@ -816,9 +816,9 @@
     {
       "id": "nettruyen",
       "name": "NetTruyen",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "medium": "comics",
-      "website": "https://nettruyenvia.com",
+      "website": "https://nettruyenviet10.com",
       "iconUrl": "https://inkstone.web.app/nettruyen/icon.png",
       "description": "Manga・Manhwa・Manhua\n\nRestrictions:\n・Cloudflare Checks",
       "capabilities": [
@@ -831,7 +831,7 @@
       ],
       "language": "vi",
       "contentRating": "adult",
-      "sha256": "2e3157fd080e510d540d6bef4d499c9adaf49694d65ac9b95d2f072083ebb956"
+      "sha256": "24dab3eab8ae2edd127b197727e3c9f1550f0424772479f16c63b25433e1099c"
     },
     {
       "id": "viz",
