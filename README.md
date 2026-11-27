@@ -229,7 +229,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [ManhwaOnline](comics/manhwaonline/index.js) | manhwaonline.org | English | Mature | 1.0.0 |
 | [ManhwaShot](comics/manhwashot/index.js) | manhwashot.lat | Spanish | Mature | 1.0.0 |
 | [ManhwaTop](comics/manhwatop/index.js) | manhwatop.com | English | Adult | 1.0.1 |
-| [ManhwaWeb](comics/manhwaweb/index.js) | manhwaweb.com | Spanish | Adult | 1.0.2 |
+| [ManhwaWeb](comics/manhwaweb/index.js) | manhwaweb.com | Spanish | Adult | 1.0.3 |
 | [Marmota](comics/marmota/index.js) | marmota.me | Spanish | Safe | 1.0.0 |
 | [MegaBanana](comics/megabanana/index.js) | megabanana.mx | Spanish | Mature | 1.0.0 |
 | [Menudo-Fansub](comics/menudofansub/index.js) | menudo-fansub.com | Spanish | Safe | 1.0.0 |
