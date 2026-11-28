@@ -816,7 +816,7 @@
     {
       "id": "nettruyen",
       "name": "NetTruyen",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "medium": "comics",
       "website": "https://nettruyenviet10.com",
       "iconUrl": "https://inkstone.web.app/nettruyen/icon.png",
@@ -831,7 +831,7 @@
       ],
       "language": "vi",
       "contentRating": "adult",
-      "sha256": "24dab3eab8ae2edd127b197727e3c9f1550f0424772479f16c63b25433e1099c"
+      "sha256": "6340431866e031659572876d8306119b5d0fa6b42c62c2fa3944fef40748999d"
     },
     {
       "id": "viz",

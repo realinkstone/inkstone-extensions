@@ -244,7 +244,7 @@ Each extension lives in the folder for what it offers: `comics`, `novels`, `mixe
 | [Naver Webtoon](comics/navercomic/index.js) | comic.naver.com | Korean | Mature | 1.2.0 |
 | [Nebulosa Scan](comics/nebulosascan/index.js) | nebulosascan.com | Brazilian Portuguese | Mature | 1.0.3 |
 | [NekoScans](comics/nekoscans/index.js) | nekoproject.org | Spanish | Safe | 1.0.0 |
-| [NetTruyen](comics/nettruyen/index.js) | nettruyenviet10.com | Vietnamese | Adult | 1.0.2 |
+| [NetTruyen](comics/nettruyen/index.js) | nettruyenviet10.com | Vietnamese | Adult | 1.0.3 |
 | [Ngomik](comics/ngomik/index.js) | 02.ngomik.cc | Indonesian | Safe | 1.0.1 |
 | [NiAdd](comics/niadd/index.js) | es.niadd.com | Spanish | Mature | 1.0.0 |
 | [Ninja Scan](comics/ninjascan/index.js) | ninjacomics.xyz | Brazilian Portuguese | Safe | 1.0.0 |

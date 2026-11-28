@@ -188,7 +188,8 @@ class Source {
 
     const page = (metadata && metadata.page) || 1;
     const query = (request && request.title) || '';
-    const feed = (request && request.feed) || '';
+    const asked = (request && request.feed) || '';
+    const feed = this.getSourceFeeds().some((f) => f.id === asked) ? asked : '';
     const includedTags = (request && request.includedTags) || [];
     const genreId = includedTags.length > 0 && includedTags[0] ? includedTags[0].id : '';
 
